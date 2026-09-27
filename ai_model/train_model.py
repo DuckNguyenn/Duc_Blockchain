@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from feature_engineering import FEATURE_COLUMNS, load_recordings
+from ai_model.feature_engineering import FEATURE_COLUMNS, load_recordings
 
 
 def train(data_dir: str, model_path: str, metrics_path: str) -> None:
@@ -50,8 +50,8 @@ def train(data_dir: str, model_path: str, metrics_path: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-dir", default="data/raw")
-    parser.add_argument("--model-path", default="ai/model.joblib")
-    parser.add_argument("--metrics-path", default="data/processed/metrics.json")
+    parser.add_argument("--data-dir", default="ai_model/data/raw")
+    parser.add_argument("--model-path", default="ai_model/model.joblib")
+    parser.add_argument("--metrics-path", default="ai_model/metrics.json")
     args = parser.parse_args()
     train(args.data_dir, args.model_path, args.metrics_path)

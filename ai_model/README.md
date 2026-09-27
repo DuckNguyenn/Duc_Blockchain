@@ -1,5 +1,10 @@
 # AI model
 
-Phiên bản HRC Safety Log hiện tại **không sử dụng AI, camera hoặc YOLO**. Thư mục này được giữ lại như một placeholder vì cấu trúc bài nộp ban đầu có yêu cầu `/ai_model`; không đặt mã YOLO hay trọng số vào đây nếu nhóm không triển khai AI.
+Thư mục này chứa toàn bộ phần AI của HRC Safety Log theo cấu trúc nộp bài.
 
-Phần xử lý thực tế nằm trong `iot_code/firmware/` và `iot_code/gateway.py`: đo khoảng cách, ngưỡng, debounce, cảnh báo và SHA-256.
+- `feature_engineering.py`: tạo đặc trưng dùng chung cho huấn luyện và gateway.
+- `train_model.py`: huấn luyện Isolation Forest từ các mẫu SAFE và xuất `model.joblib`, `metrics.json`.
+- `notebooks/01_train_anomaly_detection.ipynb`: notebook trình bày quy trình train, đánh giá và lưu model.
+- `data/raw/`: dữ liệu khoảng cách trái/phải thu từ hai HC-SR04.
+
+Mô hình chỉ phát hiện mẫu đo lệch khỏi vùng hoạt động bình thường. Các ngưỡng khoảng cách trong gateway vẫn là lớp quyết định EmergencyStop độc lập với AI.

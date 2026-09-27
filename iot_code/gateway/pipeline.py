@@ -10,7 +10,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from ai.feature_engineering import FEATURE_COLUMNS, features_from_measurement
+from ai_model.feature_engineering import FEATURE_COLUMNS, features_from_measurement
 
 SEVERITY = {"SAFE": 0, "WARNING": 1, "DANGER": 2, "EMERGENCY": 3}
 
@@ -76,12 +76,12 @@ def main() -> None:
         pass
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv", help="Replay an existing recording")
-    parser.add_argument("--model", default=os.getenv("MODEL_PATH", "ai/model.joblib"))
+    parser.add_argument("--model", default=os.getenv("MODEL_PATH", "ai_model/model.joblib"))
     parser.add_argument("--device-id", default=os.getenv("DEVICE_ID", "HRC-ESP32-01"))
     parser.add_argument("--rpc-url", default=os.getenv("RPC_URL"))
     parser.add_argument("--contract-address", default=os.getenv("CONTRACT_ADDRESS"))
     parser.add_argument("--private-key", default=os.getenv("PRIVATE_KEY"))
-    parser.add_argument("--abi", default="blockchain/abi/HRCSafetyLog.json")
+    parser.add_argument("--abi", default="contracts/abi/HRCSafetyLog.json")
     parser.add_argument("--write-chain", action="store_true", help="Submit records to the deployed contract")
     parser.add_argument("--limit", type=int, default=10)
     args = parser.parse_args()
@@ -99,7 +99,7 @@ def main() -> None:
         required = [args.rpc_url, args.contract_address, args.private_key]
         if not all(required):
             parser.error("--write-chain requires RPC_URL, CONTRACT_ADDRESS, and PRIVATE_KEY")
-        from gateway.blockchain_client import SafetyLogClient
+        from iot_code.gateway.blockchain_client import SafetyLogClient
         client = SafetyLogClient(args.rpc_url, args.contract_address, args.private_key, args.abi)
 
     for index, row in enumerate(csv_rows(args.csv)):

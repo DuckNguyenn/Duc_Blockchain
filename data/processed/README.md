@@ -1,1 +1,0 @@
-Các file trong thư mục này là sản phẩm sinh ra từ notebook/train_model.py, không phải dữ liệu gốc. Có thể lưu `metrics.json`, biểu đồ đánh giá và model artifact ở đây khi demo.

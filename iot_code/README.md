@@ -1,11 +1,15 @@
 # IoT code
 
-Module chính của HRC Safety Log dùng ESP32 và HC-SR04.
+Thư mục này chứa firmware ESP32 và gateway của đề tài HRC Safety Log.
 
-- `ultrasonic_esp32.ino` là firmware nộp chính, đo tuần tự hai HC-SR04 và xuất `distance_cm,left=...,right=...`.
-- `firmware/hrc_safety_ultrasonic.ino` là firmware/gateway prototype có sẵn từ repository trước đó và được giữ lại để không làm mất lịch sử.
-- `gateway.py`, `logging_service.py`, `blockchain.py`, `verify.py` là các module gateway/audit cũ.
+- `ultrasonic_esp32.ino`: firmware chính, đo tuần tự hai HC-SR04 và xuất telemetry qua Serial.
+- `gateway/`: parser Serial, replay CSV, feature-based safety classification và Web3 adapter.
+- `pipeline.md`: mô tả luồng IoT → AI → Blockchain.
 
-Pipeline mới đầy đủ gồm `gateway/pipeline.py`, `gateway/serial_reader.py`, `gateway/blockchain_client.py`, thư mục `ai/` và `contracts/HRCSafetyLog.sol`.
+Firmware xuất dữ liệu theo định dạng:
 
-Cả hai firmware đều cần cầu phân áp cho tín hiệu ECHO 5 V trước khi vào GPIO ESP32. Prototype này không nên được xem là hệ thống an toàn công nghiệp đã chứng nhận.
+```text
+distance_cm,left=42.7cm,right=38.1cm
+```
+
+HC-SR04 dùng ECHO 5 V, vì vậy phải lắp cầu phân áp xuống 3.3 V trước khi đưa tín hiệu vào GPIO ESP32. Prototype chưa phải hệ thống an toàn công nghiệp đã chứng nhận và chưa điều khiển E-Stop vật lý.

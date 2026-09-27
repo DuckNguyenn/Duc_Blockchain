@@ -4,22 +4,16 @@ __pycache__/
 .env
 .ipynb_checkpoints/
 
+# Generated AI artifacts
+ai_model/model.joblib
+ai_model/metrics.json
+
 # Hardhat/build artifacts
-blockchain/node_modules/
-blockchain/artifacts/
-blockchain/cache/
 contracts/node_modules/
 contracts/artifacts/
 contracts/cache/
 contracts/typechain-types/
 
-# Generated model and metrics
-ai/model.joblib
-data/processed/metrics.json
-ai_model/weights/*
-!ai_model/weights/.gitkeep
-
 # Runtime evidence
-data/incidents/*.json
-data/incidents/evidence/*
-data/sample.*
+ai_model/data/processed/
+data/incidents/

@@ -6,7 +6,7 @@ import json
 import re
 from datetime import datetime, timezone
 
-from gateway.pipeline import process_row
+from iot_code.gateway.pipeline import process_row
 
 MEASUREMENT = re.compile(r"distance_cm,left=([-\d.]+|timeout)cm?,right=([-\d.]+|timeout)cm?")
 

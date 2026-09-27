@@ -1,14 +1,15 @@
 {
-  "name": "hrc-safety-log-contracts",
+  "name": "hrc-safety-log-blockchain",
   "private": true,
   "scripts": {
+    "node": "hardhat node",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js --network localhost",
+    "demo": "hardhat run scripts/demo.js --network localhost",
     "test": "hardhat test"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.22.0"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
   }
 }

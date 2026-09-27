@@ -1,24 +1,31 @@
 # HRC Safety Log — Hộp đen an toàn và định danh cho robot hợp tác
 
-HRC Safety Log là prototype cho pipeline 3 tầng: ESP32 + hai HC-SR04 thu thập khoảng cách; Python gateway tạo đặc trưng và phát hiện bất thường; Smart Contract ghi hash nhật ký, phát event kiểm toán và đặt trạng thái EmergencyStop/khóa thiết bị khi vùng nguy hiểm bị xâm nhập.
+Đề tài xây dựng pipeline an toàn cho không gian làm việc chung giữa người và robot, sử dụng ESP32 + hai cảm biến siêu âm HC-SR04, mô hình phát hiện bất thường và Smart Contract ghi nhật ký chống sửa đổi.
 
-Repository này đã được hợp nhất với prototype ESP32/gateway có sẵn. Các module cũ trong `iot_code/`, `contracts/` và `tests/` được giữ lại; pipeline HRC đầy đủ mới nằm ở `ai/`, `gateway/`, `contracts/HRCSafetyLog.sol` và `blockchain/`.
-
-## Cấu trúc chính
+## Cấu trúc repository theo yêu cầu nộp bài
 
 ```text
-README.md / REPORT_BLOCKCHAIN.md
-ai/                               # feature engineering + train Isolation Forest
-notebooks/01_train_anomaly_detection.ipynb
-data/raw/                         # CSV đo thực tế
-firmware/ultrasonic_esp32/       # firmware + wiring notes
-.iot_code/                        # bản firmware nộp và prototype cũ
-gateway/                          # replay CSV, Serial reader, Web3 adapter
-contracts/HRCSafetyLog.sol       # Smart Contract HRC mới
-blockchain/                       # Hardhat deploy/demo/test/ABI
-contracts/contracts/SafetyLog.sol # contract prototype cũ được giữ lại
-config/                           # cấu hình prototype cũ
-REPORT_BLOCKCHAIN.md              # nội dung dùng để viết báo cáo
+README.md                    # Cài đặt, cấu hình và hướng dẫn Demo
+Report_NhomXX.pdf            # Báo cáo kỹ thuật chính thức
+contracts/                   # Smart Contract Solidity và Hardhat
+├── HRCSafetyLog.sol
+├── abi/HRCSafetyLog.json
+├── scripts/deploy.js
+├── scripts/demo.js
+├── test/HRCSafetyLog.js
+├── hardhat.config.js
+└── package.json
+ai_model/                    # Huấn luyện và artifact AI
+├── feature_engineering.py
+├── train_model.py
+├── notebooks/01_train_anomaly_detection.ipynb
+└── data/raw/*.csv
+.iot_code/                    # Firmware ESP32 và gateway IoT
+├── ultrasonic_esp32.ino
+├── gateway/pipeline.py
+├── gateway/serial_reader.py
+├── gateway/blockchain_client.py
+└── pipeline.md
 ```
 
 ## Cài đặt
@@ -27,67 +34,78 @@ REPORT_BLOCKCHAIN.md              # nội dung dùng để viết báo cáo
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-cd blockchain
+cd contracts
 npm install
 cd ..
 ```
 
-Prototype cũ có thể chạy độc lập theo tài liệu trong `iot_code/README.md`; pipeline mới dùng các lệnh bên dưới.
+## 1. IoT: ESP32 và hai HC-SR04
 
-## Train AI
-
-```powershell
-python ai/train_model.py --data-dir data/raw --model-path ai/model.joblib --metrics-path data/processed/metrics.json
-```
-
-Notebook tương ứng là `notebooks/01_train_anomaly_detection.ipynb`. Isolation Forest học vùng hoạt động `SAFE`; các nhãn còn lại dùng để đánh giá. Quyết định nguy hiểm không phụ thuộc hoàn toàn vào AI: `<= 30 cm` là `EMERGENCY`, `<= 60 cm` là `WARNING`. Đây là ngưỡng thí nghiệm, không phải khoảng cách bảo vệ đã được chứng nhận ISO/TS 15066.
-
-## Replay dữ liệu và đọc ESP32
-
-```powershell
-python -m gateway.pipeline --csv data/raw/son_dungyen_30_DANGER.csv --limit 10
-python -m gateway.serial_reader --port COM5 --device-id HRC-ESP32-01
-```
-
-Firmware mới phát:
+Mở `iot_code/ultrasonic_esp32.ino` trong Arduino IDE, chọn board ESP32 và nạp chương trình. Firmware đo tuần tự hai cảm biến để giảm nhiễu xuyên âm, sau đó xuất:
 
 ```text
 distance_cm,left=42.7cm,right=38.1cm
 ```
 
-ECHO HC-SR04 là 5 V và phải qua cầu phân áp xuống 3.3 V trước khi nối ESP32.
+Tín hiệu ECHO của HC-SR04 là 5 V; phải dùng cầu phân áp xuống 3.3 V trước khi nối vào GPIO ESP32. Pin hiện tại là LEFT TRIG 5, LEFT ECHO 2, RIGHT TRIG 18, RIGHT ECHO 4.
 
-## Blockchain local
+## 2. AI: huấn luyện anomaly detection
+
+Dữ liệu mẫu nằm trong `ai_model/data/raw/`. Huấn luyện bằng Isolation Forest, trong đó các mẫu `SAFE` được dùng để học vùng hoạt động bình thường:
+
+```powershell
+python ai_model/train_model.py --data-dir ai_model/data/raw --model-path ai_model/model.joblib --metrics-path ai_model/metrics.json
+```
+
+Notebook tương ứng là `ai_model/notebooks/01_train_anomaly_detection.ipynb`. Các đặc trưng gồm khoảng cách trái/phải, khoảng cách nhỏ nhất, độ lệch hai cảm biến và tốc độ tiếp cận.
+
+AI chỉ bổ sung cảnh báo bất thường. Lớp fail-safe ưu tiên ngưỡng khoảng cách: `<= 30 cm` tạo `EMERGENCY_STOP`, `<= 60 cm` tạo `WARNING`. Đây là ngưỡng thực nghiệm, không phải khoảng cách bảo vệ đã được chứng nhận ISO/TS 15066.
+
+## 3. Gateway và replay dữ liệu
+
+Có thể chạy Demo không cần phần cứng bằng cách replay CSV:
+
+```powershell
+python -m iot_code.gateway.pipeline --csv ai_model/data/raw/son_dungyen_30_DANGER.csv --limit 10
+```
+
+Đọc dữ liệu trực tiếp từ ESP32 qua Serial:
+
+```powershell
+python -m iot_code.gateway.serial_reader --port COM5 --device-id HRC-ESP32-01
+```
+
+Gateway tạo `event_id` bằng SHA-256 từ device ID, timestamp, hai khoảng cách và severity. Dữ liệu chi tiết vẫn ở off-chain để phục vụ phân tích.
+
+## 4. Blockchain local
 
 Terminal 1:
 
 ```powershell
-cd blockchain
+cd contracts
 npm run node
 ```
 
 Terminal 2:
 
 ```powershell
-cd blockchain
+cd contracts
 npm run compile
 npm run deploy -- --network localhost
 npm run test
 ```
 
-Copy địa chỉ contract và private key account Hardhat vào `.env`, sau đó:
+Sau khi copy địa chỉ contract và private key của tài khoản Hardhat vào `.env`, có thể ghi sự kiện lên chain:
 
 ```powershell
 cd ..
-python -m gateway.pipeline --csv data/raw/son_dungyen_30_DANGER.csv --limit 3 --write-chain
+python -m iot_code.gateway.pipeline --csv ai_model/data/raw/son_dungyen_30_DANGER.csv --limit 3 --write-chain
 ```
 
-`HRCSafetyLog.sol` lưu `eventHash`, `deviceIdHash`, timestamp, severity, cờ EmergencyStop và reporter. Khi `emergencyStop=true`, contract đặt `emergencyStopByDevice=true` và `deviceLocked=true`. Hash on-chain là bằng chứng toàn vẹn; dữ liệu cảm biến chi tiết vẫn được giữ off-chain.
+`HRCSafetyLog.sol` lưu `eventHash`, `deviceIdHash`, timestamp, severity, cờ EmergencyStop và reporter. Khi `emergencyStop=true`, thiết bị bị khóa. Chỉ owner có thể xóa trạng thái EmergencyStop; event hash trùng lặp bị từ chối.
 
-## Tài liệu báo cáo
+## Giới hạn
 
-Đọc `REPORT_BLOCKCHAIN.md` để lấy phần mô tả bài toán, kiến trúc, lý do dùng hash, thiết kế quyền reporter, kịch bản kiểm thử, giới hạn và hướng phát triển. Khi hoàn thiện, xuất tài liệu thành `Report_NhomXX.pdf` theo quy định môn học.
+Đây là prototype nghiên cứu, chưa phải hệ thống safety-certified. Blockchain không nằm trong vòng điều khiển dừng thời gian thực; quyết định dừng cục bộ phải được xử lý fail-safe ở gateway/thiết bị. Bản hiện tại chưa điều khiển relay hoặc E-Stop vật lý.
 
-## Giới hạn an toàn
-
-Đây là prototype nghiên cứu. Blockchain không được đặt trên vòng điều khiển dừng thời gian thực; dừng cục bộ phải được xử lý fail-safe ở gateway/thiết bị. Bản hiện tại chưa điều khiển relay/E-Stop vật lý và chưa phải hệ thống safety-certified.
+Xem `Report_NhomXX.pdf` để đọc báo cáo kỹ thuật chính thức.
