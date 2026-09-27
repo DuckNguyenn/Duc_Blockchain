@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.ipynb_checkpoints/
+blockchain/node_modules/
+blockchain/artifacts/
+blockchain/cache/
+ai/model.joblib
+data/processed/metrics.json
