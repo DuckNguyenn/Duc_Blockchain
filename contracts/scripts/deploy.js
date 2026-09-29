@@ -6,8 +6,13 @@ async function main() {
   const contract = await factory.deploy();
   await contract.waitForDeployment();
 
+  const permitFactory = await hre.ethers.getContractFactory("WorkPermitHandoff");
+  const permitContract = await permitFactory.deploy();
+  await permitContract.waitForDeployment();
+
   console.log(`deployer=${deployer.address}`);
   console.log(`contract=${await contract.getAddress()}`);
+  console.log(`permitContract=${await permitContract.getAddress()}`);
 }
 
 main().catch((error) => {

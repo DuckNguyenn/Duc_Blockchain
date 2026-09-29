@@ -90,6 +90,10 @@ Trong dashboard: **Kết nối ví** → nhập contract address → **Chạy m�
 
 Dashboard chỉ ghi `eventHash`, `deviceIdHash`, severity và `emergencyStop`; raw telemetry vẫn ở off-chain.
 
+### Work Permit & Human–Robot Handoff
+
+`WorkPermitHandoff` bổ sung workflow nghiệp vụ cho HRC: requester tạo permit cho worker/task/zone, supervisor approve, gateway ghi nhận worker đã vào zone dựa trên telemetry, worker xác nhận robot bàn giao task, rồi đóng permit. Sau `npm.cmd run deploy`, dùng dòng `permitContract=` làm địa chỉ contract trong panel **Work permit & robot handoff** của dashboard.
+
 ## Test smart contract
 
 Khi không cần node riêng, Hardhat test dùng network in-memory:

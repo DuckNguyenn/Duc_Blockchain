@@ -68,6 +68,21 @@
         </div>
       </section>
 
+      <section class="panel permit-panel" id="work-permit">
+        <div class="panel-heading"><div><p class="eyebrow">HRC WORKFLOW</p><h2>Work permit &amp; robot handoff</h2></div><span class="chain-badge">PERMIT LEDGER</span></div>
+        <p class="workflow-intro">Cấp phép vào vùng cộng tác, ghi nhận người đã vào vùng bằng telemetry, rồi xác nhận robot đã bàn giao nhiệm vụ. Đây là lớp workflow Web3, không thay thế E-Stop cục bộ.</p>
+        <div class="permit-grid">
+          <div class="permit-form">
+            <div class="form-row"><label class="field-label" for="workerAddress">Ví người vận hành</label><input id="workerAddress" class="text-input mono" placeholder="Để trống = ví hiện tại" /></div>
+            <div class="form-row"><label class="field-label" for="zoneName">Zone</label><input id="zoneName" class="text-input" value="ASSEMBLY-A" /></div>
+            <div class="form-row"><label class="field-label" for="taskName">Task</label><input id="taskName" class="text-input" value="HANDOFF-001" /></div>
+            <div class="form-actions"><button id="createPermitButton" class="button button-primary" disabled>Tạo permit</button><button id="approvePermitButton" class="button button-outline" disabled>Approve</button></div>
+          </div>
+          <div class="permit-state"><div class="permit-status-row"><span class="metric-label">PERMIT STATUS</span><span id="permitStatus" class="tag tag-safe">CHƯA TẠO</span></div><div class="permit-id mono" id="permitIdLabel">—</div><div class="permit-actions"><button id="entryButton" class="button button-outline" disabled>Ghi zone entry</button><button id="handoffButton" class="button button-outline" disabled>Xác nhận handoff</button><button id="completePermitButton" class="button button-outline" disabled>Đóng permit</button></div><p id="permitMessage" class="helper">Deploy thêm contract WorkPermitHandoff rồi nhập địa chỉ bên dưới.</p></div>
+        </div>
+        <label class="field-label" for="permitContractAddress">Địa chỉ contract WorkPermitHandoff</label><input id="permitContractAddress" class="text-input mono" placeholder="0x… (permitContract= sau deploy)" spellcheck="false" />
+      </section>
+
       <section class="panel timeline-panel">
         <div class="panel-heading"><div><p class="eyebrow">IMMUTABLE ACTIVITY</p><h2>Safety event stream</h2></div><span class="live-label"><span class="status-dot"></span> LIVE</span></div>
         <div id="eventList" class="event-list"><div class="empty-state"><span>◎</span><p>Chưa có event. Nhấn “Chạy mô phỏng” để tạo dữ liệu cảm biến.</p></div></div>
