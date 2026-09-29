@@ -15,16 +15,44 @@ from ai_model.feature_engineering import FEATURE_COLUMNS, features_from_measurem
 SEVERITY = {"SAFE": 0, "WARNING": 1, "DANGER": 2, "EMERGENCY": 3}
 
 
-def classify(measurement: dict[str, float], model=None, warning_cm=60.0, danger_cm=30.0) -> tuple[str, bool, float]:
+def classify(
+    measurement: dict[str, float],
+    model=None,
+    warning_cm=60.0,
+    danger_cm=30.0,
+    confidence_threshold=0.85,
+) -> tuple[str, bool, float]:
+    """Classify one measurement with hard safety rules before AI.
+
+    A hybrid artifact must satisfy both supervised-classifier confidence and
+    IsolationForest agreement before it can add a WARNING outside the hard
+    distance zones. Legacy IsolationForest-only artifacts remain supported.
+    """
     minimum = measurement["min_distance_cm"]
     if minimum <= danger_cm:
         return "EMERGENCY", True, 1.0
     if minimum <= warning_cm:
         return "WARNING", False, 0.8
-    if model is not None:
-        anomaly = int(model.predict([[measurement[c] for c in FEATURE_COLUMNS]])[0] == -1)
-        if anomaly:
-            return "WARNING", False, 0.6
+    if model is None:
+        return "SAFE", False, 0.05
+
+    row = [[measurement[c] for c in FEATURE_COLUMNS]]
+    if isinstance(model, dict) and "classifier" in model and "anomaly_model" in model:
+        classifier = model["classifier"]
+        anomaly_model = model["anomaly_model"]
+        classifier_state = int(classifier.predict(row)[0])
+        classifier_confidence = float(classifier.predict_proba(row).max())
+        anomaly_flag = int(anomaly_model.predict(row)[0] == -1)
+        threshold = float(model.get("ai_confidence_threshold", confidence_threshold))
+        if classifier_state > 0 and classifier_confidence >= threshold and anomaly_flag:
+            return "WARNING", False, classifier_confidence
+        return "SAFE", False, max(0.05, classifier_confidence if classifier_state == 0 else 0.0)
+
+    if isinstance(model, dict) and "model" in model:
+        model = model["model"]
+    anomaly = int(model.predict(row)[0] == -1)
+    if anomaly:
+        return "WARNING", False, 0.6
     return "SAFE", False, 0.05
 
 
@@ -33,12 +61,25 @@ def stable_event_id(device_id: str, timestamp: str, measurement: dict[str, float
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
-def process_row(row: dict[str, str], *, device_id: str, model=None, client=None, warning_cm=60.0, danger_cm=30.0) -> dict:
+def process_row(
+    row: dict[str, str],
+    *,
+    device_id: str,
+    model=None,
+    client=None,
+    warning_cm=60.0,
+    danger_cm=30.0,
+    confidence_threshold=0.85,
+    previous_min_cm: float | None = None,
+) -> dict:
     timestamp = row.get("timestamp") or datetime.now(timezone.utc).isoformat()
     left = float(row["left_cm"])
     right = float(row["right_cm"])
-    measurement = features_from_measurement(left, right)
-    severity, emergency_stop, confidence = classify(measurement, model, warning_cm, danger_cm)
+    dt_s = float(row.get("dt_s", 0.1) or 0.1)
+    measurement = features_from_measurement(left, right, previous_min_cm, dt_s)
+    severity, emergency_stop, confidence = classify(
+        measurement, model, warning_cm, danger_cm, confidence_threshold
+    )
     event_id = stable_event_id(device_id, timestamp, measurement, severity)
     result = {
         "event_id": event_id,
@@ -89,10 +130,20 @@ def main() -> None:
         parser.error("--csv is required for the replay demo; serial mode can be added after wiring validation")
 
     model = None
+    warning_cm = 60.0
+    danger_cm = 30.0
+    confidence_threshold = 0.85
     if Path(args.model).exists():
         import joblib
         artifact = joblib.load(args.model)
-        model = artifact["model"] if isinstance(artifact, dict) else artifact
+        model = artifact
+        if isinstance(artifact, dict):
+            thresholds = artifact.get("thresholds_cm", {})
+            warning_cm = float(thresholds.get("warning", warning_cm))
+            danger_cm = float(thresholds.get("danger", danger_cm))
+            confidence_threshold = float(
+                artifact.get("ai_confidence_threshold", confidence_threshold)
+            )
 
     client = None
     if args.write_chain:
@@ -102,10 +153,22 @@ def main() -> None:
         from iot_code.gateway.blockchain_client import SafetyLogClient
         client = SafetyLogClient(args.rpc_url, args.contract_address, args.private_key, args.abi)
 
+    previous_min_cm = None
     for index, row in enumerate(csv_rows(args.csv)):
         if index >= args.limit:
             break
-        print(json.dumps(process_row(row, device_id=args.device_id, model=model, client=client), ensure_ascii=False))
+        result = process_row(
+            row,
+            device_id=args.device_id,
+            model=model,
+            client=client,
+            warning_cm=warning_cm,
+            danger_cm=danger_cm,
+            confidence_threshold=confidence_threshold,
+            previous_min_cm=previous_min_cm,
+        )
+        previous_min_cm = result["min_distance_cm"]
+        print(json.dumps(result, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="SonarChain — nhật ký an toàn Web3 cho cảm biến siêu âm HC-SR04." />
+    <title>SonarChain · HRC Safety Log</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="topbar shell">
+      <a class="brand" href="#top" aria-label="SonarChain home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span>SONAR<span class="brand-accent">CHAIN</span></span>
+      </a>
+      <div class="network-pill"><span class="status-dot"></span><span id="networkLabel">Simulation mode</span></div>
+      <button id="connectButton" class="button button-primary">Kết nối ví</button>
+    </header>
+
+    <main id="top" class="shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">HRC SAFETY LOG · WEB3 SENSOR PROOF</p>
+          <h1>Cảm biến siêu âm,<br /><em>niềm tin on-chain.</em></h1>
+          <p class="hero-text">SonarChain biến mỗi cảnh báo khoảng cách thành bằng chứng có thể kiểm tra. Dữ liệu thô ở gateway; blockchain giữ dấu vân tay bất biến, thiết bị và trạng thái dừng khẩn cấp.</p>
+          <div class="hero-actions">
+            <button id="simulateButton" class="button button-primary button-large"><span class="play">▶</span> Chạy mô phỏng</button>
+            <a class="text-link" href="#how-it-works">Cách hoạt động <span>↘</span></a>
+          </div>
+        </div>
+        <div class="hero-orbit" aria-label="Minh họa luồng dữ liệu cảm biến">
+          <div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div>
+          <div class="sonar-core"><span class="core-label">HC-SR04</span><strong>SONAR</strong><small>ESP32 NODE</small></div>
+          <span class="orbit-node node-left">L</span><span class="orbit-node node-right">R</span><span class="orbit-node node-chain">◆</span>
+          <span class="orbit-caption caption-top">distance proof</span><span class="orbit-caption caption-bottom">tamper-evident</span>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Tổng quan cảm biến">
+        <article class="metric-card"><span class="metric-label">TRẠNG THÁI</span><strong id="overallState" class="state-safe">SAFE</strong><span id="overallHint" class="metric-note">Không có cảnh báo</span></article>
+        <article class="metric-card"><span class="metric-label">KHOẢNG CÁCH NHỎ NHẤT</span><strong><span id="minDistance">86.4</span><small> cm</small></strong><span class="metric-note">Ngưỡng cảnh báo 60 cm</span></article>
+        <article class="metric-card"><span class="metric-label">EVENT ĐÃ XÁC THỰC</span><strong id="eventCount">0</strong><span class="metric-note">Hash SHA-256 / Keccak-256</span></article>
+        <article class="metric-card metric-chain"><span class="metric-label">CHAIN</span><strong id="chainName">LOCAL 31337</strong><span class="metric-note">Evidence layer · không điều khiển E-stop</span></article>
+      </section>
+
+      <section class="workspace-grid">
+        <div class="panel sensor-panel">
+          <div class="panel-heading"><div><p class="eyebrow">LIVE TELEMETRY</p><h2>Khoảng cách hai hướng</h2></div><span id="sampleTime" class="mono muted">--:--:--</span></div>
+          <div class="sensor-cards">
+            <article class="sensor-card"><div class="sensor-top"><span class="sensor-name"><span class="sensor-icon">◀</span> LEFT / GPIO 2</span><span id="leftState" class="tag tag-safe">SAFE</span></div><div class="distance"><strong id="leftDistance">92.8</strong><span>cm</span></div><div class="bar"><span id="leftBar" style="width: 77%"></span></div><div class="sensor-foot"><span>HC-SR04 · 40 kHz</span><span id="leftEcho">echo 0.0 ms</span></div></article>
+            <article class="sensor-card"><div class="sensor-top"><span class="sensor-name"><span class="sensor-icon">▶</span> RIGHT / GPIO 4</span><span id="rightState" class="tag tag-safe">SAFE</span></div><div class="distance"><strong id="rightDistance">86.4</strong><span>cm</span></div><div class="bar"><span id="rightBar" style="width: 72%"></span></div><div class="sensor-foot"><span>HC-SR04 · 40 kHz</span><span id="rightEcho">echo 0.0 ms</span></div></article>
+          </div>
+          <div class="threshold-legend"><span><i class="legend-safe"></i> Safe &gt; 60 cm</span><span><i class="legend-warning"></i> Warning 31–60 cm</span><span><i class="legend-danger"></i> Emergency ≤ 30 cm</span></div>
+        </div>
+
+        <div class="panel chain-panel">
+          <div class="panel-heading"><div><p class="eyebrow">WEB3 IDENTITY</p><h2>Evidence layer</h2></div><span class="chain-badge">EVM</span></div>
+          <div class="wallet-row"><span class="wallet-avatar">◈</span><div><span class="metric-label">CONNECTED WALLET</span><strong id="walletAddress">Chưa kết nối</strong></div></div>
+          <label class="field-label" for="contractAddress">Địa chỉ contract HRCSafetyLog</label>
+          <input id="contractAddress" class="text-input mono" placeholder="0x… (local deploy hoặc Sepolia)" spellcheck="false" />
+          <button id="recordButton" class="button button-outline" disabled>Ghi event hiện tại lên chain</button>
+          <p id="chainMessage" class="helper">Kết nối MetaMask để ký giao dịch. Chế độ mô phỏng vẫn chạy không cần ví.</p>
+        </div>
+      </section>
+
+      <section class="panel timeline-panel">
+        <div class="panel-heading"><div><p class="eyebrow">IMMUTABLE ACTIVITY</p><h2>Safety event stream</h2></div><span class="live-label"><span class="status-dot"></span> LIVE</span></div>
+        <div id="eventList" class="event-list"><div class="empty-state"><span>◎</span><p>Chưa có event. Nhấn “Chạy mô phỏng” để tạo dữ liệu cảm biến.</p></div></div>
+      </section>
+
+      <section id="how-it-works" class="how-section">
+        <div><p class="eyebrow">Ý TƯỞNG</p><h2>Blockchain không đo khoảng cách.<br /><em>Nó chứng minh chuyện đã xảy ra.</em></h2></div>
+        <div class="how-steps"><div class="how-step"><span>01</span><h3>Đo tại edge</h3><p>ESP32 lấy mẫu HC-SR04, áp dụng ngưỡng fail-safe 60/30 cm và giữ raw telemetry ở gateway.</p></div><div class="how-step"><span>02</span><h3>Băm bằng chứng</h3><p>Event ID ổn định từ thiết bị, thời gian, hai khoảng cách và severity. Không đưa dữ liệu nhạy cảm lên chain.</p></div><div class="how-step"><span>03</span><h3>Ghi & kiểm tra</h3><p>HRCSafetyLog lưu hash, thiết bị, severity và cờ EmergencyStop. Bất kỳ ai cũng có thể xác minh.</p></div></div>
+      </section>
+
+      <footer class="footer"><span>SONARCHAIN / HRC SAFETY LOG</span><span>Prototype · safety decisions remain local and fail-safe</span></footer>
+    </main>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -17,3 +17,7 @@ contracts/typechain-types/
 # Runtime evidence
 ai_model/data/processed/
 data/incidents/
+
+# Local archives and generated evidence
+*.rar
+data/incidents/*.json

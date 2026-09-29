@@ -3,7 +3,9 @@ require("@nomicfoundation/hardhat-toolbox");
 module.exports = {
   solidity: "0.8.24",
   paths: {
-    sources: ".",
+    // Keep the project sources isolated from node_modules. With `.` Hardhat
+    // also discovers fixture contracts shipped by dependencies (HH1006).
+    sources: "./contracts",
     tests: "test",
     cache: "cache",
     artifacts: "artifacts"

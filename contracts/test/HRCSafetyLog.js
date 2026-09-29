@@ -12,7 +12,9 @@ describe("HRCSafetyLog", function () {
     const eventHash = ethers.keccak256(ethers.toUtf8Bytes("event-1"));
     await log.recordEvent(eventHash, device, 123, 2, true);
 
-    const event = await log.getEvent(eventHash);
+    // ethers v6 reserves `getEvent` for ABI event introspection, so use the
+    // full signature to call the Solidity getter with the same name.
+    const event = await log["getEvent(bytes32)"](eventHash);
     expect(event.reporter).to.equal(owner.address);
     expect(event.emergencyStop).to.equal(true);
     expect(await log.emergencyStopByDevice(device)).to.equal(true);

@@ -1,0 +1,11 @@
+{
+  "device_id": "ESP32-HRC-01",
+  "sensor_id": "HC-SR04",
+  "alert_distance_cm": 50.0,
+  "sample_interval_ms": 200,
+  "incident_cooldown_seconds": 5,
+  "pins": {
+    "trig": 25,
+    "echo": 26
+  }
+}
