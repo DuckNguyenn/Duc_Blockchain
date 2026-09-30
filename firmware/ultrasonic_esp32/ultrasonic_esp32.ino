@@ -1,110 +1,121 @@
 /*
- * ESP32 + 2 x HC-SR04 ultrasonic sensors
- *
- * Pin mapping follows the supplied wiring diagram:
- *   Left sensor : TRIG -> GPIO5,  ECHO -> GPIO2 (through 1k/2k divider)
- *   Right sensor: TRIG -> GPIO18, ECHO -> GPIO4 (through 1k/2k divider) **CHECK BOARD LABEL**
- *
- * The supplied drawing's blue right-TRIG wire lands on the pin labelled D18.
- * On some cropped/low-resolution copies it can look like D17; use the board
- * silkscreen and the table in README.md rather than wire color alone.
- *   Both sensors: VCC -> VIN/5V, GND -> ESP32 GND
- *
- * The HC-SR04 ECHO output is 5 V. Do not connect ECHO directly to an
- * ESP32 GPIO. The 1 kOhm / 2 kOhm divider shown in the diagram reduces it
- * to approximately 3.33 V (assuming the 1 kOhm resistor is on ECHO side).
- */
+  ESP32 DevKit v1 + one HC-SR04 + active buzzer + momentary silence button.
 
+  Important:
+  - HC-SR04 is powered from 5 V. Its ECHO signal MUST go through the
+    1 kOhm / 2 kOhm divider shown in the wiring diagram before GPIO18.
+  - The button silences the buzzer temporarily. It is not a safety-rated
+    emergency-stop circuit and must not be used as the sole protection for
+    people or machinery.
+  - The buzzer output is intended to drive an NPN transistor, not a large
+    buzzer directly from an ESP32 GPIO.
+*/
 #include <Arduino.h>
+#include <math.h>
+#include <string.h>
 
-namespace Pins {
-constexpr uint8_t LEFT_TRIG = 5;
-constexpr uint8_t LEFT_ECHO = 2;   // boot-strap pin; keep LOW at reset
-constexpr uint8_t RIGHT_TRIG = 18;
-constexpr uint8_t RIGHT_ECHO = 4;  // input from the divider output
+constexpr uint8_t TRIG_PIN = 5;
+constexpr uint8_t ECHO_PIN = 18;       // divider output, never raw 5 V ECHO
+constexpr uint8_t BUZZER_PIN = 23;     // drives NPN transistor base via 1 kOhm
+constexpr uint8_t SILENCE_BUTTON_PIN = 27; // button to GND, INPUT_PULLUP
 
-// These values match the supplied wiring diagram. GPIO2 is used as the left
-// ECHO input in the diagram; if the board fails to boot, move that ECHO wire
-// to another free input GPIO and update this constant.
-}  // namespace Pins
+constexpr float WARNING_DISTANCE_CM = 60.0f;
+constexpr float DANGER_DISTANCE_CM = 30.0f;
+constexpr unsigned long SAMPLE_INTERVAL_MS = 100;
+constexpr unsigned long ECHO_TIMEOUT_US = 30000;
+constexpr unsigned long DEBOUNCE_MS = 35;
 
-constexpr uint32_t SERIAL_BAUD = 115200;
-constexpr unsigned long ECHO_TIMEOUT_US = 30000UL;  // about 5 m maximum
-constexpr uint32_t SENSOR_GUARD_MS = 60;            // avoid acoustic crosstalk
-constexpr uint32_t SAMPLE_PERIOD_MS = 100;
-constexpr float SOUND_SPEED_CM_PER_US = 0.0343f;
+unsigned long lastSampleAt = 0;
+unsigned long lastButtonChangeAt = 0;
+unsigned long sequenceNumber = 0;
+bool lastButtonReading = HIGH;
+bool stableButtonState = HIGH;
+bool buzzerSilenced = false;
 
-struct UltrasonicSensor {
-  const char* name;
-  uint8_t trigPin;
-  uint8_t echoPin;
-};
-
-const UltrasonicSensor leftSensor{"left", Pins::LEFT_TRIG, Pins::LEFT_ECHO};
-const UltrasonicSensor rightSensor{"right", Pins::RIGHT_TRIG, Pins::RIGHT_ECHO};
-
-float readDistanceCm(const UltrasonicSensor& sensor) {
-  // Guarantee a clean low-to-high trigger transition.
-  digitalWrite(sensor.trigPin, LOW);
-  delayMicroseconds(3);
-  digitalWrite(sensor.trigPin, HIGH);
+float readDistanceCm() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
-  digitalWrite(sensor.trigPin, LOW);
+  digitalWrite(TRIG_PIN, LOW);
 
-  const unsigned long echoDuration = pulseIn(
-      sensor.echoPin, HIGH, ECHO_TIMEOUT_US);
-
-  // pulseIn returns zero on timeout; -1.0 is unambiguously "no reading".
-  if (echoDuration == 0) {
-    return -1.0f;
-  }
-
-  return (echoDuration * SOUND_SPEED_CM_PER_US) / 2.0f;
+  const unsigned long duration = pulseIn(ECHO_PIN, HIGH, ECHO_TIMEOUT_US);
+  return duration == 0 ? NAN : (duration * 0.0343f) / 2.0f;
 }
 
-void printDistance(const char* label, float distanceCm) {
-  Serial.print(label);
-  Serial.print("=");
-  if (distanceCm < 0.0f) {
-    Serial.print("timeout");
-  } else {
-    Serial.print(distanceCm, 1);
-    Serial.print("cm");
+const char* stateFor(float distanceCm) {
+  if (isnan(distanceCm)) return "SENSOR_FAULT";
+  if (distanceCm <= DANGER_DISTANCE_CM) return "EMERGENCY";
+  if (distanceCm <= WARNING_DISTANCE_CM) return "WARNING";
+  return "SAFE";
+}
+
+void updateButton() {
+  const bool reading = digitalRead(SILENCE_BUTTON_PIN);
+  const unsigned long now = millis();
+
+  if (reading != lastButtonReading) {
+    lastButtonChangeAt = now;
+    lastButtonReading = reading;
   }
+
+  if ((now - lastButtonChangeAt) >= DEBOUNCE_MS && reading != stableButtonState) {
+    stableButtonState = reading;
+    if (stableButtonState == LOW) {
+      buzzerSilenced = true;
+    }
+  }
+}
+
+void emitTelemetry(float distanceCm, const char* state, bool buzzerOn) {
+  Serial.print("{\"device_id\":\"ESP32-HRC-01\",\"sensor_id\":\"HC-SR04\",\"timestamp_ms\":");
+  Serial.print(millis());
+  Serial.print(",\"distance_cm\":");
+  if (isnan(distanceCm)) Serial.print("null");
+  else Serial.print(distanceCm, 1);
+  Serial.print(",\"state\":\"");
+  Serial.print(state);
+  Serial.print("\",\"emergency_stop\":");
+  Serial.print(strcmp(state, "EMERGENCY") == 0 ? "true" : "false");
+  Serial.print(",\"buzzer_on\":");
+  Serial.print(buzzerOn ? "true" : "false");
+  Serial.print(",\"buzzer_silenced\":");
+  Serial.print(buzzerSilenced ? "true" : "false");
+  Serial.print(",\"seq\":");
+  Serial.print(++sequenceNumber);
+  Serial.println("}");
 }
 
 void setup() {
-  pinMode(Pins::LEFT_TRIG, OUTPUT);
-  pinMode(Pins::RIGHT_TRIG, OUTPUT);
-  pinMode(Pins::LEFT_ECHO, INPUT);
-  pinMode(Pins::RIGHT_ECHO, INPUT);
+  Serial.begin(115200);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(SILENCE_BUTTON_PIN, INPUT_PULLUP);
+  digitalWrite(TRIG_PIN, LOW);
+  digitalWrite(BUZZER_PIN, LOW);
 
-  digitalWrite(Pins::LEFT_TRIG, LOW);
-  digitalWrite(Pins::RIGHT_TRIG, LOW);
-
-  Serial.begin(SERIAL_BAUD);
-  delay(300);
-  Serial.println();
-  Serial.println("ESP32 dual HC-SR04 ready");
-  Serial.println("left_trig=GPIO5 left_echo=GPIO2 right_trig=GPIO18 right_echo=GPIO4");
-  Serial.println("ECHO must use a 5V-to-3.3V voltage divider");
-
-  // GPIO2 is a boot-strap input on classic ESP32. The divider output must not
-  // force it HIGH while the board is resetting.
+  Serial.println("HRC Safety Log: ESP32 + HC-SR04 + buzzer + silence button ready");
 }
 
 void loop() {
-  // Trigger only one sensor at a time. This prevents one sensor from hearing
-  // the other sensor's ultrasonic burst.
-  const float leftDistanceCm = readDistanceCm(leftSensor);
-  delay(SENSOR_GUARD_MS);
-  const float rightDistanceCm = readDistanceCm(rightSensor);
+  updateButton();
 
-  Serial.print("distance_cm,");
-  printDistance("left", leftDistanceCm);
-  Serial.print(",");
-  printDistance("right", rightDistanceCm);
-  Serial.println();
+  const unsigned long now = millis();
+  if (now - lastSampleAt < SAMPLE_INTERVAL_MS) return;
+  lastSampleAt = now;
 
-  delay(SAMPLE_PERIOD_MS);
+  const float distanceCm = readDistanceCm();
+  const char* state = stateFor(distanceCm);
+
+  // A safe reading rearms the next alarm. Sensor fault is fail-safe and alarms.
+  if (strcmp(state, "SAFE") == 0) {
+    buzzerSilenced = false;
+  }
+
+  const bool alarmState = strcmp(state, "EMERGENCY") == 0 || strcmp(state, "SENSOR_FAULT") == 0;
+  const bool buzzerOn = alarmState && !buzzerSilenced;
+  digitalWrite(BUZZER_PIN, buzzerOn ? HIGH : LOW);
+
+  emitTelemetry(distanceCm, state, buzzerOn);
 }

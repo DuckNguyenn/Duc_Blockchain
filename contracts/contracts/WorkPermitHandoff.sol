@@ -119,6 +119,7 @@ contract WorkPermitHandoff {
         require(permitExists[permitId], "permit not found");
         Permit storage permit = permits[permitId];
         require(permit.status == PermitStatus.APPROVED, "permit not approved");
+        require(telemetryEventHash != bytes32(0), "empty telemetry hash");
         require(block.timestamp >= permit.validFrom, "permit not started");
         require(block.timestamp <= permit.validUntil, "permit expired");
         permit.status = PermitStatus.ACTIVE;
@@ -128,6 +129,7 @@ contract WorkPermitHandoff {
     function confirmHandoff(bytes32 handoffId, bytes32 permitId, bytes32 robotIdHash) external {
         require(handoffId != bytes32(0), "empty handoff id");
         require(!handoffExists[handoffId], "handoff already exists");
+        require(robotIdHash != bytes32(0), "empty robot id");
         require(permitExists[permitId], "permit not found");
         Permit storage permit = permits[permitId];
         require(permit.status == PermitStatus.ACTIVE, "permit not active");

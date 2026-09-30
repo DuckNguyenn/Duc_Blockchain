@@ -1,11 +1,19 @@
 {
   "device_id": "ESP32-HRC-01",
   "sensor_id": "HC-SR04",
-  "alert_distance_cm": 50.0,
-  "sample_interval_ms": 200,
+  "alert_distance_cm": 30.0,
+  "warning_distance_cm": 60.0,
+  "sample_interval_ms": 100,
   "incident_cooldown_seconds": 5,
   "pins": {
-    "trig": 25,
-    "echo": 26
+    "trig": 5,
+    "echo": 18,
+    "buzzer": 23,
+    "silence_button": 27
+  },
+  "notes": {
+    "echo_level_shift": "R1=1k from HC-SR04 ECHO to GPIO18 node; R2=2k from node to GND",
+    "button": "momentary normally-open button from GPIO27 to GND; INPUT_PULLUP",
+    "buzzer": "active buzzer driven through an NPN transistor"
   }
 }

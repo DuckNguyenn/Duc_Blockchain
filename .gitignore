@@ -21,3 +21,6 @@ data/incidents/
 # Local archives and generated evidence
 *.rar
 data/incidents/*.json
+
+# KiCad autosave history
+blockchain_sche/.history/

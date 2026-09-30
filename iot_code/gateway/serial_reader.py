@@ -1,4 +1,4 @@
-"""Read the existing ESP32 text protocol and pass measurements to pipeline.py."""
+"""Read one-HC-SR04 serial text and pass measurements to the safety pipeline."""
 from __future__ import annotations
 
 import argparse
@@ -8,21 +8,23 @@ from datetime import datetime, timezone
 
 from iot_code.gateway.pipeline import process_row
 
-MEASUREMENT = re.compile(r"distance_cm,left=([-\d.]+|timeout)cm?,right=([-\d.]+|timeout)cm?")
+MEASUREMENT = re.compile(r"distance_cm,(?:distance|left)=([-\d.]+|timeout)(?:cm)?$")
 
 
 def parse_line(line: str) -> dict[str, str] | None:
-    match = MEASUREMENT.search(line.strip())
-    if not match:
+    text = line.strip()
+    try:
+        payload = json.loads(text)
+        distance = payload.get("distance_cm") if isinstance(payload, dict) else None
+        if distance is not None:
+            return {"timestamp": datetime.now(timezone.utc).isoformat(), "distance_cm": str(distance)}
         return None
-    left, right = match.groups()
-    if "timeout" in (left, right):
+    except json.JSONDecodeError:
+        pass
+    match = MEASUREMENT.search(text)
+    if not match or match.group(1) == "timeout":
         return None
-    return {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "left_cm": left,
-        "right_cm": right,
-    }
+    return {"timestamp": datetime.now(timezone.utc).isoformat(), "distance_cm": match.group(1)}
 
 
 def main() -> None:

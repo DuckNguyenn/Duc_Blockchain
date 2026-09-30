@@ -90,6 +90,8 @@ Trong dashboard: **Kết nối ví** → nhập contract address → **Chạy m�
 
 Dashboard chỉ ghi `eventHash`, `deviceIdHash`, severity và `emergencyStop`; raw telemetry vẫn ở off-chain.
 
+Ranh giới chi tiết và các khoảng trống đã rà soát nằm ở [docs/BLOCKCHAIN_BOUNDARY_AUDIT.md](docs/BLOCKCHAIN_BOUNDARY_AUDIT.md). Luồng mới dùng evidence envelope v1 + outbox off-chain, sau đó ghi digest/schema/thời điểm/mức độ/flag lên `HRCSafetyLog`; raw telemetry, confidence, model và policy version vẫn ở off-chain.
+
 ### Work Permit & Human–Robot Handoff
 
 `WorkPermitHandoff` bổ sung workflow nghiệp vụ cho HRC: requester tạo permit cho worker/task/zone, supervisor approve, gateway ghi nhận worker đã vào zone dựa trên telemetry, worker xác nhận robot bàn giao task, rồi đóng permit. Sau `npm.cmd run deploy`, dùng dòng `permitContract=` làm địa chỉ contract trong panel **Work permit & robot handoff** của dashboard.
@@ -134,7 +136,7 @@ Ngưỡng fail-safe mặc định là `WARNING` khi khoảng cách ≤ 60 cm và
 
 ## ESP32 + HC-SR04
 
-Nạp `firmware/ultrasonic_esp32/ultrasonic_esp32.ino` bằng Arduino IDE. Pin mặc định: LEFT TRIG 5, LEFT ECHO 2, RIGHT TRIG 18, RIGHT ECHO 4. ECHO HC-SR04 thường là 5 V, cần cầu phân áp xuống 3.3 V trước khi nối ESP32.
+Nạp `firmware/ultrasonic_esp32/ultrasonic_esp32.ino` bằng Arduino IDE. Bản mạch một cảm biến dùng TRIG GPIO5, ECHO GPIO18 (qua cầu phân áp 1 kΩ/2 kΩ), buzzer driver GPIO23 và nút silence GPIO27. HC-SR04 thường chạy 5 V; không nối ECHO trực tiếp vào ESP32. Xem `firmware/ultrasonic_esp32/wiring_diagram.svg` để đấu dây.
 
 Đọc Serial:
 

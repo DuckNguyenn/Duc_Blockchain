@@ -30,4 +30,41 @@ describe("HRCSafetyLog", function () {
     await log.recordEvent(hash, device, 123, 0, false);
     await expect(log.recordEvent(hash, device, 124, 0, false)).to.be.revertedWith("event already recorded");
   });
+
+  it("enforces versioned evidence semantics and rejects inconsistent emergency flags", async function () {
+    const [owner, reporter] = await ethers.getSigners();
+    const Factory = await ethers.getContractFactory("HRCSafetyLog");
+    const log = await Factory.deploy();
+    await log.waitForDeployment();
+    await log.setReporter(reporter.address, true);
+    const device = ethers.keccak256(ethers.toUtf8Bytes("HRC-ESP32-01"));
+    const evidence = ethers.keccak256(ethers.toUtf8Bytes("evidence-v1"));
+    const schema = await log.EVIDENCE_SCHEMA_V1();
+    await expect(log.connect(reporter).recordEvidence(evidence, device, 123, 3, true, schema)).to.emit(log, "SafetyEvidenceRecorded");
+    const stored = await log["getEvent(bytes32)"](evidence);
+    expect(stored.evidenceHash).to.equal(evidence);
+    expect(stored.evidenceSchema).to.equal(schema);
+    await expect(log.recordEvidence(ethers.id("bad"), device, 124, 0, true, schema)).to.be.revertedWith("stop requires danger severity");
+    await expect(log.recordEvidence(ethers.id("bad2"), device, 0, 0, false, schema)).to.be.revertedWith("empty measured timestamp");
+    await expect(log.recordEvidence(ethers.id("bad3"), device, 123, 0, false, ethers.id("wrong-schema"))).to.be.revertedWith("unsupported evidence schema");
+  });
+
+  it("rejects an unapproved reporter", async function () {
+    const [, outsider] = await ethers.getSigners();
+    const Factory = await ethers.getContractFactory("HRCSafetyLog");
+    const log = await Factory.deploy();
+    await log.waitForDeployment();
+    await expect(log.connect(outsider).recordEvent(ethers.id("outsider"), ethers.id("device"), 123, 0, false)).to.be.revertedWith("not reporter");
+  });
+
+  it("does not clear the emergency latch when a later safe event is recorded", async function () {
+    const Factory = await ethers.getContractFactory("HRCSafetyLog");
+    const log = await Factory.deploy();
+    await log.waitForDeployment();
+    const device = ethers.id("device-latch");
+    await log.recordEvent(ethers.id("danger-latch"), device, 123, 3, true);
+    await log.recordEvent(ethers.id("safe-after-latch"), device, 124, 0, false);
+    expect(await log.deviceLocked(device)).to.equal(true);
+    expect(await log.emergencyStopByDevice(device)).to.equal(true);
+  });
 });

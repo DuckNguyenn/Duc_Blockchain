@@ -43,3 +43,33 @@ class SafetyLogClient:
         if receipt.status != 1:
             raise RuntimeError(f"Blockchain transaction failed: {tx_hash.hex()}")
         return tx_hash.hex()
+
+    def record_evidence(self, evidence: dict[str, Any]) -> str:
+        """Submit a v1 evidence digest while keeping the envelope off-chain."""
+        severity = {"SAFE": 0, "WARNING": 1, "DANGER": 2, "EMERGENCY": 3}[evidence["severity"]]
+        from datetime import datetime
+        measured_at = int(datetime.fromisoformat(evidence["measured_at"].replace("Z", "+00:00")).timestamp())
+        evidence_hash = bytes.fromhex(evidence["evidence_hash"])
+        device_hash = self.hash_text(evidence["device_id"])
+        schema_hash = self.hash_text(evidence["schema"])
+        nonce = self.web3.eth.get_transaction_count(self.account.address)
+        tx = self.contract.functions.recordEvidence(
+            evidence_hash,
+            device_hash,
+            measured_at,
+            severity,
+            bool(evidence["emergency_stop"]),
+            schema_hash,
+        ).build_transaction({
+            "from": self.account.address,
+            "nonce": nonce,
+            "chainId": self.web3.eth.chain_id,
+            "gas": 500_000,
+            "gasPrice": self.web3.eth.gas_price,
+        })
+        signed = self.account.sign_transaction(tx)
+        tx_hash = self.web3.eth.send_raw_transaction(signed.raw_transaction)
+        receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
+        if receipt.status != 1:
+            raise RuntimeError(f"Blockchain transaction failed: {tx_hash.hex()}")
+        return tx_hash.hex()

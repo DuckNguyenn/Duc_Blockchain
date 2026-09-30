@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from iot_code.gateway import build_warning, parse_telemetry, process_lines
+from iot_code.gateway.pipeline import process_row
 from iot_code.logging_service import verify_sha256
 
 
@@ -46,6 +47,25 @@ class GatewayTests(unittest.TestCase):
             payload = json.loads(paths[0].read_text(encoding="utf-8"))
             self.assertEqual(payload["event_type"], "SENSOR_TIMEOUT")
             self.assertTrue(verify_sha256(payload))
+
+    def test_emergency_telemetry_is_logged_as_emergency_stop(self):
+        with tempfile.TemporaryDirectory() as directory:
+            paths = process_lines(
+                [json.dumps({"state": "EMERGENCY", "distance_cm": 24.0})],
+                Path(directory),
+                cooldown_seconds=0,
+            )
+            payload = json.loads(paths[0].read_text(encoding="utf-8"))
+            self.assertEqual(payload["event_type"], "EMERGENCY_STOP")
+            self.assertTrue(payload["emergency_stop"])
+            self.assertTrue(verify_sha256(payload))
+
+    def test_single_sensor_pipeline_triggers_emergency_stop(self):
+        result = process_row({"timestamp": "2026-09-29T00:00:00Z", "distance_cm": "24.6"}, device_id="HRC-ESP32-01")
+        self.assertEqual(result["distance_cm"], 24.6)
+        self.assertEqual(result["severity"], "EMERGENCY")
+        self.assertTrue(result["emergency_stop"])
+        self.assertNotIn("right_cm", result)
 
 
 if __name__ == "__main__":

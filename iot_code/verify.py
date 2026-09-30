@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from .logging_service import verify_sha256
+from .evidence import evidence_digest
 
 
 def main() -> None:
@@ -13,7 +13,7 @@ def main() -> None:
     args = parser.parse_args()
 
     payload = json.loads(args.log.read_text(encoding="utf-8"))
-    valid = verify_sha256(payload)
+    valid = payload.get("evidence_hash") == evidence_digest(payload)
     print(
         "VALID: warning matches its stored SHA-256 hash"
         if valid

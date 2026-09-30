@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill:#102a43 }
+      .subtitle { font: 16px Arial, sans-serif; fill:#486581 }
+      .label { font: 700 17px Arial, sans-serif; fill:#102a43 }
+      .text { font: 16px Arial, sans-serif; fill:#243b53 }
+      .small { font: 14px Arial, sans-serif; fill:#334e68 }
+      .box { fill:#f7fafc; stroke:#829ab1; stroke-width:2 }
+      .chip { fill:#d9e2ec; stroke:#486581; stroke-width:2 }
+      .wire { fill:none; stroke:#334e68; stroke-width:4 }
+      .power { fill:none; stroke:#d64545; stroke-width:4 }
+      .ground { fill:none; stroke:#1f7a5a; stroke-width:4 }
+      .signal { fill:none; stroke:#2563eb; stroke-width:4 }
+      .warn { fill:#fff3cd; stroke:#d39e00; stroke-width:2 }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#334e68"/></marker>
+  </defs>
+  <rect width="1400" height="900" fill="#ffffff"/>
+  <text x="60" y="55" class="title">ESP32 + HC-SR04 + Buzzer + nút Silence</text>
+  <text x="60" y="85" class="subtitle">ESP32 DevKit v1 — sơ đồ nối dây khớp với ultrasonic_esp32.ino</text>
+
+  <!-- ESP32 -->
+  <rect x="510" y="145" width="320" height="570" rx="18" class="chip"/>
+  <text x="580" y="185" class="title" style="font-size:24px">ESP32 DevKit v1</text>
+  <text x="570" y="220" class="small">GPIO5  TRIG</text>
+  <text x="570" y="280" class="small">GPIO18 ECHO (3.3 V max)</text>
+  <text x="570" y="390" class="small">GPIO23 BUZZER DRIVER</text>
+  <text x="570" y="510" class="small">GPIO27 BUTTON</text>
+  <text x="570" y="645" class="small">VIN / 5V</text>
+  <text x="570" y="680" class="small">GND</text>
+  <circle cx="510" cy="214" r="7" fill="#2563eb"/>
+  <circle cx="510" cy="274" r="7" fill="#2563eb"/>
+  <circle cx="510" cy="384" r="7" fill="#2563eb"/>
+  <circle cx="510" cy="504" r="7" fill="#2563eb"/>
+  <circle cx="510" cy="640" r="7" fill="#d64545"/>
+  <circle cx="510" cy="675" r="7" fill="#1f7a5a"/>
+
+  <!-- HC-SR04 -->
+  <rect x="70" y="155" width="275" height="210" rx="12" class="box"/>
+  <text x="125" y="195" class="label">HC-SR04</text>
+  <circle cx="145" cy="245" r="35" fill="#d9e2ec" stroke="#486581" stroke-width="3"/>
+  <circle cx="270" cy="245" r="35" fill="#d9e2ec" stroke="#486581" stroke-width="3"/>
+  <text x="110" y="330" class="text">VCC  GND  TRIG  ECHO</text>
+  <circle cx="345" cy="215" r="6" fill="#d64545"/>
+  <circle cx="345" cy="255" r="6" fill="#1f7a5a"/>
+  <circle cx="345" cy="295" r="6" fill="#2563eb"/>
+  <circle cx="345" cy="335" r="6" fill="#2563eb"/>
+
+  <!-- divider -->
+  <rect x="105" y="455" width="365" height="180" rx="12" class="warn"/>
+  <text x="130" y="490" class="label">Cầu phân áp ECHO bắt buộc</text>
+  <text x="130" y="520" class="text">ECHO ── R1 1 kΩ ──●── GPIO18</text>
+  <text x="130" y="550" class="text">                  │</text>
+  <text x="130" y="580" class="text">                R2 2 kΩ</text>
+  <text x="130" y="610" class="text">                  │</text>
+  <text x="130" y="635" class="text">                 GND</text>
+
+  <!-- buzzer driver -->
+  <rect x="940" y="145" width="365" height="270" rx="12" class="box"/>
+  <text x="1015" y="185" class="label">Mạch driver buzzer</text>
+  <text x="970" y="225" class="text">GPIO23 ─ Rb 1 kΩ ─ Base</text>
+  <text x="970" y="260" class="text">                 2N2222 / BC547</text>
+  <text x="970" y="300" class="text">VIN/5V ─── (+) active buzzer</text>
+  <text x="970" y="335" class="text">             (−) ─ Collector</text>
+  <text x="970" y="370" class="text">GND ─────── Emitter</text>
+  <text x="970" y="400" class="small">Nếu buzzer là tải cảm, thêm diode flyback.</text>
+
+  <!-- button -->
+  <rect x="950" y="520" width="300" height="150" rx="12" class="box"/>
+  <text x="1035" y="560" class="label">Nút nhấn thường mở</text>
+  <text x="1000" y="605" class="text">GPIO27 ──[ BUTTON ]── GND</text>
+  <text x="1000" y="640" class="small">Firmware dùng INPUT_PULLUP; nhấn = LOW.</text>
+
+  <!-- wires -->
+  <path d="M345 215 H420 V640 H510" class="power"/>
+  <text x="365" y="205" class="small" fill="#d64545">5 V</text>
+  <path d="M345 255 H400 V675 H510" class="ground"/>
+  <path d="M345 295 H450 V214 H510" class="signal"/>
+  <path d="M345 335 H385 V520" class="signal"/>
+  <path d="M385 520 H430" class="signal"/>
+  <path d="M470 520 H510 V274" class="signal"/>
+  <text x="395" y="505" class="small">nút chia áp</text>
+
+  <path d="M830 384 H940 V225" class="signal"/>
+  <path d="M830 640 H900 V300" class="power"/>
+  <path d="M830 675 H900 V370" class="ground"/>
+  <path d="M830 504 H920 V605" class="signal"/>
+  <path d="M920 605 H950" class="signal"/>
+
+  <!-- notes -->
+  <rect x="60" y="755" width="1245" height="95" rx="10" fill="#fee2e2" stroke="#c53030" stroke-width="2"/>
+  <text x="85" y="790" class="label" fill="#9b2c2c">CẢNH BÁO AN TOÀN</text>
+  <text x="85" y="820" class="text">Không nối ECHO 5 V trực tiếp vào ESP32. Nút này chỉ silence còi, không phải mạch E-stop safety-rated.</text>
+  <text x="85" y="842" class="text">Muốn dừng máy thật cần mạch safety relay/E-stop phần cứng độc lập, được thiết kế và kiểm định phù hợp.</text>
+</svg>

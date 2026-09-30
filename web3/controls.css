@@ -1,0 +1,14 @@
+.control-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin: 14px 0; }
+.panel-intro { color: var(--muted); font-size: 11px; line-height: 1.55; margin: -5px 0 15px; }
+.role-guide { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 15px; }
+.role-guide span { padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 10px; background: var(--surface-soft); }
+.role-guide b { display: inline-grid; place-items: center; width: 17px; height: 17px; margin-right: 4px; border-radius: 50%; background: var(--mint-pale); color: var(--mint-dark); font-size: 9px; }
+.role-form { display: grid; grid-template-columns: 1.2fr .8fr; gap: 10px; }.role-form .text-input { margin-bottom: 0; }.role-form select { appearance: auto; }
+.copy-field { display: flex; align-items: stretch; gap: 7px; }.copy-field .text-input { flex: 1; margin-bottom: 11px; }.copy-button { flex: 0 0 auto; align-self: flex-start; border: 1px solid var(--line-strong); border-radius: 6px; padding: 9px 10px; background: var(--surface-soft); color: var(--navy); font: 600 10px "Space Grotesk", sans-serif; cursor: pointer; }.copy-button:hover:not(:disabled) { border-color: var(--mint); background: var(--mint-pale); color: var(--mint-dark); }.copy-button:disabled { opacity: .45; cursor: not-allowed; }.wallet-row .copy-button { margin-left: auto; align-self: center; }
+.estop-panel { border-color: #e9b9b6; background: var(--red-pale); }.danger-eyebrow { color: var(--red); }
+.estop-badge, .estop-state { padding: 5px 8px; border: 1px solid #e9b9b6; border-radius: 5px; color: var(--red); font: 10px "DM Mono", monospace; }.estop-badge.ready { color: var(--mint-dark); border-color: #b9decd; background: var(--mint-pale); }
+.estop-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }.button-danger { border: 1px solid var(--red); background: var(--red); color: #fff; }.button-danger:hover:not(:disabled) { background: #a82d2a; }
+.button-ghost { border: 1px solid #e0a4a1; background: #fff; color: var(--red); border-radius: 7px; padding: 9px 12px; font: 600 11px "Space Grotesk", sans-serif; }
+.banner-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }.banner-actions .button { padding: 8px 10px; font-size: 10px; }.safety-banner.danger .estop-state { background: #ffe1df; color: var(--red); }.safety-banner.danger .banner-icon { animation: pulse 1s infinite; } @keyframes pulse { 50% { opacity: .35; } }
+@media (max-width: 900px) { .control-grid { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .role-form, .estop-actions { grid-template-columns: 1fr; }.banner-actions { width: 100%; margin: 8px 0 0; }.safety-banner { align-items: flex-start; flex-wrap: wrap; } }

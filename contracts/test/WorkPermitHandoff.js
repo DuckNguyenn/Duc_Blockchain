@@ -47,4 +47,12 @@ describe("WorkPermitHandoff", function () {
     await contract.recordZoneEntry(permitId, ethers.id("telemetry"));
     await expect(contract.connect(outsider).confirmHandoff(ethers.id("handoff-2"), permitId, ethers.id("robot-2"))).to.be.revertedWith("not handoff participant");
   });
+
+  it("rejects empty telemetry and robot commitments", async function () {
+    const { contract, worker, requester } = await deployed();
+    const { permitId } = await createAndApprove(contract, worker, requester);
+    await expect(contract.recordZoneEntry(permitId, ethers.ZeroHash)).to.be.revertedWith("empty telemetry hash");
+    await contract.recordZoneEntry(permitId, ethers.id("telemetry-valid"));
+    await expect(contract.connect(worker).confirmHandoff(ethers.id("handoff-empty-robot"), permitId, ethers.ZeroHash)).to.be.revertedWith("empty robot id");
+  });
 });

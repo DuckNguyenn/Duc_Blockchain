@@ -3,23 +3,25 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 from typing import Any
+from datetime import datetime
+
+from iot_code.evidence import build_evidence
 
 
-CONTRACT_ABI = [
-    {
-        "inputs": [
-            {"internalType": "bytes32", "name": "warningId", "type": "bytes32"},
-            {"internalType": "bytes32", "name": "logHash", "type": "bytes32"},
-            {"internalType": "bytes32", "name": "deviceId", "type": "bytes32"},
-            {"internalType": "bytes32", "name": "sensorId", "type": "bytes32"},
-            {"internalType": "uint8", "name": "severity", "type": "uint8"}
-        ],
-        "name": "recordWarning",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    }
-]
+CONTRACT_ABI = [{
+    "inputs": [
+        {"internalType": "bytes32", "name": "evidenceHash", "type": "bytes32"},
+        {"internalType": "bytes32", "name": "deviceIdHash", "type": "bytes32"},
+        {"internalType": "uint64", "name": "measuredAt", "type": "uint64"},
+        {"internalType": "uint8", "name": "severity", "type": "uint8"},
+        {"internalType": "bool", "name": "emergencyStop", "type": "bool"},
+        {"internalType": "bytes32", "name": "evidenceSchema", "type": "bytes32"}
+    ],
+    "name": "recordEvidence",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}]
 
 
 @dataclass
@@ -67,18 +69,34 @@ class BlockchainRecorder:
 
     def record(self, warning: dict[str, Any]) -> str:
         Web3 = self.web3
-        warning_id = Web3.keccak(text=warning["warning_id"])
-        log_hash = bytes.fromhex(warning["log_sha256"])
+        state = str(warning.get("state", "WARNING"))
+        severity = {"SAFE": 0, "WARNING": 1, "DANGER": 2, "EMERGENCY": 3}.get(state, 1)
+        evidence = build_evidence(
+            event_id=warning["warning_id"],
+            device_id=warning["device_id"],
+            sensor_id=warning.get("sensor_id") or "HC-SR04",
+            measured_at=warning.get("timestamp_utc") or datetime.utcnow().isoformat() + "Z",
+            received_at=warning.get("timestamp_utc"),
+            distance_cm=warning.get("distance_cm"),
+            severity="EMERGENCY" if state == "EMERGENCY" else "WARNING" if state != "SAFE" else "SAFE",
+            emergency_stop=state == "EMERGENCY",
+            confidence=1.0,
+            policy_version="legacy-warning-adapter.v1",
+            model_version="none",
+            source="gateway.legacy-adapter",
+        )
+        evidence_hash = bytes.fromhex(evidence["evidence_hash"])
         device_id = Web3.keccak(text=warning["device_id"])
-        sensor_id = Web3.keccak(text=warning.get("sensor_id") or "HC-SR04")
-        severity = 1 if warning.get("state") == "SENSOR_FAULT" else 0
+        schema = Web3.keccak(text=evidence["schema"])
+        measured_at = int(datetime.fromisoformat(evidence["measured_at"].replace("Z", "+00:00")).timestamp())
 
-        transaction = self.contract.functions.recordWarning(
-            warning_id,
-            log_hash,
+        transaction = self.contract.functions.recordEvidence(
+            evidence_hash,
             device_id,
-            sensor_id,
+            measured_at,
             severity,
+            bool(evidence["emergency_stop"]),
+            schema,
         ).build_transaction(
             {
                 "from": self.account,

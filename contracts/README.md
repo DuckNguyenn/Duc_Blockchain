@@ -2,11 +2,11 @@
 
 Đây là phần Blockchain của HRC Safety Log.
 
-- `HRCSafetyLog.sol`: lưu hash sự kiện an toàn, định danh thiết bị đã băm và trạng thái EmergencyStop/khóa thiết bị.
+- `HRCSafetyLog.sol`: ledger safety chính. Nhận evidence digest v1 qua `recordEvidence`; `recordEvent` được giữ làm compatibility API. Lưu digest/schema/thời điểm đo/severity/reporter và trạng thái EmergencyStop; raw telemetry ở off-chain.
 - `WorkPermitHandoff.sol`: cấp phép zone, phê duyệt supervisor và xác nhận human–robot handoff.
 - `scripts/deploy.js`: deploy contract lên Hardhat local node.
 - `scripts/demo.js`: ghi một sự kiện khẩn cấp và đọc lại trạng thái khóa.
-- `test/HRCSafetyLog.js`: kiểm tra EmergencyStop, khóa thiết bị và chống ghi trùng event hash.
+- `test/HRCSafetyLog.js`: kiểm tra quyền reporter, evidence schema, invariant severity/stop, latch và chống ghi trùng.
 - `abi/HRCSafetyLog.json`: ABI được gateway Python sử dụng.
 
 Chạy Demo:
@@ -26,7 +26,14 @@ npm.cmd run deploy
 npm.cmd run demo
 ```
 
-`npm.cmd run deploy` in ra hai địa chỉ: `contract=` cho HRCSafetyLog và `permitContract=` cho WorkPermitHandoff. Nhập đúng `permitContract` vào panel Work permit trên dashboard.
+`npm.cmd run deploy` in ra ba địa chỉ: `contract=` cho HRCSafetyLog, `permitContract=` cho WorkPermitHandoff và `legacySafetyLog=` cho contract legacy `SafetyLog`. Luồng mới dùng `contract=`; legacy chỉ dành cho compatibility.
+
+## Ranh giới on-chain/off-chain
+
+- Off-chain: telemetry chi tiết, evidence JSON v1, confidence, policy/model version, outbox, retry state và file phân tích.
+- On-chain: `evidenceHash`, `deviceIdHash`, `evidenceSchema`, measured timestamp, severity, emergency flag, reporter và E-Stop logic.
+- Gateway lưu evidence trước khi submit. RPC failure giữ file pending để retry/reconcile; không coi transaction failure là mất quyết định local.
+- Blockchain là audit/evidence layer, không điều khiển motor/relay/E-Stop vật lý.
 
 On Windows PowerShell, use `npm.cmd` when execution policy blocks `npm.ps1`.
 The local RPC is `http://127.0.0.1:8545` (chain ID `31337`).
