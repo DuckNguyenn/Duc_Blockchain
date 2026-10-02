@@ -14,7 +14,7 @@ const PERMIT_ABI = [
   "function setGateway(address account, bool allowed)"
 ];
 const SEVERITY = { SAFE: 0, WARNING: 1, DANGER: 2, EMERGENCY: 3 };
-const state = { distance: 86.4, events: [], provider: null, signer: null, safety: null, permit: null, permitId: null, permitStatus: 0, estopActive: false, estopOnChain: false, estopPending: false };
+const state = { distance: 86.4, events: [], provider: null, signer: null, currentAddress: null, safety: null, permit: null, permitId: null, permitStatus: 0, estopActive: false, estopOnChain: false, estopPending: false };
 const $ = (id) => document.getElementById(id);
 
 function classify(distance) { return distance <= 30 ? "EMERGENCY" : distance <= 60 ? "WARNING" : "SAFE"; }
@@ -118,17 +118,57 @@ function simulate() {
   const event = makeEvent(); setEstopUi(state.estopActive); toast(`${event.severity}: event hash đã tạo ở local.`);
 }
 
+async function syncWallet({ request = false, notify = false } = {}) {
+  if (!window.ethereum) return false;
+  state.provider = new ethers.BrowserProvider(window.ethereum);
+  const accounts = request
+    ? await state.provider.send("eth_requestAccounts", [])
+    : await window.ethereum.request({ method: "eth_accounts" });
+  if (!accounts.length) {
+    state.signer = null;
+    state.currentAddress = null;
+    $("walletAddress").textContent = "Chưa kết nối";
+    $("networkLabel").textContent = "Simulation mode";
+    $("connectButton").textContent = "Kết nối ví";
+    $("recordButton").disabled = true;
+    if ($("copyWalletButton")) $("copyWalletButton").disabled = true;
+    updatePermitButtons();
+    updateRoleButtons();
+    return false;
+  }
+  state.signer = await state.provider.getSigner();
+  const address = await state.signer.getAddress();
+  state.currentAddress = address;
+  const network = await state.provider.getNetwork();
+  $("walletAddress").textContent = shortAddress(address);
+  $("networkLabel").textContent = `Wallet · chain ${network.chainId}`;
+  $("connectButton").textContent = "Đã kết nối";
+  $("recordButton").disabled = false;
+  if ($("copyWalletButton")) $("copyWalletButton").disabled = false;
+  updatePermitButtons();
+  setEstopUi(state.estopActive);
+  updateRoleButtons();
+  if (notify) toast(`Đã chuyển sang ví ${shortAddress(address)}.`);
+  return true;
+}
 async function connectWallet() {
   if (!window.ethereum) return toast("Chưa tìm thấy MetaMask — hãy cài extension hoặc dùng mô phỏng.");
   try {
-    state.provider = new ethers.BrowserProvider(window.ethereum); await state.provider.send("eth_requestAccounts", []); state.signer = await state.provider.getSigner(); const address = await state.signer.getAddress(); const network = await state.provider.getNetwork();
-    $("walletAddress").textContent = shortAddress(address); $("networkLabel").textContent = `Wallet · chain ${network.chainId}`; $("connectButton").textContent = "Đã kết nối"; $("recordButton").disabled = false; if ($("copyWalletButton")) $("copyWalletButton").disabled = false; updatePermitButtons(); setEstopUi(state.estopActive); updateRoleButtons(); toast("Đã kết nối ví.");
+    await syncWallet({ request: true });
+    toast("Đã kết nối ví.");
   } catch (error) { toast(error.shortMessage || error.message || "Không thể kết nối ví."); }
 }
 function watchWallet() {
   if (!window.ethereum?.on) return;
-  window.ethereum.on("accountsChanged", () => window.location.reload());
-  window.ethereum.on("chainChanged", () => window.location.reload());
+  const refresh = (notify = false) => syncWallet({ notify }).catch((error) => toast(error.shortMessage || error.message || "Không thể đồng bộ MetaMask."));
+  window.ethereum.on("accountsChanged", () => refresh(true));
+  window.ethereum.on("chainChanged", () => refresh(false));
+  window.ethereum.on("connect", () => refresh(false));
+  window.ethereum.on("disconnect", () => refresh(false));
+  // Some MetaMask versions update selectedAddress before emitting accountsChanged.
+  window.setInterval(() => {
+    if (window.ethereum.selectedAddress && window.ethereum.selectedAddress.toLowerCase() !== (state.currentAddress || "").toLowerCase()) refresh(false);
+  }, 1000);
 }
 function updateRoleButtons() {
   const address = $("roleAddress")?.value.trim(); const ready = Boolean(state.signer && ethers.isAddress(address));
@@ -172,3 +212,4 @@ $("simulateButton").addEventListener("click", simulate); $("connectButton").addE
 $("triggerEstopButton").addEventListener("click", triggerEstop); $("clearEstopButton").addEventListener("click", clearEstop); $("estopPanelTrigger").addEventListener("click", triggerEstop); $("estopPanelClear").addEventListener("click", clearEstop); $("roleAddress").addEventListener("input", updateRoleButtons); $("assignRoleButton").addEventListener("click", () => assignRole(true)); $("revokeRoleButton").addEventListener("click", () => assignRole(false));
 renderSensors(); updatePermitButtons(); setPermitStatus(0); setEstopUi(false); updateRoleButtons();
 watchWallet();
+if (window.ethereum) syncWallet().catch(() => {});
