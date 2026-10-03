@@ -106,11 +106,76 @@ function makeEvent(forceSeverity = null) {
   const event = { id, device, timestamp, severity, minimum: state.distance, distance: state.distance, emergency: severity === "EMERGENCY", tx: null }; state.events.unshift(event); $("eventCount").textContent = state.events.length; renderEvents(); return event;
 }
 function renderEvents() {
-  if (!state.events.length) return;
-  $("eventList").innerHTML = state.events.slice(0, 8).map((event) => {
-    const type = event.severity === "EMERGENCY" ? "emergency" : event.severity === "WARNING" ? "warning" : "";
-    return `<div class="event-row"><span class="event-marker ${type}"></span><div class="event-main"><strong>${event.severity} · ${event.minimum.toFixed(1)} cm${event.emergency ? " · LOCKED" : ""}</strong><small>${new Date(event.timestamp).toLocaleString("vi-VN")} · ${event.device}</small></div><div class="event-meta">${event.id.slice(0, 10)}…${event.tx ? `<a href="${event.tx}" target="_blank" rel="noreferrer">view tx ↗</a>` : "<span>local proof</span>"}</div></div>`;
+  const emergencyEvents = state.events.filter((event) => event.severity === "EMERGENCY");
+  $("eventCount").textContent = emergencyEvents.length;
+  if (!emergencyEvents.length) {
+    $("eventList").innerHTML = `<div class="empty-state"><span>◎</span><p>Chưa có EMERGENCY event.</p></div>`;
+    return;
+  }
+  $("eventList").innerHTML = emergencyEvents.slice(0, 8).map((event) => {
+    const type = "emergency";
+    return `<div class="event-row"><span class="event-marker ${type}"></span><div class="event-main"><strong>EMERGENCY · ${event.minimum.toFixed(1)} cm${event.emergency ? " · LOCKED" : ""}</strong><small>${new Date(event.timestamp).toLocaleString("vi-VN")} · ${event.device}</small></div><div class="event-meta">${event.id.slice(0, 10)}…${event.tx ? `<a href="${event.tx}" target="_blank" rel="noreferrer">view tx ↗</a>` : "<span>local proof</span>"}</div></div>`;
   }).join("");
+}
+
+const GATEWAY_API = "http://127.0.0.1:8000";
+function addGatewayTelemetry(row) {
+  if (!row || row.distance_cm === null || row.distance_cm === undefined) return;
+  const distance = Number(row.distance_cm);
+  if (!Number.isFinite(distance)) return;
+  state.distance = distance;
+  if (row.emergency_stop) state.estopActive = true;
+  renderSensors();
+  setEstopUi(state.estopActive);
+  if (row.severity !== "EMERGENCY") return;
+  if (!state.events.some((event) => event.gatewayId === row.id || event.id === row.event_id)) {
+    state.events.unshift({
+      id: row.event_id || row.evidence_hash || `gateway-${row.id}`,
+      gatewayId: row.id,
+      device: row.device_id,
+      timestamp: row.measured_at || row.received_at,
+      severity: row.severity,
+      minimum: distance,
+      distance,
+      emergency: Boolean(row.emergency_stop),
+      tx: row.tx_hash || null,
+    });
+    $("eventCount").textContent = state.events.length;
+    renderEvents();
+  }
+}
+async function loadGatewayHistory() {
+  try {
+    const response = await fetch(`${GATEWAY_API}/api/telemetry/history?severity=EMERGENCY&limit=50`, { cache: "no-store" });
+    if (!response.ok) return;
+    const payload = await response.json();
+    [...(payload.telemetry || [])].reverse().forEach(addGatewayTelemetry);
+  } catch (_) {
+    // The dashboard can still be used in simulation mode when the gateway API is off.
+  }
+}
+async function pollGatewayLatest() {
+  try {
+    const response = await fetch(`${GATEWAY_API}/api/telemetry/latest?ts=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) return;
+    const payload = await response.json();
+    if (payload.telemetry) addGatewayTelemetry(payload.telemetry);
+  } catch (_) {
+    // Keep simulation usable while the gateway is offline.
+  }
+}
+function startGatewayLive() {
+  void loadGatewayHistory();
+  void pollGatewayLatest();
+  window.setInterval(pollGatewayLatest, 1000);
+  try {
+    const socket = new WebSocket("ws://127.0.0.1:8000/ws/telemetry");
+    socket.onmessage = (message) => {
+      try { addGatewayTelemetry(JSON.parse(message.data)); } catch (_) {}
+    };
+    socket.onclose = () => window.setTimeout(startGatewayLive, 3000);
+    socket.onerror = () => socket.close();
+  } catch (_) {}
 }
 function simulate() {
   const sample = [86.4, 48.2, 24.6, 76.5][Math.floor(Math.random() * 4)]; state.distance = sample; renderSensors();
@@ -187,7 +252,11 @@ async function assignRole(allowed) {
 }
 async function recordOnChain() {
   if (!state.signer) return toast("Hãy kết nối MetaMask trước."); const address = $("contractAddress").value.trim(); if (!ethers.isAddress(address)) return toast("Địa chỉ HRCSafetyLog chưa hợp lệ."); const event = state.events[0] || makeEvent();
-  try { state.safety = new ethers.Contract(address, SAFETY_ABI, state.signer); $("chainMessage").textContent = "Đang chờ xác nhận giao dịch…"; const tx = await state.safety.recordEvent(event.id, hashText(event.device), Math.floor(new Date(event.timestamp).getTime() / 1000), SEVERITY[event.severity], event.emergency); await tx.wait(); event.tx = tx.hash; renderEvents(); $("chainMessage").textContent = `Đã ghi on-chain · ${tx.hash.slice(0, 12)}…`; toast("Safety event đã được ghi lên blockchain."); }
+  if (event.severity !== "EMERGENCY") {
+    $("chainMessage").textContent = "SAFE/WARNING chỉ lưu off-chain; chỉ EMERGENCY được ghi lên chain.";
+    return toast("Chỉ event EMERGENCY mới được ghi lên blockchain.");
+  }
+  try { state.safety = new ethers.Contract(address, SAFETY_ABI, state.signer); $("chainMessage").textContent = "Đang chờ xác nhận giao dịch EMERGENCY…"; const tx = await state.safety.recordEvent(event.id, hashText(event.device), Math.floor(new Date(event.timestamp).getTime() / 1000), SEVERITY[event.severity], true); await tx.wait(); event.tx = tx.hash; renderEvents(); $("chainMessage").textContent = `Đã ghi EMERGENCY on-chain · ${tx.hash.slice(0, 12)}…`; toast("EMERGENCY đã được ghi lên blockchain."); }
   catch (error) { $("chainMessage").textContent = "Giao dịch chưa được ghi."; toast(error.shortMessage || error.message || "Giao dịch thất bại."); }
 }
 
@@ -213,3 +282,4 @@ $("triggerEstopButton").addEventListener("click", triggerEstop); $("clearEstopBu
 renderSensors(); updatePermitButtons(); setPermitStatus(0); setEstopUi(false); updateRoleButtons();
 watchWallet();
 if (window.ethereum) syncWallet().catch(() => {});
+startGatewayLive();

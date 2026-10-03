@@ -162,8 +162,8 @@ def main() -> None:
     parser.add_argument("--evidence-dir", default="data/evidence_outbox", help="Durable off-chain evidence outbox")
     parser.add_argument("--retry-outbox", action="store_true", help="Retry all queued evidence submissions")
     args = parser.parse_args()
-    if not args.csv:
-        parser.error("--csv is required for the replay demo; serial mode can be added after wiring validation")
+    if not args.csv and not args.retry_outbox:
+        parser.error("--csv is required unless --retry-outbox is used")
 
     model = None
     warning_cm = 60.0
@@ -215,8 +215,11 @@ def main() -> None:
             previous_min_cm=previous_min_cm,
             evidence_outbox=outbox,
         )
-        if client is not None:
-            evidence_path = outbox.path_for(result["evidence_hash"])
+        evidence_path = outbox.path_for(result["evidence_hash"])
+        if result["severity"] != "EMERGENCY":
+            outbox.mark_offchain(evidence_path)
+            result["submission_status"] = "offchain"
+        elif client is not None:
             try:
                 result["tx_hash"] = outbox.submit(evidence_path, client.record_evidence)
                 result["submission_status"] = "confirmed"

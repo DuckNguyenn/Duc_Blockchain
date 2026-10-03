@@ -14,7 +14,7 @@ from typing import Any, Iterable
 
 from iot_code.logging_service import sha256_hex, write_warning
 
-ALERT_STATES = frozenset({"WARNING", "SENSOR_FAULT"})
+ALERT_STATES = frozenset({"WARNING", "EMERGENCY", "SENSOR_FAULT"})
 
 
 def utc_now() -> str:
@@ -33,13 +33,14 @@ def build_warning(payload: dict[str, Any], sequence: int) -> dict[str, Any]:
     state = str(payload.get("state", "SENSOR_FAULT"))
     warning = {
         "warning_id": f"WARN-{time.strftime('%Y%m%d-%H%M%S', time.gmtime())}-{sequence:06d}",
-        "event_type": "DISTANCE_BELOW_THRESHOLD" if state == "WARNING" else "SENSOR_TIMEOUT",
+        "event_type": "EMERGENCY_STOP" if state == "EMERGENCY" else "DISTANCE_BELOW_THRESHOLD" if state == "WARNING" else "SENSOR_TIMEOUT",
         "device_id": payload.get("device_id", "ESP32-HRC-01"),
         "sensor_id": payload.get("sensor_id", "HC-SR04"),
         "timestamp_utc": utc_now(),
         "timestamp_ms": payload.get("timestamp_ms"),
         "distance_cm": payload.get("distance_cm"),
         "state": state,
+        "emergency_stop": state == "EMERGENCY",
         "sequence": payload.get("seq"),
     }
     warning["log_sha256"] = sha256_hex(warning)

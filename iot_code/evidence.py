@@ -82,8 +82,17 @@ class EvidenceOutbox:
             raise ValueError(f"tampered evidence: {path}")
         return evidence
 
+    def mark_offchain(self, path: Path) -> dict[str, Any]:
+        evidence = self.verify(path)
+        evidence["evidence_status"] = "offchain"
+        path.write_text(json.dumps(evidence, ensure_ascii=True, indent=2), encoding="utf-8")
+        return evidence
+
     def pending(self) -> list[Path]:
-        return [path for path in sorted(self.root.glob("*.json")) if self.verify(path).get("evidence_status") != "confirmed"]
+        return [
+            path for path in sorted(self.root.glob("*.json"))
+            if self.verify(path).get("evidence_status") in {"queued", "pending"}
+        ]
 
     def submit(self, path: Path, submitter: Callable[[dict[str, Any]], str]) -> str:
         evidence = self.verify(path)

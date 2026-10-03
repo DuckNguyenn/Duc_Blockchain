@@ -23,6 +23,48 @@ Chạy gateway subscriber:
 python -m iot_code.gateway.mqtt_subscriber --host 127.0.0.1 --port 1883 --topic hrc/telemetry/# --device-id HRC-ESP32-01
 ```
 
+Với ESP32 nối USB Serial, gateway lưu dữ liệu theo ba lớp:
+
+```text
+SQLite:              data/telemetry.db
+Evidence outbox:     data/evidence_outbox/*.json
+Blockchain tùy chọn: HRCSafetyLog lưu evidence hash + metadata
+```
+
+Chạy Serial gateway:
+
+```cmd
+python -m iot_code.gateway.serial_reader --port COM5 --baud 115200 --device-id HRC-ESP32-01
+```
+
+Mở API/WebSocket ở một terminal khác để dashboard nhận telemetry thật:
+
+```cmd
+python -m iot_code.gateway.api --host 127.0.0.1 --port 8000 --database data/telemetry.db
+```
+
+Dashboard tại `http://localhost:8080` sẽ đọc lịch sử qua `http://127.0.0.1:8000/api/telemetry/history` và nhận mẫu mới qua `ws://127.0.0.1:8000/ws/telemetry`.
+
+Thêm `--write-chain --rpc-url http://127.0.0.1:8545 --contract-address <contract> --private-key <local-key>` để chỉ submit evidence `EMERGENCY` lên `HRCSafetyLog`. `SAFE` và `WARNING` vẫn được lưu SQLite/evidence outbox với trạng thái `offchain`, không tạo transaction. Nếu submit EMERGENCY thất bại, SQLite và outbox giữ trạng thái `pending` để retry.
+
+Kiểm tra API:
+
+```cmd
+curl http://127.0.0.1:8000/api/health
+curl http://127.0.0.1:8000/api/telemetry/latest
+```
+
+Nếu chạy các lệnh từ thư mục khác, dùng đường dẫn database tuyệt đối hoặc `cd` về thư mục project trước; `data/telemetry.db` là đường dẫn tương đối theo thư mục hiện hành.
+
+Dữ liệu raw telemetry hiện được lưu trong cột `raw_payload` của SQLite và được giữ đầy đủ trong evidence JSON off-chain; không lưu raw telemetry trực tiếp trên blockchain.
+
+> MQTT local hiện vẫn do `mqtt_subscriber.py` xử lý và lưu evidence outbox. Nếu cần lưu cả MQTT telemetry vào SQLite, có thể dùng cùng `TelemetryStore` trong subscriber ở bước mở rộng tiếp theo.
+
+### Lưu ý về quyền cổng Serial
+
+Chỉ một chương trình được mở `COM5` tại một thời điểm. Thoát `idf.py monitor`/Serial Monitor trước khi chạy `serial_reader.py`.
+
+
 Gửi thử một message từ terminal khác:
 
 ```cmd

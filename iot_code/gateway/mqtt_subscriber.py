@@ -100,8 +100,11 @@ def main() -> None:
             evidence_outbox=outbox,
         )
         previous_distance = result["distance_cm"]
-        if client is not None:
-            evidence_path = outbox.path_for(result["evidence_hash"])
+        evidence_path = outbox.path_for(result["evidence_hash"])
+        if result["severity"] != "EMERGENCY":
+            outbox.mark_offchain(evidence_path)
+            result["submission_status"] = "offchain"
+        elif client is not None:
             try:
                 result["tx_hash"] = outbox.submit(evidence_path, client.record_evidence)
                 result["submission_status"] = "confirmed"

@@ -11,3 +11,5 @@ pyserial>=3.5,<4
 python-dotenv>=1.0,<2
 web3>=7.0,<8
 paho-mqtt>=2.0,<3
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1

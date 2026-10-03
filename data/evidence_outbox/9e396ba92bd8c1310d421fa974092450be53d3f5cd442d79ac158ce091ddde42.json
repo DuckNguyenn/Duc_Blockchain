@@ -1,0 +1,17 @@
+{
+  "schema": "sonarchain.evidence.v1",
+  "event_id": "2c87171fa56c72f36cb02ee4129525bc873ffdcf43e5fef8245cc9363d61b67f",
+  "device_id": "HRC-ESP32-01",
+  "sensor_id": "HC-SR04",
+  "measured_at": "2026-10-03T07:50:19.685732+00:00",
+  "received_at": "2026-10-03T07:50:19.685802+00:00",
+  "distance_cm": 19.3,
+  "severity": "EMERGENCY",
+  "emergency_stop": true,
+  "confidence": 1.0,
+  "policy_version": "thresholds.v60-30",
+  "model_version": "none",
+  "source": "gateway",
+  "evidence_hash": "9e396ba92bd8c1310d421fa974092450be53d3f5cd442d79ac158ce091ddde42",
+  "evidence_status": "queued"
+}
