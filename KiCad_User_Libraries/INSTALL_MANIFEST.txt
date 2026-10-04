@@ -1,0 +1,13 @@
+KiCad user libraries installed from:
+  CoreElectronics-Logic-Level-Converter-Bidirectional-main.zip
+  KiCad-master.zip
+
+Contents:
+  Converter legacy symbol libraries: 2
+  KiCad-master legacy symbol libraries: 35
+  KiCad-master footprint libraries: 16
+
+The source project was not altered; libraries were copied to this folder.
+
+Registered globally in KiCad 9.0 and KiCad 10.0 user library tables.
+Backups: sym-lib-table.bak-20261004 and fp-lib-table.bak-20261004 in each version folder.
