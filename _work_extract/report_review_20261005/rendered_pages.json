@@ -1,0 +1,374 @@
+[
+  {
+    "page": 1,
+    "characters": 478,
+    "first_lines": [
+      "BỘ GIÁO DỤC VÀ ĐÀO TẠO",
+      "TRƯỜNG ĐẠI HỌC CÔNG NGHỆ KỸ THUẬT TP. HCM"
+    ],
+    "last_lines": [
+      "GVHD: TS. Huỳnh Thế Thiện",
+      "TP. Hồ Chí Minh, tháng 10 năm 2026"
+    ]
+  },
+  {
+    "page": 2,
+    "characters": 467,
+    "first_lines": [
+      "2",
+      "LỜI CẢM ƠN"
+    ],
+    "last_lines": [
+      "quy mô dữ liệu. Nhóm mong nhận được ý kiến đóng góp để tiếp tục hoàn thiện mô hình",
+      "thực nghiệm và nội dung báo cáo."
+    ]
+  },
+  {
+    "page": 3,
+    "characters": 1487,
+    "first_lines": [
+      "3",
+      "TÓM TẮT"
+    ],
+    "last_lines": [
+      "Từ khóa: ESP32; cảm biến siêu âm; TinyML; MLP; lượng tử hóa INT8; bằng chứng",
+      "ngoài chuỗi; blockchain."
+    ]
+  },
+  {
+    "page": 4,
+    "characters": 3031,
+    "first_lines": [
+      "4",
+      "MỤC LỤC"
+    ],
+    "last_lines": [
+      "3.4.3. Gửi giao dịch ......................................................................................... 17",
+      "3.5. Hai hợp đồng thông minh ............................................................................ 17"
+    ]
+  },
+  {
+    "page": 5,
+    "characters": 3150,
+    "first_lines": [
+      "5",
+      "3.5.1. HRCSafetyLog ...................................................................................... 17"
+    ],
+    "last_lines": [
+      "B.2. Validation .................................................................................................... 31",
+      "B.3. Test .............................................................................................................. 31"
+    ]
+  },
+  {
+    "page": 6,
+    "characters": 654,
+    "first_lines": [
+      "6",
+      "DANH MỤC TỪ VIẾT TẮT"
+    ],
+    "last_lines": [
+      "SHA-256",
+      "Hàm băm mật mã cho giá trị băm 256 bit"
+    ]
+  },
+  {
+    "page": 7,
+    "characters": 2193,
+    "first_lines": [
+      "7",
+      "CHƯƠNG 1. GIỚI THIỆU TỔNG QUAN"
+    ],
+    "last_lines": [
+      "R4 — Chuẩn hóa nội dung bằng chứng, tạo SHA-256 và lưu gói JSON ngoài chuỗi",
+      "với trạng thái xử lý có thể đối chiếu."
+    ]
+  },
+  {
+    "page": 8,
+    "characters": 2036,
+    "first_lines": [
+      "8",
+      "R5 — Xây dựng HRCSafetyLog để quản lý reporter, ghi digest và metadata, ngăn"
+    ],
+    "last_lines": [
+      "luận, hạn chế và hướng phát triển. Phụ lục cung cấp lệnh tái lập và danh sách bản ghi",
+      "của phép chia dữ liệu."
+    ]
+  },
+  {
+    "page": 9,
+    "characters": 2272,
+    "first_lines": [
+      "9",
+      "CHƯƠNG 2. CƠ SỞ LÝ THUYẾT"
+    ],
+    "last_lines": [
+      "điện áp GPIO được xác định theo datasheet ESP32 [4]. Việc tính đúng khoảng cách",
+      "trong chương trình không thay thế cho kiểm tra điện áp và sai số đo trên mạch thực."
+    ]
+  },
+  {
+    "page": 10,
+    "characters": 2323,
+    "first_lines": [
+      "10",
+      "2.3. MLP và phân loại ba trạng thái"
+    ],
+    "last_lines": [
+      "[8]. Validation dùng chọn kiến trúc và theo dõi huấn luyện; test dùng đánh giá sau khi",
+      "chốt lựa chọn."
+    ]
+  },
+  {
+    "page": 11,
+    "characters": 2530,
+    "first_lines": [
+      "11",
+      "Cửa sổ theo số mẫu phụ thuộc vào nhịp lấy mẫu. Thay đổi chu kỳ thu nhận làm thay"
+    ],
+    "last_lines": [
+      "lý trạng thái và kiểm tra điều kiện khi giao dịch được thực thi trên EVM. Hợp đồng",
+      "không tự đọc cảm biến ngoài chuỗi; gateway hoặc tài khoản được cấp quyền phải gửi"
+    ]
+  },
+  {
+    "page": 12,
+    "characters": 1578,
+    "first_lines": [
+      "12",
+      "dữ liệu vào [10]. Việc tiêu thụ tài nguyên được đo bằng gas; gas sử dụng và giá gas là"
+    ],
+    "last_lines": [
+      "chưa chứng minh tính bất biến tuyệt đối, độ bền hoặc mức phân tán của một mạng triển",
+      "khai thực."
+    ]
+  },
+  {
+    "page": 13,
+    "characters": 1240,
+    "first_lines": [
+      "13",
+      "CHƯƠNG 3. THIẾT KẾ HỆ THỐNG"
+    ],
+    "last_lines": [
+      "nguồn hoặc lỗi phần cứng. Khóa logic trên chain và trạng thái tức thời trên ESP32 được",
+      "theo dõi riêng."
+    ]
+  },
+  {
+    "page": 14,
+    "characters": 1049,
+    "first_lines": [
+      "14",
+      "3.2. Tầng IoT và firmware"
+    ],
+    "last_lines": [
+      "Buzzer bật khi EMERGENCY, SENSOR_FAULT hoặc AI_FAULT, trừ khi người",
+      "dùng đang tắt âm báo. Khi có mẫu SAFE, trạng thái tắt âm được xóa. Cờ"
+    ]
+  },
+  {
+    "page": 15,
+    "characters": 1981,
+    "first_lines": [
+      "15",
+      "emergency_stop của firmware được đặt khi trạng thái là EMERGENCY; các mẫu lỗi"
+    ],
+    "last_lines": [
+      "size 32, tối đa 150 epoch, L2 = 0,001 tại các lớp ẩn và class weight cân bằng từ train.",
+      "EarlyStopping theo val_loss có patience 20, min_delta 0,0001 và restore_best_weights;"
+    ]
+  },
+  {
+    "page": 16,
+    "characters": 2300,
+    "first_lines": [
+      "16",
+      "ReduceLROnPlateau có patience 7, factor 0,5 và learning rate tối thiểu 10⁻⁵. Sau từng"
+    ],
+    "last_lines": [
+      "build_evidence tạo envelope theo schema sonarchain.evidence.v1, gồm mã sự",
+      "kiện/thiết bị/cảm biến, thời điểm đo/nhận, khoảng cách, trạng thái, cờ dừng, confidence,"
+    ]
+  },
+  {
+    "page": 17,
+    "characters": 2209,
+    "first_lines": [
+      "17",
+      "policy_version, model_version và source. Nội dung được biểu diễn bằng JSON với"
+    ],
+    "last_lines": [
+      "trình là xác nhận của các tài khoản được cấp quyền, chưa tự chứng minh người đã vào",
+      "vùng hoặc robot đã bàn giao vật lý."
+    ]
+  },
+  {
+    "page": 18,
+    "characters": 1645,
+    "first_lines": [
+      "18",
+      "Bảng 3.4. Phân quyền thao tác"
+    ],
+    "last_lines": [
+      "phục hồi đầy đủ sau refresh; receipt từ giao dịch ký qua trình duyệt chưa tự đồng bộ vào",
+      "SQLite/outbox. Các giới hạn này được giữ rõ trong phần đánh giá."
+    ]
+  },
+  {
+    "page": 19,
+    "characters": 949,
+    "first_lines": [
+      "19",
+      "CHƯƠNG 4. KẾT QUẢ VÀ ĐÁNH GIÁ"
+    ],
+    "last_lines": [
+      "Có ảnh nguyên mẫu; chưa có bảng đo",
+      "hiệu năng"
+    ]
+  },
+  {
+    "page": 20,
+    "characters": 838,
+    "first_lines": [
+      "20",
+      "Hình 4.1. Ảnh nguyên mẫu phần cứng được giữ từ báo cáo gốc; ảnh không thay cho phép đo độ trễ"
+    ],
+    "last_lines": [
+      "Cần đo preprocessing, Invoke, arena",
+      "và toàn pipeline"
+    ]
+  },
+  {
+    "page": 21,
+    "characters": 1371,
+    "first_lines": [
+      "21",
+      "Từ mã nguồn và ảnh lắp ráp có thể xác định cấu hình nguyên mẫu, nhưng chưa thể"
+    ],
+    "last_lines": [
+      "khi trọng số đang cập nhật và không đồng nhất với đánh giá lại toàn bộ train bằng model",
+      "đã chốt."
+    ]
+  },
+  {
+    "page": 22,
+    "characters": 1563,
+    "first_lines": [
+      "22",
+      "Ở phần cuối quá trình train, validation accuracy còn tăng và validation loss tiếp tục"
+    ],
+    "last_lines": [
+      "0,9725",
+      "159"
+    ]
+  },
+  {
+    "page": 23,
+    "characters": 1277,
+    "first_lines": [
+      "23",
+      "Hình 4.3. Ma trận nhầm lẫn INT8: hàng là lớp thật, cột là lớp dự đoán."
+    ],
+    "last_lines": [
+      "khác khi triển khai. Cần bổ sung các phiên ở đúng cadence và giữ một tập đo mới độc",
+      "lập; không tiếp tục chọn cấu hình theo test đã xem."
+    ]
+  },
+  {
+    "page": 24,
+    "characters": 1092,
+    "first_lines": [
+      "24",
+      "4.4. Kết quả kiểm thử phần mềm và hợp đồng"
+    ],
+    "last_lines": [
+      "chưa thay thế việc đo tính sẵn sàng mạng, chi phí gas thực tế, đồng bộ dashboard–",
+      "gateway sau giao dịch ví hoặc kiểm thử an toàn robot."
+    ]
+  },
+  {
+    "page": 25,
+    "characters": 168,
+    "first_lines": [
+      "25",
+      "4.5. Kết quả dashboard và luồng tích hợp"
+    ],
+    "last_lines": [
+      "Hình 4.4. Dashboard sau khi xử lý mẫu SENSOR_FAULT trong kiểm tra trình duyệt với API giả lập;",
+      "chưa có ESP32 kết nối."
+    ]
+  },
+  {
+    "page": 26,
+    "characters": 1842,
+    "first_lines": [
+      "26",
+      "Bảng 4.7. Các tình huống được xác nhận bằng kiểm thử"
+    ],
+    "last_lines": [
+      "Đạt nguyên mẫu; thiếu phiên",
+      "demo phần cứng đầy đủ"
+    ]
+  },
+  {
+    "page": 27,
+    "characters": 2232,
+    "first_lines": [
+      "27",
+      "CHƯƠNG 5. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN"
+    ],
+    "last_lines": [
+      "trễ cảnh báo, tensor arena/RAM và jitter. Chỉ thay đổi kiến trúc, số epoch hoặc class",
+      "weight theo validation."
+    ]
+  },
+  {
+    "page": 28,
+    "characters": 807,
+    "first_lines": [
+      "28",
+      "Thiết kế cơ cấu dừng motor/relay, latch và reset có kiểm soát; bổ sung watchdog và"
+    ],
+    "last_lines": [
+      "batching/Merkle tree, đo gas và chi phí theo điều kiện triển khai; không dùng thông số",
+      "Hardhat làm chi phí tiền thực."
+    ]
+  },
+  {
+    "page": 29,
+    "characters": 3273,
+    "first_lines": [
+      "29",
+      "TÀI LIỆU THAM KHẢO"
+    ],
+    "last_lines": [
+      "các log kiểm thử ngày 05/10/2026. Báo cáo nhóm khác chỉ dùng tham khảo cách tổ chức và văn",
+      "phong, không làm nguồn số liệu SonarChain."
+    ]
+  },
+  {
+    "page": 30,
+    "characters": 2189,
+    "first_lines": [
+      "30",
+      "PHỤ LỤC A. HƯỚNG DẪN TÁI LẬP"
+    ],
+    "last_lines": [
+      "RAM/latency và kết quả parity. Nếu ghi chain, lưu evidence JSON, digest, network/contract và",
+      "receipt tương ứng. Tính accuracy thực tế trên phiên đo mới có nhãn độc lập."
+    ]
+  },
+  {
+    "page": 31,
+    "characters": 779,
+    "first_lines": [
+      "31",
+      "PHỤ LỤC B. MANIFEST CHIA DỮ LIỆU"
+    ],
+    "last_lines": [
+      "son_roi_30ve150_cham_RETREATING.csv",
+      "son_roi_50ve200_cham_RETREATING.csv"
+    ]
+  }
+]

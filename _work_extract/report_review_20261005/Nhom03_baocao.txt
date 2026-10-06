@@ -1,0 +1,910 @@
+[PAGE 1]
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆKỸTHUẬT TP. HỒCHÍ MINH
+KHOA ĐIỆN - ĐIỆN TỬ
+BỘMÔN KỸTHUẬT ĐIỆN TỬ- THÔNG TIN
+ĐỀTÀI CUỐI KỲ
+THIẾT KẾHỆTHỐNG PHÁT HIỆN TÉ NGÃ
+VÀ QUẢN LÝ TRÁCH NHIỆM
+Môn học: Blockchain và ứng dụng
+Mã môn học: BCAP437964
+Nhóm SVTH: Nhóm 3 - Sáng thứ3
+Hà Quang Huy
+MSSV: 23119147
+Hà Quang Minh
+MSSV: 23119169
+Phan Ngọc Tuấn Nguyên
+MSSV: 23119178
+Nguyễn Trọng Nhân
+MSSV: 23119182
+GVHD: TS. Huỳnh ThếThiện
+TP. HồChí Minh, 09/2026
+
+
+[PAGE 2]
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆKỸTHUẬT TP. HỒCHÍ MINH
+KHOA ĐIỆN - ĐIỆN TỬ
+BỘMÔN KỸTHUẬT ĐIỆN TỬ- THÔNG TIN
+ĐỀTÀI CUỐI KỲ
+THIẾT KẾHỆTHỐNG PHÁT HIỆN TÉ NGÃ
+VÀ QUẢN LÝ TRÁCH NHIỆM
+Môn học: Blockchain và ứng dụng
+Mã môn học: BCAP437964
+Nhóm SVTH: Nhóm 3 - Sáng thứ3
+Hà Quang Huy
+MSSV: 23119147
+Hà Quang Minh
+MSSV: 23119169
+Phan Ngọc Tuấn Nguyên
+MSSV: 23119178
+Nguyễn Trọng Nhân
+MSSV: 23119182
+GVHD: TS. Huỳnh ThếThiện
+TP. HồChí Minh, 09/2026
+
+
+[PAGE 3]
+Mục lục
+1
+TỔNG QUAN ĐỀTÀI
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.1
+Bối cảnh và tính cấp thiết . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Tổng quan nghiên cứu liên quan
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.3
+Mục tiêu đềtài . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+1.4
+Phạm vi và giới hạn đềtài
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+2
+CƠ SỞLÝ THUYẾT
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+2.1
+Lý thuyết vềBlockchain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+2.2
+Chữký sốECDSA và EIP-191
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+2.3
+Nhận diện té ngã . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+2.4
+Lượng tửhóa mô hình . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+3
+THIẾT KẾHỆTHỐNG . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.1
+Tổng quan kiến trúc CPS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2
+Thiết kếtầng IoT
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.3
+Thiết kếtầng AI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.3.1
+Vai trò của tầng AI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.3.2
+Tập dữliệu và tiền xửlý
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.3.3
+Kiến trúc mô hình học sâu . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.3.4
+Lượng tửhóa mô hình sang INT8
+. . . . . . . . . . . . . . . . . . . . . .
+9
+3.4
+Thiết kếtầng Blockchain
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.4.1
+Vai trò và lý do lựa chọn blockchain . . . . . . . . . . . . . . . . . . . . .
+9
+3.4.2
+Thiết kếsmart contract . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.4.3
+Cấu hình hợp đồng và quy tắc chia tiền . . . . . . . . . . . . . . . . . . .
+10
+3.4.4
+Tích hợp Gateway . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+4
+KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN . . . . . . . . . . . . . . . . . . . . . . . .
+11
+4.1
+Kết quảAI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+4.1.1
+Kết quảhuấn luyện và lượng tửhóa . . . . . . . . . . . . . . . . . . . . .
+11
+4.1.2
+Kết quảtrên tập kiểm thử
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+4.2
+Kết quảIoT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+4.2.1
+Mạch cứng và thu thập dữliệu . . . . . . . . . . . . . . . . . . . . . . . .
+12
+4.2.2
+Truyền thông MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+4.2.3
+Luồng hoạt động và kết quảquan sát trên Monitor
+. . . . . . . . . . . .
+12
+4.3
+Kết quảBlockchain
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+i
+
+
+[PAGE 4]
+MỤC LỤC
+4.3.1
+Kết quảDashboard và giám sát sựcố. . . . . . . . . . . . . . . . . . . .
+14
+4.3.2
+Kết quảchia tiền cuối kỳ. . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+4.4
+Đánh giá rủi ro và giới hạn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+5
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+5.1
+Kết luận . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+5.2
+Hướng phát triển . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+ii
+
+
+[PAGE 5]
+Danh sách bảng
+3.1
+Phân loại dữliệu on-chain và off-chain . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+4.1
+So sánh mô hình Float32 và INT8 trên tập kiểm thử. . . . . . . . . . . . . . . . . . . . .
+11
+4.2
+Các thành phần chính của thiết bịIoT . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+iii
+
+
+[PAGE 6]
+Danh sách hình vẽ
+3.1
+Kiến trúc CPS 3 lớp.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2
+Kiến trúc mô hình biển thểResNet14 phát hiện té ngã
+. . . . . . . . . . . . . . . . . . .
+8
+4.1
+Biểu diễn trực quan ma trận nhầm lẫn của mô hình Float32 và INT8 trên tập kiểm thử.
+11
+4.2
+Monitor hiển thịgiai đoạn nghi té ngã và cửa sổhủy cảnh báo trên ESP32. . . . . . . . .
+13
+4.3
+Monitor hiển thịsựkiện té ngã đã được ESP32 xác nhận và bản tin FALL được nhận qua
+MQTT. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+4.4
+Giao diện nhập thông tin tạo hợp đồng chăm sóc.
+. . . . . . . . . . . . . . . . . . . . . .
+14
+4.5
+Các bước chấp nhận hợp đồng, cam kết ca trực và mởgiám sát.
+. . . . . . . . . . . . . .
+14
+4.6
+Dashboard hiển thịthông tin hợp đồng và hai sựcốđã được xửlý trên Hardhat local. . .
+15
+4.7
+Kết quảchia tiền hợp đồng trên Hardhat local. . . . . . . . . . . . . . . . . . . . . . . . .
+15
+iv
+
+
+[PAGE 7]
+Danh mục các từviết tắt
+Dưới đây là danh mục các từviết tắt được sửdụng trong báo cáo.
+Từviết tắt
+Định nghĩa
+AI
+Artificial intelligence (Trí tuệnhân tạo)
+IoT
+Internet of Things (Internet vạn vật)
+CPS
+Cyber-Physical Systems (Hệthống thực - ảo)
+SLA
+Service Level Agreement (Thỏa thuận mức dịch vụ)
+INT8
+8-bit Integer (Lượng tửhóa 8-bit)
+EIP
+Ethereum Improvement Proposal
+
+
+[PAGE 8]
+1. TỔNG QUAN ĐỀTÀI
+1
+TỔNG QUAN ĐỀTÀI
+1.1 Bối cảnh và tính cấp thiết
+Việt Nam đang bước vào giai đoạn già hóa dân sốvới tốc độthuộc nhóm nhanh nhất thếgiới. Theo
+kết quảĐiều tra dân sốvà nhà ởgiữa kỳnăm 2024 của Cục Thống kê (thời điểm 01/4/2024), dân sốcả
+nước đạt khoảng 101,1 triệu người, trong đó sốngười từ60 tuổi trởlên là 14,2 triệu người. Tỷtrọng dân
+sốtừ65 tuổi trởlên chiếm 9,3%, chỉsốgià hóa đạt 60,2%. Dựbáo đến năm 2030, sốngười từ60 tuổi trở
+lên sẽxấp xỉ18 triệu người [1]. Quá trình này diễn ra trong bối cảnh mức sinh giảm dưới ngưỡng thay
+thếvà tuổi thọtrung bình tăng, tạo áp lực lớn lên hệthống chăm sóc dài hạn và an sinh xã hội.
+Té ngã là một trong những nguyên nhân gây chấn thương và suy giảm khảnăng vận động ởngười
+cao tuổi. Theo Tổchức Y tếThếgiới (WHO), té ngã là nguyên nhân thứhai gây tửvong do chấn thương
+không chủý trên toàn cầu; người trên 60 tuổi chịu gánh nặng tửvong do té ngã lớn nhất [2]. Ngoài ảnh
+hưởng đến sức khỏe và chất lượng cuộc sống của người bịngã, sựcốcòn tạo thêm gánh nặng chăm sóc
+cho gia đình.
+Trong chăm sóc người cao tuổi tại trung tâm hoặc viện dưỡng lão, sựcốté ngã có thểdẫn đến tranh
+chấp trách nhiệm giữa gia đình và đơn vịcung cấp dịch vụ. Thời gian phản hồi, lịch trực và việc nhân
+viên có mặt thường được ghi trong nhật ký do chính đơn vịchăm sóc quản lý, khiến gia đình khó kiểm
+chứng và tạo ra xung đột lợi ích. Trong khi đó, thỏa thuận mức dịch vụ(Service Level Agreement – SLA)
+vềthời gian phản hồi và chếtài vi phạm còn thiếu cơ chếthực thi tựđộng, minh bạch. Vì vậy, việc phân
+định trách nhiệm và áp dụng chếtài công bằng gặp khó khăn, làm giảm niềm tin giữa các bên.
+Trước bối cảnh già hóa nhanh, nguy cơ té ngã cao và nhu cầu phân định trách nhiệm rõ ràng trong
+dịch vụchăm sóc, nhóm chọn đềtài thiết kếhệthống phát hiện té ngã và quản lý trách nhiệm
+(CareSLA). Hệthống kết hợp IoT phát hiện té ngã, AI hỗtrợnhận diện và blockchain đểthực thi SLA
+(ký quỹ, cam kết lịch trực, ghi nhận phản hồi và áp dụng chếtài tựđộng) nhằm giải quyết vấn đềthiếu
+tin cậy giữa các bên không tin nhau, thay vì chỉlưu trữnhật ký. Đây là lý do chính thúc đẩy việc lựa
+chọn và triển khai đềtài.
+1.2 Tổng quan nghiên cứu liên quan
+Các công trình tích hợp IoT, AI và Blockchain trong y tếhiện nay chủyếu khai thác blockchain như
+một kho lưu trữbất biến hoặc kênh truyền dữliệu an toàn:
+• BlockTheFall [3]: Phát hiện té ngã qua cảm biến điện thoại và ghi nhận cảnh báo lên blockchain
+phục vụtính toàn vẹn và tuân thủchuẩn HIPAA.
+• Trinet [4]: Ứng dụng mô hình chuỗi thời gian (LSTM–CNN–RNN) nhận diện sựcốvà truyền tin
+qua blockchain tới các bên liên quan.
+• MetaSave [5]: Kết hợp thiết bịđeo, mô hình thịgiác YOLOv7-Pose, IPFS và smart contract
+Ethereum đểgiám sát sức khỏe từxa.
+• Black Block Recorder [6]: Xây dựng mô hình “hộp đen” phân tán bằng chữký sốvà HMAC để
+điều tra sựcốcho robot tựhành.
+1
+
+
+[PAGE 9]
+1. TỔNG QUAN ĐỀTÀI
+Khoảng trống nghiên cứu: Hầu hết giải pháp hiện hữu mới dừng ởtầng bảo vệdữliệu sựkiện (data
+integrity), chưa tích hợp cơ chếràng buộc trách nhiệm, ký quỹ(escrow), phân định lịch trực hay tựđộng
+áp dụng chếtài vi phạm SLA khi bên cung cấp dịch vụchậm trễphản hồi.
+1.3 Mục tiêu đềtài
+Nghiên cứu hướng tới thiết kếhệthống thực–ảo (Cyber-Physical System – CPS) tích hợp ba tầng
+công nghệgiải quyết đồng thời bài toán phát hiện tức thời và quy trách nhiệm tựđộng:
+• Tầng IoT (Cảm biến & Cảnh báo): Thu thập dữliệu chuyển động từthiết bịđeo (ESP32 và
+IMU), truyền phát cảnh báo thời gian thực qua giao thức nhẹMQTT đểxửlý y tếkhẩn cấp.
+• Tầng Edge AI (Suy luận cục bộ): Tối ưu hóa và lượng tửhóa mô hình (INT8) chạy trực tiếp
+trên vi điều khiển ESP32, đảm bảo thời gian suy luận thấp và tiết kiệm năng lượng mà vẫn duy trì
+độnhạy cao.
+• Tầng Blockchain (Thực thi SLA): Sửdụng smart contract quản lý tiền ký quỹ, ghi nhận lịch
+trực cam kết và tựđộng phân phối tiền phạt theo cấp độvi phạm SLA khi nhân viên chậm trễ, loại
+bỏhoàn toàn yếu tốgian lận ghi chép.
+1.4 Phạm vi và giới hạn đềtài
+Phạm vi nghiên cứu:
+• Phần cứng: Vi điều khiển ESP32 tích hợp cảm biến gia tốc và con quay hồi chuyển (MPU6050/ICM-
+series).
+• Dữliệu & Mô hình AI: Huấn luyện trên bộdữliệu KFall [14], lượng tửhóa INT8 và kiểm thửđánh
+giá theo từng đối tượng riêng biệt (subject-wise).
+• Triển khai Blockchain: Hợp đồng thông minh viết bằng Solidity, thửnghiệm trên testnet (Sepolia/Hardhat)
+và xác minh qua Etherscan.
+Giới hạn nghiên cứu:
+• Bộdữliệu mô hình hóa từngười trẻtuổi mô phỏng hành vi ngã, chưa qua thửnghiệm lâm sàng
+diện rộng trên người cao tuổi thực tế.
+• Smart contract chỉxác thực tính toàn vẹn và nguồn gốc gói tin (qua chữký thiết bị), chưa trực tiếp
+thẩm định được tính khách quan vật lý của sựkiện té ngã tại nguồn.
+• Cổng giao tiếp (Gateway) và mạng điều phối tác vụ(Keeper) vẫn đóng vai trò là các thành phần
+tập trung trong kiến trúc mẫu thửnghiệm.
+2
+
+
+[PAGE 10]
+2. CƠ SỞLÝ THUYẾT
+2
+CƠ SỞLÝ THUYẾT
+2.1 Lý thuyết vềBlockchain
+Blockchain là sổcái sốphân tán, chống giảmạo và chống sửa đổi, trong đó các giao dịch được ghi
+nhận theo khối và liên kết bằng hàm băm mật mã. Mỗi khối chứa thông tin của khối trước, tạo thành
+chuỗi liên tục. Trong điều kiện hoạt động bình thường, không có thành phần trung tâm nào có thểthay
+đổi dữliệu đã được công bốmà không bịphát hiện bởi các nút khác trong mạng [8]. Tính chất này cho
+phép các bên không tin tưởng lẫn nhau vẫn chia sẻtrạng thái chung mà không cần bên thứba đáng tin
+cậy.
+Smart contract (hợp đồng thông minh) là chương trình máy tính gắn với blockchain, kết hợp giao
+thức với giao diện người dùng đểchính thức hóa và bảo vệquan hệgiữa các bên trên mạng công cộng [7].
+Khi điều kiện được mã hóa trong hợp đồng thỏa mãn, mã thực thi tựđộng theo quy tắc đã định sẵn,
+không phụthuộc vào ý chí của một bên sau khi triển khai. Nền tảng Ethereum cung cấp môi trường thực
+thi cho smart contract thông qua Ethereum Virtual Machine, cho phép lập trình trạng thái và chuyển
+giá trịtheo logic tùy chỉnh.
+Smart contract chỉthay đổi trạng thái khi nhận giao dịch từbên ngoài. Chúng không tựgiám sát
+thời gian hay dữliệu ngoài chuỗi. Vấn đềoracle xuất hiện khi hợp đồng cần thông tin từthếgiới thực:
+blockchain không có khảnăng tựxác minh sựkiện bên ngoài như té ngã hay thời điểm nhân viên đến
+nơi. Dữliệu phải được đưa vào qua một kênh trung gian, và độtin cậy của kênh đó quyết định độtin
+cậy của toàn bộhệthống.
+Keeper là thành phần off-chain có nhiệm vụtheo dõi điều kiện và gửi giao dịch kích hoạt hàm trên hợp
+đồng khi điều kiện được thỏa. Vì smart contract không tựchạy theo lịch, keeper đóng vai trò kích hoạt
+các hành động phụthuộc thời gian hoặc trạng thái. Trong thiết kếCareSLA, keeper viết bằng Python
+định kỳgọi hàm checkTimeout đểphát hiện quá hạn SLA và thực hiện chuyển cấp. Ai cũng có quyền
+gọi hàm này; keeper chỉlà một triển khai cụthể, không được cấp đặc quyền trên hợp đồng. Cách tiếp
+cận này giữlogic thực thi trên chuỗi, đồng thời chấp nhận điểm tập trung ởlớp kích hoạt.
+2.2 Chữký sốECDSA và EIP-191
+Chữký sốcho phép một bên chứng minh mình đã tạo ra một thông điệp mà không cần tiết lộkhóa
+riêng. Elliptic Curve Digital Signature Algorithm (ECDSA) là thuật toán chữký dựa trên đường cong
+elliptic, được chuẩn hóa và sửdụng rộng rãi trong các hệthống mật mã hiện đại [10]. Ethereum và Bitcoin
+đều chọn đường cong secp256k1 cho ECDSA. Ưu điểm chính của ECDSA so với RSA là kích thước khóa
+nhỏhơn mà vẫn đạt mức an ninh tương đương, phù hợp với thiết bịtài nguyên hạn chếnhư ESP32.
+Quy trình ký ởmức cao gồm ba bước. Trước hết, thông điệp gốc được băm bằng hàm băm mật mã
+(trên Ethereum là keccak256) đểthu được chuỗi cốđịnh 32 byte. Người ký dùng khóa riêng đểtính chữ
+ký gồm hai thành phần r và s, cùng với recovery id v. Bên nhận chỉcần khóa công khai (hoặc địa chỉ
+Ethereum tương ứng) đểkiểm tra chữký có khớp với thông điệp đã băm hay không. Hàm ecrecover
+trên EVM cho phép khôi phục địa chỉngười ký trực tiếp từchữký, không cần gửi kèm khóa công khai.
+3
+
+
+[PAGE 11]
+2. CƠ SỞLÝ THUYẾT
+EIP-191 định nghĩa chuẩn định dạng dữliệu được ký nhằm tránh xung đột với giao dịch Ethereum
+thông thường và giảm nguy cơ tái sửdụng chữký [9]. Cấu trúc chung bắt đầu bằng byte 0x19, theo sau
+là một byte phiên bản và dữliệu đặc thù của phiên bản đó, rồi đến nội dung cần ký. Byte 0x19 đảm bảo
+chuỗi ký không thểbịdiễn giải thành một giao dịch RLP hợp lệ. Phiên bản 0x45 (ký tựE) tương ứng
+với thông điệp dạng personal_sign, thêm tiền tốEthereum Signed Message:\n kèm độdài thông điệp.
+2.3 Nhận diện té ngã
+Té ngã ởngười cao tuổi thường đểlại hậu quảnặng, từgãy xương đến mất khảnăng tựchủ. Hệthống
+giám sát cần phân biệt được tín hiệu của một cú té với các hoạt động sinh hoạt hàng ngày (activities of
+daily living – ADL) như ngồi xuống ghế, cúi người hoặc va chạm nhẹ. Cảm biến quán tính gắn ởthắt
+lưng cung cấp ba trục gia tốc và ba trục vận tốc góc, là nguồn dữliệu phổbiến vì giá thành thấp và có
+thểđeo liên tục.
+Phân tích tín hiệu gia tốc thường bắt đầu từviệc phát hiện đỉnh va chạm. Khi cơ thểchạm sàn,
+thành phần gia tốc theo phương thẳng đứng hoặc vector tổng tăng đột ngột trong thời gian ngắn. Sau
+va chạm, nhiều thuật toán kiểm tra giai đoạn bất động: nếu biên độgia tốc và vận tốc góc duy trì ởmức
+thấp trong vài giây, khảnăng cao là người đã nằm xuống và không tựđứng dậy được. Ngưỡng cốđịnh
+trên biên độhoặc trên góc nghiêng là cách đơn giản nhất, nhưng dễsinh báo giảkhi người đeo thực hiện
+động tác nhanh hoặc khi thiết bịbịrung mạnh.
+Dù vậy, hầu hết dữliệu công khai đều đến từngười trẻkhỏe mạnh và các cú té được thực hiện có
+kiểm soát trên bềmặt mềm. Đặc điểm động học của người cao tuổi – phản xạchậm hơn, tư thếkhông
+ổn định, lực va chạm khác – chưa được phản ánh đầy đủ. Ngoài ra, môi trường thực tếcó nhiều nguồn
+nhiễu như rung từphương tiện, va chạm với đồđạc sẽkhó tái hiện ởphòng thí nghiệm. Những giới hạn
+này buộc hệthống thực tếphải kết hợp nhiều điều kiện như va chạm mạnh kèm bất động kéo dài và cho
+phép người đeo hủy cảnh báo trong một cửa sổngắn, thay vì phụthuộc hoàn toàn vào một ngưỡng đơn
+lẻ.
+2.4 Lượng tửhóa mô hình
+Mô hình học sâu huấn luyện ởđộchính xác sốthực 32-bit (float32) có kích thước lớn và yêu cầu
+tài nguyên tính toán vượt quá khảnăng của vi điều khiển biên như ESP32. Lượng tửhóa INT8 ánh xạ
+trọng sốvà kích hoạt từmiền sốthực sang sốnguyên 8-bit theo công thức q = round(r/s) + z, trong đó
+s là hệsốtỷlệvà z là điểm không. Kỹthuật này giảm kích thước mô hình khoảng bốn lần, tăng tốc suy
+luận nhờphép nhân sốnguyên và cho phép triển khai trên TensorFlow Lite Micro. Độchính xác thường
+suy giảm nhẹso với bản float32, nhưng vẫn chấp nhận được nếu quá trình hiệu chỉnh dùng tập đại diện.
+Việc chạy mô hình trực tiếp trên thiết bịbiên giúp giảm độtrễvà phụthuộc vào máy chủtrung tâm.
+4
+
+
+[PAGE 12]
+3. THIẾT KẾHỆTHỐNG
+3
+THIẾT KẾHỆTHỐNG
+3.1 Tổng quan kiến trúc CPS
+Hệthống CareSLA là một hệthống cyber-physical system (CPS) kết hợp tầng cảm biến có tác dụng
+điều khiển tại chỗvới tầng ghi nhận và thực thi trách nhiệm trên blockchain. Các bên tham gia gồm năm
+thực thểchính.
+• Gia đình là bên ký quỹphí dịch vụvà là người thụhưởng cam kết thời gian phản hồi.
+• Trung tâm chăm sóc nhận tiền ký quỹ, cam kết lịch trực và chịu trách nhiệm trước smart contract.
+Mỗi ca trực có một nhân viên chính và một nhân viên dựphòng; cảhai đều có khóa riêng đểký
+xác nhận đến nơi.
+• Thiết bịIoT (ESP32 kèm MPU6050) mang danh tính mật mã riêng, ký mọi sựkiện FALL và
+ARRIVAL trước khi gửi đi.
+• Smart contract đóng vai trò trọng tài trung lập: giữtiền, kiểm tra chữký, thực thi luật chuyển
+cấp và chia tiền cuối kỳ.
+Hình 3.1: Kiến trúc CPS 3 lớp.
+Từtổng quan vềhệthống CareSLA ởbên trên, hệthống cần đáp ứng các yêu cầu sau.
+5
+
+
+[PAGE 13]
+3. THIẾT KẾHỆTHỐNG
+• Khi có té ngã, loa trên thiết bịphải phát cảnh báo ngay trong phạm vi nghe được, không phụ
+thuộc kết nối mạng.
+• Mọi sựcốđưa vào luồng trách nhiệm phải được ghi nhận trên chuỗi với dấu thời gian, danh tính
+thiết bịvà nhân viên, đồng thời tựđộng chuyển cấp nếu vượt quá ngưỡng SLA.
+• Yêu cầu chống giảmạo nhật ký nhờchữký thiết bịvà tính bất biến của blockchain, khảnăng
+hoạt động khi mất mạng ởtầng cảnh báo tại chỗ, và tính minh bạch đểgia đình kiểm tra lịch sử
+vi phạm mà không cần tin tưởng trung tâm.
+Kiến trúc CPS tách thành hai luồng độc lập (Hình 3.1). Luồng cảnh báo tại chỗchạy hoàn toàn trên
+ESP32: sau khi máy trạng thái xác nhận té ngã và hết cửa sổhủy, loa phát tín hiệu ngay. Luồng này
+không gửi dữliệu lên mạng, không phụthuộc gateway hay blockchain, phù hợp môi trường viện dưỡng
+lão nơi nhân viên thường ởgần người cao tuổi. Luồng trách nhiệm bắt đầu khi gói tin FALL đã ký được
+gửi qua MQTT tới gateway. Gateway kiểm tra sơ bộ, gọi hàm reportFall trên smart contract, sau đó
+các sựkiện on-chain được Dashboard đọc và hiển thị. Nhân viên không có mặt tại chỗchỉbiết sựcốqua
+Dashboard; hệthống không duy trì kênh thông báo đẩy tới điện thoại.
+Dữliệu được phân chia rõ giữa on-chain và off-chain đểcân bằng chi phí gas với nhu cầu kiểm chứng
+(Bảng 3.1).
+Bảng 3.1: Phân loại dữliệu on-chain và off-chain
+Loại dữliệu
+Vịtrí lưu trữ
+Lý do
+Tiền ký quỹ, lịch trực đã cam
+kết, sựcốFALL/ARRIVAL đã xác
+thực, trạng thái chuyển cấp, sốvi
+phạm
+On-chain
+Cần tính bất biến và khả
+năng tựthực thi
+Heartbeat thiết bị, gói tin hủy
+trong cửa sổ10 s, log chi tiết gia
+tốc thô
+Off-chain (gateway)
+Tần suất cao, không cần đưa
+vào tranh chấp
+Cấu hình SLA, danh sách nhân
+viên theo ca
+On-chain (khi cam kết)
+Không được sửa sau giờbắt
+đầu ca
+Việc tách hai luồng giúp hệthống vẫn cảnh báo được khi mất kết nối, đồng thời chỉđưa những sựcố
+đã qua cửa sổhủy lên chuỗi. Cái giá phải trảlà nhân viên ởxa phụthuộc hoàn toàn vào Dashboard và
+độtrễcủa mạng cùng thời gian đóng khối.
+3.2 Thiết kếtầng IoT
+Tầng IoT chịu trách nhiệm thu thập tín hiệu chuyển động, quyết định tại chỗvà phát cảnh báo tức
+thời, đồng thời chuẩn bịgói tin đã ký cho luồng trách nhiệm. Phần cứng gồm module ESP32 kết nối cảm
+biến MPU6050 (gia tốc kếvà con quay hồi chuyển ba trục) qua giao tiếp I2C. Thiết bịđược đeo ởthắt
+lưng người cao tuổi. Firmware viết trên ESP-IDF, tận dụng hai lõi của ESP32 đểtách nhiệm vụđọc cảm
+biến với nhiệm vụxửlý logic và giao tiếp mạng.
+Logic phát hiện được tổchức dưới dạng máy trạng thái hữu hạn. Trạng thái ban đầu theo dõi tín
+hiệu gia tốc liên tục. Khi phát hiện va chạm mạnh, máy chuyển sang kiểm tra bất động: nếu biên độ
+chuyển động duy trì ởmức thấp trong khoảng thời gian ngắn, hệthống coi đó là dấu hiệu té ngã tiềm
+6
+
+
+[PAGE 14]
+3. THIẾT KẾHỆTHỐNG
+năng. Ngay sau đó, loa trên thiết bịbắt đầu phát cảnh báo và mởcửa sổhủy 10 giây. Trong cửa sổnày,
+người đeo có thểnhấn nút ngắn đểhủy; sựkiện hủy chỉđược ghi nhận off-chain tại gateway, không đưa
+lên blockchain. Hết thời gian hủy mà không có thao tác, thiết bịđóng gói sựkiện FALL, ký sốvà gửi
+qua MQTT.
+Khi nhân viên đến nơi, họnhấn giữnút trên thiết bịtrong 3 giây. Thao tác này kích hoạt việc tạo và
+ký gói tin ARRIVAL, xác nhận có mặt tại hiện trường. Heartbeat định kỳđược gửi lên gateway đểtheo
+dõi tình trạng kết nối; gateway chỉghi nhận off-chain và không phát cảnh báo khi mất heartbeat.
+Quy trình ký sốthực hiện như sau. Các trường device, eventType, timestamp, nonce và dataHash
+được đóng gói bằng abi.encodePacked, tạo chuỗi 69 byte. Chuỗi này được băm keccak256, thêm tiền
+tốtheo EIP-191, rồi ký bằng thuật toán secp256k1 với khóa riêng của thiết bị. Nonce tăng dần và lưu
+trong NVS (Non-Volatile Storage) của ESP32 đểchống gửi lại gói tin cũ. Khóa riêng nằm trong flash; hệ
+thống chưa tích hợp secure element.
+Thiết kếnày ưu tiên độtrễthấp cho cảnh báo tại chỗ: loa kêu ngay sau khi hết cửa sổhủy, không
+cần chờmạng hay blockchain. Cái giá phải trảlà phạm vi cảnh báo bịgiới hạn bởi khoảng cách nghe
+được của loa, và mọi sựkiện đưa lên chuỗi đều phụthuộc vào gateway còn hoạt động. Ngoài ra, việc lưu
+khóa trong flash làm tăng rủi ro nếu thiết bịbịmất hoặc bịtháo rời.
+3.3 Thiết kếtầng AI
+3.3.1 Vai trò của tầng AI
+Tầng AI phân tích gia tốc và vận tốc góc từcảm biến đeo ởlưng dưới đểnhận diện ứng viên té
+ngã trước va chạm. ESP32 lấy mẫu liên tục, suy luận trên cửa sổtrượt và yêu cầu hai dựđoán dương
+tính liên tiếp trước khi chuyển sang bước kiểm tra bất động. Kết quảAI không tựđộng trởthành sựcố
+trên blockchain: thiết bịcòn thực hiện kiểm tra bất động, cho người đeo hủy cảnh báo trong 10 giây, rồi
+mới gửi sựkiện FALL đã ký. Cách tổchức này giữvai trò của AI là phát hiện sớm, còn các luật trên thiết
+bịkiểm tra bối cảnh trước khi phát cảnh báo chính thức.
+3.3.2 Tập dữliệu và tiền xửlý
+Nhóm sửdụng bộdữliệu KFall do Yu, Jang và Xiong công bố, gồm dữliệu hoạt động thường ngày
+(ADL) và té ngã mô phỏng của 32 người tham gia [14, 15]. Cảm biến gốc đặt ởlưng dưới, lấy mẫu ởtần
+số100 Hz. Các tệp CSV chứa gia tốc theo đơn vịg và vận tốc góc theo đơn vị◦/s. Mô hình chỉsửdụng
+sáu kênh theo thứtựAccX, AccY, AccZ, GyrX, GyrY, GyrZ; không sửdụng góc Euler.
+Dữliệu được chia theo người tham gia: 20 người cho tập huấn luyện, 6 người cho tập xác thực và 6
+người cho tập kiểm thử. Cách chia này tránh đểcác cửa sổgần nhau của cùng một người xuất hiện đồng
+thời trong tập huấn luyện và tập kiểm thử.
+Mỗi cửa sổgồm 50 × 6 giá trị, tương ứng 0,5 giây dữliệu. Cửa sổtrượt 10 mẫu, tương ứng 0,1 giây
+giữa hai lần suy luận. Cửa sổđược gán nhãn ngã nếu phần giao giữa cửa sổvà khoảng thời gian từlúc
+bắt đầu té đến lúc va chạm chiếm ít nhất 40% độdài cửa sổ. Với từng kênh c, dữliệu được chuẩn hóa
+7
+
+
+[PAGE 15]
+3. THIẾT KẾHỆTHỐNG
+bằng trung bình µc và độlệch chuẩn σc chỉtính từtập huấn luyện, sau đó giới hạn trong đoạn [−4, 4]:
+ut,c = clip
+(xt,c −µc
+σc
+, −4, 4
+)
+.
+(1)
+Trong quá trình huấn luyện cấu hình được chọn, dữliệu thô được tăng cường bằng phép xoay trục
+IMU tối đa 15◦, thay đổi biên độtối đa 10% và bổsung nhiễu Gaussian với độlệch chuẩn 0,01. Phép
+xoay được thực hiện trước bước chuẩn hóa; cùng một ma trận xoay được áp dụng cho ba trục gia tốc và
+ba trục vận tốc góc. Tập xác thực và tập kiểm thửkhông áp dụng tăng cường dữliệu.
+3.3.3 Kiến trúc mô hình học sâu
+Nhóm xây dựng mô hình CNN một chiều rút gọn từmô hình gốc là ResNet14, lấy cảm hứng từhướng
+thiết kếmạng gọn nhẹcho phát hiện té ngã trước va chạm của TinyFallNet [16]. Kiến trúc mô hình được
+trình bày bởi hình dưới đây:
+Hình 3.2: Kiến trúc mô hình biển thểResNet14 phát hiện té ngã
+Đầu vào của mô hình có kích thước (50, 6). Dữliệu lần lượt đi qua lớp Conv1D gồm 64 bộlọc với
+kích thước kernel bằng 3, lớp chuẩn hóa theo lô (Batch Normalization), hàm kích hoạt ReLU6 và lớp
+MaxPooling. Sau bước gộp, chiều thời gian giảm còn khoảng 25 bước.
+Phần trích xuất đặc trưng gồm bốn khối dư có đường tắt đồng nhất (residual identity blocks). Trong
+mỗi khối, nhánh chính sửdụng ba lớp tích chập một chiều theo thứtự1 × 1 với 16 kênh, 3 × 1 với 16
+kênh và 1 × 1 với 64 kênh. Các lớp được kết hợp với Batch Normalization và ReLU6; đầu ra nhánh chính
+được cộng với đầu vào khối qua đường tắt. Hệsốgiãn nởcủa bốn khối lần lượt là 1, 1, 2 và 4.
+Đầu ra các khối được đưa qua global average pooling và global max pooling. Hai vector đặc trưng được
+nối lại, đi qua lớp Dropout với tỷlệ0,1 và lớp Dense tạo hai giá trịđầu ra (logits). Lớp 0 biểu thịhoạt
+động thường ngày (ADL), còn lớp 1 biểu thịté ngã (FALL). Mô hình có 14 914 tham sốvà ước tính cần
+339 456 phép nhân–cộng (MAC) cho mỗi lần suy luận. SốMAC là ước tính lý thuyết, không biểu thịthời
+8
+
+
+[PAGE 16]
+3. THIẾT KẾHỆTHỐNG
+gian thực thi trên ESP32.
+3.3.4 Lượng tửhóa mô hình sang INT8
+Sau khi huấn luyện, nhóm áp dụng lượng tửhóa sau huấn luyện (post-training quantization) đểchuyển
+mô hình từbiểu diễn sốthực 32 bit sang sốnguyên 8 bit. Quá trình chuyển đổi sửdụng một tập mẫu
+đại diện lấy từdữliệu huấn luyện đểxác định miền giá trịcủa các tensor trung gian. Nhờđó, trọng số
+và các phép tính của mô hình có thểđược biểu diễn dưới dạng INT8, phù hợp hơn với tài nguyên bộnhớ
+và khảnăng tính toán của ESP32.
+Mô hình sau lượng tửhóa có kích thước khoảng 49,9 KB. Nhóm kiểm tra đầu ra của mô hình INT8
+so với mô hình sốthực trên cùng dữliệu kiểm thử; hệsốtương quan giữa hai đầu ra đạt 0,99916. Ởmức
+đánh giá theo lượt hoạt động, hai phiên bản cho cùng sốtrường hợp phát hiện đúng và cảnh báo nhầm:
+445 trường hợp ngã được phát hiện, không bỏsót trường hợp ngã nào và có 23 cảnh báo nhầm trên 526
+lượt hoạt động thường ngày. Kết quảnày cho thấy lượng tửhóa giữđược hiệu quảphân loại trên tập
+kiểm thửđã sửdụng.
+3.4 Thiết kếtầng Blockchain
+3.4.1 Vai trò và lý do lựa chọn blockchain
+Trong mô hình quản lý truyền thống, nhật ký sựcốvà thời điểm nhân viên phản hồi thường được
+lưu trên cơ sởdữliệu do chính trung tâm chăm sóc quản lý. Điều này tạo ra xung đột lợi ích: trung tâm
+vừa cung cấp dịch vụvừa giữbằng chứng đểtựđánh giá mức độtuân thủcủa mình.
+Blockchain giải quyết vấn đềnày bằng cách đưa các sựkiện quan trọng (té ngã, xác nhận đến nơi,
+chuyển cấp) lên sổcái công khai, không thểsửa đổi sau khi đã ghi nhận. Smart contract đóng vai trò
+trọng tài trung lập: giữtiền ký quỹcủa gia đình, kiểm tra chữký thiết bị, thực thi luật chuyển cấp khi
+quá hạn SLA, và chia tiền cuối kỳtheo sốvi phạm đã ghi nhận. Mọi bên đều có thểtựkiểm chứng lịch
+sửtrên Etherscan mà không cần tin tưởng máy chủcủa trung tâm.
+3.4.2 Thiết kếsmart contract
+Contract CareSLA.sol được viết bằng Solidity ^0.8.24, sửdụng thư viện OpenZeppelin 5.x và triển
+khai trên mạng thửnghiệm Sepolia (cùng môi trường Hardhat local đểkiểm thử). Các logic chính gồm:
+• Vòng đời hợp đồng chăm sóc: Gia đình gọi createCarePlan và chuyển ETH ký quỹ. Trung tâm
+gọi acceptPlan đểchấp nhận. Cuối kỳ, hàm settle tính tiền phạt theo công thức min(sốvi phạm×
+mức phạt, tiền ký quỹ), trảphần phạt cho gia đình và phần còn lại cho trung tâm.
+• Cam kết ca trực: Trước giờbắt đầu ca, trung tâm phải gọi commitShift đểđăng ký nhân viên
+chính và nhân viên dựphòng. Sau thời điểm bắt đầu, dữliệu ca không thểsửa.
+• Ghi nhận sựcố: Khi nhận gói tin FALL đã ký, contract khôi phục địa chỉngười ký bằng
+ecrecover, kiểm tra nonce và timestamp. Nếu hợp lệ, sựcốđược tạo ởcấp 0 và bắt đầu tính thời
+hạn SLA. Việc kiểm tra quá hạn do hàm checkTimeout thực hiện (được gọi bởi keeper hoặc bất
+9
+
+
+[PAGE 17]
+3. THIẾT KẾHỆTHỐNG
+kỳai).
+• Xác nhận phản hồi và có mặt: Nhân viên có thểgọi acknowledge đểđánh dấu đã nhận thông
+tin. Khi đến nơi, thiết bịgửi gói ARRIVAL đã ký; hàm confirmArrival (mởcho mọi người gọi)
+xác nhận có mặt và kết thúc trách nhiệm phản hồi cho sựcốđó.
+3.4.3 Cấu hình hợp đồng và quy tắc chia tiền
+Trong kịch bản thửnghiệm trên Hardhat local, nhóm cấu hình sốdư ban đầu 10 000 ETH cho mỗi
+ví thửnghiệm, mức ký quỹ100 ETH, thời hạn phản hồi SLA 60 giây và mức phạt 20 ETH cho mỗi vi
+phạm. Gia đình chuyển tiền ký quỹvào smart contract khi tạo hợp đồng; trung tâm chỉnhận phần tiền
+được phân chia sau khi kết thúc kỳ.
+Khi thanh lý, sốtiền hoàn cho gia đình bằng tổng tiền phạt nhưng không vượt quá tiền ký quỹ. Trung
+tâm nhận phần còn lại:
+Pgia đình = min(V × 20, 100) ETH,
+Ptrung tâm = 100 −Pgia đình,
+trong đó V là sốvi phạm SLA được hợp đồng ghi nhận. Giao dịch chia tiền chỉđược thực hiện sau khi
+kỳhợp đồng kết thúc thêm 600 giây, không còn sựcốđang chờxửlý và hợp đồng chưa được thanh lý
+trước đó.
+3.4.4 Tích hợp Gateway
+ESP32 không đủtài nguyên và không kết nối trực tiếp được với mạng Ethereum, nên hệthống dùng
+một gateway viết bằng Python (Web3.py + MQTT) làm cầu nối. Gateway nhận gói tin từthiết bị, kiểm
+tra sơ bộđịnh dạng và chữký off-chain đểloại bỏgói rác trước khi gửi lên chuỗi (tránh tốn gas không
+cần thiết), rồi gọi reportFall hoặc confirmArrival.
+Gateway chỉđóng vai trò chuyển tiếp và trảphí gas. Nó không có quyền đặc biệt trên contract: tính
+hợp lệcủa sựkiện nằm hoàn toàn ởchữký của thiết bị. Do đó gateway không thểgiảmạo sựcố, nhưng
+có thểchọn không gửi hoặc trì hoãn gửi gói tin — rủi ro này được ghi nhận ởphần đánh giá giới hạn.
+10
+
+
+[PAGE 18]
+4. KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+4
+KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+4.1 Kết quảAI
+4.1.1 Kết quảhuấn luyện và lượng tửhóa
+Cấu hình CNN một chiều được lựa chọn có 14 914 tham sốvà cần khoảng 339 456 phép nhân–cộng
+cho mỗi lần suy luận. Quá trình huấn luyện kéo dài 65 epoch; giá trịPR-AUC trên tập xác thực đạt
+0,9678. Sau lượng tửhóa INT8, mô hình có kích thước khoảng 49,9 KB. Hệsốtương quan giữa đầu ra
+của mô hình Float32 và mô hình INT8 đạt 0,99916 trên dữliệu dùng đểđối chiếu.
+4.1.2 Kết quảtrên tập kiểm thử
+Mô hình Float32 sau huấn luyện và mô hình INT8 sau lượng tửhóa được đánh giá trên cùng tập
+kiểm thử, gồm 445 lượt té ngã mô phỏng và 526 lượt hoạt động thường ngày (ADL). Kết quảphân loại
+theo lượt hoạt động được trình bày trước tiên bằng ma trận nhầm lẫn Hình 4.1. Hai phiên bản cho cùng
+ma trận nhầm lẫn nên được biểu diễn chung.
+Hình 4.1: Biểu diễn trực quan ma trận nhầm lẫn của mô hình Float32 và INT8 trên tập kiểm thử.
+Hình 4.1 cho thấy cảhai phiên bản đều phát hiện đúng 445 lượt té ngã và không bỏsót lượt nào.
+Trong 526 lượt ADL, mô hình nhận diện đúng 503 lượt và cảnh báo nhầm 23 lượt. Từma trận nhầm lẫn
+này, các chỉsốđánh giá và đặc điểm kích thước của hai phiên bản được tổng hợp trong Bảng 4.1.
+Bảng 4.1: So sánh mô hình Float32 và INT8 trên tập kiểm thử
+Chỉsố
+Float32
+INT8
+Độnhạy (%)
+100,00
+100,00
+Độđặc hiệu (%)
+95,63
+95,63
+Độchính xác (%)
+97,63
+97,63
+Thời gian phát hiện trước va chạm trung bình (ms)
+264,90
+261,98
+Kích thước mô hình (KiB)
+53
+14,7
+Sốtham số
+14 914
+14 914
+11
+
+
+[PAGE 19]
+4. KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+Theo Bảng 4.1, lượng tửhóa INT8 không làm thay đổi sốtham sốhoặc các chỉsốphân loại theo lượt
+hoạt động trên tập kiểm thử. Kích thước tệp mô hình giảm khoảng 3,6 lần. Thời gian phát hiện trước
+va chạm trung bình giảm khoảng 2,92 ms. Các kết quảnày được đo trên dữliệu kiểm thửKFall, chưa
+phải kết quảthửnghiệm khi thiết bịđược đeo trong sinh hoạt thực tế.
+4.2 Kết quảIoT
+4.2.1 Mạch cứng và thu thập dữliệu
+Thiết bịsửdụng ESP32 DevKit V1 kết nối với cảm biến MPU6050 đểthu thập gia tốc và vận tốc
+góc. Cảm biến được cấu hình lấy mẫu ởtần số100 Hz. ESP32 chuyển dữliệu cảm biến sang đơn vịđầu
+vào của mô hình AI, đồng thời điều khiển còi và đọc trạng thái nút nhấn đểxửlý cảnh báo tại thiết bị.
+Bảng 4.2: Các thành phần chính của thiết bịIoT
+Thành phần
+Kết nối ESP32
+Vai trò
+MPU6050
+SDA: GPIO25; SCL: GPIO26
+Đo gia tốc và vận tốc góc qua giao tiếp I2C.
+Nút nhấn
+GPIO5
+Hủy cảnh báo trong cửa sổcho phép hoặc xác
+nhận nhân viên đã đến.
+Còi
+GPIO18
+Báo động tại chỗkhi thiết bịmởcửa sổhủy
+cảnh báo.
+4.2.2 Truyền thông MQTT
+ESP32 kết nối Wi-Fi và gửi dữliệu tới gateway thông qua MQTT. Ngoài bản tin heartbeat dùng để
+theo dõi kết nối, thiết bịgửi các sựkiện có chữký và sốthứtựnonce. Trường eventType trong bản tin
+sựkiện phân biệt ba trường hợp:
+• eventType = 1 (FALL): thiết bịđã hoàn tất quy trình xác nhận cảnh báo té ngã và gửi sựkiện.
+• eventType = 2 (ARRIVAL): nhân viên đã đến và nhấn giữnút trên thiết bịtrong 3 giây đểxác
+nhận có mặt.
+• eventType = 3 (CANCEL): người đeo hủy cảnh báo trong cửa sổ10 giây; gateway ghi nhận trường
+hợp này vào bộđếm báo động giả.
+Gateway tiếp nhận cảba loại sựkiện, nhưng chỉchuyển FALL và ARRIVAL thành giao dịch trên
+blockchain. CANCEL được lưu ngoài blockchain. Dữliệu cảm biến liên quan đến FALL hoặc ARRIVAL được
+gửi trong bản tin riêng đểđối chiếu.
+4.2.3 Luồng hoạt động và kết quảquan sát trên Monitor
+Sau khi khởi động, ESP32 liên tục đọc MPU6050 và duy trì kết nối MQTT. Ởcấu hình thửnghiệm
+AI, khi gia tốc vượt ngưỡng kích hoạt, thiết bịbắt đầu chạy mô hình INT8 trên các cửa sổdữliệu cảm
+biến. Nếu mô hình tạo ứng viên té ngã, máy trạng thái tiếp tục kiểm tra bất động trong 2 giây. Thiết bị
+sau đó mởcửa sổhủy 10 giây và phát còi. Người đeo có thểnhấn nút đểhủy; nếu không hủy, thiết bị
+gửi sựkiện FALL. Sau khi nhân viên đến, thao tác nhấn giữnút trong 3 giây tạo sựkiện ARRIVAL.
+12
+
+
+[PAGE 20]
+4. KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+Hình 4.2 ghi lại giai đoạn thiết bịđã phát hiện ứng viên té ngã và đang mởcửa sổcho phép hủy cảnh
+báo.
+Hình 4.2: Monitor hiển thịgiai đoạn nghi té ngã và cửa sổhủy cảnh báo trên ESP32.
+Trên Hình 4.2, vùng tô đỏđánh dấu cửa sổdữliệu cảm biến liên quan đến cảnh báo; các đồthịthể
+hiện gia tốc và vận tốc góc ởdạng giá trịthô. Dòng sựkiện ghi nhận ứng viên té ngã lúc 17:34:26 và
+thông báo mởcửa sổhủy 10 giây lúc 17:34:30. Thanh cảnh báo hiển thịđiểm FALL 80,7% và trạng thái
+ESP32 đang phát còi. Tần sốlấy mẫu hiển thịlà 100,3 Hz.
+Nếu hết thời gian hủy mà không có thao tác hủy, thiết bịchuyển sang xác nhận sựkiện té ngã.
+Hình 4.3 cho thấy trạng thái tiếp theo được Monitor ghi nhận.
+Hình 4.3: Monitor hiển thịsựkiện té ngã đã được ESP32 xác nhận và bản tin FALL được nhận qua
+MQTT.
+Ởhình này, thanh trạng thái hiển thị“TÉ NGÃ ĐÃ ĐƯỢC ESP32 XÁC NHẬN” vào lúc 17:34:40 với
+nonce 18. Nhật ký Monitor ghi nhận bản tin MQTT FALL mang cùng nonce lúc 17:34:41 và cửa sổdữliệu
+thô gồm 400 mẫu lúc 17:34:42. Tần sốlấy mẫu hiển thịlà 99,7 Hz. Các thông tin này cho thấy Monitor
+đã quan sát được quá trình chuyển từứng viên té ngã sang sựkiện FALL và nhận bản tin qua MQTT
+trong lần thửđược chụp lại.
+13
+
+
+[PAGE 21]
+4. KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+4.3 Kết quảBlockchain
+4.3.1 Kết quảDashboard và giám sát sựcố
+Dashboard CareSLA gồm trang thiết lập hợp đồng và trang giám sát sựcố. Quy trình trên trang
+thiết lập bắt đầu từviệc gia đình nhập thông tin hợp đồng, như thểhiện ởHình 4.4.
+Hình 4.4: Giao diện nhập thông tin tạo hợp đồng chăm sóc.
+Giao diện có các trường địa chỉtrung tâm, địa chỉthiết bị, thời hạn phản hồi, mức phạt, tiền ký quỹ
+và thời điểm kết thúc kỳ. Trong Hình 4.4 các giá trịđang được điền là 60 giây, 20 ETH và 100 ETH. Ví
+chưa kết nối nên ảnh này minh họa bước nhập thông tin. Sau bước tạo hợp đồng, trang thiết lập dành
+các phần riêng cho trung tâm chấp nhận, cam kết ca trực và mởgiao diện giám sát (Hình 4.5).
+Hình 4.5: Các bước chấp nhận hợp đồng, cam kết ca trực và mởgiám sát.
+Phần cam kết ca cho phép nhập thời gian bắt đầu, kết thúc cùng địa chỉnhân viên chính và nhân
+viên dựphòng.
+14
+
+
+[PAGE 22]
+4. KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+Khi hợp đồng có sựcố, trang Monitor hiển thịtrạng thái đọc từHardhat local và danh sách sựcố
+của hợp đồng đang xem. Hình 4.6 ghi lại trạng thái dashboard của hợp đồng có Plan ID 1.
+Hình 4.6: Dashboard hiển thịthông tin hợp đồng và hai sựcốđã được xửlý trên Hardhat local.
+Kết quảtrên Hình 4.6 cho thấy dashboard đã đọc và tổng hợp trạng thái của hợp đồng trên Hardhat
+local. Với mức ký quỹ100 ETH, hợp đồng ghi nhận một vi phạm và không còn sựcốđang chờxửlý. Hai
+sựcốđều đã chuyển sang trạng thái “Đã đến nơi”; trong đó, sựcố#1 đã được chuyển cho nhân viên dự
+phòng, còn sựcố#2 được hiển thịởcấp nhân viên chính. Điều này cho thấy giao diện phản ánh được
+cảtrạng thái xửlý sựcốlẫn kết quảchuyển cấp theo luật SLA. Bộđếm báo động giảvà heartbeat là
+thông tin giám sát bổsung ngoài blockchain.
+4.3.2 Kết quảchia tiền cuối kỳ
+Sau khi kỳhợp đồng kết thúc và không còn sựcốchờxửlý, nhóm thực hiện giao dịch settle trên
+Hardhat local. Hình 4.7 thểhiện kết quảphân chia tiền và sốdư của hai bên trước, sau giao dịch.
+Hình 4.7: Kết quảchia tiền hợp đồng trên Hardhat local.
+Hợp đồng ghi nhận hai vi phạm, với mức phạt 20 ETH mỗi vi phạm trên khoản ký quỹ100 ETH.
+Kết quảSettled hoàn 40 ETH cho gia đình và chuyển 60 ETH cho trung tâm, đúng với quy tắc phân
+chia đã thiết kế. Sốdư gia đình trong hình tăng từkhoảng 9 899,9998 lên 9 939,9998 ETH; sốdư trung
+tâm tăng từkhoảng 9 999,9998 lên 10 059,9997 ETH. Chênh lệch sốdư ví có thểbao gồm phí gas của ví
+15
+
+
+[PAGE 23]
+4. KẾT QUẢTHỰC NGHIỆM VÀ THẢO LUẬN
+ký giao dịch, nên nhóm đối chiếu sốtiền phân chia theo kết quảSettled. Giao dịch được ghi tại block
+460 trên Hardhat local; kết quảnày không đại diện cho giao dịch trên mạng Ethereum công khai.
+4.4 Đánh giá rủi ro và giới hạn
+Mô hình đã được đánh giá trên tập kiểm thửKFall và được tích hợp đểthửluồng dựđoán trên
+ESP32. Tuy nhiên, KFall được thu thập từngười trẻthực hiện các tình huống té ngã mô phỏng, trong
+khi đối tượng hướng tới của CareSLA là người cao tuổi. Sựkhác biệt vềdáng đi, tốc độchuyển động và
+cách té ngã có thểkhiến kết quảtrên tập dữliệu chưa phản ánh đầy đủhiệu quảđối với nhóm người
+dùng mục tiêu. Vì vậy, bước đánh giá tiếp theo là thu thập thêm dữliệu phù hợp với người cao tuổi và
+kiểm tra hệthống trong điều kiện đeo thiết bịthực tế.
+Trong quá trình truyền sựkiện, bản tin MQTT có thểđã đến broker trước khi giao dịch được ghi lên
+blockchain. Hệthống sửdụng chữký, nonce và nhật ký gateway đểtheo dõi các bước xửlý; khảnăng
+khôi phục sựkiện đang chờkhi thiết bịhoặc gateway khởi động lại là nội dung cần kiểm tra thêm khi
+vận hành dài hạn.
+Các kết quảthực thi luật SLA và chia tiền đã được kiểm chứng trên Hardhat local. Phạm vi này phù
+hợp đểđánh giá logic hợp đồng, trong khi phí giao dịch và thời gian xác nhận trên mạng công khai sẽ
+phụthuộc vào điều kiện mạng khi triển khai. Những giới hạn trên xác định phạm vi áp dụng của kết quả
+hiện tại và là cơ sởcho các bước thửnghiệm tiếp theo.
+16
+
+
+[PAGE 24]
+5. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+5
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+5.1 Kết luận
+Bài toán đặt ra là xung đột lợi ích khi nhật ký sựcốté ngã và thời điểm phản hồi nằm trong tay
+chính trung tâm chăm sóc. CareSLA giải quyết bằng một hệthống CPS ba tầng IoT, AI và Blockchain,
+đồng thời tách rõ hai luồng. Luồng cảnh báo tại chỗchạy hoàn toàn trên ESP32, phát loa ngay sau cửa
+sổhủy, không phụthuộc mạng hay blockchain. Luồng trách nhiệm đưa bằng chứng đã ký lên chuỗi và
+đểsmart contract thực thi luật.
+Vềkết quảđã đo được, hệthống chạy liên tục ba vòng trên Hardhat local đều thành công; ESP32
+thật đã gửi được gói CANCEL chỉghi off-chain và gói FALL lên chuỗi. Độtrễgateway lên chain khoảng
+35–50,ms, sựcốhiện trên Dashboard khoảng 2,5 giây. Phía thiết bị, thời gian từva chạm đến khi hết
+cửa sổhủy là 12 giây theo thiết kế, gồm 2 giây kiểm tra bất động và 10 giây cửa sổhủy. Mô hình AI trên
+tập test KFall đạt độnhạy 100% và độđặc hiệu 95,6%; bản lượng tửINT8 cho kết quảtương đương bản
+sốthực và có kích thước khoảng 14KB.
+Hệthống vẫn còn một sốhạn chế. Dữliệu huấn luyện đến từngười trẻvà các cú té mô phỏng, chưa
+được kiểm chứng trên người cao tuổi thực tế. Phía contract, chữký thiết bịchưa gắn chainId và địa
+chỉcontract; SLA hiện chỉtính đến lúc nhân viên gọi acknowledge, chưa tính đến lúc có mặt; tiền được
+đẩy thẳng cho các bên khi settle, nên nếu một bên từchối nhận thì giao dịch có thểbịkẹt. Keeper và
+gateway vẫn là thành phần tập trung. Nếu keeper ngừng chạy thì việc ghi vi phạm bịchậm, dù bất kỳ
+ai cũng có quyền gọi checkTimeout thay thế.
+5.2 Hướng phát triển
+Chữký thiết bịhiện chỉbăm các trường của sựkiện, nên vềnguyên tắc có thểđem sang một contract
+khác đểdùng lại. Nhóm dựkiến tính SLA đến sựkiện ARRIVAL và bắt buộc nhân viên tựxác thực khi
+tới, bằng thẻNFC hoặc chữký từví riêng, vì nút nhấn trên thiết bịmới chứng minh có người bấm chứ
+chưa chứng minh là ai.
+Thay thếhàm keeper bằng Chainlink Automation hoặc trích một khoản nhỏtừtiền phạt đểthưởng
+cho người gọi đúng lúc. Gateway là điểm phụthuộc thứhai, vì nó có thểkhông đẩy sựkiện lên chain.
+Nếu thiết bịgửi song song tới nhiều gateway do các bên khác nhau vận hành, một gateway im lặng không
+đủđểche giấu sựcố.
+Mô hình hiện tại dùng ResNet14, và khi chạy bằng TensorFlow Lite Micro trên ESP32. Việc chuyển
+bài toán cần dữliệu từngười cao tuổi thật, thu thập có sựđồng ý và quy trình an toàn. Báo động giả
+mới được đo trong thời gian ngắn; bước tiếp theo là thửnghiệm sinh hoạt kéo dài nhiều ngày và điều
+chỉnh ngưỡng theo từng người đeo.
+17
+
+
+[PAGE 25]
+Tài liệu tham khảo
+[1] Cục
+Thống
+kê,
+“Thông
+cáo
+báo
+chí
+Kết
+quả
+Điều
+tra
+dân
+số
+và
+nhà
+ở
+giữa
+kỳ
+năm
+2024,”
+2025.
+https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2025/01/
+thong-cao-bao-chi-ket-qua-dieu-tra-dan-so-va-nha-o-giua-ky-nam-2024/
+[2] World
+Health
+Organization,
+“Falls,”
+2021.
+https://www.who.int/news-room/fact-sheets/
+detail/falls
+[3] K. Riad, S. Sneha, v.v., “BlockTheFall: Wearable Device-based Fall Detection Framework Powered
+by Machine Learning and Blockchain for Elderly Care,” arXiv preprint arXiv:2306.06452, 2023.
+[4] S. A. H. Seno v.v., “TriNet: A Hybrid LSTM-CNN-RNN Framework for Emergency Incident
+Detection and Blockchain Notification,” Journal of Systems Architecture, 2023.
+[5] A. Unal v.v., “MetaSave: Remote Healthcare Monitoring Framework Integrating YOLOv7-Pose,
+IPFS, and Ethereum Smart Contracts,” IEEE Transactions on Services Computing, 2023.
+[6] R. White v.v., “Black Block Recorder: Digital Signature and HMAC-based Distributed Blackbox for
+Autonomous Systems,” IEEE Internet of Things Journal, 2022.
+[7] N. Szabo, “Formalizing and Securing Relationships on Public Networks,” First Monday, tập 2, số9,
+1997. doi: 10.5210/fm.v2i9.548.
+[8] D.
+Yaga,
+P.
+Mell,
+N.
+Roby
+và
+K.
+Scarfone,
+“Blockchain
+Technology
+Overview,”
+NIST
+Interagency/Internal Report 8202, 2018. doi: 10.6028/NIST.IR.8202.
+[9] M. Holst Swende và N. Johnson, “ERC-191: Signed Data Standard,” Ethereum Improvement
+Proposals. https://eips.ethereum.org/EIPS/eip-191
+[10] D. Johnson, A. Menezes và S. Vanstone, “The Elliptic Curve Digital Signature Algorithm (ECDSA),”
+International Journal of Information Security, tập 1, tr. 36–63, 2001. doi: 10.1007/s102070100002.
+[11] Solidity Documentation. [Online]. Available: https://docs.soliditylang.org/
+[12] Ethers.js Documentation. [Online]. Available: https://docs.ethers.org/v6/
+[13] TensorFlow Lite Post-training quantization. [Online]. Available: https://www.tensorflow.org/
+lite/performance/post_training_quantization
+18
+
+
+[PAGE 26]
+TÀI LIỆU THAM KHẢO
+[14] X. Yu, J. Jang và S. Xiong, “A Large-Scale Open Motion Dataset (KFall) and Benchmark Algorithms
+for Detecting Pre-impact Fall of the Elderly Using Wearable Inertial Sensors,” Frontiers in Aging
+Neuroscience, tập 13, 2021. doi: 10.3389/fnagi.2021.692865.
+[15] KFall Team, “KFall dataset.” https://sites.google.com/view/kfalldataset
+[16] “TinyFallNet: A Lightweight Pre-Impact Fall Detection Model,” Sensors, tập 23, số20, bài 8459,
+2023. doi: 10.3390/s23208459.
+19

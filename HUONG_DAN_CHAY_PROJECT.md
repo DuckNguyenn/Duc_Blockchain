@@ -1,688 +1,250 @@
-# Hướng dẫn chạy SonarChain HRC Safety Log
+# Cách chạy SonarChain — phiên bản đã rà soát ngày 05/10/2026
 
-Tài liệu này hướng dẫn hai cách demo project:
+Luồng chính hiện tại là **một HC-SR04 → ESP32/ESP-IDF/TFLite Micro → USB Serial → Python gateway → SQLite/evidence → API → dashboard**. Blockchain là phần audit tùy chọn. Các notebook IsolationForest, Arduino và tài liệu hai cảm biến thuộc các phiên bản trước; không dùng chúng để export model cho firmware TinyML hiện tại.
 
-1. **Demo mô phỏng**: không cần ESP32 hoặc HC-SR04; có thể chạy dashboard và replay dữ liệu CSV.
-2. **Demo phần cứng thật**: ESP32 đọc HC-SR04, xuất telemetry qua USB Serial, Python gateway xử lý và tạo evidence.
+## 1. Cài môi trường
 
-Project là prototype nghiên cứu. Blockchain chỉ là lớp audit/evidence và workflow; nó không thay thế E-Stop vật lý, không trực tiếp điều khiển motor/relay và không chứng minh cảm biến đo chính xác.
+Chạy PowerShell từ thư mục project:
 
----
-
-## 1. Kiến trúc demo
-
-```text
-MÔ PHỎNG
-CSV / nút dashboard
-        ↓
-Python gateway hoặc dashboard
-        ↓
-Evidence JSON + SHA-256
-        ↓
-HRCSafetyLog trên Hardhat Local
-        ↓
-Dashboard + MetaMask
+```powershell
+Set-Location 'C:\Users\P1 Gen 5\Downloads\Blockchain'
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-```text
-PHẦN CỨNG THẬT
-HC-SR04 → ESP32 → USB Serial → Python gateway
-                                  ↓
-                         Evidence outbox
-                                  ↓
-                         HRCSafetyLog
+Nếu đã có `.venv`, bỏ lệnh tạo môi trường. Các lệnh dưới đây dùng trực tiếp Python của môi trường nên không cần `Activate.ps1`. TensorFlow được kiểm tra bằng Python 3.12 trên máy này; chỉ cần cài khi huấn luyện/export:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-tinyml.txt
 ```
 
-Nếu dùng MQTT thay cho USB Serial:
+Cài Node.js/npm nếu chưa có. Dùng `npm.cmd` để tránh PowerShell chặn file `npm.ps1`:
 
-```text
-ESP32/Wi-Fi publisher → Mosquitto → MQTT subscriber
-                                      ↓
-                              Python safety pipeline
-                                      ↓
-                              Evidence + blockchain
-```
-
----
-
-## 2. Yêu cầu cài đặt
-
-Cài các phần mềm sau trên Windows:
-
-- Node.js LTS và npm.
-- Python 3.10 trở lên.
-- Arduino IDE và ESP32 board package nếu chạy phần cứng.
-- MetaMask nếu muốn ký transaction trên dashboard.
-- Docker Desktop nếu muốn chạy MQTT broker bằng Docker.
-- Driver USB của board ESP32 nếu Windows chưa tự nhận cổng COM.
-
-Mở Command Prompt hoặc PowerShell. Nếu PowerShell chặn lệnh `npm`, dùng `npm.cmd`.
-
-Kiểm tra cài đặt:
-
-```cmd
-node --version
-npm.cmd --version
-python --version
-```
-
-Cài thư viện Python từ thư mục project:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m pip install -r requirements.txt
-```
-
-Nếu máy dùng lệnh `py` thay cho `python`, có thể thay toàn bộ `python` bằng `py`.
-
----
-
-## 3. Demo nhanh chỉ với dashboard
-
-Cách này dùng để trình bày giao diện và ngưỡng an toàn, chưa ghi transaction lên blockchain.
-
-Mở terminal:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m http.server 8080 --directory web3
-```
-
-Mở trình duyệt tại:
-
-```text
-http://localhost:8080
-```
-
-Trong dashboard:
-
-1. Nhấn **Chạy mô phỏng**.
-2. Dashboard chọn ngẫu nhiên một khoảng cách như `86.4`, `48.2`, `24.6` hoặc `76.5 cm`.
-3. Ngưỡng được áp dụng như sau:
-   - Lớn hơn `60 cm`: `SAFE`.
-   - Từ `31 cm` đến `60 cm`: `WARNING`.
-   - Nhỏ hơn hoặc bằng `30 cm`: `EMERGENCY`.
-4. Khi có `EMERGENCY`, dashboard bật trạng thái E-STOP mô phỏng.
-5. Quan sát **Safety event stream**. Event chưa ghi blockchain sẽ có nhãn `local proof`.
-
-Ở chế độ này, chưa cần MetaMask, Hardhat hoặc contract.
-
----
-
-## 4. Chạy blockchain local bằng Hardhat
-
-Đây là phần nên chạy trước cả demo mô phỏng ghi on-chain và demo phần cứng.
-
-### 4.1. Cài và compile smart contract
-
-Mở Terminal 1:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain\contracts"
-npm.cmd install
+```powershell
+Set-Location contracts
+npm.cmd ci
 npm.cmd run compile
+Set-Location ..
 ```
 
-Nếu compile báo lỗi không tải được Solidity compiler do mạng/proxy, thử dùng môi trường đã có cache compiler hoặc kiểm tra kết nối mạng. Không dùng contract address cũ nếu đã reset node.
+ESP-IDF 5.5.4 và esp-tflite-micro 1.4.1 được dùng để kiểm tra firmware. MetaMask chỉ cần cho các giao dịch qua dashboard.
 
-### 4.2. Chạy Hardhat node
+## 2. Chạy dashboard mô phỏng, không cần ESP32
 
-Vẫn ở Terminal 1:
+```powershell
+.\.venv\Scripts\python.exe -m http.server 8080 --directory web3
+```
 
-```cmd
+Mở **http://localhost:8080**, chọn **Mô phỏng**, nhấn **Mẫu mô phỏng tiếp theo**. Chuỗi cố định: 86,4 → 48,2 → 24,6 → 76,5 cm. Mẫu gần kích hoạt yêu cầu E-STOP mô phỏng; sau mẫu SAFE, dùng nút gỡ mô phỏng. Mỗi mẫu xuất hiện trong event stream. Số giao dịch xác nhận chỉ tăng khi có transaction thành công.
+
+Không cần ví để mô phỏng. Chuyển sang nguồn ESP32 sẽ tắt nút tạo mẫu giả. Khóa trên chain được hiển thị và gỡ riêng; nó không điều khiển ESP32.
+
+## 3. Huấn luyện và chọn model nhúng
+
+Notebook mới: [`ai_model/notebooks/esp32_grouped_training.ipynb`](ai_model/notebooks/esp32_grouped_training.ipynb). Notebook độc lập có thể chạy trên Kaggle cùng `dataset_3class.csv`, không cần upload toàn bộ code project. Nếu tìm thấy nhiều dataset, chỉ định đúng `DATASET_PATH`.
+
+Hoặc chạy từ thư mục gốc:
+
+```powershell
+.\.venv\Scripts\python.exe -m ai_model.train_keras_tflite --check-data
+.\.venv\Scripts\python.exe -m ai_model.train_keras_tflite --epochs 150
+```
+
+Script dùng 3 feature đúng firmware: `distance_cm`, `distance_delta_3`, `distance_std_5`. Tách recording trước khi tạo feature. Train/validation/test đều đủ SAFE, APPROACHING, EMERGENCY. Scaler và representative dataset chỉ lấy train. Bốn ứng viên: linear softmax, Dense(4), Dense(8), Dense(16)→Dense(8). Chọn theo validation macro-F1, dùng test sau khi chọn; không đổi seed để tìm điểm cao.
+
+Artifact ở `ai_model/artifacts/esp32_candidate/`:
+
+| File | Công dụng |
+|---|---|
+| `model_data.cc`, `model_data.h` | Model INT8 và mean/scale cho C++ |
+| `ultrasonic_safety_int8.tflite` | Model để đánh giá bằng interpreter |
+| `model_metadata.json` | Input/output, feature order, quantization, thời gian lấy mẫu |
+| `metrics.json`, `history.json` | Metric từng ứng viên, float/INT8 và learning curves |
+| `split_manifest.json` | Các recording thuộc từng tập |
+| `parity_vectors.json` | Input/output cố định để đối chiếu thiết bị |
+
+Kết quả lần chạy này: MLP **3→16→8→3**, 227 tham số, 3.456 byte; validation accuracy **88,91%**, test INT8 accuracy **91,14%**, macro-F1 **0,8937**, recall EMERGENCY **100%**. Đây là kết quả offline trên một split, không phải độ chính xác đã đo trên board.
+
+**Chu kỳ lấy mẫu:** median dataset là khoảng **176 ms**, firmware đang đặt **100 ms** cộng thời gian đo/inference. Vì delta/std phụ thuộc cửa sổ theo số mẫu, cần thu thêm dữ liệu ở đúng cadence firmware trước khi kết luận accuracy thực tế. Không dùng phần giảm mẫu 1 giây của notebook cũ để nạp firmware 100 ms.
+
+## 4. Build/nạp ESP32
+
+Mở **ESP-IDF terminal**, vào `esp32_safety_idf`. Pin: TRIG GPIO5, ECHO GPIO18 qua chuyển mức 5 V→3,3 V, buzzer GPIO23, nút silence GPIO27→GND. Không dùng pin map GPIO2/hai cảm biến từ README cũ.
+
+Để dùng candidate, copy **cùng lúc** hai file sau; nên sao lưu model đang dùng trước:
+
+```powershell
+Copy-Item ai_model/artifacts/esp32_candidate/model_data.cc esp32_safety_idf/main/model/model_data.cc
+Copy-Item ai_model/artifacts/esp32_candidate/model_data.h esp32_safety_idf/main/model/model_data.h
+```
+
+Hai lệnh copy trên chạy từ thư mục gốc. Sau đó, trong ESP-IDF terminal:
+
+```powershell
+Set-Location esp32_safety_idf
+idf.py build
+idf.py -p COM5 flash monitor
+```
+
+Thay COM5 bằng cổng thực tế. Thoát monitor bằng **Ctrl+]** trước khi mở Serial gateway. Nếu board là ESP32-S3/C3, cần đổi target và kiểm tra pin/toolchain tương ứng; cấu hình đã kiểm tra ở đây là `esp32`.
+
+Firmware kiểm tra input `[1,3]`, output `[1,3]`, kiểu INT8 và scale hợp lệ. Hard rule `distance <=30 cm → EMERGENCY` luôn ưu tiên; AI được phép nâng lên EMERGENCY ở phía ngoài. Mẫu lỗi xóa history. Buzzer silence chỉ tắt âm; chưa có relay/motor E-Stop hay cơ chế reset latch vật lý.
+
+Đối chiếu các vector export trên board, đo thời gian `Invoke()` và arena thực tế trước khi sử dụng. Build thành công không thay thế các phép đo này.
+
+## 5. ESP32 → gateway → dashboard thật
+
+Ba terminal đều mở từ thư mục gốc project.
+
+**Terminal 1 — Serial:**
+
+```powershell
+.\.venv\Scripts\python.exe -m iot_code.gateway.serial_reader --port COM5 --baud 115200 --database data/telemetry.db
+```
+
+**Terminal 2 — API:**
+
+```powershell
+.\.venv\Scripts\python.exe -m iot_code.gateway.api --host 127.0.0.1 --port 8000 --database data/telemetry.db
+```
+
+**Terminal 3 — dashboard:**
+
+```powershell
+.\.venv\Scripts\python.exe -m http.server 8080 --directory web3
+```
+
+Mở http://localhost:8080, chọn **ESP32 · gateway thật**. Đúng dữ liệu sẽ hiển thị `GATEWAY · LIVE`. Mẫu quá 5 giây hoặc API mất kết nối hiển thị chờ dữ liệu. `null`/timeout/AI_FAULT được ghi và hiển thị, không giữ khoảng cách SAFE cũ. APPROACHING trên ESP32 được gateway chuyển thành WARNING; raw JSON vẫn nằm trong `raw_payload` của SQLite.
+
+Kiểm tra nhanh:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/api/health
+Invoke-RestMethod http://127.0.0.1:8000/api/telemetry/latest
+```
+
+SQLite lưu mọi mẫu; evidence JSON ở `data/evidence_outbox/`. Device ID lấy từ telemetry; firmware hiện phát `ESP32-HRC-01`. `timestamp_ms` của board là uptime, không phải Unix timestamp; gateway dùng thời gian nhận UTC nếu firmware không gửi `measured_at`.
+
+## 6. Blockchain local và MetaMask
+
+**Terminal 4**, từ `contracts/`:
+
+```powershell
+Set-Location 'C:\Users\P1 Gen 5\Downloads\Blockchain\contracts'
 npm.cmd run node
 ```
 
-Giữ terminal này mở. Hardhat in ra danh sách account và private key local.
+**Terminal 5**, từ `contracts/`:
 
-Thông tin mạng:
-
-```text
-RPC URL: http://127.0.0.1:8545
-Chain ID: 31337
-Network: Hardhat Local
-```
-
-Nếu thấy `EADDRINUSE`, có thể Hardhat node đã chạy. Không mở thêm node thứ hai.
-
-### 4.3. Deploy contract
-
-Mở Terminal 2:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain\contracts"
+```powershell
+Set-Location 'C:\Users\P1 Gen 5\Downloads\Blockchain\contracts'
 npm.cmd run deploy
 ```
 
-Kết quả có dạng:
+Lấy `contract=` cho HRCSafetyLog và `permitContract=` cho WorkPermitHandoff. MetaMask: RPC **http://127.0.0.1:8545**, chain ID **31337**, tên Hardhat Local. Import một account dev do Hardhat in ra. Nhập hai contract trên dashboard và kết nối ví. Nếu restart node, deploy lại và kiểm tra contract trên mạng ví đang dùng.
 
-```text
-deployer=0xf39Fd...
-contract=0x...
-permitContract=0x...
-legacySafetyLog=0x...
+Chọn một cách submit EMERGENCY:
+
+- **Gateway tự submit:** cấu hình env và thêm `--write-chain` như bên dưới. Dashboard dùng để quan sát.
+- **Dashboard submit thủ công:** gateway chạy không `--write-chain`; nhập contract, dùng owner/Reporter, nhấn **Ghi EMERGENCY chưa gửi lên chain** và xác nhận MetaMask. Gateway commitment được chuẩn hóa SHA-256 thành bytes32, gọi `recordEvidence`.
+
+Không dùng hai cách submit cho cùng commitment. Contract chống trùng; nếu dashboard gửi thủ công, database/outbox chưa tự cập nhật transaction từ trình duyệt. Giữ transaction hash để đối chiếu. Event mô phỏng dùng `recordEvent` và được gắn nhãn mô phỏng.
+
+EMERGENCY vẫn tự phát yêu cầu E-STOP khi chạy off-chain. Để đọc COM5 mà không cần private key hoặc gửi giao dịch, dùng:
+
+```bat
+.\.venv\Scripts\python.exe -m iot_code.gateway.serial_reader --port COM5
 ```
 
-Lưu lại hai địa chỉ:
+Trên dashboard, chọn **ESP32 · gateway thật**. E-STOP giám sát ở banner được kích hoạt từ telemetry; trạng thái **Khóa trên chain** chỉ đổi khi có giao dịch. Supervisor dùng nút **gỡ sau kiểm tra** khi có mẫu SAFE mới; nút **gỡ khóa trên chain** chỉ dành cho khóa đã ghi blockchain.
 
-```text
-contract=       → HRCSafetyLog
-permitContract= → WorkPermitHandoff
+Serial gateway tự ghi chain dùng biến môi trường trong **PowerShell**. Trong terminal gateway, chạy từ thư mục gốc và nhập giá trị thật khi PowerShell hỏi:
+
+```powershell
+Set-Location 'C:\Users\P1 Gen 5\Downloads\Blockchain'
+$env:RPC_URL='http://127.0.0.1:8545'
+$env:CONTRACT_ADDRESS=(Read-Host 'Dan dia chi sau contract= trong output deploy').Trim()
+$env:PRIVATE_KEY=(Read-Host 'Dan Private Key cua Account #0 (Owner) trong terminal Hardhat').Trim()
+.\.venv\Scripts\python.exe -m iot_code.gateway.serial_reader --port COM5 --write-chain
 ```
 
-Không dùng địa chỉ `legacySafetyLog` cho luồng mới.
+`CONTRACT_ADDRESS` có dạng `0x` + 40 ký tự hex; lấy giá trị sau `contract=`, không lấy `permitContract=` hay địa chỉ ví. Dòng **Private Key** của Account #0 là khóa Owner/deployer mặc định; cũng có thể dùng tài khoản đã được cấp Reporter. Không nhập nguyên câu mô tả như `private key account Hardhat local`. Biến `$env:` chỉ áp dụng trong terminal đang chạy gateway và các tiến trình con của nó; giữ terminal Hardhat node mở. Thoát `idf.py monitor`/Serial Monitor trước khi gateway mở `COM5`.
 
-Mỗi lần dừng Hardhat node rồi chạy lại, blockchain local được tạo lại. Khi đó cần deploy lại và dùng địa chỉ contract mới.
+Nếu cửa sổ là **CMD** (`C:\...>`), dùng cú pháp `set`:
 
----
-
-## 5. Cấu hình MetaMask cho demo local
-
-Trong MetaMask thêm network:
-
-```text
-Network name: Hardhat Local
-New RPC URL: http://127.0.0.1:8545
-Chain ID: 31337
-Currency symbol: ETH
+```bat
+set "RPC_URL=http://127.0.0.1:8545"
+set "CONTRACT_ADDRESS=DIA_CHI_HRCSAFETYLOG_VUA_DEPLOY"
+set "PRIVATE_KEY=PRIVATE_KEY_THAT_CUA_REPORTER_HOAC_OWNER"
+.\.venv\Scripts\python.exe -m iot_code.gateway.serial_reader --port COM5 --write-chain
 ```
 
-Import Account #0 bằng private key mà Hardhat in trong Terminal 1. Account #0 là deployer/owner của contract.
+Thay các giá trị mẫu trước khi chạy. Private key là `0x` + **64 ký tự hex**, lấy từ dòng **Private Key** của tài khoản trong terminal Hardhat. Dòng **Account** là địa chỉ ví (`0x` + 40 ký tự), không dùng làm private key. Tài khoản gửi giao dịch cần Reporter ở HRCSafetyLog hoặc là Owner; Supervisor không mặc nhiên có quyền ghi log.
 
-Địa chỉ owner mặc định thường là:
+Nên dùng **Reporter riêng cho Serial gateway** (ví dụ Account #1), còn Owner và Supervisor thao tác qua MetaMask. Dừng gateway trước khi dùng Owner cấp Reporter, rồi đặt `PRIVATE_KEY` của Reporter trong terminal gateway và chạy lại. Hai chương trình cùng ký bằng một ví có thể chọn trùng nonce, kể cả khi gateway đọc nonce `pending`.
 
-```text
-0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+Chỉ EMERGENCY lên chain; SAFE/WARNING/SENSOR_FAULT off-chain. Gateway lưu mọi mẫu vào SQLite ngay, gửi giao dịch trên luồng riêng để chờ receipt không làm đứng telemetry/E-STOP giám sát. Sau xác nhận, terminal in thêm `submission_status: confirmed` kèm `tx_hash`; dashboard cập nhật số on-chain và lịch sử EMERGENCY trong tối đa khoảng 5 giây. RPC lỗi giữ evidence pending. Retry sau khi RPC hoạt động:
+
+```powershell
+.\.venv\Scripts\python.exe -m iot_code.gateway.pipeline --retry-outbox --write-chain
 ```
 
-Các private key Hardhat chỉ dành cho local test. Tuyệt đối không dùng hoặc gửi tiền thật cho các key này trên Ethereum Mainnet, Sepolia hay mạng công khai.
+Supervisor của HRCSafetyLog có thể **gỡ khóa trên chain** bằng nút riêng. Việc này không gửi lệnh xuống ESP32 và không chứng minh robot đã dừng.
 
-Có thể import thêm Account #1, #2, #3 để demo phân quyền.
+Nếu ô chọn là ESP32 mà nhãn vẫn `MÔ PHỎNG`, hoặc khoảng cách giữ ở `86.4`, nhấn **Ctrl+F5** để nạp `app.js` mới rồi chọn lại **ESP32 · gateway thật**. Nhãn đúng là `GATEWAY · LIVE`, nút mô phỏng bị khóa. Sau khi cập nhật mã gateway/API, dừng hai terminal đó bằng Ctrl+C rồi chạy lại cùng database; không cần khởi động lại Hardhat hay deploy contract cho sửa lỗi đồng bộ này.
 
----
+### Lỗi MetaMask `Nonce too low`
 
-## 6. Demo dashboard ghi event lên blockchain
+Ví dụ `Expected nonce to be 2587 but got 2586`: nonce đã được dùng bởi một giao dịch khác. Khi gateway dùng khóa Owner và MetaMask cũng mở Owner, hai nơi có thể tranh nonce.
 
-Mở Terminal 3:
+1. Dừng Serial gateway bằng Ctrl+C và kiểm tra MetaMask đang ở mạng Hardhat local (`31337`, RPC `http://127.0.0.1:8545`).
+2. Trên MetaMask Extension: **Settings → Developer tools → Delete activity and nonce data**, rồi tải lại dashboard bằng Ctrl+F5. Việc này xóa lịch sử/nonce cục bộ của mạng đang chọn. Xem [hướng dẫn MetaMask](https://support.metamask.io/configure/accounts/how-to-clear-your-account-activity-reset-account).
+3. Dùng Owner cấp role **Reporter** cho một tài khoản riêng (Account #1 của Hardhat). Dùng khóa Reporter cho `PRIVATE_KEY` của gateway; Owner/Supervisor ký thao tác web bằng ví của mình.
+4. Nếu node đã khởi động lại, kiểm tra địa chỉ contract của lần deploy hiện tại, rồi cấp lại role nếu contract được deploy mới. Địa chỉ cũ có thể không còn code; lấy `contract=` và `permitContract=` từ terminal deploy.
 
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m http.server 8080 --directory web3
+Không cố định nonce theo số trong thông báo: nó có thể đổi ngay khi gateway gửi thêm giao dịch. Gateway đọc nonce `pending`, nhưng việc tách ví mới tránh tranh nonce với MetaMask.
+
+## 7. Work permit
+
+Owner cấp Supervisor/Gateway bằng panel role. Requester tạo permit, Supervisor approve, Gateway ghi zone entry, worker/requester xác nhận handoff rồi đóng permit. Cần tạo một telemetry event của nguồn đang chọn trước khi ghi zone entry. Quyền và thời hạn được contract kiểm tra; đổi account MetaMask theo vai trò cần dùng.
+
+Zone entry/handoff là lời xác nhận của tài khoản, không phải chứng nhận vị trí người hay chuyển động robot. Permit đang theo phiên trình duyệt; refresh trang chưa khôi phục permit đã tạo.
+
+## 8. Replay CSV và MQTT tùy chọn
+
+Replay CLI để kiểm tra evidence, không thay thế luồng SQLite/Serial:
+
+```powershell
+.\.venv\Scripts\python.exe -m iot_code.gateway.pipeline --csv ai_model/data/single_sensor/processed_3class/recordings/son_dungyen_20_DANGER.csv --limit 3 --model ai_model/artifacts/no_legacy_model.joblib
 ```
 
-Mở:
-
-```text
-http://localhost:8080
-```
-
-Trong dashboard:
-
-1. Chọn network `Hardhat Local` trong MetaMask.
-2. Kết nối bằng Account #0 hoặc một Reporter đã được cấp quyền.
-3. Nhập địa chỉ sau dòng `contract=` vào ô **Contract HRCSafetyLog**.
-4. Nhấn **Chạy mô phỏng**.
-5. Chọn một event trong event stream.
-6. Nhấn **Ghi event hiện tại lên chain**.
-7. Xác nhận transaction trong MetaMask.
-8. Chờ dashboard hiển thị transaction hash.
-
-Nếu dashboard hiện `not reporter`, tài khoản đang ký chưa có quyền Reporter và cũng không phải owner.
-
-Lưu ý: giao diện hiện tại dùng hàm tương thích `recordEvent(...)`. Gateway evidence v1 dùng digest/schema và lưu raw evidence ở off-chain.
-
----
-
-## 7. Demo role và Work Permit
-
-Dùng Account #0 owner trong panel **Ví & vai trò** để cấp quyền. Địa chỉ được nhập là tài khoản nhận role; tài khoản đang chọn trong MetaMask là người ký giao dịch.
-
-Ví dụ:
-
-```text
-Account #1 → Supervisor
-Account #2 → Gateway
-Account #3 → Reporter
-```
-
-### Cấp Supervisor
-
-```text
-Địa chỉ account: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
-Role: Supervisor · approve permit
-```
-
-Nhấn **Cấp role** và xác nhận bằng Account #0.
-
-### Cấp Gateway
-
-```text
-Địa chỉ account: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
-Role: Gateway · ghi zone entry
-```
-
-Nhấn **Cấp role** và xác nhận bằng Account #0.
-
-### Cấp Reporter
-
-```text
-Địa chỉ account: 0x90F79bf6EB2c4f870365E785982E1f101E93b906
-Role: Reporter · ghi safety event
-```
-
-Nhấn **Cấp role** và xác nhận bằng Account #0.
-
-### Chạy workflow permit
-
-Trong panel **Work permit & robot handoff**:
-
-1. Nhập **Contract WorkPermitHandoff** bằng địa chỉ sau dòng `permitContract=`.
-2. Nhập ví người vận hành, hoặc để trống để dùng ví hiện tại.
-3. Nhập:
-   ```text
-   Zone: ASSEMBLY-A
-   Task: HANDOFF-001
-   ```
-4. Dùng requester/owner nhấn **Tạo permit**.
-5. Chuyển MetaMask sang Supervisor, kết nối lại rồi nhấn **Approve**.
-6. Chuyển MetaMask sang Gateway, kết nối lại rồi nhấn **Ghi zone entry**.
-7. Khi permit ở `ACTIVE`, nhấn **Xác nhận handoff**.
-8. Nhấn **Đóng permit**.
-
-Trạng thái kỳ vọng:
-
-```text
-PENDING → APPROVED → ACTIVE → COMPLETED
-```
-
-Nếu đổi account làm mất `Permit ID` trên giao diện, permit vẫn tồn tại trên chain nhưng bản dashboard hiện tại chưa có chức năng tải permit lại bằng ID. Khi demo nhanh, có thể dùng owner cho toàn bộ workflow vì owner mặc định có quyền Supervisor và Gateway.
-
----
-
-## 8. Chuẩn bị phần cứng thật
-
-### 8.1. Linh kiện
-
-- ESP32 DevKit.
-- HC-SR04.
-- Breadboard và dây nối.
-- Cáp USB dữ liệu.
-- Cầu phân áp cho chân ECHO.
-- Có thể thêm buzzer và nút silence theo firmware đầy đủ.
-
-### 8.2. Đấu nối firmware đầy đủ
-
-Firmware chính nằm tại:
-
-```text
-firmware/ultrasonic_esp32/ultrasonic_esp32.ino
-```
-
-Sơ đồ chân của firmware này:
-
-| Thiết bị | ESP32 |
-|---|---:|
-| HC-SR04 TRIG | GPIO5 |
-| HC-SR04 ECHO | GPIO18, qua cầu phân áp |
-| Buzzer driver | GPIO23 |
-| Nút silence | GPIO27, nối về GND |
-| VCC HC-SR04 | 5 V |
-| GND HC-SR04 | GND chung |
-
-**Cảnh báo điện áp:** HC-SR04 thường trả tín hiệu ECHO 5 V. Không nối ECHO 5 V trực tiếp vào GPIO ESP32. Dùng cầu phân áp, ví dụ 1 kΩ/2 kΩ theo sơ đồ của project, và kiểm tra mạch trước khi cấp nguồn.
-
-Firmware tương thích đơn giản nằm tại:
-
-```text
-iot_code/ultrasonic_esp32.ino
-```
-
-Firmware này dùng:
-
-```text
-TRIG = GPIO25
-ECHO = GPIO26
-```
-
-Không trộn hai sơ đồ chân. Chọn đúng file firmware thì đấu dây theo đúng file đó.
-
-### 8.3. Nạp firmware
-
-Trong Arduino IDE:
-
-1. Cài ESP32 board package.
-2. Chọn board phù hợp, thường là `ESP32 Dev Module`.
-3. Chọn đúng cổng COM.
-4. Mở file `.ino` tương ứng.
-5. Chọn baud Serial `115200`.
-6. Verify rồi Upload.
-7. Mở Serial Monitor ở `115200 baud`.
-
-Khi chạy, ESP32 xuất JSON tương tự:
-
-```json
-{"device_id":"ESP32-HRC-01","sensor_id":"HC-SR04","timestamp_ms":12345,"distance_cm":42.7,"state":"WARNING","emergency_stop":false,"buzzer_on":false,"buzzer_silenced":false,"seq":10}
-```
-
-Đưa tay hoặc vật thể ra xa/gần cảm biến để thấy `SAFE`, `WARNING` và `EMERGENCY`.
-
----
-
-## 9. Chạy gateway với ESP32 qua USB Serial
-
-Xác định cổng COM trong Arduino IDE hoặc Device Manager, ví dụ `COM5`.
-
-Mở Terminal:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m iot_code.gateway.serial_reader --port COM5 --baud 115200 --device-id HRC-ESP32-01
-```
-
-Thay `COM5` bằng cổng thật.
-
-Gateway sẽ:
-
-1. Đọc từng dòng JSON từ ESP32.
-2. Bỏ qua dòng khởi động không phải JSON telemetry.
-3. Lấy `distance_cm`.
-4. Phân loại theo ngưỡng:
-   ```text
-   distance <= 30 cm → EMERGENCY
-   distance <= 60 cm → WARNING
-   distance > 60 cm  → SAFE
-   ```
-5. In kết quả xử lý ra terminal.
-
-Để kiểm tra bằng phần cứng thật, trình bày theo trình tự:
-
-```text
-Đưa vật thể ra xa       → SAFE
-Đưa vào khoảng 31–60 cm → WARNING
-Đưa vào ≤ 30 cm         → EMERGENCY
-Đưa vật thể ra xa lại   → SAFE
-```
-
-Trong firmware đầy đủ, `EMERGENCY` hoặc `SENSOR_FAULT` bật buzzer. Đây là cảnh báo cục bộ; không phụ thuộc blockchain.
-
-### Lưu ý về Serial hiện tại
-
-`serial_reader.py` là reader kiểm tra luồng Serial và in kết quả pipeline. Luồng evidence outbox/ghi blockchain hoàn chỉnh hiện được hỗ trợ rõ nhất qua CSV pipeline và MQTT subscriber. Vì vậy có hai cách trình bày phần cứng:
-
-- **Demo hardware + gateway:** chạy `serial_reader.py`, chứng minh ESP32 đo thật và gateway phân loại thật; ghi on-chain bằng dashboard hoặc replay evidence riêng.
-- **Demo hardware + blockchain end-to-end:** mở rộng serial reader để truyền kết quả vào `EvidenceOutbox`, sau đó gọi `SafetyLogClient.record_evidence`, hoặc dùng MQTT subscriber nếu ESP32 có Wi-Fi publisher.
-
-Không nên tuyên bố `serial_reader.py` hiện tự động ghi chain nếu chưa bổ sung phần tích hợp đó.
-
----
-
-## 10. Demo phần cứng kết hợp dashboard
-
-Cách trình bày an toàn và dễ hiểu:
-
-### Terminal 1
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain\contracts"
-npm.cmd run node
-```
-
-### Terminal 2
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain\contracts"
-npm.cmd run deploy
-```
-
-Ghi lại `contract=` và `permitContract=`.
-
-### Terminal 3
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m iot_code.gateway.serial_reader --port COM5 --baud 115200 --device-id HRC-ESP32-01
-```
-
-### Terminal 4
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m http.server 8080 --directory web3
-```
-
-Trong dashboard:
-
-1. Chuyển MetaMask sang Hardhat Local.
-2. Kết nối owner hoặc Reporter.
-3. Nhập địa chỉ `HRCSafetyLog`.
-4. Cho ESP32 đo một giá trị nguy hiểm.
-5. Quan sát terminal gateway in `EMERGENCY`.
-6. Quan sát buzzer/cảnh báo cục bộ nếu dùng firmware đầy đủ.
-7. Trên dashboard, chạy mô phỏng tương ứng hoặc ghi event bằng nút **Ghi event hiện tại lên chain**.
-8. Xác nhận transaction.
-9. Giải thích rõ: E-Stop thật xảy ra tại edge; blockchain chỉ ghi bằng chứng của sự kiện.
-
----
-
-## 11. Chạy MQTT local tùy chọn
-
-MQTT không bắt buộc cho demo USB Serial. Dùng MQTT khi muốn minh họa đường truyền telemetry qua broker.
-
-### 11.1. Với Docker Desktop
-
-Kiểm tra Docker:
-
-```cmd
-docker --version
-docker compose version
-```
-
-Khởi động broker:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-docker compose -f docker-compose.mqtt.yml up -d
-```
-
-Broker mặc định:
-
-```text
-MQTT: 127.0.0.1:1883
-WebSocket: 127.0.0.1:9001
-Topic: hrc/telemetry/#
-```
-
-Cài `paho-mqtt` nếu chưa cài:
-
-```cmd
-python -m pip install -r requirements.txt
-```
-
-Chạy subscriber:
-
-```cmd
-python -m iot_code.gateway.mqtt_subscriber --host 127.0.0.1 --port 1883 --topic hrc/telemetry/# --device-id HRC-ESP32-01
-```
-
-Mở terminal khác và gửi telemetry giả lập:
-
-```cmd
-docker exec hrc-mqtt mosquitto_pub -h 127.0.0.1 -t hrc/telemetry/HRC-ESP32-01 -q 1 -m "{\"device_id\":\"HRC-ESP32-01\",\"timestamp_ms\":1730000000000,\"distance_cm\":24.6}"
-```
-
-Kết quả kỳ vọng:
-
-```text
-severity = EMERGENCY
-emergency_stop = true
-submission_status = queued
-```
-
-### 11.2. Nếu không có Docker
-
-Có thể cài Mosquitto native trên Windows, sau đó chạy broker và `mosquitto_pub.exe` trực tiếp. Hoặc bỏ qua MQTT và dùng USB Serial cho demo phần cứng.
-
-MQTT trong project hiện cho phép anonymous chỉ để demo local. Không expose broker ra Internet khi chưa có username/password và TLS.
-
-Dừng broker:
-
-```cmd
-docker compose -f docker-compose.mqtt.yml down
-```
-
----
-
-## 12. Replay CSV và ghi evidence lên chain
-
-Đây là cách mô phỏng gateway gần với luồng blockchain mới.
-
-Không ghi chain:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m iot_code.gateway.pipeline --csv ai_model/data/raw/son_dungyen_30_DANGER.csv --limit 1 --evidence-dir data/evidence_outbox
-```
-
-Evidence được lưu trong:
-
-```text
-data/evidence_outbox/
-```
-
-Để ghi chain, tạo file `.env` từ `.env.example` và điền:
-
-```text
-RPC_URL=http://127.0.0.1:8545
-CONTRACT_ADDRESS=<địa chỉ contract= sau deploy>
-PRIVATE_KEY=<private key Account #0 local>
-```
-
-Sau đó chạy:
-
-```cmd
-python -m iot_code.gateway.pipeline --csv ai_model/data/raw/son_dungyen_30_DANGER.csv --limit 1 --write-chain --evidence-dir data/evidence_outbox
-```
-
-Luồng này lưu evidence JSON trước, sau đó chỉ gửi commitment/metadata cần thiết lên chain. Raw distance, confidence, model và policy version không được lưu trực tiếp lên blockchain.
-
-Không dùng `PRIVATE_KEY` Hardhat trên mạng thật.
-
----
-
-## 13. Kiểm tra project trước buổi demo
-
-Chạy Python tests:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain"
-python -m unittest discover -s tests -p "test_*.py" -v
-```
-
-Chạy compile check:
-
-```cmd
-python -m compileall -q iot_code
-```
-
-Chạy Solidity tests:
-
-```cmd
-cd /d "C:\Users\P1 Gen 5\Downloads\Blockchain\contracts"
+Đường model không tồn tại chủ động giữ replay threshold-only; không nạp joblib IsolationForest cũ khi đang đánh giá TinyML. MQTT xem `iot_code/README.md`; firmware ESP-IDF hiện phát Serial, chưa có publisher Wi-Fi. MQTT subscriber hiện lưu outbox, chưa đồng bộ SQLite/API như luồng Serial.
+
+## 9. Kiểm thử
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+node --test tests/dashboard.test.cjs
+Set-Location contracts
 npm.cmd test
+Set-Location ..
+.\.venv\Scripts\python.exe -m tools.verify_esp32_candidate
 ```
 
-Kiểm tra dashboard:
+Lệnh cuối cần g++ trên PATH và TensorFlow; nó so sánh feature Python với hàm C++ thật của firmware và kiểm tra hard rule. Kiểm tra giao diện bằng Edge headless tùy chọn:
 
-```text
-http://localhost:8080
+```powershell
+.\.venv\Scripts\python.exe -m pip install playwright
+.\.venv\Scripts\python.exe tools/check_dashboard_browser.py
 ```
 
-Kiểm tra trước khi trình bày:
+Ảnh ở `docs/dashboard_desktop.png` và `docs/dashboard_mobile.png`. Báo cáo chi tiết model/notebook/Web3: [`docs/DANH_GIA_PROJECT_VA_MODEL.md`](docs/DANH_GIA_PROJECT_VA_MODEL.md).
 
-- Hardhat node đang chạy ở chain `31337`.
-- Contract address là địa chỉ của lần deploy hiện tại.
-- MetaMask không ở Ethereum Mainnet hoặc chain khác.
-- Owner được dùng khi cấp role.
-- ECHO HC-SR04 đi qua cầu phân áp.
-- Cổng COM không bị Arduino Serial Monitor chiếm khi chạy Python reader.
-- Không dùng cùng lúc hai chương trình mở cùng một cổng Serial.
+## 10. Lỗi thường gặp
 
----
-
-## 14. Các lỗi thường gặp
-
-### `not owner`
-
-MetaMask đang dùng account không phải deployer. Chuyển sang Account #0 owner rồi cấp role hoặc clear E-Stop.
-
-### `not reporter`
-
-Tài khoản đang ký chưa có Reporter role trên `HRCSafetyLog`.
-
-### `not supervisor`
-
-Tài khoản đang ký chưa có Supervisor role trên `WorkPermitHandoff`.
-
-### `not gateway`
-
-Tài khoản đang ký chưa có Gateway role trên `WorkPermitHandoff`.
-
-### `permit not approved`
-
-Chưa dùng Supervisor nhấn **Approve** nhưng đã nhấn **Ghi zone entry**.
-
-### `permit not started` hoặc `permit expired`
-
-Thời gian hiện tại nằm ngoài khoảng hiệu lực của permit.
-
-### `docker is not recognized`
-
-Docker Desktop chưa cài hoặc chưa có trong PATH. Dùng USB Serial hoặc cài Mosquitto native nếu chỉ cần MQTT local.
-
-### `COM port đang bị sử dụng`
-
-Đóng Arduino Serial Monitor/Serial Plotter và mọi gateway khác trước khi chạy `serial_reader.py`.
-
-### Dashboard báo transaction thất bại sau khi reset Hardhat
-
-Contract address cũ không còn tồn tại trên chain mới. Chạy deploy lại và nhập địa chỉ mới.
-
-### Không thấy dữ liệu ESP32
-
-Kiểm tra cáp USB là cáp dữ liệu, đúng board, đúng COM, baud `115200`, dây GND chung và nguồn cảm biến.
-
-### Khoảng cách luôn là `SENSOR_FAULT`
-
-Kiểm tra TRIG/ECHO, nguồn HC-SR04, GND chung, hướng cảm biến và cầu phân áp ở ECHO. Không nối ECHO 5 V trực tiếp vào ESP32.
-
----
-
-## 15. Kịch bản thuyết trình ngắn
-
-Có thể trình bày theo thứ tự sau:
-
-1. Mở dashboard và giải thích đây là lớp hiển thị/audit.
-2. Cho chạy mô phỏng `SAFE`, `WARNING`, `EMERGENCY`.
-3. Giải thích ngưỡng `60 cm` và `30 cm`.
-4. Kết nối MetaMask Hardhat Local.
-5. Ghi một event lên `HRCSafetyLog` và cho xem transaction hash.
-6. Cấp `Supervisor`, `Gateway`, `Reporter` bằng owner.
-7. Tạo permit, Supervisor approve, Gateway ghi zone entry.
-8. Nếu có phần cứng, cho ESP32 đọc HC-SR04 thật và tạo `WARNING`/`EMERGENCY`.
-9. Nhấn mạnh khi blockchain hoặc MQTT hỏng, quyết định dừng cục bộ vẫn phải tồn tại.
-
-Thông điệp kết luận:
-
-> ESP32/HC-SR04 tạo quyết định safety tại edge. Gateway tạo bằng chứng. Blockchain lưu commitment và workflow có thể kiểm chứng. Blockchain không phải là bộ điều khiển E-Stop.
-
----
-
-## 16. Giới hạn an toàn
-
-- Đây là prototype giáo dục, chưa phải hệ thống safety-certified.
-- Không dùng buzzer, dashboard hoặc blockchain làm E-Stop duy nhất cho người và máy móc.
-- Không nối tín hiệu 5 V trực tiếp vào GPIO 3.3 V của ESP32.
-- Không expose MQTT anonymous ra Internet.
-- Không đưa private key thật hoặc tiền thật vào Hardhat.
-- Không khẳng định blockchain chứng minh sensor đúng hoặc motor đã dừng.
-- Nếu dùng robot/motor thật, phải có thiết kế safety độc lập, E-Stop phần cứng và đánh giá bởi người có chuyên môn.
+- **COM bị chiếm:** đóng Serial Monitor và `idf.py monitor` trước khi chạy gateway.
+- **Gateway chờ dữ liệu:** kiểm tra cổng COM, baud 115200, API port 8000 và các tiến trình dùng cùng `data/telemetry.db`.
+- **Không có contract/quyền Reporter:** chọn đúng mạng ví, deploy lại nếu node reset, cấp quyền bằng owner.
+- **Model không khởi tạo:** kiểm tra input 3 feature, copy đủ cc/h, schema/operator/arena. Model 6 feature của notebook cũ sẽ bị từ chối.
+- **Accuracy trên board giảm:** kiểm tra sampling cadence, feature order, std ddof=1, normalization, reset window sau timeout và INT8 saturation; thu thêm session độc lập.

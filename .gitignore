@@ -24,3 +24,10 @@ data/incidents/*.json
 
 # KiCad autosave history
 blockchain_sche/.history/
+
+# Review/training outputs and gateway runtime state
+ai_model/artifacts/esp32_candidate/verification/
+ai_model/artifacts/esp32_candidate/*.o
+esp32_safety_idf/build_review/
+data/telemetry.db*
+data/evidence_outbox/

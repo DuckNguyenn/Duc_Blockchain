@@ -1,230 +1,131 @@
-"""Train the 6-feature ultrasonic classifier and export an int8 TFLite Micro model.
+"""Select on grouped validation, test once, export ESP32-compatible INT8.
 
-Run from the repository root:
-    python ai_model/train_keras_tflite.py
-
-The exported model consumes the six raw features used by the notebook. Feature
-normalization is embedded in the Keras model, so the ESP32 only needs to build
-those six features and apply the TFLite input quantization parameters.
+Run: python -m ai_model.train_keras_tflite
+Candidates are saved separately from the currently flashed firmware model.
 """
 from __future__ import annotations
-
 import argparse
-import json
 from pathlib import Path
-
 import numpy as np
-import pandas as pd
-import tensorflow as tf
-
-LABELS = ["SAFE", "APPROACHING", "EMERGENCY"]
-FEATURE_COLUMNS = [
-    "distance_cm",
-    "approach_speed_cm_s",
-    "distance_delta_3",
-    "distance_std_5",
-    "distance_mean_5",
-    "speed_mean_5",
-]
+from ai_model.tinyml_pipeline import FEATURE_COLUMNS, LABELS, metrics, prepare_data, split_manifest, write_json
 
 
-def make_features(frame: pd.DataFrame) -> pd.DataFrame:
-    out = frame.sort_values(["source_file", "elapsed_s"]).copy()
-    grouped = out.groupby("source_file", sort=False)
-    dt = grouped["elapsed_s"].diff()
-    dd = grouped["distance_cm"].diff()
-    out["approach_speed_cm_s"] = (
-        dd / dt.replace(0, np.nan)
-    ).replace([np.inf, -np.inf], np.nan)
-    out["approach_speed_cm_s"] = (
-        out["approach_speed_cm_s"].clip(-500, 500).fillna(0.0)
-    )
-    out["distance_delta_3"] = grouped["distance_cm"].diff(3).fillna(0.0)
-    out["distance_std_5"] = grouped["distance_cm"].transform(
-        lambda s: s.rolling(5, min_periods=1).std().fillna(0.0)
-    )
-    out["distance_mean_5"] = grouped["distance_cm"].transform(
-        lambda s: s.rolling(5, min_periods=1).mean()
-    )
-    out["speed_mean_5"] = grouped["approach_speed_cm_s"].transform(
-        lambda s: s.rolling(5, min_periods=1).mean()
-    )
-    return out
+def float_literal(value: float) -> str:
+    text = format(float(value), ".9g")
+    if "." not in text and "e" not in text.lower():
+        text += ".0"
+    return text + "f"
 
 
-def load_dataset(path: Path) -> tuple[np.ndarray, np.ndarray]:
-    frame = pd.read_csv(path)
-    required = {"source_file", "elapsed_s", "distance_cm", "label"}
-    missing = required - set(frame.columns)
-    if missing:
-        raise ValueError(f"Dataset thiếu cột: {sorted(missing)}")
-
-    frame["elapsed_s"] = pd.to_numeric(frame["elapsed_s"], errors="coerce")
-    frame["distance_cm"] = pd.to_numeric(frame["distance_cm"], errors="coerce")
-    frame = frame.dropna(
-        subset=["source_file", "elapsed_s", "distance_cm", "label"]
-    ).copy()
-    frame["label"] = frame["label"].astype(str).str.upper()
-    if set(frame["label"].unique()) != set(LABELS):
-        raise ValueError(f"Nhãn không đúng: {sorted(frame['label'].unique())}")
-
-    features = make_features(frame)[FEATURE_COLUMNS].astype("float32").to_numpy()
-    labels = frame["label"].map({name: i for i, name in enumerate(LABELS)}).to_numpy(
-        dtype="int32"
-    )
-    return features, labels
+def write_c_array(blob: bytes, output: Path, mean: np.ndarray, scale: np.ndarray) -> None:
+    output.mkdir(parents=True, exist_ok=True)
+    count = len(FEATURE_COLUMNS)
+    rows = [", ".join(f"0x{value:02x}" for value in blob[i:i + 16]) for i in range(0, len(blob), 16)]
+    (output / "model_data.h").write_text(
+        "#pragma once\nextern const unsigned char g_model_data[];\nextern const unsigned int g_model_data_len;\n"
+        f"extern const float g_feature_mean[{count}];\nextern const float g_feature_scale[{count}];\n", encoding="utf-8")
+    (output / "model_data.cc").write_text(
+        '#include "model_data.h"\nalignas(16) const unsigned char g_model_data[] = {\n  '
+        + ",\n  ".join(rows) + "\n};\nconst unsigned int g_model_data_len = sizeof(g_model_data);\n"
+        + f"const float g_feature_mean[{count}] = {{{', '.join(map(float_literal, mean))}}};\n"
+        + f"const float g_feature_scale[{count}] = {{{', '.join(map(float_literal, scale))}}};\n", encoding="utf-8")
 
 
-def build_model(x_normalized: np.ndarray) -> tf.keras.Model:
-    # Normalization is performed before the model so the exported graph stays
-    # small and fully int8-compatible. The same mean/scale are exported for C++.
-    model = tf.keras.Sequential(
-        [
-            tf.keras.Input(shape=(len(FEATURE_COLUMNS),), dtype=tf.float32),
-            tf.keras.layers.Dense(16, activation="relu"),
-            tf.keras.layers.Dense(8, activation="relu"),
-            tf.keras.layers.Dense(len(LABELS), activation="softmax"),
-        ],
-        name="ultrasonic_safety_classifier",
-    )
-
-
-    model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
-        loss="sparse_categorical_crossentropy",
-        metrics=["accuracy"],
-    )
-    return model
-
-
-def write_c_array(
-    model_bytes: bytes,
-    output_dir: Path,
-    feature_mean: np.ndarray,
-    feature_scale: np.ndarray,
-) -> None:
-    output_dir.mkdir(parents=True, exist_ok=True)
-    header = output_dir / "model_data.h"
-    source = output_dir / "model_data.cc"
-    values = ", ".join(f"0x{byte:02x}" for byte in model_bytes)
-    mean_values = ", ".join(f"{value:.9g}f" for value in feature_mean)
-    scale_values = ", ".join(f"{value:.9g}f" for value in feature_scale)
-    source.write_text(
-        "#include \"model_data.h\"\n\n"
-        "alignas(16) const unsigned char g_model_data[] = {\n"
-        f"  {values}\n"
-        "};\n"
-        "const unsigned int g_model_data_len = sizeof(g_model_data);\n"
-        f"const float g_feature_mean[6] = {{{mean_values}}};\n"
-        f"const float g_feature_scale[6] = {{{scale_values}}};\n",
-        encoding="utf-8",
-    )
-    header.write_text(
-        "#pragma once\n\n"
-        "extern const unsigned char g_model_data[];\n"
-        "extern const unsigned int g_model_data_len;\n"
-        "extern const float g_feature_mean[6];\n"
-        "extern const float g_feature_scale[6];\n",
-        encoding="utf-8",
-    )
-
-
-def export_int8(
-    model: tf.keras.Model,
-    x_normalized: np.ndarray,
-    output_dir: Path,
-    feature_mean: np.ndarray,
-    feature_scale: np.ndarray,
-) -> None:
+def train_and_export(data: dict, output: Path, epochs: int = 150, seed: int = 42) -> dict:
+    import tensorflow as tf
+    from sklearn.utils.class_weight import compute_class_weight
+    weights = compute_class_weight("balanced", classes=np.arange(3), y=data["y"]["train"])
+    candidates, trained, histories = [], {}, {}
+    for hidden in [(), (4,), (8,), (16, 8)]:
+        tf.keras.utils.set_random_seed(seed)
+        name = "linear" if not hidden else "mlp_" + "_".join(map(str, hidden))
+        layers = [tf.keras.Input(shape=(len(FEATURE_COLUMNS),))]
+        layers += [tf.keras.layers.Dense(size, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(1e-3)) for size in hidden]
+        layers.append(tf.keras.layers.Dense(3, activation="softmax"))
+        model = tf.keras.Sequential(layers, name=name)
+        model.compile(optimizer=tf.keras.optimizers.Adam(1e-3), loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+        history = model.fit(data["normalized"]["train"], data["y"]["train"],
+                            validation_data=(data["normalized"]["validation"], data["y"]["validation"]),
+                            epochs=epochs, batch_size=32, class_weight=dict(enumerate(map(float, weights))),
+                            callbacks=[tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=20, min_delta=1e-4, restore_best_weights=True),
+                                       tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", patience=7, factor=0.5, min_lr=1e-5)], verbose=2)
+        pred = model.predict(data["normalized"]["validation"], verbose=0).argmax(axis=1)
+        candidates.append({"name": name, "parameters": model.count_params(), "validation": metrics(data["y"]["validation"], pred)})
+        trained[name] = model
+        histories[name] = {key: [float(value) for value in values] for key, values in history.history.items()}
+    selected = max(candidates, key=lambda row: (row["validation"]["macro_f1"], row["validation"]["emergency_recall"], -row["parameters"]))
+    model = trained[selected["name"]]
+    train_pred = model.predict(data["normalized"]["train"], verbose=0).argmax(axis=1)
+    float_pred = model.predict(data["normalized"]["test"], verbose=0).argmax(axis=1)
+    rng = np.random.default_rng(seed)
+    calibration = data["normalized"]["train"][rng.permutation(len(data["y"]["train"]))[:500]]
     def representative_data():
-        for row in x_normalized[:: max(1, len(x_normalized) // 500)][:500]:
+        for row in calibration:
             yield [row.reshape(1, -1).astype(np.float32)]
-
     converter = tf.lite.TFLiteConverter.from_keras_model(model)
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
     converter.representative_dataset = representative_data
     converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
     converter.inference_input_type = tf.int8
     converter.inference_output_type = tf.int8
-    model_bytes = converter.convert()
-
-    output_dir.mkdir(parents=True, exist_ok=True)
-    tflite_path = output_dir / "ultrasonic_safety_int8.tflite"
-    tflite_path.write_bytes(model_bytes)
-    write_c_array(model_bytes, output_dir, feature_mean, feature_scale)
-
-    interpreter = tf.lite.Interpreter(model_content=model_bytes)
+    blob = converter.convert()
+    interpreter = tf.lite.Interpreter(model_content=blob)
     interpreter.allocate_tensors()
-    input_info = interpreter.get_input_details()[0]
-    output_info = interpreter.get_output_details()[0]
-    metadata = {
-        "labels": LABELS,
-        "features": FEATURE_COLUMNS,
-        "normalization": {
-            "mean": feature_mean.tolist(),
-            "scale": feature_scale.tolist(),
-        },
-        "input": {
-            "shape": input_info["shape"].tolist(),
-            "dtype": str(input_info["dtype"]),
-            "scale": float(input_info["quantization"][0]),
-            "zero_point": int(input_info["quantization"][1]),
-        },
-        "output": {
-            "shape": output_info["shape"].tolist(),
-            "dtype": str(output_info["dtype"]),
-            "scale": float(output_info["quantization"][0]),
-            "zero_point": int(output_info["quantization"][1]),
-        },
-        "model_bytes": len(model_bytes),
-        "tensor_arena_start_bytes": 16 * 1024,
-    }
-    (output_dir / "model_metadata.json").write_text(
-        json.dumps(metadata, indent=2), encoding="utf-8"
-    )
-    print(json.dumps(metadata, indent=2))
-    print(f"Exported: {tflite_path}")
-    print(f"Exported: {output_dir / 'model_data.cc'}")
+    inp, out = interpreter.get_input_details()[0], interpreter.get_output_details()[0]
+    assert inp["dtype"] == np.int8 and out["dtype"] == np.int8
+    assert inp["shape"].tolist() == [1, len(FEATURE_COLUMNS)] and out["shape"].tolist() == [1, 3]
+    input_scale, input_zero = inp["quantization"]
+    scaled = data["normalized"]["test"] / input_scale
+    rounded = np.sign(scaled) * np.floor(np.abs(scaled) + 0.5)  # C++ lround parity
+    quantized = np.clip(rounded + input_zero, -128, 127).astype(np.int8)
+    outputs = []
+    for row in quantized:
+        interpreter.set_tensor(inp["index"], row.reshape(1, -1))
+        interpreter.invoke()
+        outputs.append(interpreter.get_tensor(out["index"])[0].tolist())
+    int8_pred = np.asarray(outputs).argmax(axis=1)
+    report = {"selected": selected["name"], "candidates": candidates, "train": metrics(data["y"]["train"], train_pred),
+              "test_float": metrics(data["y"]["test"], float_pred), "test_int8": metrics(data["y"]["test"], int8_pred),
+              "float_int8_agreement": float(np.mean(float_pred == int8_pred)),
+              "input_saturation_fraction": float(np.mean((rounded + input_zero < -128) | (rounded + input_zero > 127))),
+              "split": split_manifest(data), "seed": seed}
+    # Report the currently implemented firmware policy separately from raw AI.
+    firmware_pred = np.where(data["x"]["test"][:, 0] <= 30, 2, int8_pred)
+    report["test_firmware_policy"] = metrics(data["y"]["test"], firmware_pred)
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "ultrasonic_safety_int8.tflite").write_bytes(blob)
+    model.save(output / "selected_model.keras")
+    write_c_array(blob, output, data["mean"], data["scale"])
+    metadata = {"labels": LABELS, "features": FEATURE_COLUMNS, "window_size": 5, "std_ddof": 1,
+                "normalization": {"mean": data["mean"].tolist(), "scale": data["scale"].tolist()},
+                "input": {"shape": inp["shape"].tolist(), "scale": float(input_scale), "zero_point": int(input_zero), "dtype": "int8"},
+                "output": {"shape": out["shape"].tolist(), "scale": float(out["quantization"][0]), "zero_point": int(out["quantization"][1]), "dtype": "int8"},
+                "model_bytes": len(blob), "hard_distance_rule_cm": 30.0,
+                "training_median_dt_s": float(data["raw"].groupby("source_file")["elapsed_s"].diff().median()),
+                "operators": sorted({op["op_name"] for op in interpreter._get_ops_details() if op["op_name"] != "DELEGATE"})}
+    write_json(output / "model_metadata.json", metadata)
+    write_json(output / "metrics.json", report)
+    write_json(output / "history.json", histories)
+    write_json(output / "parity_vectors.json", {"raw_features": data["x"]["test"][:20].tolist(),
+               "int8_input": quantized[:20].tolist(), "int8_output": outputs[:20], "expected_label_id": int8_pred[:20].tolist()})
+    print(f"Selected on validation: {selected['name']}; test INT8 accuracy={report['test_int8']['accuracy']:.4f}")
+    return report
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--dataset",
-        type=Path,
-        default=Path("ai_model/data/single_sensor/processed_3class/dataset_3class.csv"),
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=Path("esp32_safety_idf/main/model"),
-    )
-    parser.add_argument("--epochs", type=int, default=80)
+    parser.add_argument("--dataset", type=Path, default=Path("ai_model/data/single_sensor/processed_3class/dataset_3class.csv"))
+    parser.add_argument("--output-dir", type=Path, default=Path("ai_model/artifacts/esp32_candidate"))
+    parser.add_argument("--epochs", type=int, default=150)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--check-data", action="store_true", help="Validate grouped partitions without TensorFlow")
     args = parser.parse_args()
-
-    tf.keras.utils.set_random_seed(42)
-    x, y = load_dataset(args.dataset)
-    feature_mean = x.mean(axis=0)
-    feature_scale = x.std(axis=0)
-    feature_scale = np.where(feature_scale < 1e-6, 1.0, feature_scale)
-    x_normalized = ((x - feature_mean) / feature_scale).astype("float32")
-    model = build_model(x_normalized)
-    model.fit(
-        x_normalized,
-        y,
-        epochs=args.epochs,
-        batch_size=32,
-        validation_split=0.2,
-        shuffle=False,
-        verbose=2,
-    )
-    export_int8(
-        model,
-        x_normalized,
-        args.output_dir,
-        feature_mean,
-        feature_scale,
-    )
+    data = prepare_data(args.dataset, args.seed)
+    write_json(args.output_dir / "split_manifest.json", split_manifest(data))
+    if args.check_data:
+        print(split_manifest(data))
+    else:
+        train_and_export(data, args.output_dir, args.epochs, args.seed)
 
 
 if __name__ == "__main__":

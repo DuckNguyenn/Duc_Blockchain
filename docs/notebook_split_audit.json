@@ -1,0 +1,187 @@
+{
+  "recordings_per_class": {
+    "SAFE": 11,
+    "APPROACHING": 3,
+    "EMERGENCY": 3
+  },
+  "original_5fold": [
+    {
+      "fold": 1,
+      "train_counts": {
+        "SAFE": 987,
+        "APPROACHING": 264,
+        "EMERGENCY": 255
+      },
+      "validation_counts": {
+        "SAFE": 209,
+        "EMERGENCY": 159
+      },
+      "validation_recordings": [
+        "son2_roi_50ve200_cham_RETREATING.csv",
+        "son_ghe_30_DANGER.csv",
+        "son_vatnho_50_SAFE.csv"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_counts": {
+        "SAFE": 954,
+        "EMERGENCY": 414,
+        "APPROACHING": 167
+      },
+      "validation_counts": {
+        "SAFE": 242,
+        "APPROACHING": 97
+      },
+      "validation_recordings": [
+        "son3_roi_30ve150_cham_RETREATING.csv",
+        "son_dungyen_200_SAFE.csv",
+        "son_tien_200ve100_cham_APPROACHING.csv"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_counts": {
+        "SAFE": 954,
+        "EMERGENCY": 414,
+        "APPROACHING": 176
+      },
+      "validation_counts": {
+        "SAFE": 242,
+        "APPROACHING": 88
+      },
+      "validation_recordings": [
+        "son2_tien_200ve100_cham_APPROACHING.csv",
+        "son_dungyen_150_SAFE.csv",
+        "son_vatnho_100_SAFE.csv"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_counts": {
+        "SAFE": 987,
+        "EMERGENCY": 278,
+        "APPROACHING": 185
+      },
+      "validation_counts": {
+        "SAFE": 209,
+        "EMERGENCY": 136,
+        "APPROACHING": 79
+      },
+      "validation_recordings": [
+        "son3_tien_200ve100_cham_APPROACHING.csv",
+        "son_dungyen_30_DANGER.csv",
+        "son_roi_50ve200_cham_RETREATING.csv",
+        "son_trong_EMPTY.csv"
+      ]
+    },
+    {
+      "fold": 5,
+      "train_counts": {
+        "SAFE": 902,
+        "EMERGENCY": 295,
+        "APPROACHING": 264
+      },
+      "validation_counts": {
+        "SAFE": 294,
+        "EMERGENCY": 119
+      },
+      "validation_recordings": [
+        "son2_roi_30ve150_cham_RETREATING.csv",
+        "son3_roi_50ve200_cham_RETREATING.csv",
+        "son_dungyen_20_DANGER.csv",
+        "son_roi_30ve150_cham_RETREATING.csv"
+      ]
+    }
+  ],
+  "one_second_5fold": [
+    {
+      "fold": 1,
+      "train_counts": {
+        "SAFE": 176,
+        "EMERGENCY": 70,
+        "APPROACHING": 31
+      },
+      "validation_counts": {
+        "SAFE": 45,
+        "APPROACHING": 16
+      },
+      "validation_recordings": [
+        "son3_roi_50ve200_cham_RETREATING.csv",
+        "son_dungyen_200_SAFE.csv",
+        "son_tien_200ve100_cham_APPROACHING.csv"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_counts": {
+        "SAFE": 177,
+        "EMERGENCY": 70,
+        "APPROACHING": 31
+      },
+      "validation_counts": {
+        "SAFE": 44,
+        "APPROACHING": 16
+      },
+      "validation_recordings": [
+        "son2_tien_200ve100_cham_APPROACHING.csv",
+        "son_dungyen_150_SAFE.csv",
+        "son_vatnho_100_SAFE.csv"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_counts": {
+        "SAFE": 167,
+        "APPROACHING": 47,
+        "EMERGENCY": 43
+      },
+      "validation_counts": {
+        "SAFE": 54,
+        "EMERGENCY": 27
+      },
+      "validation_recordings": [
+        "son3_roi_30ve150_cham_RETREATING.csv",
+        "son_ghe_30_DANGER.csv",
+        "son_roi_50ve200_cham_RETREATING.csv",
+        "son_vatnho_50_SAFE.csv"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_counts": {
+        "SAFE": 182,
+        "APPROACHING": 47,
+        "EMERGENCY": 47
+      },
+      "validation_counts": {
+        "SAFE": 39,
+        "EMERGENCY": 23
+      },
+      "validation_recordings": [
+        "son2_roi_50ve200_cham_RETREATING.csv",
+        "son_dungyen_30_DANGER.csv",
+        "son_trong_EMPTY.csv"
+      ]
+    },
+    {
+      "fold": 5,
+      "train_counts": {
+        "SAFE": 182,
+        "EMERGENCY": 50,
+        "APPROACHING": 32
+      },
+      "validation_counts": {
+        "SAFE": 39,
+        "EMERGENCY": 20,
+        "APPROACHING": 15
+      },
+      "validation_recordings": [
+        "son2_roi_30ve150_cham_RETREATING.csv",
+        "son3_tien_200ve100_cham_APPROACHING.csv",
+        "son_dungyen_20_DANGER.csv",
+        "son_roi_30ve150_cham_RETREATING.csv"
+      ]
+    }
+  ]
+}

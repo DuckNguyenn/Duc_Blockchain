@@ -5,6 +5,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import os
 import time
 from datetime import datetime, timezone
@@ -79,7 +80,9 @@ def classify(
 
 
 def stable_event_id(device_id: str, timestamp: str, measurement: dict[str, float], severity: str) -> str:
-    payload = f"{device_id}|{timestamp}|{measurement['distance_cm']:.2f}|{severity}"
+    distance = measurement['distance_cm']
+    distance_text = "null" if distance is None else f"{distance:.2f}"
+    payload = f"{device_id}|{timestamp}|{distance_text}|{severity}"
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
@@ -96,12 +99,30 @@ def process_row(
     evidence_outbox: EvidenceOutbox | None = None,
 ) -> dict:
     timestamp = row.get("timestamp") or datetime.now(timezone.utc).isoformat()
-    distance = float(row["distance_cm"])
+    try:
+        distance = float(row["distance_cm"])
+    except (ValueError, TypeError):
+        distance = None
+    sensor_fault = distance is None or not math.isfinite(distance) or not 2 <= distance <= 450
+    if sensor_fault:
+        distance = None
     dt_s = float(row.get("dt_s", 0.1) or 0.1)
-    measurement = features_from_measurement(distance, previous_min_cm, dt_s)
-    severity, emergency_stop, confidence = classify(
-        measurement, model, warning_cm, danger_cm, confidence_threshold
-    )
+    if sensor_fault:
+        measurement = {"distance_cm": None}
+        severity, emergency_stop, confidence = "SENSOR_FAULT", False, 0.0
+    else:
+        measurement = features_from_measurement(distance, previous_min_cm, dt_s)
+        severity, emergency_stop, confidence = classify(
+            measurement, model, warning_cm, danger_cm, confidence_threshold
+        )
+        edge_state = str(row.get("state", "")).upper()
+        if severity != "EMERGENCY":
+            if edge_state in {"SENSOR_FAULT", "AI_FAULT"}:
+                severity, emergency_stop, confidence = "SENSOR_FAULT", False, 0.0
+            elif edge_state == "EMERGENCY":
+                severity, emergency_stop, confidence = "EMERGENCY", True, 1.0
+            elif edge_state in {"APPROACHING", "WARNING"} and severity == "SAFE":
+                severity, confidence = "WARNING", 0.8
     event_id = stable_event_id(device_id, timestamp, measurement, severity)
     result = {
         "event_id": event_id,
@@ -112,12 +133,12 @@ def process_row(
         "severity": severity,
         "confidence": confidence,
         "emergency_stop": emergency_stop,
-        "action": "EMERGENCY_STOP" if emergency_stop else "MONITOR",
+        "action": "EMERGENCY_STOP" if emergency_stop else "CHECK_SENSOR" if severity == "SENSOR_FAULT" else "MONITOR",
     }
     evidence = build_evidence(
         event_id=event_id,
         device_id=device_id,
-        sensor_id="HC-SR04",
+        sensor_id=row.get("sensor_id") or "HC-SR04",
         measured_at=timestamp,
         received_at=datetime.now(timezone.utc).isoformat(),
         distance_cm=distance,
@@ -125,12 +146,12 @@ def process_row(
         emergency_stop=emergency_stop,
         confidence=confidence,
         policy_version=f"thresholds.v{warning_cm:g}-{danger_cm:g}",
-        model_version="provided" if model is not None else "none",
+        model_version="provided" if model is not None else "edge_reported" if row.get("state") else "none",
     )
     result["evidence_hash"] = evidence["evidence_hash"]
     if evidence_outbox is not None:
         evidence_outbox.enqueue(evidence)
-    if client is not None and evidence_outbox is None:
+    if client is not None and evidence_outbox is None and severity == "EMERGENCY":
         if hasattr(client, "record_evidence"):
             result["tx_hash"] = client.record_evidence(evidence)
         else:

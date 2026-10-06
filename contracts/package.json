@@ -6,6 +6,8 @@
     "compile": "hardhat compile",
     "deploy": "hardhat run scripts/deploy.js --network localhost",
     "demo": "hardhat run scripts/demo.js --network localhost",
+    "demo:roles": "hardhat run scripts/demo-roles.js --network localhost",
+    "demo:roles:check": "hardhat run scripts/demo-roles.js",
     "test": "hardhat test"
   },
   "devDependencies": {

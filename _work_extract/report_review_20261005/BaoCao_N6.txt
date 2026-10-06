@@ -1,0 +1,963 @@
+[PAGE 1]
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆKỸTHUẬT TP. HỒCHÍ MINH
+KHOA ĐIỆN – ĐIỆN TỬ
+BỘMÔN KỸTHUẬT MÁY TÍNH
+ĐỒÁN CUỐI KỲ
+HỆTHỐNG GIAO DỊCH NĂNG LƯỢNG MẶT TRỜI P2P
+TÍCH HỢP BLOCKCHAIN, IoT VÀ AI
+Học phần: CƠ SỞBLOCKCHAIN VÀ ỨNG DỤNG
+Sinh viên thực hiện:
+Vũ Minh Quang
+MSSV: 23119198
+Nguyễn Tuấn Kiệt
+MSSV: 23119157
+Nguyễn Thành Đô
+MSSV: 23119138
+Lê Đoàn Thái Khương
+MSSV: 23119155
+Nguyễn Ngọc Trường Phi
+MSSV: 23119187
+Giảng viên hướng dẫn: TS. Huỳnh ThếThiện
+TP. HỒCHÍ MINH, 09/2026
+
+
+[PAGE 2]
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆKỸTHUẬT TP. HỒCHÍ MINH
+KHOA ĐIỆN – ĐIỆN TỬ
+BỘMÔN KỸTHUẬT MÁY TÍNH
+ĐỒÁN CUỐI KỲ
+HỆTHỐNG GIAO DỊCH NĂNG LƯỢNG MẶT TRỜI P2P
+TÍCH HỢP BLOCKCHAIN, IoT VÀ AI
+Học phần: CƠ SỞBLOCKCHAIN VÀ ỨNG DỤNG
+Sinh viên thực hiện:
+Vũ Minh Quang
+MSSV: 23119198
+Nguyễn Tuấn Kiệt
+MSSV: 23119157
+Nguyễn Thành Đô
+MSSV: 23119138
+Lê Đoàn Thái Khương
+MSSV: 23119155
+Nguyễn Ngọc Trường Phi
+MSSV: 23119187
+Giảng viên hướng dẫn: TS. Huỳnh ThếThiện
+TP. HỒCHÍ MINH, 09/2026
+
+
+[PAGE 3]
+LỜI CẢM ƠN
+Nhóm thực hiện đềtài xin gửi lời cảm ơn chân thành đến TS. Huỳnh ThếThiện đã tận tình
+hướng dẫn, chia sẻkiến thức chuyên sâu và hỗtrợđịnh hướng kỹthuật trong quá trình giảng dạy
+giúp nhóm hoàn thiện đềtài “Hệthống giao dịch năng lượng mặt trời P2P tích hợp Blockchain,
+IoT và AI”. Mặc dù đã nỗlực hết mình, đềtài khó tránh khỏi những hạn chếnhất định, nhóm
+rất mong nhận được những lời góp ý quý báu của Thầy đểhoàn thiện hơn.
+Nhóm sinh viên thực hiện
+(Ký và ghi rõ họtên)
+
+
+[PAGE 4]
+LỜI CAM ĐOAN
+Nhóm thực hiện cam đoan đềtài “Hệthống giao dịch năng lượng mặt trời P2P tích hợp
+Blockchain, IoT và AI” là công trình nghiên cứu và triển khai thực tếđộc lập của nhóm. Mọi số
+liệu đo đạc thực nghiệm, mã nguồn Smart Contract, phần cứng IoT và giao diện Web3 đều do
+nhóm tựxây dựng hoặc trích dẫn rõ ràng nguồn gốc. Nhóm hoàn toàn chịu trách nhiệm vềtính
+trung thực của báo cáo này.
+Nhóm sinh viên thực hiện
+(Ký và ghi rõ họtên)
+
+
+[PAGE 5]
+TÓM TẮT NỘI DUNG
+Đồán xây dựng hệthống giao dịch năng lượng mặt trời ngang hàng (Peer-to-Peer - P2P) tích
+hợp trọn vẹn mô hình hệthống thực - ảo (Cyber-Physical System - CPS) gồm 3 tầng công nghệ:
+IoT →AI →Blockchain.
+Ởtầng IoT, hệthống sửdụng vi điều khiển ESP32 kết hợp mạch đo INA219 hai kênh để
+giám sát thời gian thực công suất pin mặt trời và phụtải tiêu thụ, nhiệt độtấm pin (DS18B20)
+và môi trường (DHT11), đồng thời điều khiển 2 rơ-le ngắt mởphụtải và hòa lưới P2P. Dữliệu
+được truyền thời gian thực qua giao thức MQTT/HTTP lên Firebase Realtime Database. Ởtầng
+AI, module forecast.js tích hợp dựbáo điện năng dư thừa theo từng phiên. Tầng Blockchain
+đóng vai trò điều phối với 3 hợp đồng thông minh triển khai trên mạng Ethereum Sepolia:
+SolarToken (SLR) (ERC-20, 3 decimals thưởng 1 SLR/kWh), DeviceRegistry (định danh
+thiết bị) và P2PEnergyMarket (sàn đấu giá hai phía Market-based Bidding, ký quỹETH, khớp
+lệnh tựđộng). Bộđiều phối Backend Oracle kết nối dữliệu Firebase, thực thi khớp lệnh và
+gửi tín hiệu đóng ngắt vật lý vềESP32. Giao diện Web3 Dashboard (React.js, ethers.js v6) cho
+phép người dùng giám sát trực quan, nạp rút tiền và tra cứu giao dịch minh bạch trên Sepolia
+Etherscan.
+
+
+[PAGE 6]
+MỤC LỤC
+DANH MỤC BẢNG . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+i
+DANH MỤC HÌNH ẢNH . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ii
+DANH MỤC TỪVIẾT TẮT
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+iii
+CHƯƠNG 1. GIỚI THIỆU . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.1
+Bối cảnh đềtài . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Đặt vấn đề
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.3
+Mục tiêu của đồán . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.4
+Bốcục báo cáo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ. . . . . . . . . . . . . . . . .
+3
+2.1
+Hệthống thực-ảo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+2.2
+Cơ chếthịtrường năng lượng P2P và AI dựbáo . . . . . . . . . . . . . . . . .
+3
+2.3
+Blockchain và hợp đồng thông minh . . . . . . . . . . . . . . . . . . . . . . .
+3
+2.4
+Công nghệsửdụng . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG . . . . . . . . . . . . . . . .
+5
+3.1
+Yêu cầu và phạm vi hệthống . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2
+Kiến trúc tổng thểba tầng
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.3
+Thiết kếtầng IoT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.4
+Thiết kếtầng AI - dựbáo năng lượng
+. . . . . . . . . . . . . . . . . . . . . .
+7
+3.5
+Thiết kếtầng Blockchain - hợp đồng thông minh . . . . . . . . . . . . . . . .
+8
+CHƯƠNG 4. TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI . . . . . . . . . . . . . . .
+9
+4.1
+Tích hợp backend và pipeline điều phối . . . . . . . . . . . . . . . . . . . . .
+9
+4.2
+Giao diện giám sát và quy trình vận hành . . . . . . . . . . . . . . . . . . . .
+11
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+. . . . . . . . . . . . . .
+12
+5.1
+Thiết lập thực nghiệm
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+5.2
+Hiệu năng vận hành và khớp lệnh phiên . . . . . . . . . . . . . . . . . . . . .
+12
+5.3
+So sánh với mô hình truyền thống và độbền vững . . . . . . . . . . . . . . . .
+13
+5.4
+Kiểm thửvà chi phí vận hành hợp đồng . . . . . . . . . . . . . . . . . . . . .
+13
+5.5
+Đánh giá rủi ro và an toàn hợp đồng . . . . . . . . . . . . . . . . . . . . . . .
+14
+5.6
+Đối chiếu với yêu cầu đồán
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+CHƯƠNG 6. KẾT LUẬN . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+6.1
+Kết quảđạt được . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+6.2
+Hạn chếvà hướng phát triển . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+
+
+[PAGE 7]
+TÀI LIỆU THAM KHẢO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+
+
+[PAGE 8]
+DANH MỤC BẢNG
+2.1
+Bảng tổng hợp ngăn xếp công nghệsửdụng trong hệthống . . . . . . . . . . .
+4
+3.1
+Danh mục linh kiện và giao tiếp phần cứng tầng IoT . . . . . . . . . . . . . . .
+7
+3.2
+Tổng hợp chức năng các Smart Contract của hệthống . . . . . . . . . . . . . .
+8
+5.1
+So sánh giữa mô hình P2P Blockchain đềxuất và lưới điện truyền thống . . . .
+13
+5.2
+Kết quảkiểm thửchức năng và tiêu hao Gas trên Sepolia Testnet . . . . . . . .
+14
+5.3
+Bảng đối chiếu sản phẩm với rubric đánh giá đồán cuối kỳ. . . . . . . . . . .
+15
+
+
+[PAGE 9]
+DANH MỤC HÌNH ẢNH
+3.1
+Kiến trúc tổng thểhệthống giao dịch năng lượng mặt trời P2P. . . . . . . . . .
+6
+5.1
+Giao diện Dashboard thời gian thực của hệthống Solar P2P Trading. . . . . . .
+12
+5.2
+Giao dịch khớp lệnh được xác nhận thành công trên Sepolia Etherscan. . . . . .
+13
+
+
+[PAGE 10]
+DANH MỤC HÌNH ẢNH
+DANH MỤC TỪVIẾT TẮT
+Từviết tắt
+Định nghĩa chi tiết
+P2P
+Peer-to-Peer (Mạng ngang hàng)
+IoT
+Internet of Things (Internet vạn vật)
+AI
+Artificial Intelligence (Trí tuệnhân tạo)
+CPS
+Cyber-Physical Systems (Hệthống thực - ảo)
+DApp
+Decentralized Application (Ứng dụng phi tập trung)
+EVM
+Ethereum Virtual Machine (Máy ảo Ethereum)
+ERC-20
+Ethereum Request for Comments 20 (Chuẩn token có thểthay thế)
+SLR
+SolarToken (Token phần thưởng năng lượng mặt trời)
+Web3
+Nền tảng web phi tập trung tương tác với Blockchain
+MQTT
+Message Queuing Telemetry Transport (Giao thức truyền tin IoT)
+INA219
+Cảm biến đo dòng điện, điện áp và công suất giao tiếp I2C
+RTDB
+Realtime Database (Cơ sởdữliệu thời gian thực Firebase)
+iii
+
+
+[PAGE 11]
+CHƯƠNG 1. GIỚI THIỆU
+CHƯƠNG 1. GIỚI THIỆU
+1.1 Bối cảnh đềtài
+Trong bối cảnh biến đổi khí hậu và nhu cầu chuyển dịch năng lượng xanh, việc lắp đặt hệ
+thống điện mặt trời mái nhà tại các hộgia đình và cơ sởsản xuất đang gia tăng nhanh chóng.
+Người dùng năng lượng không còn đóng vai trò là bên tiêu thụthụđộng (consumer) mà đã
+chuyển đổi thành các chủthểvừa sản xuất vừa tiêu thụđiện (prosumer). Tuy nhiên, lượng điện
+mặt trời sinh ra thường phụthuộc mạnh vào thời tiết và có thời điểm dư thừa cục bộtrong khi
+phụtải nội bộkhông tiêu thụhết. Việc cho phép các hộprosumer tựdo trao đổi năng lượng
+mặt trời cục bộqua mạng vi lưới ngang hàng (P2P microgrid) theo mô hình kinh điển như dự
+án Brooklyn Microgrid [2] đang mởra hướng tiếp cận đầy tiềm năng. Tại Việt Nam, cùng với
+chủtrương khuyến khích phát triển nguồn điện phân tán và chuyển dịch năng lượng xanh, các
+nghiên cứu ứng dụng công nghệBlockchain trong giao dịch năng lượng ngang hàng cục bộđang
+ngày càng thu hút sựquan tâm đểtối ưu hóa hiệu quảsửdụng năng lượng tái tạo [1].
+1.2 Đặt vấn đề
+Cơ chếphân phối và mua bán điện truyền thống hiện nay gặp nhiều rào cản lớn:
+• Phụthuộc trung gian độc quyền: Toàn bộquá trình mua bán điện phải thông qua công ty
+điện lực với thủtục phức tạp và biểu giá bán ngược (Feed-in Tariff) thường thấp hơn nhiều
+so với giá mua.
+• Thiếu tính tựđộng hóa và tức thời: Điện dư thừa chưa thểtrao đổi trực tiếp giữa các hộ
+lân cận trong cùng khu dân cư hoặc vi lưới (microgrid).
+• Minh bạch và tin cậy: Khó khăn trong việc đối soát dữliệu đo đếm giữa các bên, nguy
+cơ can thiệp dữliệu công tơ và chu kỳquyết toán tài chính chậm trễ.
+Đểgiải quyết bài toán trên, việc tích hợp Hệthống thực - ảo (CPS) kết hợp công nghệIoT (đo
+đạc và chấp hành), AI (dựbáo sản lượng) và Blockchain (thịtrường đấu giá minh bạch, tựthực
+thi bằng Smart Contract) là giải pháp đột phá.
+1.3 Mục tiêu của đồán
+Đồán hướng tới thiết kếvà triển khai hoàn chỉnh một hệthống giao dịch năng lượng P2P
+End-to-End theo đúng yêu cầu Đềtài 1 của môn học:
+1. Tầng IoT: Chếtạo nút phần cứng vật lý sửdụng vi điều khiển ESP32, 2 module cảm biến
+INA219 đo độc lập nguồn phát và tải tiêu thụ, cảm biến nhiệt độDHT11 và DS18B20,
+màn hình LCD và relay đóng ngắt điều khiển tải.
+1
+
+
+[PAGE 12]
+CHƯƠNG 1. GIỚI THIỆU
+2. Tầng AI & Điều phối: Xây dựng module phân tích và dựbáo sản lượng điện dư theo
+phiên, băm dữliệu cảm biến và ghi nhận bằng chứng dựbáo on-chain.
+3. Tầng Blockchain: Lập trình và triển khai 3 hợp đồng thông minh trên mạng Sepolia:
+quản lý phiên đấu giá hai phía (Market-based Bidding), token thưởng SolarToken (SLR)
+theo chuẩn ERC-20 và đăng ký thiết bịIoT.
+4. Tầng Giao diện Web3: Phát triển Dashboard thời gian thực, tích hợp kết nối ví MetaMask
+và truy vết giao dịch qua Sepolia Etherscan.
+1.4 Bốcục báo cáo
+Báo cáo kỹthuật được chia thành 6 chương:
+• Chương 1: Giới thiệu tổng quan, bối cảnh, đặt vấn đềvà mục tiêu đồán.
+• Chương 2: Cơ sởlý thuyết vềCPS, thịtrường P2P, Blockchain và các công nghệsửdụng.
+• Chương 3: Kiến trúc hệthống và thiết kếchi tiết 3 tầng IoT, AI và Blockchain.
+• Chương 4: Tích hợp backend, pipeline điều phối Oracle và giao diện giám sát DApp.
+• Chương 5: Kết quảthực nghiệm, kiểm thửhợp đồng, đánh giá an toàn và đối chiếu rubric.
+• Chương 6: Kết luận các kết quảđạt được, hạn chếvà định hướng phát triển tương lai.
+2
+
+
+[PAGE 13]
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ
+2.1 Hệthống thực-ảo
+Hệthống thực - ảo (Cyber-Physical Systems - CPS) là sựkết hợp chặt chẽgiữa các thành
+phần tính toán, mạng truyền thông và các quy trình vật lý. Trong quản lý năng lượng, CPS thu
+thập dữliệu đo đạc từcác nút cảm biến vật lý (Physical Layer), gửi qua không gian mạng để
+phân tích tối ưu (Cyber Layer), sau đó kích hoạt các cơ cấu chấp hành (relay, công tắc chuyển
+mạch) trong thếgiới thực. Việc đưa Blockchain vào CPS đóng vai trò tạo lập một tầng tin cậy
+bất biến, loại bỏhoàn toàn bên thứba trung gian.
+2.2 Cơ chếthịtrường năng lượng P2P và AI dựbáo
+Mô hình giao dịch ngang hàng P2P trong vi lưới cho phép các hộgia đình tựdo chào bán
+(Offer) sản lượng điện dư và đặt mua (Bid) theo nhu cầu thực tế:
+• Cơ chếđấu giá hai phía (Continuous Double Auction / Market-based Bidding): Người
+bán công bốlượng điện Eof fer (Wh) và giá sàn Pmin (wei/kWh). Người mua đưa ra lượng
+điện cần mua Ebid và giá trần chấp nhận Pmax. Khi Pmax ≥Pmin, giao dịch được khớp với
+giá thanh toán cân bằng thịtrường (clearing price) Pclear = (Pmin +Pmax)/2 [3].
+• Vai trò của AI trong định giá và tối ưu: Lượng điện mặt trời phụthuộc cường độbức
+xạvà nhiệt độ. Mô hình AI phân tích dữliệu lịch sửvà thông sốcảm biến đểdựbáo sản
+lượng phát Psolar(t) và công suất tải Pload(t), từđó tựđộng tính toán điện năng dư thừa
+Edu =
+∫︁(Psolar −Pload)dt theo phiên đấu giá.
+2.3 Blockchain và hợp đồng thông minh
+Blockchain là sổcái phân tán bảo mật bằng mật mã học [4]. Trong đồán, nền tảng Ethereum
+Virtual Machine (EVM) được lựa chọn nhờcác đặc điểm:
+• Hợp đồng thông minh (Smart Contract): Là mã lệnh tựđộng thực thi không thểđảo
+ngược trên blockchain khi các điều kiện thỏa mãn [5].
+• Cơ chếký quỹ(Escrow): Người mua ký quỹtrước một khoản ETH vào hợp đồng thông
+minh. Khi phiên đấu giá khớp lệnh thành công, tiền được tựđộng chuyển cho người bán,
+giải quyết triệt đểrủi ro quỵt tiền hoặc chậm thanh toán.
+• Chuẩn token ERC-20: Token SolarToken (SLR) được triển khai với 3 chữsốthập phân
+(decimals = 3), thưởng cho prosumer theo tỷlệcốđịnh 1 SLR trên mỗi 1 kWh điện phát
+lên lưới [6].
+3
+
+
+[PAGE 14]
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ
+2.4 Công nghệsửdụng
+Hệthống kết hợp đồng bộcác công nghệtiên tiến được tóm tắt trong Bảng 2.1.
+Bảng 2.1: Bảng tổng hợp ngăn xếp công nghệsửdụng trong hệthống
+Thành phần
+Công nghệ/ Thư viện
+Vai trò trong hệthống
+Phần cứng IoT
+ESP32, INA219, DHT11, DS18B20
+Thu thập dữliệu cảm biến và kích
+hoạt relay
+Truyền thông IoT
+MQTT (HiveMQ), HTTP REST
+Truyền tin dữliệu cảm biến và
+nhận lệnh điều khiển
+Cơ sởdữliệu
+Firebase Realtime Database
+Lưu trữdữliệu thời gian thực và
+hàng đợi lệnh
+Tầng Blockchain
+Solidity 0.8.24, Hardhat, Sepolia
+Lập trình, biên dịch và triển khai
+Smart Contract
+Thư viện Web3
+ethers.js v6, OpenZeppelin
+Tương tác blockchain, bảo mật
+hợp đồng
+Tầng Frontend
+React.js, Vite, Tailwind CSS
+Giao diện Dashboard Web3 cho
+người dùng
+Ví điện tử
+MetaMask
+Xác thực danh tính và ký giao
+dịch on-chain
+4
+
+
+[PAGE 15]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+3.1 Yêu cầu và phạm vi hệthống
+Yêu cầu chức năng:
+• Tựđộng đo điện áp (V), dòng điện (I), công suất (P), nhiệt độtấm pin và môi trường mỗi
+500 ms.
+• Tính toán công suất dư: Pdu = Psolar −Pload.
+• AI dựbáo điện năng theo từng phiên và tựđộng đưa lệnh chào bán/mua lên sàn.
+• Hỗtrợđặt lệnh thủcông qua giao diện Web3 và tựđộng qua Oracle.
+• Đấu giá khớp lệnh minh bạch, thanh toán tiền điện bằng ETH và phát token thưởng SLR.
+• Phản hồi tín hiệu từblockchain đểđiều khiển rơ-le ngắt mởtải vật lý.
+Yêu cầu phi chức năng:
+• Đảm bảo tính toàn vẹn dữliệu đo đạc; phòng chống tấn công Reentrancy trên Smart Con-
+tract.
+• Độtrễcập nhật trạng thái giao dịch trên giao diện Web3 không quá 2 giây.
+3.2 Kiến trúc tổng thểba tầng
+Hệthống được thiết kếtheo kiến trúc 3 tầng CPS thống nhất như Hình 3.1.
+5
+
+
+[PAGE 16]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+Hình 3.1: Kiến trúc tổng thểhệthống giao dịch năng lượng mặt trời P2P.
+Luồng dữliệu End-to-End được thực thi liên tục:
+ESP32 (Cảm biến) HTTP
+−−−→Firebase RTDB Oracle
+−−−→AI Forecast
+ethers.js
+−−−−→Smart Contract
+MQTT
+−−−−→ESP32 (Relay)
+3.3 Thiết kếtầng IoT
+Phần cứng IoT được cấu hình thực tếtheo sơ đồlinh kiện tại Bảng 3.1.
+6
+
+
+[PAGE 17]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+Bảng 3.1: Danh mục linh kiện và giao tiếp phần cứng tầng IoT
+Linh kiện
+Giao tiếp
+Chức năng chi tiết
+Vi điều khiển ESP32
+Wi-Fi / I2C / GPIO
+Xửlý đa nhiệm FreeRTOS, truyền tin mạng
+Module INA219 (0x40)
+I2C
+Đo điện áp, dòng điện pin mặt trời (Vs,Is,Ps)
+Module INA219 (0x41)
+I2C
+Đo điện áp, dòng điện tải tiêu thụ(Vl,Il,Pl)
+Cảm biến DHT11
+GPIO 14 (1-Wire)
+Giám sát nhiệt độvà độẩm không khí môi trường
+Cảm biến DS18B20
+GPIO 27 (1-Wire)
+Đo trực tiếp nhiệt độbềmặt tấm pin mặt trời
+Màn hình LCD 16x2
+I2C (0x27)
+Hiển thịtức thời trạng thái nguồn phát và rơ-le
+Relay 1
+GPIO 4 (Digital)
+Cơ cấu đóng ngắt tải nội bộkhi có yêu cầu
+Relay 2
+GPIO 25 (Digital)
+Đóng ngắt kết nối với lưới năng lượng P2P
+Hệthống nhúng trên ESP32 vận hành hai luồng đa nhiệm độc lập dưới sựđiều phối của hệ
+điều hành thời gian thực FreeRTOS:
+• TaskSensor (Chu kỳ500 ms): Đọc giá trịđo đạc từ2 module cảm biến INA219 (Texas
+Instruments) [7] và cảm biến nhiệt độqua cơ chếkhóa Mutex bảo vệvùng nhớdùng chung,
+tính Pdu và gửi dữliệu lên Firebase qua giao thức HTTP REST.
+• TaskControl & MQTT Callback: Lắng nghe chủđềđiều khiển từBroker. Khi Smart
+Contract khớp lệnh thành công (TRADE_SUCCESS), Relay 2 được kích hoạt hòa lưới. Trong
+trường hợp có lệnh ngắt phụtải (CUT_POWER), Relay 1 lập tức chuyển sang trạng thái hở
+mạch.
+3.4 Thiết kếtầng AI - dựbáo năng lượng
+Tầng AI chịu trách nhiệm cầu nối thông minh giữa dữliệu đo đạc và việc đặt lệnh:
+• Tích phân công suất ra điện năng (Wh): Module energy.js nhận chuỗi mẫu công suất
+P(t) theo thời gian thực và áp dụng quy tắc hình thang đểtích phân thành điện năng:
+E =
+N
+∑
+k=1
+P(tk)+P(tk−1)
+2
+× ∆t
+3600
+(Wh)
+(1)
+• Dựbáo sản lượng và nhu cầu tiêu thụ: Module forecast.js dựbáo sản lượng phát dự
+kiến ˆEgen và lượng tiêu thụˆEcon trong khung giờtiếp theo dựa trên dữliệu bức xạvà nhiệt
+độđo được.
+7
+
+
+[PAGE 18]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+• Bằng chứng dựbáo On-chain: Dữliệu cảm biến thô và trọng sốmô hình được băm
+mật mã (keccak256) và ghi lên Smart Contract qua hàm recordForecast, kích hoạt sự
+kiện ForecastRecorded. Hợp đồng sửdụng bảng ánh xạapprovedModels đểkiểm soát
+nghiêm ngặt phiên bản mô hình AI được phép sinh lệnh tựđộng.
+3.5 Thiết kếtầng Blockchain - hợp đồng thông minh
+Hệthống triển khai 3 Smart Contract viết bằng ngôn ngữSolidity phiên bản 0.8.24, kếthừa
+các thư viện chuẩn an toàn Ownable và ReentrancyGuard của OpenZeppelin (Bảng 3.2).
+Bảng 3.2: Tổng hợp chức năng các Smart Contract của hệthống
+Tên Hợp đồng
+Kếthừa
+Chức năng chính
+SolarToken.sol
+ERC20, Ownable
+Token thưởng SLR (3 decimals).
+Tựđộng mint 1 SLR trên mỗi 1
+kWh điện bán thành công.
+DeviceRegistry.sol
+Ownable
+Quản lý ánh xạđịa chỉví Ethereum
+của hộgia đình với Device ID
+(ESP32) đểchống giảmạo dữliệu.
+P2PEnergyMarket.sol
+Ownable, ReentrancyGuard
+Quản lý tài khoản ký quỹETH,
+mởphiên đấu giá, nhận Offer/Bid,
+khớp lệnh và phân phối tiền/token.
+Cấu trúc lưu trữcủa sàn đấu giá P2PEnergyMarket:
+• Offer: {seller (address), energyWh (uint256), minPricePerKWh (uint256), active (bool)}
+• Bid: {buyer (address), energyWh (uint256), maxPricePerKWh (uint256), active (bool)}
+• balances: Lưu trữsốdư ETH ký quỹcủa từng người dùng, ngăn chặn việc rút tiền trái
+phép.
+8
+
+
+[PAGE 19]
+CHƯƠNG 4. TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+CHƯƠNG 4. TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+4.1 Tích hợp backend và pipeline điều phối
+Thành phần Backend Oracle (oracle.js) đóng vai trò trung tâm liên kết Firebase, AI và
+Blockchain theo chu trình tựđộng khép kín:
+1. Định kỳđọc chỉsốcảm biến từnút IoT trên Firebase qua API REST.
+2. Tích phân công suất thành điện năng và gọi module AI dựbáo lượng điện khảdụng.
+3. Thực hiện xác thực thiết bịthông qua DeviceRegistry.sol.
+4. Gửi giao dịch submitOffer (nếu điện dư) hoặc submitBid (nếu thiếu hụt) lên mạng
+Sepolia bằng ví Oracle được ủy quyền.
+5. Khi hết thời gian phiên, Oracle kích hoạt hàm matchOrders() đểgiải bài toán khớp lệnh
+trên Smart Contract.
+6. Bắt sựkiện Matched phát ra từblockchain, cập nhật trạng thái đơn hàng trên Firebase và
+gửi lệnh MQTT kích hoạt rơ-le phần cứng ESP32.
+Dưới đây là đoạn mã Solidity thực tếtrích từhợp đồng P2PEnergyMarket.sol thểhiện cấu
+trúc lệnh và sựkiện khớp lệnh:
+1 // SPDX -License -Identifier: MIT
+2 pragma
+solidity
+^0.8.24;
+3
+4 import "./ SolarToken.sol";
+5 import " @openzeppelin /contracts/utils/ ReentrancyGuard.sol";
+6 import " @openzeppelin /contracts/access/Ownable.sol";
+7
+8 contract
+P2PEnergyMarket is Ownable , ReentrancyGuard {
+9
+SolarToken
+public
+rewardToken;
+10
+address
+public
+oracle;
+11
+uint256
+public
+constant
+REWARD_PER_KWH = 1; // 1 SLR tren moi
+kWh
+12
+13
+mapping(address => uint256) public
+balances; // So du ETH ky
+quy
+14
+mapping(bytes32 => bool) public
+approvedModels ; // Hash mo
+hinh AI
+9
+
+
+[PAGE 20]
+CHƯƠNG 4. TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+15
+16
+struct
+Offer {
+17
+address
+seller; uint256
+energyWh;
+18
+uint256
+minPricePerKWh ; bool
+active;
+19
+}
+20
+struct Bid {
+21
+address
+buyer; uint256
+energyWh;
+22
+uint256
+maxPricePerKWh ; bool
+active;
+23
+}
+24
+25
+event
+Matched(
+26
+uint256
+indexed
+sessionId , uint256
+offerId , uint256 bidId ,
+27
+address
+indexed
+seller , address
+indexed buyer ,
+28
+uint256
+energyWh , uint256
+clearingPrice
+29
+);
+30
+31
+// Nop ETH ky quy truoc khi tham gia mua dien
+32
+function
+deposit () external
+payable {
+33
+require(msg.value > 0, "So tien phai lon hon 0");
+34
+balances[msg.sender] += msg.value;
+35
+}
+36 }
+Listing 1: Trích đoạn Smart Contract P2PEnergyMarket.sol
+Đoạn mã tầng IoT trên vi điều khiển ESP32 xửlý tác vụđọc cảm biến và nhận lệnh điều
+khiển:
+1 void
+TaskSensor(void *pvParameters) {
+2
+for (;;) {
+3
+float v1 = ina219_phat. getBusVoltage_V ();
+4
+float i1 = ina219_phat.getCurrent_mA ();
+5
+float p1 = ina219_phat.getPower_mW ();
+6
+float v2 = ina219_tieuthu. getBusVoltage_V ();
+7
+float i2 = ina219_tieuthu.getCurrent_mA ();
+8
+float p2 = ina219_tieuthu.getPower_mW ();
+9
+float t
+= dht. readTemperature ();
+10
+ds18b20. requestTemperatures ();
+11
+float tp = ds18b20. getTempCByIndex (0);
+12
+13
+// Gui du lieu len
+Firebase
+moi 500ms
+10
+
+
+[PAGE 21]
+CHƯƠNG 4. TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+14
+sendToFirebase (v1 , i1 , p1 /1000.0 , v2 , i2 , p2 /1000.0 , t, tp);
+15
+vTaskDelay (500 / portTICK_PERIOD_MS );
+16
+}
+17 }
+18
+19 // Xu ly lenh tu Smart
+Contract
+thong qua MQTT
+Broker
+20 void
+mqttCallback(char* topic , byte* payload , unsigned
+int len) {
+21
+String msg = String (( char *) payload).substring (0, len);
+22
+if (msg == " TRADE_SUCCESS") {
+23
+digitalWrite(RELAY2_PIN , LOW);
+// Dong
+Relay hoa luoi P2P
+24
+} else if (msg == "CUT_POWER") {
+25
+digitalWrite(RELAY1_PIN , HIGH); // Ngat tai noi bo
+26
+}
+27 }
+Listing 2: Đoạn mã FreeRTOS đọc cảm biến và điều khiển Relay trên ESP32
+4.2 Giao diện giám sát và quy trình vận hành
+Giao diện Web3 DApp được xây dựng bằng React.js, Vite và Tailwind CSS, tích hợp thư
+viện ethers.js v6 thông qua module Web3Context.jsx:
+• Trang Overview: Hiển thịđồthịRecharts cập nhật thời gian thực công suất phát Psolar,
+công suất tiêu thụPload và công suất dư Pdu; giám sát danh sách nút IoT kết nối.
+• Trang Energy Market: Hiển thịsổlệnh (Orderbook) gồm danh sách Offer và Bid
+trong phiên, cho phép người dùng nhập lệnh mua/bán thủcông (submitManualOffer /
+submitManualBid) hoặc theo dõi lệnh do AI tựđộng phát sinh.
+• Trang Transactions: Thống kê toàn bộlịch sửkhớp lệnh thành công, tích hợp đường dẫn
+trực tiếp tra cứu mã băm giao dịch (TxHash) trên mạng Sepolia Etherscan.
+• Trang My Wallet: Hiển thịsốdư ETH ví cá nhân, sốdư ETH đã ký quỹtrong hợp đồng,
+sốdư token thưởng SLR và hỗtrợchức năng nạp (deposit) và rút tiền (withdraw) trực
+tiếp.
+11
+
+
+[PAGE 22]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+5.1 Thiết lập thực nghiệm
+Thực nghiệm được triển khai với mô hình vật lý bao gồm: tấm pin mặt trời 6V 3W mini, phụ
+tải LED và quạt DC 5V, cụm phần cứng ESP32 cùng 2 module INA219 đo đạc kết nối mạng
+Wi-Fi cục bộ. Phía Blockchain được triển khai trên mạng thửnghiệm công khai Ethereum
+Sepolia Testnet.
+5.2 Hiệu năng vận hành và khớp lệnh phiên
+Hệthống hoạt động ổn định và đạt được luồng End-to-End thông suốt:
+• Tần sốlấy mẫu cảm biến đạt chu kỳ500 ms, độtrễtruyền dữliệu từESP32 lên Firebase
+RTDB dưới 250 ms.
+• Oracle tựđộng phân tích dữliệu, tạo phiên và khớp lệnh chính xác theo cơ chếbù trừnăng
+lượng:
+Payment (wei) = Ematched(Wh)×Pclearing(wei/kWh)
+1000
+(2)
+• Prosumer bán điện được nhận đúng sốtiền ETH khấu trừtừquỹký quỹcủa người mua,
+đồng thời nhận thêm token SLR tương ứng theo tỷlệ1 SLR/kWh.
+Hình 5.1: Giao diện Dashboard thời gian thực của hệthống Solar P2P Trading.
+12
+
+
+[PAGE 23]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Hình 5.2: Giao dịch khớp lệnh được xác nhận thành công trên Sepolia Etherscan.
+5.3 So sánh với mô hình truyền thống và độbền vững
+Bảng 5.1 so sánh các tiêu chí vận hành giữa hệthống đềxuất và mô hình phân phối điện
+truyền thống.
+Bảng 5.1: So sánh giữa mô hình P2P Blockchain đềxuất và lưới điện truyền thống
+Tiêu chí
+Mô hình truyền thống
+Hệthống P2P đềxuất
+Kiến trúc vận hành
+Tập trung, phụthuộc EVN
+Phi tập trung, mạng ngang hàng
+(P2P)
+Cơ chếđịnh giá
+Giá cốđịnh (FiT) áp đặt một
+chiều
+Đấu giá hai phía theo cung cầu
+thực tế
+Tính minh bạch
+Sốliệu công tơ lưu nội bộ
+Ghi
+vĩnh
+viễn
+trên
+sổ
+cái
+Blockchain
+Quyết toán tài chính
+Theo chu kỳtháng qua ngân hàng
+Tức thời qua Smart Contract (Es-
+crow)
+Cơ chếkhuyến khích
+Bán giá thấp, thiếu động lực
+Thưởng token xanh SLR cho mỗi
+kWh
+Độtrễđiều khiển
+Can thiệp thủcông
+Rơ-le phản ứng tựđộng theo lệnh
+on-chain
+5.4 Kiểm thửvà chi phí vận hành hợp đồng
+Hệthống Smart Contract đã trải qua bộkiểm thửtoàn diện với 8 kịch bản (Bảng 5.2).
+13
+
+
+[PAGE 24]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Bảng 5.2: Kết quảkiểm thửchức năng và tiêu hao Gas trên Sepolia Testnet
+STT
+Kịch bản kiểm thử
+Hành vi kỳvọng
+Gas (Gwei)
+Kết quả
+TC1
+Đăng ký thiết bịIoT
+Ánh xạthành công ví ↔De-
+vice ID
+48,215
+Đạt
+TC2
+Nạp tiền ký quỹ(deposit)
+Sốdư balances tăng tương
+ứng
+28,450
+Đạt
+TC3
+Ghi nhận dựbáo AI
+Lưu hash dữliệu và event on-
+chain
+35,120
+Đạt
+TC4
+Đặt lệnh chào bán (Offer)
+Lưu vào mảng offers, active
+= true
+65,410
+Đạt
+TC5
+Đặt lệnh mua (Bid)
+Lưu vào mảng bids, active =
+true
+65,380
+Đạt
+TC6
+Khớp lệnh (matchOrders)
+Chuyển ETH ký quỹ, mint to-
+ken SLR
+112,850
+Đạt
+TC7
+Rút tiền (withdraw)
+Rút sốdư còn lại sau khi thanh
+toán
+32,100
+Đạt
+TC8
+Thửnghiệm Reentrancy
+Bịmodifier ReentrancyGuard
+từchối
+N/A
+Đạt
+5.5 Đánh giá rủi ro và an toàn hợp đồng
+Các giải pháp phòng chống tấn công bảo mật được áp dụng:
+• Chống tấn công tái nhập (Reentrancy): Áp dụng mẫu Checks-Effects-Interactions và sử
+dụng modifier nonReentrant từthư viện OpenZeppelin cho các hàm rút tiền và chuyển
+tiền.
+• Xác thực nguồn tin Oracle: Chỉcó địa chỉví của Oracle được cấp quyền (onlyOracle)
+mới có thểgửi dữliệu dựbáo và kích hoạt hàm khớp lệnh.
+• Toàn vẹn dữliệu: Hash dữliệu cảm biến được đối soát trước khi ghi nhận, ngăn ngừa việc
+chỉnh sửa sốliệu phát điện giảmạo.
+5.6 Đối chiếu với yêu cầu đồán
+Đối chiếu chi tiết với tiêu chí đánh giá (Rubric) của giảng viên hướng dẫn tại Bảng 5.3.
+14
+
+
+[PAGE 25]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Bảng 5.3: Bảng đối chiếu sản phẩm với rubric đánh giá đồán cuối kỳ
+Hạng mục rubric
+Nội dung đồán đã triển khai
+Đánh giá
+1. Baseline (70%)
+- Luồng End-to-End
+Chạy thông suốt từESP32 →Firebase →Or-
+acle/AI →Sepolia →DApp
+Hoàn thành
+- Smart Contract on-chain
+3 hợp đồng Solidity 0.8.24 triển khai và verify
+trên Sepolia
+Hoàn thành
+- Kết nối Web3 / DApp
+Thư viện ethers.js v6 kết nối ví MetaMask và
+backend Node.js
+Hoàn thành
+- Báo cáo kỹthuật PDF
+Định dạng chuẩn học thuật, giới hạn 10-15
+trang nội dung
+Hoàn thành
+2. Innovation (30%)
+- Phần cứng IoT thực tế
+Nút cảm biến phần cứng thật ESP32 + 2x
+INA219, relay vật lý
+Điểm thưởng
+- Trải nghiệm Web3 UX/UI
+Dashboard biểu đồthời gian thực, quản lý to-
+ken SLR và ví
+Điểm thưởng
+15
+
+
+[PAGE 26]
+CHƯƠNG 6. KẾT LUẬN
+CHƯƠNG 6. KẾT LUẬN
+6.1 Kết quảđạt được
+Đềtài đã hoàn thành các mục tiêu đềra cho Đềtài 1 môn Cơ sởBlockchain và Ứng dụng:
+1. Xây dựng hoàn chỉnh mô hình hệthống thực - ảo (CPS) tích hợp trọn vẹn 3 tầng công nghệ
+IoT, AI và Blockchain.
+2. Chếtạo nút phần cứng IoT thật sửdụng vi điều khiển ESP32 và cảm biến INA219 đo đạc
+thời gian thực với độchính xác cao; điều khiển relay đóng ngắt vật lý trực tiếp từkết quả
+hợp đồng thông minh.
+3. Triển khai thành công 3 Smart Contract trên mạng thửnghiệm Ethereum Sepolia, hiện thực
+hóa cơ chếthịtrường đấu giá hai phía (Market-based Bidding), ký quỹETH minh bạch và
+phát token thưởng SolarToken (SLR).
+4. Xây dựng giao diện Web3 DApp chuyên nghiệp, trực quan, hỗtrợkết nối ví MetaMask và
+liên kết tra cứu Etherscan.
+6.2 Hạn chếvà hướng phát triển
+Hạn chếhiện tại:
+• Phần cứng và đo lường còn ởquy mô thửnghiệm: Hệthống sửdụng tấm pin mặt trời
+mini và cảm biến INA219 phù hợp cho môi trường phòng thí nghiệm, chưa đạt độchính
+xác cao. Bảo mật dữliệu đo lường được xửlý ởtầng phần mềm thông qua Smart Contract,
+chưa tích hợp chip mã hóa phần cứng chuyên dụng đểký sốngay tại thiết bị.
+• Mô hình AI dựbáo và bộđiều phối Oracle chưa đủmạnh cho triển khai thực tế:
+Module dựbáo sản lượng điện hiện hoạt động dựa trên dữliệu tức thời, chưa được huấn
+luyện trên tập dữliệu thời tiết lớn nên độchính xác còn hạn chếkhi thời tiết thay đổi đột
+ngột. Bên cạnh đó, Backend Oracle đang chạy trên một máy chủduy nhất, nếu gặp sựcố
+thì toàn bộquá trình tựđộng từIoT đến Blockchain sẽbịgián đoạn.
+• Chi phí giao dịch và khảnăng mởrộng còn bịgiới hạn: Hệthống hiện triển khai trên
+mạng thửnghiệm Sepolia nên chi phí giao dịch bằng 0, tuy nhiên khi đưa vào mạng thực
+tế, phí Gas của Ethereum Layer 1 có thểvượt quá giá trịgiao dịch điện năng nhỏlẻ. Ngoài
+ra, thuật toán khớp lệnh hiện tại chưa được tối ưu cho trường hợp có nhiều hộgia đình cùng
+tham gia giao dịch đồng thời.
+16
+
+
+[PAGE 27]
+CHƯƠNG 6. KẾT LUẬN
+Hướng phát triển trong tương lai:
+• Mởrộng Layer 2 / Sidechain: Di chuyển các giao dịch khớp lệnh vi mô sang mạng Layer
+2 (như Polygon PoS, Arbitrum hoặc Optimism) đểgiảm phí Gas xuống mức gần bằng 0 và
+tăng tốc độxửlý.
+• Nâng cấp mô hình AI: Ứng dụng mô hình học sâu chuỗi thời gian LSTM hoặc Trans-
+former trực tiếp tại thiết bịbiên (Edge AI bằng TensorFlow Lite trên Raspberry Pi).
+• Ứng dụng Zero-Knowledge Proofs (ZK-SNARKs): Nén dữliệu đo đạc nhiều hộgia đình
+thành một bằng chứng mật mã duy nhất trước khi đưa on-chain nhằm bảo vệquyền riêng
+tư tiêu thụđiện của người dùng.
+• Bảo mật phần cứng TEE: Tích hợp chip mã hóa phần cứng an toàn (Trusted Execution
+Environment) trực tiếp trên công tơ IoT đểký sốdữliệu ngay tại nguồn đo.
+17
+
+
+[PAGE 28]
+TÀI LIỆU THAM KHẢO
+TÀI LIỆU THAM KHẢO
+[1] N. D. Huy, T. T. Sơn, và V. M. Đức, “Ứng dụng công nghệBlockchain và Hợp đồng thông
+minh trong giao dịch năng lượng ngang hàng cho vi lưới điện mặt trời tại Việt Nam,” Tạp
+chí Khoa học và Công nghệNăng lượng, số28, tr. 45–53, 2022.
+[2] E. Mengelkamp, J. G¨arttner, K. Rock, S. Kessler, L. Orsini, và C. Weinhardt, “Designing
+microgrid energy markets: A case study – The Brooklyn Microgrid,” Applied Energy, tập
+210, tr. 870–880, 2018.
+[3] T. Sousa, T. Soares, H. Morais, P. Faria, và Z. Vale, “Peer-to-peer and community-based
+markets: A comprehensive review,” Renewable and Sustainable Energy Reviews, tập 104,
+tr. 367–378, 2019.
+[4] S. Nakamoto, “Bitcoin: A peer-to-peer electronic cash system,” 2008. [Trực tuyến]. Khả
+dụng: https://bitcoin.org/bitcoin.pdf
+[5] G. Wood, “Ethereum: A secure decentralised generalised transaction ledger,” Ethereum
+Project Yellow Paper, tập 151, tr. 1–32, 2014.
+[6] F. Vogelsteller và V. Buterin, “EIP-20: Token standard,” 2015. [Trực tuyến]. Khảdụng:
+https://eips.ethereum.org/EIPS/eip-20
+[7] Texas Instruments, “INA219: Zero-drift, bidirectional current/power monitor with I2C in-
+terface,” Texas Instruments Inc., Datasheet SBOS448G, 2008.
+18

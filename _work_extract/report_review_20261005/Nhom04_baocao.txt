@@ -1,0 +1,1053 @@
+[PAGE 1]
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆKỸTHUẬT TP. HỒCHÍ MINH
+KHOA ĐIỆN – ĐIỆN TỬ
+BỘMÔN KỸTHUẬT MÁY TÍNH
+BÁO CÁO ĐỒÁN CUỐI KỲ
+HỌC LIÊN KẾT BẢO MẬT DỮLIỆU CẢM BIẾN Y
+TẾ(BLOCKFL)
+MÔN HỌC: BLOCKCHAIN VÀ ỨNG DỤNG
+GVHD: TS. HUỲNH THẾTHIỆN
+Sinh viên thực hiện:
+1.
+TRẦN MINH CHIẾN
+MSSV: 23119127
+2.
+HỒNHẬT ĐỊNH
+MSSV: 23119137
+3.
+TRẦN XUÂN MINH
+MSSV: 23119171
+4.
+NGUYỄN LÂM MINH NHẬT
+MSSV: 23119183
+5.
+HUỲNH CHÍ THIỆN
+MSSV: 23119207
+Thành phốHồChí Minh, Tháng 9 năm 2026
+
+
+[PAGE 2]
+MỤC LỤC
+1
+GIỚI THIỆU
+1
+1.1
+Bối cảnh đềtài . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Đặt vấn đề. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.3
+Mục tiêu của đồán . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.4
+Bốcục báo cáo
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+2
+CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ
+2
+2.1
+Hệthống thực-ảo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+2.2
+Học liên kết . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+2.3
+Blockchain và hợp đồng thông minh . . . . . . . . . . . . . . . . . . . . . .
+3
+2.4
+Công nghệsửdụng . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+3
+KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+4
+3.1
+Yêu cầu và phạm vi hệthống
+. . . . . . . . . . . . . . . . . . . . . . . . .
+4
+3.2
+Kiến trúc tổng thểba tầng . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+3.3
+Thiết kếtầng IoT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.4
+Thiết kếtầng AI – học liên kết
+. . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.5
+Thiết kếtầng Blockchain – hợp đồng thông minh
+. . . . . . . . . . . . . .
+7
+4
+TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+8
+4.1
+Tích hợp backend và pipeline điều phối . . . . . . . . . . . . . . . . . . . .
+8
+4.2
+Giao diện giám sát và quy trình vận hành
+. . . . . . . . . . . . . . . . . .
+8
+5
+KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+10
+5.1
+Thiết lập thực nghiệm . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+5.2
+Hội tụvà hiệu năng học liên kết . . . . . . . . . . . . . . . . . . . . . . . .
+10
+5.3
+So sánh với huấn luyện tập trung và độbền vững . . . . . . . . . . . . . .
+11
+5.4
+Kiểm thửvà chi phí vận hành hợp đồng
+. . . . . . . . . . . . . . . . . . .
+12
+5.5
+Đánh giá rủi ro và an toàn hợp đồng
+. . . . . . . . . . . . . . . . . . . . .
+12
+5.6
+Đối chiếu với yêu cầu đồán
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+6
+KẾT LUẬN
+15
+6.1
+Kết quảđạt được . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+6.2
+Hạn chếvà bài học rút ra
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+6.3
+Hướng phát triển . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+TÀI LIỆU THAM KHẢO
+16
+
+
+[PAGE 3]
+DANH MỤC BẢNG
+1
+So sánh huấn luyện tập trung và học liên kết
+. . . . . . . . . . . . . . . .
+2
+2
+Công nghệvà công cụsửdụng trong hệthống . . . . . . . . . . . . . . . .
+3
+3
+Yêu cầu chức năng . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+4
+Các hàm chính của FederatedAggregator.sol . . . . . . . . . . . . . . . . .
+7
+5
+Chỉsốtừng round; mã băm mô hình toàn cục đọc từhợp đồng
+. . . . . .
+10
+6
+Độchính xác ởround 5: mô hình cục bộvà mô hình toàn cục . . . . . . .
+11
+7
+FedAvg so với huấn luyện tập trung trên cùng dữliệu (seed = 7)
+. . . . .
+11
+8
+Kết quảtổng hợp trên 10 seed (accuracy / F1 lớp bất thường, %) . . . . .
+12
+9
+Kịch bản kiểm thửhợp đồng và kết quả
+. . . . . . . . . . . . . . . . . . .
+13
+10
+Chi phí gas đo được
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+11
+Ma trận rủi ro – các rủi ro mức cao và trung bình quan trọng nhất . . . .
+14
+12
+Mức độđáp ứng yêu cầu của đềcương . . . . . . . . . . . . . . . . . . . .
+14
+DANH MỤC HÌNH ẢNH
+1
+Kiến trúc 3 tầng CPS: IoT →AI (Federated Learning) →Blockchain . . .
+5
+2
+Sơ đồtuần tựcủa một round huấn luyện . . . . . . . . . . . . . . . . . . .
+6
+3
+Sốmẫu huấn luyện và tỉlệca bất thường của từng nút (seed = 7) . . . . .
+6
+4
+Máy trạng thái của một round trong FederatedAggregator . . . . . . . . .
+7
+5
+Trang Tổng quan của dashboard giám sát BlockFL . . . . . . . . . . . . .
+9
+6
+Độchính xác và F1 của mô hình toàn cục qua các round (seed = 7) . . . .
+10
+7
+FedAvg so với từng nút tựhọc trên tập kiểm tra chung . . . . . . . . . . .
+10
+8
+Accuracy của FedAvg và tập trung trên 10 seed . . . . . . . . . . . . . . .
+12
+9
+Mô hình toàn cục qua các round theo mức α . . . . . . . . . . . . . . . . .
+12
+
+
+[PAGE 4]
+DANH MỤC TỪVIẾT TẮT
+Từviết tắt
+Từviết đầy đủ
+ABI
+Application Binary Interface
+AI
+Artificial Intelligence
+BFL
+BlockFL Token
+CPS
+Cyber-Physical System
+CSS
+Cascading Style Sheets
+ERC-20
+Ethereum Request for Comments 20
+EVM
+Ethereum Virtual Machine
+FedAvg
+Federated Averaging
+FedProx
+Federated Proximal
+FL
+Federated Learning
+FN
+False Negative
+FP
+False Positive
+FR
+Functional Requirement
+HTML
+HyperText Markup Language
+IID
+Independent and Identically Distributed
+IoT
+Internet of Things
+IPFS
+InterPlanetary File System
+JS
+JavaScript
+KB
+Kilobyte
+MLP
+Multi-Layer Perceptron
+non-IID
+Non-Independent and Identically Distributed
+ReLU
+Rectified Linear Unit
+RPC
+Remote Procedure Call
+SGD
+Stochastic Gradient Descent
+TB
+Trung bình
+TEE
+Trusted Execution Environment
+TP
+True Positive
+ZK
+Zero-Knowledge
+ZK-SNARK
+Zero-Knowledge Succinct Non-Interactive Argument of Knowl-
+edge
+
+
+[PAGE 5]
+CHƯƠNG 1
+GIỚI THIỆU
+1.1
+Bối cảnh đềtài
+Các hệthống IoT y tếvà đô thịthông minh tạo ra khối lượng dữliệu cảm biến lớn,
+là nguyên liệu cho các mô hình AI phát hiện bất thường. Cách làm truyền thống là gom
+dữliệu vềmáy chủtrung tâm rồi huấn luyện, nhưng với dữliệu y tếcách này gây rò rỉ
+quyền riêng tư, tạo điểm lỗi duy nhất và tốn chi phí truyền tải.
+1.2
+Đặt vấn đề
+Học liên kết – Federated Learning giải quyết vấn đềriêng tư bằng cách đưa mô hình
+đến dữliệu thay vì ngược lại, nhưng vẫn phụthuộc vào một máy chủtổng hợp được tin
+cậy tuyệt đối, không có nhật ký bất biến. Blockchain bổsung phần còn thiếu này qua
+giao dịch có chữký, cam kết bằng mã băm và hợp đồng thông minh chia thưởng minh
+bạch. Đềtài đặt câu hỏi trung tâm: thiết kếhệthống ba tầng thếnào đểvừa minh bạch
+vừa duy trì độchính xác chấp nhận được khi dữliệu giữa các nút không đồng nhất, trong
+phạm vi mô phỏng với dữliệu tổng hợp và mạng blockchain cục bộ.
+1.3
+Mục tiêu của đồán
+Mục tiêu tổng quát là xây dựng hệthống thực-ảo mô phỏng, chạy thông suốt từnút
+cảm biến đến hợp đồng thông minh, chứng minh học liên kết có thểvận hành minh
+bạch và có cơ chếkhuyến khích. Mục tiêu cụthể: giảlập bốn nút biên với dữliệu không
+đồng nhất; huấn luyện và tổng hợp bằng FedAvg đạt độchính xác từ90% trởlên; hợp
+đồng thông minh điều phối vòng huấn luyện và phân phối token theo đóng góp; tích hợp
+Web3.py cùng giao diện giám sát; đánh giá hội tụ, so sánh với huấn luyện tập trung và
+chi phí vận hành. Đóng góp chính là luồng đầu-cuối chạy lại được bằng một lệnh và đánh
+giá định lượng trên nhiều lần lặp độc lập thay vì một lần chạy đơn lẻ.
+1.4
+Bốcục báo cáo
+Báo cáo gồm sáu chương: Chương 1 – Giới thiệu, Chương 2 – Cơ sởlý thuyết và công
+nghệ, Chương 3 – Kiến trúc và thiết kếhệthống, Chương 4 – Tích hợp hệthống và triển
+khai, Chương 5 – Kết quảthực nghiệm và đánh giá, Chương 6 – Kết luận.
+1
+
+
+[PAGE 6]
+CHƯƠNG 2
+CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ
+2.1
+Hệthống thực-ảo
+Hệthống thực-ảo là hệthống trong đó quá trình vật lý và quá trình tính toán liên
+kết chặt chẽ, tác động qua lại qua vòng lặp cảm nhận, tính toán và điều phối [1]. Một hệ
+thống thực-ảo điển hình gồm ba thành phần: lớp cảm biến/chấp hành tiếp xúc với thế
+giới vật lý, lớp tính toán xửlý và ra quyết định, và lớp mạng/điều phối kết nối các thành
+phần phân tán. Trong đồán này, tầng vật lý là các cảm biến sinh hiệu tại nút biên, tầng
+tính toán là mô hình AI được huấn luyện liên kết, còn tầng điều phối và xác thực là mạng
+blockchain, nơi các quyết định như chốt mô hình hay chia thưởng được thực thi tựđộng,
+minh bạch và bất biến.
+2.2
+Học liên kết
+Học liên kết là phương pháp huấn luyện phân tán trong đó nhiều nút cùng huấn luyện
+một mô hình chung mà không chia sẻdữliệu thô [2, 3]. Mỗi vòng gồm bốn bước: máy
+chủphát trọng sốtoàn cục, mỗi nút huấn luyện vài epoch trên dữliệu riêng, các nút gửi
+trọng sốmới lên, máy chủtổng hợp thành trọng sốtoàn cục mới.
+Bảng 1: So sánh huấn luyện tập trung và học liên kết
+Tiêu chí
+Huấn luyện tập trung
+Học liên kết
+Vịtrí dữliệu
+Gom vềmột máy chủ
+Ởlại tại từng nút
+Dữliệu truyền đi
+Toàn bộdữliệu thô
+Chỉtrọng sốmô hình
+Quyền riêng tư
+Rủi ro rò rỉcao
+Tốt hơn rõ rệt, vẫn có nguy cơ tấn
+công suy diễn
+Độchính xác
+Thường cao nhất
+Thấp hơn một chút khi dữliệu
+không đồng nhất
+Điểm tin cậy
+Máy chủlưu dữliệu
+Máy chủtổng hợp, BlockFL thay
+bằng blockchain
+Thuật toán tổng hợp phổbiến nhất là FedAvg, do McMahan và cộng sựđềxuất [2].
+Trọng sốtoàn cục là trung bình có trọng sốcủa các trọng sốcục bộ, trong đó hệsốcủa
+nút k tỉlệvới sốmẫu nk của nút đó:
+w(t+1) =
+X
+k
+nk
+N · w(t+1)
+k
+,
+với N =
+X
+k
+nk
+(2.1)
+Trong thực tế, dữliệu giữa các nút thường không cùng phân phối, gọi là non-IID: một
+khoa cấp cứu có tỉlệca bất thường cao, một trạm theo dõi định kỳthì rất thấp. Hiện
+tượng này khiến mô hình cục bộlệch dần theo dữliệu riêng, làm chậm hội tụvà giảm
+độchính xác của mô hình tổng hợp [4, 3]. Cách mô phỏng chuẩn là lấy tỉlệnhãn từng
+nút từphân phối Dirichlet Dir(α), với α nhỏcho dữliệu rất lệch và α lớn cho dữliệu gần
+2
+
+
+[PAGE 7]
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT VÀ CÔNG NGHỆ
+đồng nhất [4].
+Do lớp bất thường thường chiếm thiểu số, F1 của lớp này được dùng làm chỉsốchính
+bên cạnh accuracy:
+Precision =
+TP
+TP + FP ,
+Recall =
+TP
+TP + FN ,
+F1 = 2 · Precision · Recall
+Precision + Recall
+(2.2)
+2.3
+Blockchain và hợp đồng thông minh
+Blockchain là sổcái phân tán chỉghi thêm, các khối giao dịch liên kết bằng mã băm
+của khối trước; mỗi thay đổi trạng thái là một giao dịch ký bằng khoá riêng của người gửi
+nên truy vết được và không thểsửa sau khi ghi. Hợp đồng thông minh là chương trình
+triển khai lên chuỗi, thực thi tất định trên máy ảo Ethereum, có hàm thay đổi trạng thái
+tốn gas và hàm chỉđọc miễn phí; ghi một ô lưu trữmới tốn khoảng 20.000 gas nên dữ
+liệu lớn như trọng sốmô hình không phù hợp lưu trực tiếp trên chuỗi.
+Đểxác thực dữliệu mà không cần lưu toàn bộlên chuỗi, hệthống dùng hàm băm
+keccak256, ánh xạdữliệu độdài bất kỳthành 32 byte kháng va chạm cao; ghi mã băm
+lên chuỗi tạo thành cam kết mà ai cũng băm lại đểkiểm tra toàn vẹn. Token thưởng tuân
+theo chuẩn ERC-20 [5], giúp tương thích với ví và ứng dụng khác mà không cần tích hợp
+riêng.
+Nghiên cứu gần nhất là của Kim và cộng sự[6], đềxuất kiến trúc BlockFL trong đó
+cập nhật mô hình cục bộđược trao đổi và xác thực qua blockchain, thiết bịnhận thưởng
+theo sốmẫu đóng góp. Đồán kếthừa ý tưởng này nhưng hiện thực phiên bản tối giản:
+chỉlưu mã băm trên chuỗi, bước tổng hợp chạy off-chain và được cam kết bằng mã băm.
+2.4
+Công nghệsửdụng
+Bảng 2: Công nghệvà công cụsửdụng trong hệthống
+Thành phần
+Công nghệ
+AI / huấn luyện
+Python, PyTorch, NumPy
+Hợp đồng thông minh
+Solidity 0.8.24
+Framework blockchain
+Hardhat 2.22 + hardhat-toolbox 5
+Kết nối Web3
+Web3.py cho backend, Ethers.js v6 cho dashboard
+Lưu trữtrọng số
+Tệp .npy off-chain, mã băm keccak256 on-chain
+Dashboard
+HTML/CSS/JS thuần, 8 trang, hỗtrợMetaMask
+Quản lý mã nguồn
+Git/Github
+3
+
+
+[PAGE 8]
+CHƯƠNG 3
+KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+3.1
+Yêu cầu và phạm vi hệthống
+Hệthống có ba tác nhân: owner triển khai hợp đồng, đăng ký nút, chốt mô hình và
+phát thưởng; edge node đại diện một bệnh viện hoặc trạm quan trắc, giữdữliệu riêng và
+nộp mã băm trọng số; observer đọc chuỗi qua dashboard đểkiểm tra.
+Bảng 3: Yêu cầu chức năng
+Mã
+Yêu cầu
+Thành phần đáp ứng
+FR1
+Sinh dữliệu sinh hiệu và chia non-IID cho
+từng nút
+iot_code/data_partition.py
+FR2
+Huấn luyện cục bộtại nút từtrọng sốtoàn
+cục
+edge_node.py, local_train.py
+FR3
+Tổng hợp trọng sốbằng FedAvg theo sốmẫu
+ai_model/fedavg.py
+FR4
+Chỉnút đã đăng ký được nộp mã băm ∆w,
+mỗi round một lần
+FederatedAggregator.
+submitWeights
+FR5
+Chốt mô hình toàn cục khi đủsốnút tối thiểu
+FederatedAggregator.
+aggregate
+FR6
+Thưởng token theo tỉlệsốmẫu, không
+thưởng trùng
+distributeReward +
+BlockFLToken
+FR7
+Theo dõi round, token, sựkiện theo thời gian
+thực
+dashboard/
+FR8
+Kiểm tra tệp trọng sốkhớp với mã băm on-
+chain
+Trang Round on-chain
+Vềphi chức năng, hệthống đảm bảo riêng tư bằng cách giữdữliệu thô tại từng nút,
+minh bạch và chống chối bỏnhờmọi lần nộp là giao dịch có chữký, toàn vẹn nhờmô
+hình toàn cục được cam kết bằng mã băm, và tái lập được nhờcùng seed cho cùng kết
+quả.
+Phạm vi và giảđịnh: cảm biến giảlập bằng dữliệu tổng hợp; hợp đồng phát triển và
+kiểm thửtrên Hardhat local, script triển khai đã hỗtrợsẵn Sepolia; FedAvg tính off-chain
+vì EVM không có kiểu sốthực; sốnút cốđịnh là bốn đểso sánh trực tiếp giữa các phương
+án.
+3.2
+Kiến trúc tổng thểba tầng
+Hệthống gồm ba tầng ghép nối tuần tự: dữliệu thô không rời khỏi nút biên, chỉtrọng
+số∆w đi lên tầng AI và chỉmã băm 32 byte đi lên tầng blockchain. Tầng IoT gồm bốn
+nút biên giảlập giữdữliệu sinh hiệu riêng. Tầng AI huấn luyện cục bộmô hình MLP tại
+từng nút rồi dùng FedAvg tổng hợp. Tầng blockchain gồm hợp đồng FederatedAggregator
+quản lý round và BlockFLToken thưởng token BFL.
+4
+
+
+[PAGE 9]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+Hình 1: Kiến trúc 3 tầng CPS: IoT →AI (Federated Learning) →Blockchain
+Một round đi qua chín bước: chia dữliệu non-IID, phát trọng sốtoàn cục, huấn luyện
+cục bộ, băm và nộp ∆w, tổng hợp FedAvg off-chain, chốt mã băm on-chain, phân phối
+thưởng, mởround mới, và đánh giá trên tập kiểm tra gộp – các nút nộp mã băm trước,
+FedAvg chạy sau.
+Nguyên tắc lưu trữ: dữliệu thô chỉtại nút biên; trọng sốvà mô hình toàn cục lưu
+tệp .npy off-chain vì EVM không có kiểu sốthực; mã băm, sốmẫu và sốdư token lưu
+on-chain làm cam kết bất biến; chỉsốaccuracy, F1, loss lưu off-chain phục vụdashboard.
+3.3
+Thiết kếtầng IoT
+Mỗi mẫu gồm năm đặc trưng sinh hiệu, sinh theo phân phối chuẩn riêng cho hai lớp,
+mô phỏng dấu hiệu lâm sàng như nhịp tim bất thường, SpO2 tụt, sốt; đặc trưng motion
+đóng vai trò nhiễu đểmô hình học cách bỏqua. Lớp bất thường của heart_rate là hỗn
+hợp hai đỉnh nên trung bình lại gần vùng bình thường, đây là lý do mô hình cần lớp ẩn
+phi tuyến. Các thông sốnày được cấu hình chi tiết trong bộsinh dữliệu của hệthống.
+Việc chia non-IID gồm ba bước: lấy tỉlệbất thường theo phân phối Dirichlet, co về
+khoảng 0,1–0,7; mỗi nút chọn 200–500 mẫu theo tỉlệđó; tách 25% kiểm tra và chuẩn hoá
+z-score bằng thống kê riêng của nút.
+Với seed 7, một nút có tới 72,6% ca bất thường, nút khác chỉ9,8%, trên tổng 850 mẫu
+huấn luyện và 283 mẫu kiểm tra – mức lệch điển hình mà FL thực tếphải đối mặt. Lớp
+EdgeNode giữdữliệu riêng, địa chỉví, epoch và learning rate; phương thức train_round
+5
+
+
+[PAGE 10]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+Hình 2: Sơ đồtuần tựcủa một round huấn luyện
+Hình 3: Sốmẫu huấn luyện và tỉlệca bất thường của từng nút (seed = 7)
+trảvềtrọng sốmới, mã băm, sốmẫu và độchính xác, với seed gắn theo round và mã nút
+đểtái lập được.
+3.4
+Thiết kếtầng AI – học liên kết
+Mô hình VitalsMLP là mạng ba lớp (5 →16 →16 →2, 402 tham số) – kích thước
+nhỏgiúp FedAvg hội tụnhanh và vector trọng sốchỉkhoảng 3,2 KB. Mỗi round, nút nạp
+trọng sốtoàn cục, đo accuracy ban đầu, huấn luyện 10 epoch bằng SGD (learning rate
+0,05) rồi chỉgửi trọng sốmới, không gửi dữliệu – ranh giới bảo mật cốt lõi của FL. Các
+siêu tham sốnày được thiết lập đồng bộcho toàn bộcác nút trong mạng.
+Hàm FedAvg cộng dồn trọng sốtheo hệsốnk/N; với phân bốởmục 3.3, hệsốbốn
+nút là 0,211, 0,284, 0,326, 0,180 – vừa đảm bảo công bằng tổng hợp, vừa là căn cứchia
+6
+
+
+[PAGE 11]
+CHƯƠNG 3. KIẾN TRÚC VÀ THIẾT KẾHỆTHỐNG
+thưởng. Trọng sốđược làm tròn 6 chữsốrồi băm bằng keccak256 trước khi nộp.
+Mô hình toàn cục được đánh giá trên tập kiểm tra gộp bằng accuracy, loss và F1 của
+lớp bất thường theo công thức (2.2) – F1 quan trọng hơn vì bỏsót ca bất thường nguy
+hiểm hơn báo nhầm.
+3.5
+Thiết kếtầng Blockchain – hợp đồng thông minh
+FederatedAggregator lưu trạng thái nộp từng nút theo round. Vòng đời mỗi round
+được mô hình hoá theo mẫu máy trạng thái hữu hạn [7, 8] gồm hai trạng thái không quay
+lui: mởnhận nộp trọng số, và đã chốt sau khi owner gọi aggregate. Ởtrạng thái đã chốt,
+distributeReward chia thưởng theo cờrewarded của từng nút nên gọi lại không mint
+trùng, còn advanceRound mởround kếtiếp.
+Hình 4: Máy trạng thái của một round trong FederatedAggregator
+Bảng 4: Các hàm chính của FederatedAggregator.sol
+Hàm
+Người gọi
+Chức năng
+registerNode
+owner
+Đăng ký nút tham gia mạng
+submitWeights
+nút đã đăng ký
+Nộp mã băm ∆w và sốmẫu cho round hiện tại
+aggregate
+owner
+Chốt mã băm mô hình toàn cục khi đủsốnút
+tối thiểu
+distributeReward
+owner
+Mint token BFL theo tỉlệsốmẫu trên tổng số
+mẫu
+advanceRound
+owner
+Mởround mới khi round hiện tại đã chốt
+Ràng buộc an toàn kiểm tra bằng require (chỉowner quản trị, chỉnút đã đăng ký
+được nộp, mỗi nút nộp một lần mỗi round...), cùng hệthống sựkiện (event) lưu vết trên
+chuỗi. Sốtoken mỗi round tính theo công thức:
+rewardk =
+rewardPerRound · nk
+totalSamples
+
+(3.1)
+cùng hệsốvới FedAvg ởcông thức (2.1); với rewardPerRound = 1000 BFL, bốn nút
+nhận khoảng 210,59, 283,53, 325,88 và 180,00 BFL mỗi round.
+Hai hợp đồng triển khai tuần tựtrên Hardhat local với minNodes = 3, rewardPerRound =
+1000 BFL, gán minter cho aggregator rồi đăng ký bốn nút tham gia hệthống.
+7
+
+
+[PAGE 12]
+CHƯƠNG 4
+TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+4.1
+Tích hợp backend và pipeline điều phối
+Lớp ChainClient là điểm duy nhất tầng AI chạm tới blockchain: khởi tạo bằng cách
+đọc tệp cấu hình triển khai, kết nối RPC và tạo hai đối tượng hợp đồng từđịa chỉvà ABI.
+Mỗi hàm hợp đồng được bọc bằng một phương thức Python cùng tên chức năng, ký giao
+dịch bằng đúng tài khoản chịu trách nhiệm; các phương thức chỉđọc như current_round
+hay token_balances không cần ký giao dịch.
+Mỗi thao tác ghi đều chờbiên nhận trước khi trảvề, nhờđó các bước của máy trạng
+thái round luôn thực thi đúng thứtự– nếu một bước bịrevert, pipeline dừng ngay thay
+vì chạy tiếp với trạng thái sai.
+Bộđiều phối run_demo.py ghép ba tầng thành một pipeline, thực thi theo đúng chín
+bước đã mô tảởmục 3.2: huấn luyện cục bộ, nộp mã băm lên chuỗi, tổng hợp FedAvg
+off-chain, chốt mã băm và chia thưởng, mởround mới, rồi đánh giá trên tập kiểm tra gộp.
+Mỗi round còn chấm mô hình cục bộcủa từng nút bằng một mô hình tạm đểphục vụso
+sánh ởchương 5. Chếđộkhông dùng chuỗi cho phép kiểm tra riêng phần AI khi cần gỡ
+lỗi; pipeline hỗtrợđầy đủcác tham sốcấu hình linh hoạt qua dòng lệnh.
+4.2
+Giao diện giám sát và quy trình vận hành
+Dashboard gồm tám trang HTML, CSS, JavaScript thuần, đọc trực tiếp trạng thái
+hợp đồng qua Ethers.js và tựlàm mới mỗi năm giây, chỉđọc chuỗi và không giữkhoá
+riêng nào: Tổng quan (round, sốnút, token đã phát, accuracy mới nhất, nút chạy demo),
+Kiến trúc CPS, Dữliệu IoT, Hội tụAI, Round on-chain, Token thưởng, Nhật ký sựkiện,
+Smart Contract.
+Trang Round on-chain đảm nhận việc kiểm tra toàn vẹn: băm lại tệp trọng sốtoàn
+cục và so với mã băm đã chốt trên chuỗi, hiển thịkhớp hoặc lệch đểngười xem tựkiểm
+chứng. Dashboard hỗtrợkết nối MetaMask xem sốdư BFL, và tựchuyển mã giao dịch
+thành liên kết Etherscan khi mạng là Sepolia. Chức năng chạy demo từđầu thực hiện
+ba pha đặt lại chuỗi, triển khai lại hợp đồng và huấn luyện ngay trên giao diện – đặt lại
+chuỗi trước mỗi lần chạy đảm bảo sốliệu hiển thịluôn sinh từchính lần chạy đó.
+Việc triển khai tuân theo quy trình năm giai đoạn – chuẩn bịmôi trường, kiểm thử
+hợp đồng, khởi tạo hạtầng cục bộ, triển khai hợp đồng, chạy pipeline kèm giám sát –
+được thiết kếlặp lại được từđầu, đảm bảo kết quảtại buổi bảo vệluôn tái tạo từmột
+lần chạy thực tếqua các script điều phối tựđộng.
+8
+
+
+[PAGE 13]
+CHƯƠNG 4. TÍCH HỢP HỆTHỐNG VÀ TRIỂN KHAI
+Hình 5: Trang Tổng quan của dashboard giám sát BlockFL
+9
+
+
+[PAGE 14]
+CHƯƠNG 5
+KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+5.1
+Thiết lập thực nghiệm
+Cấu hình chính chạy đủba tầng trên mạng Hardhat local với bốn nút, năm round,
+hệsốDirichlet α = 0, 4, seed = 7, mười epoch cục bộmỗi round, learning rate 0,05, số
+nút tối thiểu đểchốt round bằng 3, mức thưởng 1000 BFL mỗi round, trên tổng 850 mẫu
+huấn luyện và 283 mẫu kiểm tra gộp; sốliệu ởmục 5.2–5.3 lấy từtệp kết quảtương ứng
+trong repository. Do tầng AI không phụthuộc blockchain trong quá trình tính toán, hai
+thực nghiệm bổsung được chạy ởchếđộkhông dùng chuỗi và cho cùng kết quả94,35%
+accuracy, 91,75% F1 ởseed 7, xác nhận khảnăng tái lập giữa hai chếđộ. Chi phí gas ở
+mục 5.4 được đo bằng công cụbáo cáo gas tích hợp trong Hardhat và một kịch bản đo
+riêng cho một round đầy đủbốn nút.
+5.2
+Hội tụvà hiệu năng học liên kết
+Độchính xác của mô hình toàn cục tăng từ33,57% ởlần khởi tạo ngẫu nhiên lên
+94,35%, F1 của lớp bất thường tăng từ50,26% lên 91,75%, loss giảm từ0,745 xuống
+0,191. Mô hình vượt 92% ngay sau round đầu tiên và ổn định quanh 94–95% từround
+thứhai, nhờba yếu tố: mô hình nhỏ, mười epoch cục bộmỗi round, và hai lớp dữliệu
+tách khá rõ ởđặc trưng SpO2, nhiệt độ.
+Hình 6: Độchính xác và F1 của mô hình
+toàn cục qua các round (seed = 7)
+Hình 7: FedAvg so với từng nút tựhọc trên
+tập kiểm tra chung
+Bảng 5: Chỉsốtừng round; mã băm mô hình toàn cục đọc từhợp đồng
+Round
+Accuracy
+F1
+Loss
+Mã băm mô hình toàn cục
+0 (khởi tạo)
+33,57%
+50,26%
+0,7446
+—
+1
+92,93%
+89,58%
+0,1913
+57fdcda1b252df...
+2
+94,35%
+91,67%
+0,1917
+3540843475346d...
+3
+94,35%
+91,75%
+0,1985
+9c66947f979c01...
+4
+94,70%
+92,23%
+0,1962
+b84d74aad827bf...
+5
+94,35%
+91,75%
+0,1906
+518729c58561f8...
+10
+
+
+[PAGE 15]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Từround 2, accuracy chỉdao động 0,35 điểm phần trăm (một mẫu trên 283 mẫu kiểm
+tra); loss không giảm đơn điệu do dữliệu non-IID giữa các nút kéo mô hình theo các
+hướng khác nhau mỗi round – biểu hiện nhẹcủa hiện tượng client drift. Đểđối chiếu, mô
+hình cục bộcủa từng nút, chỉhọc trên dữliệu riêng, được chấm trên cùng tập kiểm tra
+gộp với mô hình toàn cục.
+Bảng 6: Độchính xác ởround 5: mô hình cục bộvà mô hình toàn cục
+Nút
+Sốmẫu
+Accuracy mô hình cục bộ
+(tập kiểm tra chung)
+Accuracy mô hình toàn cục
+(dữliệu huấn luyện của nút)
+node 0
+179
+93,64%
+100,00%
+node 1
+241
+60,42%
+88,80%
+node 2
+277
+87,99%
+98,19%
+node 3
+153
+81,98%
+94,77%
+Mô hình toàn cục đạt 94,35%, cao hơn mọi mô hình cục bộ, rõ nhất ởnode 1: mô
+hình tựhuấn luyện của nút này (72,6% dữliệu là ca bất thường) chỉđạt 60,42%, trong
+khi tham gia học liên kết giúp tăng gần 34 điểm phần trăm mà không cần chia sẻdữliệu.
+Mô hình toàn cục ởround 5, đo trước khi các nút huấn luyện tiếp, cũng phục vụtốt dữ
+liệu riêng của từng nút (cột cuối).
+5.3
+So sánh với huấn luyện tập trung và độbền vững
+Phương án huấn luyện tập trung gom dữliệu của bốn nút vềmột nơi, dùng cùng kiến
+trúc, cùng bộtối ưu và 50 epoch – tương đương công sức huấn luyện của FedAvg (5 round
+× 10 epoch) – và được chấm trên cùng tập kiểm tra.
+Bảng 7: FedAvg so với huấn luyện tập trung trên cùng dữliệu (seed = 7)
+Phương án
+Accuracy
+F1 (bất thường)
+Loss
+Huấn luyện tập trung (không FL)
+93,99%
+91,63%
+0,151
+FedAvg (5 round, non-IID)
+94,35%
+91,75%
+0,191
+Ởseed 7, FedAvg nhỉnh hơn một chút vềaccuracy và F1 nhưng loss cao hơn; vì đây
+chỉlà kết quảcủa một lần chia dữliệu, nhóm lặp lại thí nghiệm trên mười seed độc lập
+(1–10), mỗi seed một lần sinh và chia dữliệu khác nhau, giữnguyên cấu hình còn lại.
+Bảng 8 tóm tắt kết quảtrên 10 seed độc lập, cho thấy ba điểm đáng chú ý. Một,
+huấn luyện tập trung tốt hơn FedAvg trung bình 1,34 điểm accuracy và 2,57 điểm F1, với
+FedAvg chỉvượt ở2/10 seed – đúng cái giá đã được ghi nhận trong lý thuyết học liên kết
+trên dữliệu non-IID [4, 3], cho thấy kết luận riêng từseed 7 ởtrên là quá lạc quan nếu
+dùng làm kết luận chung. Hai, FedAvg luôn vượt xa nút tựhuấn luyện kém nhất (trung
+bình 60,74%) và vượt cảnút tốt nhất ở8/10 seed, cho thấy lợi ích học liên kết rõ nhất ở
+các nút có dữliệu lệch. Ba, F1 của FedAvg biến động mạnh hơn huấn luyện tập trung (độ
+lệch chuẩn 3,52 so với 2,66), nhất là ởcác seed có một nút mang phần lớn ca bất thường.
+11
+
+
+[PAGE 16]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Hình 8: Accuracy của FedAvg và tập trung
+trên 10 seed
+Hình 9: Mô hình toàn cục qua các round
+theo mức α
+Bảng 8: Kết quảtổng hợp trên 10 seed (accuracy / F1 lớp bất thường, %)
+Chỉsố
+Seed 7
+(minh hoạ)
+Khoảng giá trị
+(10 seed)
+Trung bình
+± độlệch chuẩn
+FedAvg accuracy
+94,35%
+94,22 – 98,25%
+96,26 ± 1,34%
+Tập trung accuracy
+93,99%
+93,99 – 99,67%
+97,60 ± 1,74%
+FedAvg F1
+91,75%
+87,02 – 97,93%
+93,49 ± 3,52%
+Tập trung F1
+91,63%
+91,63 – 99,65%
+96,06 ± 2,66%
+Nút cục bộkém nhất
+60,42%
+44,57 – 86,38%
+60,74%
+Với seed 7, nhóm cũng thửđổi hệsốDirichlet α trong tập {0, 1; 0, 4; 1; 10}, lưu ý
+rằng α thay đổi cảtỉlệnhãn lẫn tập kiểm tra nên chỉnên so sánh hình dạng đường hội
+tụ, không so tuyệt đối giữa các mức α. Ởα = 1 và 10 (dữliệu gần đồng nhất), mô hình
+đạt 99,21% và 100% ngay round đầu và giữnguyên vì các nút đồng thuận. Ởα = 0, 4 và
+0, 1, round đầu chỉđạt 92–93% và cần thêm round đểtăng; F1 cuối ởα = 0, 1 chỉcòn
+86,54% so với 91,75% ởα = 0, 4 – khớp lý thuyết ởmục 2.2: dữliệu càng lệch, FedAvg
+hội tụcàng chậm và càng khó nhận ra lớp thiểu số.
+5.4
+Kiểm thửvà chi phí vận hành hợp đồng
+Bộkiểm thửHardhat gồm sáu kịch bản, cảsáu kịch bản đều đạt yêu cầu.
+Kịch bản 5 kiểm chứng đồng thời công thức (3.1) ởmục 3.5 và việc distributeReward
+không thểchia thưởng trùng; kịch bản 6 hiện chỉkiểm tra quyền gọi aggregate, còn quyền
+cho distributeReward, advanceRound và các hàm cấu hình khác được ghi nhận ởphần
+hướng phát triển.
+Chi phí distributeReward ởround 1 cao hơn vì lần mint đầu ghi vào ô sốdư đang
+bằng 0 (tốn gas hơn ghi đè ô đã có giá trị). Một round tiêu tốn dưới một triệu gas – mức
+chấp nhận được trên testnet và mạng lớp hai, tỉlệthuận với giá gas trên mainnet – trong
+đó submitWeights tốn nhất vì mỗi lần nộp ghi mới bốn ô lưu trữvà thêm một phần tử
+vào mảng nút đã nộp.
+5.5
+Đánh giá rủi ro và an toàn hợp đồng
+Ba nhóm tác nhân có thểgây hại hệthống được xem xét: nút biên không trung thực
+(muốn nhận nhiều thưởng hơn hoặc phá hoại mô hình), owner không trung thực (chốt
+12
+
+
+[PAGE 17]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Bảng 9: Kịch bản kiểm thửhợp đồng và kết quả
+#
+Kịch bản
+Kỳvọng
+Kết quả
+1
+Đăng
+ký
+nút;
+đăng
+ký
+trùng một nút
+revert "already registered"
+Pass
+2
+Tài
+khoản
+lạ
+gọi
+submitWeights
+revert "not a registered node"
+Pass
+3
+Nộp sai round; nộp hai lần
+trong một round
+revert "wrong round"/ "already submitted"
+Pass
+4
+aggregate khi mới có 1/3
+nút nộp
+revert "not enough submissions"
+Pass
+5
+Ba nút nộp 100/200/300
+mẫu,
+chốt
+round,
+chia
+thưởng, mởround mới, gọi
+chia thưởng lần hai
+Sốdư 150/300/450 BFL, tổng cung giữ900,
+round chuyển sang 2
+Pass
+6
+Nút gọi aggregate, vốn là
+hàm của owner
+revert "not owner"
+Pass
+Bảng 10: Chi phí gas đo được
+Thao tác
+Gas
+Ghi chú
+Triển khai BlockFLToken
+560.905
+1 lần
+Triển khai FederatedAggregator
+1.042.854
+1 lần
+registerNode
+≈80.454 (TB)
+Mỗi nút, 1 lần
+submitWeights – nút đầu tiên của
+round
+186.273
+Khởi tạo bản ghi Round
+submitWeights – các nút sau
+≈134.973
+aggregate
+79.194
+distributeReward (4 nút)
+210.425 / 124.925
+Round 1 / các round sau
+advanceRound
+32.060
+Tổng một round 4 nút
+912.859 / 827.383
+Round 1 / các round sau
+một mô hình khác với kết quảFedAvg thật), và kẻtấn công bên ngoài (gọi hàm quản trị,
+phát lại giao dịch cũ, đánh cắp khoá riêng). Bảng 11 đánh giá từng rủi ro theo mức độ,
+phân biệt phần đã xửlý với phần thuộc hướng phát triển.
+Bảng 11 đánh giá các rủi ro mức cao và trung bình quan trọng nhất của hệthống. Về
+an toàn hợp đồng, bốn điểm đã được kiểm tra:
+ Reentrancy: Lời gọi ra ngoài duy nhất là hàm mint của hợp đồng token; cờđã
+thưởng được đặt trước khi mint (đúng mẫu kiểm tra–cập nhật–tương tác) nên gọi
+lại không thểmint trùng.
+ Vòng lặp không giới hạn: distributeReward lặp qua danh sách nút đã nộp của
+một round, bịchặn trên bởi sốnút đã đăng ký; với bốn nút, chi phí 124–210 nghìn
+gas, còn rất xa giới hạn một khối.
+ Tràn số: Solidity 0.8 tựđộng revert khi tràn; tích giữa mức thưởng mỗi round và số
+mẫu ởgiá trịhiện tại còn cách giới hạn kiểu uint256 rất xa.
+13
+
+
+[PAGE 18]
+CHƯƠNG 5. KẾT QUẢTHỰC NGHIỆM VÀ ĐÁNH GIÁ
+Bảng 11: Ma trận rủi ro – các rủi ro mức cao và trung bình quan trọng nhất
+Rủi ro
+Mức
+Hiện trạng / phương án
+Owner là điểm tin cậy tập
+trung: hợp đồng không tự
+kiểm chứng globalHash có
+đúng là FedAvg của các ∆w
+đã nộp
+Cao
+Mọi mã băm ∆w đều công khai on-chain nên
+có thểtính lại và đối chiếu; hướng phát triển là
+công bố∆w lên IPFS hoặc dùng bằng chứng
+ZK cho bước tổng hợp
+Nút khai khống numSamples
+đểnhận nhiều thưởng và tăng
+trọng sốFedAvg
+Cao
+Chưa có kiểm soát; hướng phát triển là đặt cọc
+và phạt, hoặc chứng thực bằng phần cứng TEE
+Nút gửi ∆w độc hại (model
+poisoning)
+Trung bình
+Chưa triển khai; hướng phát triển là đo độlệch
+thống kê của ∆w trước khi tổng hợp
+Lộkhoá riêng khi triển khai
+Sepolia
+Cao
+Đã xửlý: khoá đọc từbiến môi trường, không
+commit lên repository
+Gọi hàm quản trịtrái phép /
+phát lại round cũ
+Cao
+Đã xửlý bằng kiểm soát quyền gọi và cờđã
+nộp, xác nhận qua kịch bản kiểm thử2, 3, 6
+FedAvg kém hơn huấn luyện
+tập trung trên dữliệu non-IID
+Trung bình
+Đã đo: chênh trung bình 1,34 điểm accuracy
+trên 10 seed ởmục 5.3; hướng phát triển là
+dùng FedProx
+ Tập trung quyền: Owner có quyền đổi sốnút tối thiểu, mức thưởng mỗi round và
+là người duy nhất chốt round – đánh đổi có chủđích trong phạm vi đồán; hướng
+giảm thiểu là chuyển owner sang một ví multisig.
+5.6
+Đối chiếu với yêu cầu đồán
+Mỗi lần nộp trọng sốgắn với chữký tài khoản nút và được ghi qua sựkiện công khai
+nên không nút nào chối bỏđược phần đã nộp. Dashboard băm lại tệp trọng sốđã lưu và
+so với mã băm đã chốt trên chuỗi: khớp nghĩa là tệp đúng là tệp đã chốt, còn sửa dù một
+byte cũng khiến trạng thái lệch ngay, trong khi giá trịtrên chuỗi không ai sửa được để
+che giấu.
+Bảng 12: Mức độđáp ứng yêu cầu của đềcương
+Yêu cầu
+Bằng chứng trong hệthống
+Luồng end-to-end IoT →AI →
+Smart Contract
+run_demo.py chạy trọn 5 round với chuỗi local (chương
+4, mục 5.2)
+Smart Contract Solidity, triển
+khai Local/Testnet
+2 hợp đồng Solidity 0.8.24 trên Hardhat local; script triển
+khai hỗtrợsẵn Sepolia
+Backend/Frontend
+dùng
+Web3.py / Ethers.js
+ChainClient (Web3.py) gọi hợp đồng từtầng AI; dash-
+board dùng Ethers.js
+Kiểm thửtính đúng đắn
+6/6 kịch bản Hardhat pass (mục 5.4)
+Điểm sáng tạo – Giao diện Web3
+Dashboard 8 trang thời gian thực, kết nối MetaMask, liên
+kết Etherscan, chạy demo trên giao diện
+14
+
+
+[PAGE 19]
+CHƯƠNG 6
+KẾT LUẬN
+6.1
+Kết quảđạt được
+Đồán đã hiện thực thành công hệthống thực-ảo BlockFL với luồng đầu-cuối từIoT
+qua học liên kết đến blockchain, đáp ứng đủbốn yêu cầu nền của đềcương cùng một
+hướng sáng tạo vềgiao diện Web3. Bốn nút biên với dữliệu non-IID huấn luyện cục bộ,
+FedAvg tổng hợp off-chain, hợp đồng thông minh lưu vết bằng mã băm và chia token theo
+đúng hệsốFedAvg. Mô hình toàn cục hội tụtừ33,57% lên 94,35% sau năm round, vượt
+mọi mô hình tựhuấn luyện, và đạt trung bình 96,26% ± 1,34% trên mười seed độc lập.
+Hợp đồng vượt cảsáu kịch bản kiểm thử, một round tốn dưới một triệu gas, và dashboard
+tám trang cho phép theo dõi, kiểm tra toàn vẹn dữliệu và chạy lại demo chỉbằng một
+thao tác.
+6.2
+Hạn chếvà bài học rút ra
+Hệthống còn bốn hạn chế: bước tổng hợp vẫn tin cậy owner vì hợp đồng không tự
+kiểm chứng mã băm mô hình toàn cục; sốmẫu do nút tựkhai, chưa chống được khai
+khống hay đầu độc mô hình; trên dữliệu non-IID, FedAvg kém hơn huấn luyện tập trung
+trung bình 1,34 điểm accuracy; và dữliệu, mạng thửnghiệm đều là mô phỏng, chưa đo
+trên testnet công khai.
+Bài học lớn nhất là một lần chạy tốt chưa phải là kết luận: ởseed 7 FedAvg nhỉnh
+hơn huấn luyện tập trung, nhưng lặp lại trên mười seed thì bức tranh đảo ngược. Việc lặp
+thực nghiệm nhiều lần giúp nhóm hiểu đúng giá trịcủa học liên kết – không phải chính
+xác hơn, mà đạt độchính xác gần tương đương trong khi dữliệu không rời khỏi nơi sinh
+ra, và blockchain làm cho quá trình đó minh bạch, kiểm chứng được.
+6.3
+Hướng phát triển
+Hướng phát triển tập trung vào năm nhóm: chống gian lận bằng cách kiểm tra độlệch
+thống kê của ∆w, đặt cọc và phạt, hoặc chứng thực bằng TEE; giảm tin cậy vào owner
+bằng cách công bố∆w lên IPFS, chứng minh tổng hợp bằng ZK-SNARK, hoặc chuyển
+owner sang ví multisig; cải thiện mô hình bằng FedProx hoặc tăng sốround; hoàn thiện
+kiểm thửquyền gọi cho các hàm còn lại; và triển khai thực tếtrên Sepolia kèm mô hình
+rút gọn nhúng lên phần cứng IoT thật.
+15
+
+
+[PAGE 20]
+Tài liệu tham khảo
+[1] E. A. Lee, “Cyber physical systems: Design challenges,” in Proceedings of the 11th IEEE
+International Symposium on Object and Component-Oriented Real-Time Distributed
+Computing (ISORC), 2008, pp. 363–369.
+[2] H. B. McMahan, E. Moore, D. Ramage, S. Hampson, and B. A. y Arcas,
+“Communication-efficient learning of deep networks from decentralized data,” in Pro-
+ceedings of the 20th International Conference on Artificial Intelligence and Statistics
+(AISTATS), ser. Proceedings of Machine Learning Research, vol. 54, 2017, pp. 1273–
+1282.
+[3] P. Kairouz, H. B. McMahan et al., “Advances and open problems in federated learning,”
+Foundations and Trends® in Machine Learning, vol. 14, no. 1–2, pp. 1–210, 2021.
+[4] T.-M. H. Hsu, H. Qi, and M. Brown, “Measuring the effects of non-identical data
+distribution for federated visual classification,” arXiv preprint arXiv:1909.06335, 2019.
+[5] F. Vogelsteller and V. Buterin, “EIP-20: Token Standard,” Ethereum Improvement
+Proposals, no. 20, 2015, [Online]. Available: https://eips.ethereum.org/EIPS/eip-20.
+Accessed: Sep. 28, 2026.
+[6] H. Kim, J. Park, M. Bennis, and S.-L. Kim, “Blockchained on-device federated learn-
+ing,” IEEE Communications Letters, vol. 24, no. 6, pp. 1279–1283, 2020.
+[7] A. Mavridou and A. Laszka, “Designing secure ethereum smart contracts: A finite state
+machine based approach,” in Financial Cryptography and Data Security (FC 2018),
+ser. Lecture Notes in Computer Science, vol. 10957.
+Springer, 2018, pp. 523–540.
+[8] Solidity Documentation, “Common patterns: State machine,” 2026, [Online]. Available:
+https://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine.
+Accessed: Sep. 28, 2026.
+16

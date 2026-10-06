@@ -1,0 +1,1046 @@
+[PAGE 1]
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆKỸTHUẬT TP. HỒCHÍ MINH
+KHOA ĐIỆN - ĐIỆN TỬ
+BỘMÔN KỸTHUẬT MÁY TÍNH
+MÔN HỌC: BLOCK CHAIN
+ĐỀTÀI: HỘP ĐEN AN TOÀN VÀ ĐỊNH DANH CHO
+ROBOT HỢP TÁC (HRC SAFETY LOG)
+GVHD
+:
+TS. Huỳnh ThếThiện
+Mã môn học
+:
+BCAP437964_01
+Ngành
+:
+Công NghệKỹThuật Máy Tính
+Khoá
+:
+2023
+Danh sách thành viên
+:
+Họvà tên
+MSSV
+Hoàn Thành
+Lê Văn Lương (Nhóm trưởng)
+23119166
+100%
+Đoàn Nguyễn Hoàng Minh
+23119168
+100%
+Nguyễn Ngọc Tú
+23119224
+100%
+Đinh Thiện Vinh
+23119226
+100%
+Nguyễn HồMinh Vy
+23119230
+100%
+Tp. HồChí Minh, tháng 09 năm 2026
+
+
+[PAGE 2]
+LỜI CẢM ƠN
+Trong quá trình học tập và thực hiện báo cáo cuối kỳcủa môn học
+Blockchain và Ứng dụng, nhóm chúng em đã nhận được rất nhiều sự
+quan tâm, hướng dẫn và hỗtrợtận tình từThầy cùng các bạn. Những
+sựgiúp đỡđó đã tạo điều kiện thuận lợi đểnhóm có thểhoàn thành tốt
+quá trình học tập và thực hiện đềtài.
+Nhóm chúng em xin bày tỏlòng biết ơn sâu sắc đến Thầy TS. Huỳnh
+ThếThiện, giảng viên hướng dẫn học phần, đã tận tình giảng dạy, định
+hướng tư duy và chia sẻnhững lời góp ý chân thành trong suốt quá trình
+học tập và thực hiện đồán. Những kiến thức Thầy truyền đạt vềcông
+nghệBlockchain, hợp đồng thông minh và các ứng dụng thực tiễn không
+chỉgiúp nhóm hình thành tư duy kỹthuật vững chắc, mà còn là nền tảng
+đểchúng em xây dựng thành công hệthống HRC Safety Log - hộp đen
+an toàn và định danh cho robot hợp tác.
+Nhóm cũng xin chân thành cảm ơn các bạn trong lớp đã hỗtrợ, trao
+đổi kinh nghiệm và đóng góp ý kiến trong quá trình hoàn thiện đềtài. Sự
+hợp tác và chia sẻđó đã giúp nhóm vượt qua nhiều khó khăn khi triển
+khai hệthống tích hợp IoT - AI - Blockchain, góp phần vào kết quảcủa
+bài báo cáo.
+Mặc dù nhóm đã cốgắng hoàn thành đồán một cách tốt nhất, nhưng do
+kinh nghiệm còn hạn chếvà đây là lần đầu tiếp cận công nghệBlockchain
+ởmức độứng dụng thực tế, báo cáo khó tránh khỏi những thiếu sót.
+Nhóm rất mong nhận được sựgóp ý, nhận xét từThầy đểcó thểtiếp tục
+hoàn thiện kiến thức và phát triển bài báo cáo tốt hơn trong tương lai.
+Nhóm xin chân thành cảm ơn!
+Nhóm thực hiện đềtài
+(Ký và ghi rõ họtên)
+
+
+[PAGE 3]
+TÓM TẮT
+Trong lĩnh vực Blockchain và Hệthống Nhúng, việc tích hợp công nghệchuỗi
+khối vào các hệthống vật lý thực tếđang mởra hướng ứng dụng mới mẻvà đầy
+tiềm năng. Một trong những thách thức lớn của môi trường sản xuất hiện đại là
+đảm bảo an toàn lao động khi con người làm việc chung không gian với robot hợp
+tác (cobot). Việc xây dựng một hệthống ghi nhật ký an toàn có tính bất biến,
+minh bạch và có thểkiểm chứng là bài toán thiết thực mà đồán hướng đến giải
+quyết. Do đó, đềtài tập trung nghiên cứu và hiện thực hóa hệthống HRC Safety
+Log - hộp đen an toàn và định danh cho robot hợp tác - trên nền tảng tích hợp
+IoT - AI - Blockchain.
+Hệthống được thiết kếtheo kiến trúc CPS ba tầng. Tầng IoT sửdụng vi điều
+khiển ESP32 kết hợp cảm biến khoảng cách VL53L0X, áp dụng thuật toán Speed &
+Separation Monitoring đểtựngắt relay bảo vệtrong vòng mili-giây mà không phụ
+thuộc mạng. Tầng AI triển khai tổhợp mô hình RandomForest, IsolationForest và
+Autoencoder nhằm phân biệt người thật với cảm biến báo sai, đạt precision 1,000
+và recall 0,996. Tầng Blockchain sửdụng smart contract Solidity đểlưu bằng chứng
+bất biến dưới dạng Merkle root của log vận hành, ghi nhận sựcốvà phân quyền
+khóa/mởrobot - trong đó chỉduy nhất SUPERVISOR được quyền mởkhóa.
+Smart contract đạt coverage 100% với 50/50 test case. Hệthống đã được
+kiểm thửend-to-end với 198 pytest và triển khai thành công trên cảmạng local
+lẫn testnet Sepolia, kèm giao diện Dashboard trực quan tích hợp MetaMask để
+SUPERVISOR ký mởkhóa trực tiếp từtrình duyệt.
+
+
+[PAGE 4]
+Mục lục
+1
+GIỚI THIỆU TỔNG QUAN
+1
+1.1
+Giới thiệu bài toán . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Mục tiêu đềtài . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.3
+Phạm vi và giới hạn
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+2
+CƠ SỞLÝ THUYẾT
+2
+2.1
+Tổng quan vềCPS và Cobot (Collaborative robot) . . . . . . . . . . . . . . . . . . . . . .
+2
+2.2
+SSM theo ISO/TS 15066 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+2.3
+Blockchain, Smart Contract và cây Merkle . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+2.4
+Isolation Forest . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+2.5
+MQTT và HMAC
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+3
+THIẾT KẾHỆTHỐNG
+5
+3.1
+Kiến trúc tổng thể. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2
+Tầng IoT
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2.1
+Vai trò . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2.2
+Phần cứng
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.2.3
+Thuật toán SSM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.2.4
+Gói tin MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.3
+Tầng AI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.3.1
+Vai trò . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.3.2
+Tập dữliệu . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.3.3
+Kiến trúc mô hình . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.3.4
+Triển khai . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.4
+Tầng Blockchain
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.4.1
+Vai trò . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.4.2
+Phân quyền . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+3.4.3
+Máy trạng thái và các hàm
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+3.4.4
+Merkle tree và chống replay . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+3.5
+Backend và Dashboard . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+3.5.1
+Vai trò . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+3.5.2
+Sơ đồtuần tựxửlý sựcố. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+i
+
+
+[PAGE 5]
+MỤC LỤC
+4
+KẾT QUẢ
+13
+4.1
+Môi trường và kịch bản
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+4.2
+Kết quảIoT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+4.3
+Kết quảAI
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+4.4
+Kết quảSmart Contract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+4.5
+Kết quảend-to-end . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+5
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+18
+5.1
+Kết luận . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+5.2
+Hướng phát triển . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+ii
+
+
+[PAGE 6]
+Danh sách hình vẽ
+2.1
+Cấu trúc cây Merkle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+3.1
+Sơ đồkiến trúc tổng thểhệthống
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2
+Sơ đồkết nối phần cứng . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+4.1
+Ma trận nhầm lẫn của Random Forest . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+4.2
+Phân bốđiểm bất thường của dữliệu bình thường và bất thường . . . . . . . . . . . . . .
+15
+iii
+
+
+[PAGE 7]
+Danh sách bảng
+3.1
+Tham sốSSM trong quá trình demo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.2
+Các topic MQTT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.3
+Phân bốtập dữliệu (chu kỳ100 ms/bản ghi) . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3.4
+Các vai trò trong contract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+3.5
+Các hàm chính của HRCSafetyLog . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+3.6
+Trình tựxửlý một sựcố
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+4.1
+Môi trường thực nghiệm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+4.2
+Kết quảtầng IoT
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+4.3
+Kết quảphân loại của Random Forest (không tính lỗi trôi dần) . . . . . . . . . . . . . . .
+14
+4.4
+Kết quảphát hiện bất thường
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+4.5
+Xác nhận sựcốvùng DANGER
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+4.6
+Chi phí gas (solc 0.8.28, optimizer 200 runs)
+. . . . . . . . . . . . . . . . . . . . . . . . .
+16
+4.7
+Chi phí một ca 8 giờ. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+4.8
+Kết quảdemo trên mạch thật
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+iv
+
+
+[PAGE 8]
+CHƯƠNG 1
+GIỚI THIỆU TỔNG QUAN
+1.1
+Giới thiệu bài toán
+Trong các nhà máy hiện nay, robot công nghiệp không chỉlàm việc trong những khu vực riêng biệt
+với con người mà còn làm và hoạt động chung khu vực với con người. Robot hợp tác (collaborative robot)
+được thiết kếđểlàm việc ngay bên cạnh công nhân và dùng chung không gian làm việc. Cách làm này
+giúp dây chuyền linh hoạt hơn, nhưng đồng thời cũng làm tăng nguy cơ va chạm giữa người và robot. Vì
+vậy, các tiêu chuẩn ISO 10218 và ISO/TS 15066 đã đưa ra những yêu cầu an toàn riêng cho robot hợp
+tác [2, 3].
+Bên cạnh việc phòng tránh tai nạn, một vấn đềkhác cũng rất quan trọng là truy vết sau sựcố. Khi
+xảy ra va chạm, nhà máy, hãng sản xuất robot và bên bảo hiểm đều cần dữliệu vận hành đểxác định
+nguyên nhân và trách nhiệm. Tuy nhiên, nhật ký (log) thường được lưu trên máy chủcủa một bên nên
+có thểbịchỉnh sửa hoặc xóa do đó làm cho các bên khó tin tưởng lẫn nhau. Blockchain có đặc điểm là
+dữliệu đã ghi thì không thểsửa mà không bịphát hiện, vì vậy có thểdùng đểxây dựng một “hộp đen”
+cho robot, tương tựhộp đen trên máy bay [11].
+Xuất phát từhai vấn đềtrên, nhóm chọn đềtài “Hộp đen an toàn và định danh cho robot hợp
+tác (HRC Safety Log)”, kết hợp ba công nghệIoT, AI và Blockchain.
+1.2
+Mục tiêu đềtài
+Xây dựng mô hình hệthống thực - ảo gồm ba tầng, chạy thông suốt End-to-End:
+• IoT: đo khoảng cách người - robot, tựdừng robot khi người vào vùng nguy hiểm.
+• AI: phát hiện hành vi bất thường và xác nhận sựcố.
+• Blockchain: lưu vết nhật ký không thểchỉnh sửa, tựkhóa robot khi có sựcố, chỉngười có thẩm
+quyền mới được mởkhóa.
+1.3
+Phạm vi và giới hạn
+Hệthống được thực hiện trên mô hình thu nhỏ: servo đóng vai trò tay robot, cảm biến siêu âm
+HC-SR04 thay cho máy quét laser công nghiệp. Smart Contract chỉtriển khai trên mạng Hardhat cục
+bộ. Dữliệu AI do nhóm tựthu thập và sinh bằng giảlập. Hệthống mang tính minh họa, chưa đạt chứng
+nhận an toàn chức năng.
+1
+
+
+[PAGE 9]
+CHƯƠNG 2
+CƠ SỞLÝ THUYẾT
+2.1
+Tổng quan vềCPS và Cobot (Collaborative robot)
+Hệthống thực - ảo (Cyber Physical System: CPS) là hệthống kết hợp chặt chẽgiữa phần tính toán,
+mạng truyền thông và quá trình vật lý. Cảm biến thu thập dữliệu từthếgiới thực, phần mềm xửlý dữ
+liệu, sau đó hệthống tác động ngược lại thếgiới thực. Trong đềtài này, ESP32 cùng cảm biến và relay
+là phần vật lý, còn backend, mô hình AI và blockchain là phần ảo.
+Cộng tác người - robot (Human-Robot Collaboration: HRC) là hình thức người và robot cùng làm
+việc trong một không gian chung. Tiêu chuẩn ISO 10218-1 và ISO/TS 15066 chia hoạt động cộng tác
+thành bốn hình thức: dừng có giám sát an toàn, dẫn hướng bằng tay, giám sát tốc độvà khoảng cách
+(SSM), và giới hạn công suất, lực [2, 3]. Nhóm chọn hình thức SSM vì có thểthực hiện bằng cảm biến
+khoảng cách, không cần robot có cảm biến lực đắt tiền.
+2.2
+SSM theo ISO/TS 15066
+Nguyên lý của SSM là robot và người phải luôn giữmột khoảng cách an toàn tối thiểu. Nếu khoảng
+cách thực tếnhỏhơn khoảng cách này thì robot phải dừng lại [3, 4]. Khi giảsửtốc độcủa người và robot
+không đổi, khoảng cách bảo vệtối thiểu S có thểviết gọn như sau [4]:
+S = vH · (TR + TS) + vR · TR + SS + C + ZR + ZS
+(2.1)
+Trong đó: vH là tốc độngười tiến lại gần robot; vR là tốc độrobot di chuyển vềphía người; TR là
+thời gian phản ứng của hệthống; TS là thời gian đểrobot dừng hẳn; SS là quãng đường robot đi được
+trong lúc dừng; C là khoảng xâm nhập (phần tay người có thểvươn tới); ZR và ZS lần lượt là sai sốvị
+trí của robot và của cảm biến.
+Nguyên tắc hoạt động: nếu khoảng cách đo được d nhỏhơn S thì robot dừng; khi d lớn hơn hoặc
+bằng S thì robot được phép chạy lại. Từcông thức có thểthấy robot chạy càng nhanh thì S càng lớn,
+nghĩa là cần giữkhoảng cách xa hơn.
+2.3
+Blockchain, Smart Contract và cây Merkle
+Blockchain là một sổcái phân tán, trong đó dữliệu được gom thành các khối (block). Mỗi khối chứa
+giá trịbăm (hash) của khối trước nên các khối liên kết với nhau thành chuỗi. Nếu ai đó sửa dữliệu trong
+một khối, giá trịbăm sẽthay đổi và phá vỡliên kết với các khối phía sau, nên việc sửa sẽbịcác nút khác
+trong mạng phát hiện [5].
+Hàm băm biến một dữliệu bất kỳthành một chuỗi có độdài cốđịnh. Ethereum sửdụng hàm Keccak-
+256 cho ra kết quả32 byte. Chỉcần thay đổi một bit của dữliệu đầu vào, kết quảbăm sẽkhác hoàn
+toàn.
+2
+
+
+[PAGE 10]
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT
+Smart Contract là chương trình được lưu và chạy trên blockchain, tựđộng thực thi khi có giao dịch
+gọi đến và không thểbịsửa sau khi đã triển khai. Trên Ethereum, Smart Contract thường được viết
+bằng ngôn ngữSolidity. Mỗi giao dịch đều được ký bằng khóa riêng (private key) của người gửi, nhờđó
+hệthống biết chính xác ai đã thực hiện hành động nào. Mỗi giao dịch cũng tốn phí gas và việc ghi dữ
+liệu lên chuỗi khá tốn kém, vì vậy thực tếchỉnên lưu giá trịbăm thay vì dữliệu gốc.
+Cây Merkle là cây nhịphân dùng đểđại diện cho một tập dữliệu lớn bằng một giá trịbăm duy
+nhất [7]. Mỗi lá là giá trịbăm của một bản ghi, mỗi nút cha là giá trịbăm của hai nút con và nút gốc
+được gọi là Merkle root (Hình 2.1). Vì vậy việc lưu Merkle root (32 byte) lên blockchain có thểđại diện
+cho tất cảbản ghi; nếu một bản ghi bịsửa thì Merkle root sẽthay đổi. Đểchứng minh một bản ghi thuộc
+lô đó, chỉcần khoảng log2(n) giá trịbăm (gọi là Merkle proof) thay vì toàn bộn bản ghi.
+Hình 2.1: Cấu trúc cây Merkle
+2.4
+Isolation Forest
+Isolation Forest là thuật toán phát hiện bất thường không giám sát, được Liu và cộng sựđềxuất năm
+2008 [8]. Ý tưởng chính là các điểm bất thường “ít và khác biệt” so với phần còn lại, nên dễbịtách riêng
+hơn.
+Thuật toán xây dựng nhiều cây ngẫu nhiên. Ởmỗi nút, cây chọn ngẫu nhiên một đặc trưng và một
+ngưỡng đểchia dữliệu làm hai. Điểm bất thường thường bịtách riêng chỉsau vài lần chia (đường đi từ
+gốc đến lá ngắn), trong khi điểm bình thường cần nhiều lần chia hơn. Điểm bất thường được tính dựa
+trên độdài đường đi trung bình qua tất cảcác cây: giá trịcàng gần 1 thì mẫu càng có khảnăng bất
+thường.
+Thuật toán này chạy nhanh, nhẹvà không cần nhiều dữliệu có nhãn. Điều này phù hợp với đềtài vì
+dữliệu sựcốthực tếrất ít.
+2.5
+MQTT và HMAC
+MQTT là giao thức truyền tin nhẹtheo mô hình publish/subscribe, được chuẩn hóa bởi tổchức
+OASIS [9]. Hệthống MQTT gồm bên gửi (publisher), bên nhận (subscriber) và máy chủtrung gian
+(broker). Bên gửi đăng tin lên một chủđề(topic), broker sẽchuyển tin đến tất cảbên nhận đã đăng ký
+3
+
+
+[PAGE 11]
+CHƯƠNG 2. CƠ SỞLÝ THUYẾT
+chủđềđó. MQTT có gói tin nhỏ, tốn ít tài nguyên nên rất phù hợp với vi điều khiển như ESP32.
+HMAC (Hash-based Message Authentication Code) là mã xác thực thông điệp, được tạo bằng hàm
+băm kết hợp với một khóa bí mật mà hai bên cùng biết [10]. Bên gửi tính HMAC của bản tin và gửi
+kèm; bên nhận tính lại HMAC và so sánh. Nếu hai giá trịkhớp thì bản tin đúng nguồn và không bịsửa
+trên đường truyền. Nhóm sửdụng HMAC-SHA256, kết hợp với sốthứtự(seq) tăng dần trong mỗi bản
+tin đểchống việc phát lại (replay), hay là kẻgian gửi lại một bản tin cũ hợp lệ.
+4
+
+
+[PAGE 12]
+CHƯƠNG 3
+THIẾT KẾHỆTHỐNG
+3.1
+Kiến trúc tổng thể
+Hệthống gồm ba tầng IoT, AI và Blockchain, được tổchức thành hai luồng xửlý song song (Hình 3.1).
+Luồng an toàn (fast lane): ESP32 tựtính khoảng cách an toàn và ngắt relay ngay tại chỗkhi
+người đi vào vùng nguy hiểm. Luồng này không phụthuộc vào mạng hay blockchain, nên robot dừng
+được trong thời gian rất ngắn.
+Luồng truy vết (trust lane): dữliệu được gửi qua MQTT vềbackend. Mô hình AI phân tích, sau
+đó Smart Contract ghi lại bằng chứng, khóa robot và lưu vết người chịu trách nhiệm.
+Blockchain có độtrễcỡgiây, nên nhóm không đưa blockchain vào vòng điều khiển an toàn. Blockchain
+chỉđóng vai trò “hộp đen” và “trọng tài” của hệthống.
+Hình 3.1: Sơ đồkiến trúc tổng thểhệthống
+3.2
+Tầng IoT
+3.2.1 Vai trò
+Tầng IoT thu thập khoảng cách giữa người và robot, tính khoảng cách an toàn theo SSM, dừng robot
+khi cần và gửi dữliệu vận hành vềbackend.
+5
+
+
+[PAGE 13]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+3.2.2 Phần cứng
+• ESP32: vi điều khiển trung tâm, có sẵn WiFi đểgửi dữliệu MQTT.
+• Cảm biến siêu âm HC-SR04: đo khoảng cách từ2 cm đến khoảng 4 m. Chân Echo xuất mức
+5 V nên nhóm dùng cầu chia áp [1 kΩ- 2 kΩ] đểhạxuống 3,3 V trước khi đưa vào ESP32.
+• Servo SG90: mô phỏng tay robot. Tốc độquay được điều khiển đểgiảlập các mức tốc độrobot
+khác nhau.
+• Relay và buzzer: đóng vai trò nút dừng khẩn cấp (E-Stop). Relay ngắt nguồn servo, buzzer báo
+động.
+• LED trạng thái: xanh (SAFE), vàng (WARNING), đỏ(DANGER/LOCKED).
+Hình 3.2: Sơ đồkết nối phần cứng
+3.2.3 Thuật toán SSM
+HC-SR04 đo độrộng t của xung ECHO. Khoảng cách được tính theo
+d = t × vâm
+2
+,
+với vâm ≈343 m/s ở20◦C,
+(3.1)
+kết quảlàm tròn xuống đểkhoảng cách báo ra luôn hơi gần hơn thực tế. Theo khuyến nghịcủa nhà sản
+xuất, mỗi lần đo cách nhau ít nhất 60 ms đểsóng dội của lần trước tắt hẳn, nên nhóm chọn chu kỳđo
+60 ms (khoảng 16,7 Hz). Khi không có vật trong tầm tin cậy (xa hơn 1.200 mm), cảm biến báo giá trị
+quy ước 8190 (“ngoài tầm”).
+ESP32 tính khoảng cách bảo vệS theo phương pháp SSM của ISO/TS 15066:
+6
+
+
+[PAGE 14]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+S =
+⌈︃vH · (TR + TS) + vR · TR
+1000
+⌉︃
++ SS + C + ZR + ZS
+(3.2)
+Trong đó vR là tốc độđã ra lệnh cho servo ởchu kỳtrước, vì SG90 không có encoder đểđo tốc độ
+thật. Kết quảđược làm tròn lên. Bảng 3.1 là bộtham sốdemo_close đang chạy trên mạch.
+Bảng 3.1: Tham sốSSM trong quá trình demo
+Tham số
+Giá trị
+Ý nghĩa
+vH
+50 mm/s
+Tốc độtay tiến lại gần (giảđịnh cho demo)
+TR
+150 ms
+Thời gian phản ứng: chu kỳ60 ms + chờtiếng vọng + xửlý
+TS
+100 ms
+Thời gian relay nhảvà servo dừng
+SS, C
+0 mm
+Quãng trượt khi dừng và khoảng xâm nhập (bỏqua với mô
+hình nhỏ)
+ZR, ZS
+5 mm, 10 mm
+Sai sốvịtrí servo và sai sốcảm biến
+Lềcảnh báo
+50 mm
+Độrộng vùng WARNING
+Tốc độvận hành /
+giới hạn
+150 / 250 mm/s
+Vượt 250 mm/s thì ngắt (OVERSPEED)
+Với tốc độ150 mm/s ta có S = 50 mm; khi robot đã đứng yên S co lại còn 28 mm; ở250 mm/s
+S = 65 mm. Các giá trịnày chỉđểbiểu diễn trên mô hình, đểrobot dừng khi tay cách cảm biến khoảng
+5 cm. Nhóm không sửdụng bộtham chiếu theo tiêu chuẩn (vH = 1.600 mm/s, TS = 300 ms, C = 850
+mm. . . ) vì S vượt xa tầm đo của mô hình. Dựa vào khoảng cách, hệthống chia ba vùng:
+• DANGER khi d ≤S: ngắt relay ngay, còi kêu, đèn đỏ.
+• WARNING khi S < d ≤S + 50 mm: robot giảm tốc còn 50%, đèn vàng.
+• SAFE khi d > S + 50 mm: robot chạy bình thường, đèn xanh.
+3.2.4 Gói tin MQTT
+ESP32 và backend trao đổi qua broker Mosquitto trên ba topic (Bảng 3.2). Nội dung là JSON, mọi
+gói đều có trường hmac là HMAC-SHA256 của một chuỗi chuẩn hóa, dùng khóa bí mật 32 byte dùng
+chung giữa ESP32 và backend.
+7
+
+
+[PAGE 15]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+Bảng 3.2: Các topic MQTT
+Topic
+Chiều
+Nội dung chính
+Tần suất
+hrc/1/telemetry
+ESP32 →backend
+robot_id,
+seq,
+ts_ms,
+distance_mm,
+v_robot_mmps, zone, estop, hmac
+10 Hz
+hrc/1/heartbeat
+ESP32 →backend
+ts_ms, state (khóa hay không), estop, cfg (mã
+cấu hình), hmac
+2 Hz
+hrc/1/cmd
+backend →ESP32
+cmd (LOCK/UNLOCK), nonce, hmac - QoS 1
+Khi có
+sựkiện
+Ví dụ, chuỗi được ký của một bản tin telemetry có dạng:
+robot_id|seq|ts_ms|distance_mm|v_robot_mmps|zone|estop
+Đểchống phát lại bản tin cũ (replay), mỗi telemetry có sốthứtựseq tăng dần; seq được lưu vào
+NVS theo khối 1.000 sốnên không bịquay về0 khi mất điện. Lệnh LOCK/UNLOCK có nonce là thời
+gian Unix (ms), phải lớn hơn lệnh trước và không lệch quá 30 giây so với đồng hồESP32. Vì vậy ESP32
+phải đồng bộgiờqua NTP trước khi gửi dữliệu. Khi ESP32 mất kết nối đột ngột, broker tựphát tín
+hiệu (LWT) đểbackend biết thiết bịđã offline.
+3.3
+Tầng AI
+3.3.1 Vai trò
+Nếu chỉdùng luật “cứvào DANGER là sựcố” thì mỗi lần cảm biến báo sai (ví dụmột xung nhiễu
+tụt xuống vài cm) robot sẽbịkhóa oan và phải gọi supervisor tới mở. AI trong đềtài làm hai việc: phân
+biệt người thật với cảm biến lỗi trước khi ghi sựcốlên blockchain, và phát hiện dữliệu bất thường. AI
+không nằm trong vòng dừng robot; việc dừng vẫn do fast lane làm.
+3.3.2 Tập dữliệu
+Chưa có đủdữliệu thật, nên nhóm sinh dữliệu có nhãn bằng simulator viết bằng Python, chạy đúng
+logic của firmware. Simulator có các kịch bản: làm việc bình thường, người tiến vào vùng nguy hiểm,
+robot vượt tốc và cảm biến lỗi (xung nhiễu, mất tín hiệu, trôi dần). Mỗi bản ghi có một trong bốn nhãn
+NORMAL, INTRUSION, OVERSPEED, SENSOR_FAULT. Dữliệu được chia theo seed (mỗi seed là
+một lần chạy độc lập) chứkhông chia ngẫu nhiên theo dòng, đểcửa sổcủa tập test không lọt vào tập
+train.
+8
+
+
+[PAGE 16]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+Bảng 3.3: Phân bốtập dữliệu (chu kỳ100 ms/bản ghi)
+Tập
+Sốbản ghi
+NORMAL
+INTRUSION
+OVERSPEED
+SENSOR_FAULT
+Train
+180.000
+144.177
+5.809
+10.200
+19.814
+Validation
+54.000
+43.419
+1.743
+3.060
+5.778
+Test
+90.000
+72.438
+2.896
+5.100
+9.566
+3.3.3 Kiến trúc mô hình
+Mô hình không nhìn từng sốđo lẻmà nhìn cửa sổ2 giây (20 bản ghi). Từmỗi cửa sổnhóm tính 20
+đặc trưng như khoảng cách nhỏnhất, tốc độtiến lại gần, độnhảy lớn nhất giữa hai mẫu, độrung quanh
+đường hồi quy, tỉlệmẫu ngoài tầm. . . Người thật đi tới thì khoảng cách giảm đều, còn cảm biến lỗi thì
+nhảy vọt. Nhóm dùng ba mô hình:
+• Random Forest (60 cây, sâu tối đa 12): phân loại bốn nhãn. Chỉkhi vùng là DANGER và
+Random Forest xác nhận INTRUSION thì backend mới ghi sựcố.
+• Isolation Forest (100 cây): phát hiện bất thường, chỉhọc trên dữliệu bình thường.
+• Autoencoder (20-16-8-4-8-16-20, 1.032 tham số): nén rồi dựng lại đặc trưng; dữliệu lạsẽdựng
+lại sai nhiều. Ngưỡng của cảhai mô hình bất thường là phân vị99% sai sốtrên dữliệu bình thường
+của tập validation.
+3.3.4 Triển khai
+Mô hình sau khi huấn luyện được lưu thành file và nạp vào backend đểsuy luận theo thời gian thực.
+(Nếu nhóm làm phần sáng tạo:) Nhóm huấn luyện thêm một mạng autoencoder nhỏ, lượng tửhóa sang
+INT8 bằng TensorFlow Lite và nạp lên ESP32 bằng thư viện esp-tflite-micro, đểphát hiện bất thường
+ngay tại thiết bị.
+3.4
+Tầng Blockchain
+3.4.1 Vai trò
+Smart contract HRCSafetyLog (Solidity 0.8.28, dùng thư viện OpenZeppelin) không dừng robot. Nó
+có hai vai trò chính là: hộp đen (lưu Merkle root của log đểphát hiện nếu ai sửa log) và trọng tài
+(phân quyền, khóa/mởrobot, ghi lại ai chịu trách nhiệm). Contract được deploy lên chuỗi Hardhat chạy
+trên máy tính cục bộ.
+9
+
+
+[PAGE 17]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+3.4.2 Phân quyền
+Bảng 3.4: Các vai trò trong contract
+Vai trò
+Ai giữ
+Được làm gì
+DEFAULT_ADMIN
+Ví deploy
+Đăng ký robot, cấp/thu quyền, xóa sốlần vi phạm
+DEVICE
+Ví của backend
+(thay mặt robot)
+anchorLog, reportIncident
+OPERATOR
+Người vận hành
+checkIn / checkOut (nhận và trảca)
+SUPERVISOR
+Người giám sát an toàn
+unlock - người duy nhất mởkhóa được
+AUDITOR
+Kiểm toán viên
+recordAudit - ghi kết quảđối soát log
+Điểm chính là tách quyền: backend khóa được robot nhưng không mởđược; admin cũng không mở
+được vì không có quyền SUPERVISOR. Ngoài ra nhóm ghi đè hàm _grantRole đểadmin không cấp lại
+quyền OPERATOR cho người đã bịkhóa, trừkhi reset sốvi phạm trước (việc reset cũng phát event nên
+đểlại dấu vết).
+3.4.3 Máy trạng thái và các hàm
+Mỗi robot có hai trạng thái:
+• ACTIVE và LOCKED. reportIncident chuyển ACTIVE →LOCKED, chỉunlock của SUPERVISOR
+mới đưa LOCKED →ACTIVE.
+• Khi robot đang LOCKED, operator không checkIn được.
+10
+
+
+[PAGE 18]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+Bảng 3.5: Các hàm chính của HRCSafetyLog
+Hàm
+Quyền
+Chức năng
+anchorLog(robotId, batchId,
+root, fromSeq, toSeq)
+DEVICE của robot
+Ghi Merkle root của một batch log
+reportIncident(robotId,
+evidence, severity,
+operator)
+DEVICE của robot
+Ghi sựcố, khóa robot, cộng vi phạm
+cho operator; đủ3 lần thì thu quyền
+OPERATOR
+unlock(robotId)
+SUPERVISOR
+Mởkhóa, xóa operator đang giữca
+checkIn / checkOut
+OPERATOR /
+người đang giữca
+Nhận và trảca vận hành
+recordAudit(robotId,
+batchId, passed, reportHash)
+AUDITOR
+Ghi kết quảđối soát (chỉphát event)
+verifyRecord(batchId,
+record, proof)
+Ai cũng gọi được
+(view)
+Kiểm tra một dòng log có thuộc batch đã
+neo không
+Mọi thao tác quan trọng đều phát event (LogAnchored, EmergencyStop, Unlocked, OperatorBlocked,
+AuditRecorded. . . ). Backend nghe event đểgửi lệnh xuống robot, còn dashboard đọc event đểhiện lịch
+sử. Khi sai điều kiện, contract trảvềcustom error có tham số(ví dụRobotIsLocked, InvalidBatchId)
+nên dễbiết sai ởđâu.
+3.4.4 Merkle tree và chống replay
+Ghi từng dòng log lên chuỗi là không khảthi (10 dòng mỗi giây). Backend gom tối đa 256 bản ghi
+hoặc 30 giây thành một batch. Mỗi bản ghi thành một lá:
+leaf = keccak256(abi.encode(7 trường của bản ghi))
+Bảy trường này đúng bằng các trường của telemetry: robot_id, seq, ts_ms, distance_mm, v_robot_mmps,
+zone, estop. Thứtựphải giống nhau ởcontract (Solidity), backend (Python) và phần test (TypeScript),
+nếu không root sẽkhông khớp.
+Các lá được ghép từng cặp (hash nhỏhơn đứng trước) cho tới khi còn một Merkle root; chỉroot
+32 byte này được ghi lên chuỗi. Sửa bất kỳdòng nào thì root thay đổi và không khớp với root trên
+chuỗi. Đểchứng minh một dòng thuộc batch chỉcần khoảng 8 hash “hàng xóm” (với 256 bản ghi). Hàm
+verifyRecord tựtính lá từdữliệu gốc nên tránh được kiểu tấn công đưa node trung gian vào giảlàm
+lá (second-preimage).
+Đểchống ghi đè hoặc phát lại batch cũ, anchorLog yêu cầu batchId phải bằng batch trước + 1 và
+fromSeq phải lớn hơn toSeq của batch trước. Như vậy không ai chèn hay thay một batch đã neo được.
+11
+
+
+[PAGE 19]
+CHƯƠNG 3. THIẾT KẾHỆTHỐNG
+3.5
+Backend và Dashboard
+3.5.1 Vai trò
+Backend viết bằng Python, gồm các khối:
+• Nhận dữliệu MQTT và kiểm tra HMAC, seq.
+• Chạy mô hình AI.
+• Gom lô và tính Merkle root.
+• Gọi Smart Contract qua thư viện web3.py.
+• Lắng nghe sựkiện on-chain đểgửi lệnh LOCK/UNLOCK xuống ESP32.
+Dashboard viết bằng React và ethers.js, kết nối ví MetaMask với mạng Hardhat cục bộ. Dashboard
+hiển thịvùng an toàn theo thời gian thực, lịch sửsựcốcùng mã giao dịch (tx hash) và sốblock, và có
+nút mởkhóa đểSUPERVISOR ký giao dịch.
+3.5.2 Sơ đồtuần tựxửlý sựcố
+Bảng 3.6: Trình tựxửlý một sựcố
+Bước
+Thành phần
+Việc xảy ra
+1
+HC-SR04 →ESP32
+Đo được d ≤S →vùng DANGER
+2
+ESP32
+Ngắt relay ngay, servo dừng, còi kêu (fast lane)
+3
+ESP32 →Mosquitto →
+Backend
+Telemetry có ký; backend kiểm HMAC, seq rồi lưu log
+4
+Backend (AI)
+Random Forest xác nhận INTRUSION trên cửa sổ2 giây
+5
+Backend →Contract
+reportIncident: ghi sựcố, robot chuyển LOCKED, phát
+event EmergencyStop
+6
+Contract →Backend →ESP32
+Backend nghe EmergencyStop, gửi lệnh LOCK có ký;
+ESP32 lưu trạng thái khóa vào NVS
+7
+Dashboard
+Đọc chuỗi, hiện LOCKED và dòng sựcốmới
+8
+SUPERVISOR (MetaMask) →
+Contract
+Kiểm tra hiện trường, ký unlock; contract phát event
+Unlocked
+9
+Contract →Backend →ESP32
+Backend nghe Unlocked, gửi UNLOCK có ký
+10
+ESP32
+Vùng SAFE liên tục 1 giây thì đóng relay, robot chạy lại
+12
+
+
+[PAGE 20]
+CHƯƠNG 4
+KẾT QUẢ
+4.1
+Môi trường và kịch bản
+Bảng 4.1: Môi trường thực nghiệm
+Thành phần
+Cấu hình
+Máy tính
+Laptop Windows 11, Python 3.11, Node.js 24
+Blockchain
+Hardhat 3.17 (chuỗi local, chain 31337), Solidity 0.8.28, OpenZeppelin 5.6.1
+MQTT
+Mosquitto 2.1.2, nghe cổng 1883 trên mạng Wi-Fi
+Mạng
+Hotspot điện thoại 2,4 GHz; laptop và ESP32 cùng mạng
+Firmware
+PlatformIO, Arduino core 2.0.17 cho ESP32
+AI
+scikit-learn 1.9.1, TensorFlow 2.21 (chỉkhi huấn luyện và lượng tửhóa)
+Giao diện
+React 19, ethers 6.17, MetaMask
+4.2
+Kết quảIoT
+Bảng 4.2: Kết quảtầng IoT
+Hạng mục
+Kết quả
+Logic firmware so với
+simulator
+Biên dịch logic C++ bằng g++ và so từng chu kỳvới simulator: trùng
+khớp trên 5 kịch bản
+Quy đổi HC-SR04
+Kiểm tra biên tầm đo, lỗi cảm biến, ngoài tầm; cốý cài 4 lỗi vào code
+thì cả4 đều bịphát hiện
+Mạch thật - khởi động
+Tựkiểm tra HMAC và Edge AI đạt; HC-SR04 phản hồi
+Mạch thật - phân vùng
+Tay ởkhoảng 48 cm: SAFE, servo quay; khoảng 3,6 cm khi robot đứng
+yên: WARNING; dưới 5 cm khi robot chạy: DANGER, relay ngắt
+Mạch thật - kết nối
+ESP32 vào hotspot, kết nối Mosquitto, gửi telemetry 10 Hz sau khi đồng
+bộgiờNTP (khoảng 20 giây sau khi cấp điện)
+13
+
+
+[PAGE 21]
+CHƯƠNG 4. KẾT QUẢ
+4.3
+Kết quảAI
+Bảng 4.3: Kết quảphân loại của Random Forest (không tính lỗi trôi dần)
+Nhãn
+Precision
+Recall
+F1
+Sốmẫu
+NORMAL
+0,998
+0,983
+0,990
+71.969
+INTRUSION
+0,998
+0,999
+0,998
+2.896
+OVERSPEED
+0,806
+0,967
+0,879
+5.100
+SENSOR_FAULT
+0,978
+0,999
+0,988
+2.367
+Accuracy
+0,983
+82.332
+Hình 4.1: Ma trận nhầm lẫn của Random Forest
+Bảng 4.4: Kết quảphát hiện bất thường
+Mô hình
+Precision
+Recall
+F1
+ROC-AUC
+Báo nhầm
+Isolation Forest
+0,974
+0,662
+0,788
+0,978
+0,8%
+Autoencoder
+0,977
+0,929
+0,952
+0,989
+1,0%
+Kết hợp IF + AE
+0,969
+0,958
+0,963
+0,993
+1,4%
+14
+
+
+[PAGE 22]
+CHƯƠNG 4. KẾT QUẢ
+Hình 4.2: Phân bốđiểm bất thường của dữliệu bình thường và bất thường
+Kết quảquan trọng nhất là khảnăng xác nhận sựcốtrước khi ghi lên blockchain (Bảng 4.5). Trong
+2.544 cửa sổvùng DANGER của tập test có 2.390 cửa sổlà người thật, phần còn lại do cảm biến báo sai.
+Bảng 4.5: Xác nhận sựcốvùng DANGER
+Cách
+Precision
+Recall
+F1
+Sựcốgiả
+Luật: cứDANGER là sựcố
+0,939
+1,000
+0,969
+154
+AI: Random Forest xác nhận INTRUSION
+1,000
+1,000
+1,000
+0
+Nếu chỉdùng luật, robot sẽbịkhóa oan 154 lần và mỗi lần phải gọi supervisor. Dùng AI thì không
+có lần khóa oan nào mà vẫn không bỏsót người thật. Thời gian suy luận trung bình trên backend là 9,7
+ms (p95 là 10,8 ms).
+4.4
+Kết quảSmart Contract
+Contract có 50 test: 45 test kịch bản (mocha) và 5 fuzz test (mỗi test chạy 256 lần với đầu vào ngẫu
+nhiên). Tất cảđều đạt và độphủdòng lệnh là 100%. Các test kiểm tra cảtrường hợp đúng lẫn trường
+hợp phải bịtừchối, ví dụoperator, device và cảadmin gọi unlock đều bịtừchối, gửi lại batch cũ bịtừ
+chối, sửa một trường của bản ghi thì verifyRecord trảvềfalse.
+15
+
+
+[PAGE 23]
+CHƯƠNG 4. KẾT QUẢ
+Bảng 4.6: Chi phí gas (solc 0.8.28, optimizer 200 runs)
+Hàm
+Gas
+Deploy contract
+1.623.828
+anchorLog (batch 256 bản ghi)
+84.540
+reportIncident
+122.235
+unlock
+33.279
+checkIn
+33.094
+recordAudit
+29.896
+verifyRecord (view, proof 8 phần tử)
+35.020
+Có thểthấy anchorLog cho 256 bản ghi (84.540 gas) gần bằng cho 1 bản ghi (84.552 gas), vì trên
+chuỗi chỉlưu một root. Bảng 4.7 so sánh chi phí một ca 8 giờ(10 bản ghi/giây, giá gas giảđịnh 1 gwei).
+Bảng 4.7: Chi phí một ca 8 giờ
+Cách ghi
+Sốgiao dịch
+Gas
+Chi phí
+Neo theo batch 256 bản ghi
+1.125
+95.107.500
+≈0,095 ETH
+Ghi từng dòng
+288.000
+24.350.976.000
+≈24,35 ETH
+Ghi theo batch rẻhơn khoảng 256 lần. Ghi từng dòng còn cần 10 giao dịch mỗi giây, trong khi Sepolia
+12 giây mới có một khối, nên không khảthi.
+16
+
+
+[PAGE 24]
+CHƯƠNG 4. KẾT QUẢ
+4.5
+Kết quảend-to-end
+Bảng 4.8: Kết quảdemo trên mạch thật
+Màn
+Thao tác
+Kết quảquan sát
+1
+Đểtrống trước cảm biến
+Servo quay, dashboard SAFE, cứ8 giây có một batch được neo
+lên chuỗi
+2
+Đưa tay vào dưới 5 cm
+Servo dừng ngay, còi kêu; khoảng 1 giây sau dashboard chuyển
+LOCKED và có dòng sựcốmới; rút tay ra robot vẫn đứng yên
+3
+Ví OPERATOR gọi
+unlock
+Contract từchối (AccessControlUnauthorizedAccount); 10
+giây sau robot vẫn LOCKED, relay vẫn ngắt
+4
+SUPERVISOR ký unlock
+bằng MetaMask
+Giao dịch được ghi lên chuỗi; dashboard ACTIVE, relay đóng,
+servo quay lại
+5
+Sửa một dòng log trong
+SQLite
+Root tính lại lệch với root trên chuỗi; HMAC chỉra đúng dòng
+bịsửa
+Khi chạy lại hệthống, nhóm còn thấy cơ chếtựđối chiếu hoạt động: ESP32 vẫn nhớtrạng thái
+LOCKED từbuổi trước, nhưng trên chuỗi mới robot đang ACTIVE, nên backend tựgửi UNLOCK có ký
+đểhai bên khớp nhau. Trên chuỗi local, thời gian từlúc vào DANGER tới lúc gửi lệnh LOCK là khoảng
+0,3-1,1 giây; robot đã dừng từtrước đó nhờfast lane. Trên Sepolia, thời gian này sẽtăng lên khoảng
+15-30 giây do thời gian tạo khối, nhưng không ảnh hưởng tới việc dừng robot.
+17
+
+
+[PAGE 25]
+CHƯƠNG 5
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+5.1
+Kết luận
+Đềtài đã xây dựng thành công mô hình hệthống “hộp đen” an toàn cho robot hợp tác, tích hợp đủ
+ba tầng IoT, AI và Blockchain. Hệthống chạy thông suốt từlúc thu thập dữliệu cảm biến đến khi ghi
+nhận sựcốtrên Smart Contract. Các kết quảchính đạt được gồm:
+• Tầng IoT dùng ESP32 và cảm biến HC-SR04 đểtính khoảng cách an toàn theo nguyên lý SSM
+và tựdừng robot ngay tại chỗ, không phụthuộc vào mạng.
+• Tầng AI dùng Isolation Forest phát hiện được các trường hợp bất thường như robot vượt tốc hoặc
+cảm biến nhiễu, hỗtrợxác nhận sựcố.
+• Smart Contract trên Hardhat thực hiện được việc công chứng nhật ký bằng Merkle root, tựđộng
+khóa robot khi có sựcố, và chỉcho phép người giám sát mởkhóa. Mọi thao tác đều được lưu vết.
+• Hệthống phát hiện chính xác trường hợp nhật ký bịchỉnh sửa, cho thấy tính bất biến của dữliệu
+được đảm bảo.
+Qua đềtài, nhóm hiểu rõ hơn cách kết hợp các công nghệkhác nhau trong một hệthống thực - ảo.
+Nhóm cũng nhận ra blockchain nên dùng đểtruy vết và phân định trách nhiệm, không nên đưa vào vòng
+điều khiển an toàn đòi hỏi phản hồi nhanh.
+5.2
+Hướng phát triển
+• Thay HC-SR04 bằng cảm biến chính xác hơn như ToF, LiDAR hoặc camera, đểgiảm sai sốvà
+mởrộng vùng giám sát.
+• Tích hợp chip bảo mật (secure element) hoặc TEE, đểESP32 tựký dữliệu và giao dịch, hạn chế
+nguy cơ giảmạo dữliệu đầu vào.
+• Triển khai Smart Contract lên mạng thửnghiệm công khai hoặc blockchain riêng cho nhà máy, và
+áp dụng cơ chếđa chữký (multisig) cho thao tác mởkhóa.
+• Kết nối với robot thật hoặc môi trường mô phỏng ROS 2 đểđánh giá hệthống trong điều kiện
+gần với thực tếhơn.
+18
+
+
+[PAGE 26]
+Tài liệu tham khảo
+[1] NIST, “Framework for cyber-physical systems: Volume 1, overview,” National Institute of Standards
+and Technology, NIST Special Publication 1500-201, 2017.
+[2] ISO, “ISO 10218-1:2011, robots and robotic devices – safety requirements for industrial robots – part
+1: Robots,” 2011.
+[3] ——, “ISO/TS 15066:2016, robots and robotic devices – collaborative robots,” 2016.
+[4] J. A. Marvel and R. Norcross, “Implementing speed and separation monitoring in collaborative robot
+workcells,” Robotics and Computer-Integrated Manufacturing, vol. 44, pp. 144–155, 2017.
+[5] S. Nakamoto, “Bitcoin: A peer-to-peer electronic cash system,” 2008.
+[6] V. Buterin, “Ethereum white paper: A next-generation smart contract and decentralized application
+platform,” 2014.
+[7] R. C. Merkle, “A digital signature based on a conventional encryption function,” in Advances in
+Cryptology – CRYPTO ’87, ser. LNCS, vol. 293, 1988, pp. 369–378.
+[8] F. T. Liu, K. M. Ting, and Z.-H. Zhou, “Isolation forest,” in Proc. IEEE International Conference
+on Data Mining (ICDM), 2008, pp. 413–422.
+[9] OASIS, “MQTT version 5.0,” 2019, oASIS Standard.
+[10] H. Krawczyk, M. Bellare, and R. Canetti, “HMAC: Keyed-hashing for message authentication,” 1997,
+rFC 2104.
+[11] R. White, G. Caiazza, A. Cortesi, Y. I. Cho, and H. I. Christensen, “Black block recorder: Immutable
+black box logging for robots via blockchain,” IEEE Robotics and Automation Letters, 2019.
+19

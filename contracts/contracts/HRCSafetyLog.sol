@@ -21,6 +21,7 @@ contract HRCSafetyLog {
 
     address public immutable owner;
     mapping(address => bool) public reporters;
+    mapping(address => bool) public supervisors;
     mapping(bytes32 => SafetyEvent) private eventsByHash;
     mapping(bytes32 => bool) public eventExists;
     mapping(bytes32 => bool) public deviceLocked;
@@ -28,6 +29,7 @@ contract HRCSafetyLog {
     mapping(bytes32 => bool) public evidenceExists;
 
     event ReporterUpdated(address indexed reporter, bool allowed);
+    event SupervisorUpdated(address indexed account, bool allowed);
     event SafetyEventRecorded(
         bytes32 indexed eventHash,
         bytes32 indexed deviceIdHash,
@@ -62,6 +64,17 @@ contract HRCSafetyLog {
     constructor() {
         owner = msg.sender;
         reporters[msg.sender] = true;
+    }
+
+    modifier onlySupervisor() {
+        require(supervisors[msg.sender], "not supervisor");
+        _;
+    }
+
+    function setSupervisor(address account, bool allowed) external onlyOwner {
+        require(account != address(0), "empty supervisor");
+        supervisors[account] = allowed;
+        emit SupervisorUpdated(account, allowed);
     }
 
     function setReporter(address reporter, bool allowed) external onlyOwner {
@@ -107,8 +120,8 @@ contract HRCSafetyLog {
         require(timestamp > 0, "empty measured timestamp");
         require(!eventExists[eventHash], "event already recorded");
         require(!evidenceExists[evidenceHash], "evidence already recorded");
-        require(!emergencyStop || severity >= Severity.DANGER, "stop requires danger severity");
-        require(severity != Severity.EMERGENCY || emergencyStop, "emergency requires stop");
+        require(severity == Severity.EMERGENCY, "only emergency events");
+        require(emergencyStop, "emergency requires stop");
 
         uint64 recordedAt = uint64(block.timestamp);
         eventsByHash[eventHash] = SafetyEvent({
@@ -136,7 +149,8 @@ contract HRCSafetyLog {
         emit SafetyEvidenceRecorded(evidenceHash, deviceIdHash, evidenceSchema, severity, emergencyStop, timestamp, recordedAt, msg.sender);
     }
 
-    function clearEmergencyStop(bytes32 deviceIdHash) external onlyOwner {
+    function clearEmergencyStop(bytes32 deviceIdHash) external onlySupervisor {
+        require(deviceIdHash != bytes32(0), "empty device hash");
         emergencyStopByDevice[deviceIdHash] = false;
         deviceLocked[deviceIdHash] = false;
         emit EmergencyStopChanged(deviceIdHash, false, bytes32(0));

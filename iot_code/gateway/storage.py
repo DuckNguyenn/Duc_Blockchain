@@ -75,6 +75,13 @@ class TelemetryStore:
         )
         self.connection.commit()
 
+    def mark_pending(self, event_id: str) -> None:
+        self.connection.execute(
+            "UPDATE telemetry SET evidence_status = 'pending' WHERE event_id = ? AND evidence_status != 'confirmed'",
+            (event_id,),
+        )
+        self.connection.commit()
+
     def close(self) -> None:
         self.connection.close()
 

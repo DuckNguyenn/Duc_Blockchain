@@ -564,6 +564,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/espressif__esp-nn/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/espressif__esp-tflite-micro/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/main/cmake_install.cmake")
 endif()
 

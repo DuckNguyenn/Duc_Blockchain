@@ -16,6 +16,13 @@
   --red-pale: #fff0ef;
   --shadow: 0 10px 28px rgba(22, 53, 44, .07);
 }
+.source-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; }
+.source-controls .field-label { width: 100%; margin-bottom: 0; }
+.source-controls .text-input { width: min(100%, 285px); margin: 0; }
+.source-status { font: 10px "DM Mono", monospace; color: var(--muted); }
+.event-main { min-width: 0; overflow-wrap: anywhere; }
+.event-meta { max-width: 180px; overflow-wrap: anywhere; }
+.sensor-card.emergency { border-color: #e9b9b6; background: var(--red-pale); }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 86px; }
 body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); font-family: "Space Grotesk", sans-serif; }

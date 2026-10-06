@@ -94,6 +94,13 @@ class EvidenceOutbox:
             if self.verify(path).get("evidence_status") in {"queued", "pending"}
         ]
 
+    def mark_pending(self, path: Path) -> None:
+        evidence = self.verify(path)
+        if evidence.get("evidence_status") == "confirmed":
+            return
+        evidence["evidence_status"] = "pending"
+        path.write_text(json.dumps(evidence, ensure_ascii=True, indent=2), encoding="utf-8")
+
     def submit(self, path: Path, submitter: Callable[[dict[str, Any]], str]) -> str:
         evidence = self.verify(path)
         tx_hash = submitter(evidence)

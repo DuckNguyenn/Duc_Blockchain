@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 
@@ -36,7 +37,8 @@ def _row_to_dict(row: sqlite3.Row) -> dict[str, Any]:
 def _read_rows(limit: int = 100, severity: str | None = None) -> list[dict[str, Any]]:
     if not _database_path.exists():
         return []
-    with sqlite3.connect(_database_path) as connection:
+    # sqlite3's own context manager commits but does not close the connection.
+    with closing(sqlite3.connect(_database_path)) as connection:
         connection.row_factory = sqlite3.Row
         query = (
             "SELECT id, event_id, device_id, sensor_id, measured_at, received_at, "
@@ -72,13 +74,16 @@ def history(limit: int = 100, severity: str | None = None) -> dict[str, Any]:
 @app.websocket("/ws/telemetry")
 async def telemetry_socket(websocket: WebSocket) -> None:
     await websocket.accept()
-    last_id: int | None = None
+    last_version: tuple | None = None
     try:
         while True:
-            rows = _read_rows(1, "EMERGENCY")
-            if rows and rows[0]["id"] != last_id:
-                last_id = rows[0]["id"]
-                await websocket.send_json(rows[0])
+            rows = _read_rows(1)
+            if rows:
+                row = rows[0]
+                version = (row["id"], row["evidence_status"], row["tx_hash"])
+                if version != last_version:
+                    last_version = version
+                    await websocket.send_json(row)
             await asyncio.sleep(0.5)
     except (WebSocketDisconnect, RuntimeError):
         return

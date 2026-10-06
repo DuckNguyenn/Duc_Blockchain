@@ -1,27 +1,37 @@
-# Cấu trúc repository
+# Cấu trúc đang dùng
 
 ```text
-HRC-Safety-Log/
-├── README.md                         # Cài đặt, cấu hình và demo
-├── Report_NhomXX.pdf                 # Báo cáo kỹ thuật nhóm (bổ sung khi có)
-├── contracts/                        # Solidity/Hardhat
-├── iot_code/
-│   ├── firmware/                     # Firmware ESP32 + HC-SR04
-│   ├── gateway.py                    # Đọc telemetry và ghi cảnh báo
-│   ├── logging_service.py            # Canonical JSON và SHA-256
-│   ├── blockchain.py                 # Adapter audit tùy chọn
-│   └── verify.py                     # Xác minh hash
-├── ai_model/                         # Placeholder; không dùng hiện tại
-├── config/sensor.json                # Ngưỡng khoảng cách và pin map
-├── data/incidents/                   # Cảnh báo JSON tạo khi chạy demo
-└── docs/                             # Tài liệu kỹ thuật/tham khảo
+README.md
+HUONG_DAN_CHAY_PROJECT.md         # Cài đặt, mô phỏng, hardware, chain, train
+ai_model/
+  tinyml_pipeline.py             # 3 causal features, recording splits
+  train_keras_tflite.py           # Keras → INT8 → C++
+  notebooks/esp32_grouped_training.ipynb
+  data/single_sensor/processed_3class/
+  artifacts/esp32_candidate/     # Model mới giữ riêng khỏi model firmware
+esp32_safety_idf/
+  main/main.cpp                  # Firmware HC-SR04 + TFLite Micro
+  main/model/                    # Model đang được firmware build dùng
+  build_review/                  # Build kiểm tra; không commit
+iot_code/gateway/
+  serial_reader.py
+  pipeline.py
+  storage.py
+  api.py
+  blockchain_client.py
+contracts/contracts/
+  HRCSafetyLog.sol
+  WorkPermitHandoff.sol
+web3/
+  index.html / app.js / styles.css / controls.css
+  vendor/                        # ethers + MIT license
+docs/
+  DANH_GIA_PROJECT_VA_MODEL.md
+  TINYML_PRIMARY_SOURCES.md
+tests/
+tools/
+data/telemetry.db                # Runtime SQLite; không commit
+data/evidence_outbox/            # Runtime evidence; không commit
 ```
 
-## Phân loại theo đề tài
-
-- **IoT:** HC-SR04 đo khoảng cách và xuất JSON qua Serial.
-- **Gateway:** lọc trạng thái, ghi cảnh báo và tính SHA-256.
-- **Blockchain:** lưu bằng chứng audit tùy chọn; không tham gia đo khoảng cách.
-- **AI:** không có trong phạm vi hiện tại; không cài YOLO/OpenCV/weights.
-
-`docs/de_tai_2_esp32_sieu_am.md` là tài liệu kỹ thuật phần cứng. PDF trong `docs/reference/` là hướng dẫn môn học, không phải báo cáo nhóm.
+Repo cũng giữ firmware Arduino, IsolationForest, notebook Kaggle và báo cáo cũ. Luồng hiện hành trong `HUONG_DAN_CHAY_PROJECT.md` dùng một HC-SR04/ESP-IDF/USB Serial; MQTT là tùy chọn và chưa đồng bộ SQLite như Serial.

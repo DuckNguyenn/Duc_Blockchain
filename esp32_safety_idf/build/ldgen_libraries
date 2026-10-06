@@ -159,4 +159,8 @@ C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/rt/librt.a
 C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/spiffs/libspiffs.a
 C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
 C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/json/libjson.a
+C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/espressif__esp-nn/libespressif__esp-nn.a
+C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/espressif__esp-tflite-micro/libespressif__esp-tflite-micro.a
+C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/espressif__esp-nn/libespressif__esp-nn.a
 C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/main/libmain.a
+C:/Users/P1 Gen 5/Downloads/Blockchain/esp32_safety_idf/build/esp-idf/espressif__esp-tflite-micro/libespressif__esp-tflite-micro.a

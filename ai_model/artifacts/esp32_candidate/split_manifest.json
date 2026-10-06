@@ -1,0 +1,49 @@
+{
+  "train": {
+    "recordings": [
+      "son2_roi_50ve200_cham_RETREATING.csv",
+      "son3_roi_30ve150_cham_RETREATING.csv",
+      "son3_roi_50ve200_cham_RETREATING.csv",
+      "son3_tien_200ve100_cham_APPROACHING.csv",
+      "son_dungyen_150_SAFE.csv",
+      "son_dungyen_200_SAFE.csv",
+      "son_dungyen_20_DANGER.csv",
+      "son_trong_EMPTY.csv",
+      "son_vatnho_100_SAFE.csv"
+    ],
+    "rows": 978,
+    "class_counts": {
+      "SAFE": 780,
+      "APPROACHING": 79,
+      "EMERGENCY": 119
+    }
+  },
+  "validation": {
+    "recordings": [
+      "son2_roi_30ve150_cham_RETREATING.csv",
+      "son_dungyen_30_DANGER.csv",
+      "son_tien_200ve100_cham_APPROACHING.csv",
+      "son_vatnho_50_SAFE.csv"
+    ],
+    "rows": 433,
+    "class_counts": {
+      "SAFE": 200,
+      "APPROACHING": 97,
+      "EMERGENCY": 136
+    }
+  },
+  "test": {
+    "recordings": [
+      "son2_tien_200ve100_cham_APPROACHING.csv",
+      "son_ghe_30_DANGER.csv",
+      "son_roi_30ve150_cham_RETREATING.csv",
+      "son_roi_50ve200_cham_RETREATING.csv"
+    ],
+    "rows": 463,
+    "class_counts": {
+      "SAFE": 216,
+      "APPROACHING": 88,
+      "EMERGENCY": 159
+    }
+  }
+}

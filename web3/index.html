@@ -16,7 +16,7 @@
       <div class="shell topbar-inner">
         <a class="brand" href="#top" aria-label="SonarChain home"><span class="brand-mark"><i></i><i></i><i></i></span><span>SONAR<span class="brand-accent">CHAIN</span></span></a>
         <nav class="top-nav" aria-label="Điều hướng"><a href="#overview">Tổng quan</a><a href="#sensors">Cảm biến</a><a href="#work-permit">Permit</a><a href="#events">Events</a></nav>
-        <div class="top-status"><span class="network-pill"><span class="status-dot"></span><span id="networkLabel">Simulation mode</span></span><button id="connectButton" class="button button-primary">Kết nối ví</button></div>
+        <div class="top-status"><span class="network-pill"><span class="status-dot"></span><span id="networkLabel">Ví chưa kết nối</span></span><button id="connectButton" class="button button-primary">Kết nối ví</button></div>
       </div>
     </header>
 
@@ -27,10 +27,11 @@
           <h1>Giám sát an toàn,<br /><em>kiểm chứng trên chain.</em></h1>
           <p class="hero-text">Theo dõi khoảng cách, trạng thái dừng khẩn cấp và bằng chứng giao dịch trong cùng một màn hình. Quyết định an toàn vẫn được xử lý cục bộ tại gateway/ESP32.</p>
           <div id="safetyBanner" class="safety-banner safe"><span class="banner-icon">●</span><div class="banner-copy"><strong id="bannerTitle">Hệ thống an toàn</strong><span id="bannerText">Không có vật thể trong vùng cảnh báo</span></div><div class="banner-actions"><span id="estopState" class="estop-state">E-STOP ARMED</span><button id="triggerEstopButton" class="button button-danger" disabled>Kích hoạt E-STOP</button><button id="clearEstopButton" class="button button-ghost" disabled>Gỡ E-STOP</button></div></div>
-          <div class="hero-actions"><button id="simulateButton" class="button button-primary button-large"><span class="play">▶</span> Chạy mô phỏng</button><a class="text-link" href="#how-it-works">Cách hoạt động <span>↓</span></a></div>
+          <div class="source-controls"><label class="field-label" for="dataMode">Nguồn dữ liệu</label><select id="dataMode" class="text-input"><option value="simulation">Mô phỏng · không có phần cứng</option><option value="gateway">ESP32 · gateway thật</option></select><span id="gatewayStatus" class="source-status" role="status">MÔ PHỎNG</span></div>
+          <div class="hero-actions"><button id="simulateButton" class="button button-primary button-large"><span class="play">▶</span> Mẫu mô phỏng tiếp theo</button><a class="text-link" href="#how-it-works">Cách hoạt động <span>↓</span></a></div>
         </div>
         <div class="zone-visual" aria-label="Vùng làm việc ASSEMBLY-A">
-          <div class="zone-header"><span>WORK ZONE · ASSEMBLY-A</span><span class="live-label"><span class="status-dot"></span> LIVE</span></div>
+          <div class="zone-header"><span>WORK ZONE · ASSEMBLY-A</span><span class="live-label">SƠ ĐỒ MINH HỌA</span></div>
           <div class="zone-map"><div class="zone-entity"><span class="entity-icon">👷</span><strong>Worker</strong><small id="workerZoneState">SAFE</small></div><div class="zone-scan"><span class="scan-beam"></span><span>HC-SR04</span></div><div class="zone-entity"><span class="entity-icon">🤖</span><strong>Robot</strong><small>ESP32 · 40 kHz</small></div></div>
           <div class="zone-foot"><span>SONAR DISTANCE</span><b id="zoneDistance">86.4 cm</b></div>
         </div>
@@ -39,21 +40,21 @@
       <section class="metrics-grid" aria-label="Tổng quan vận hành">
         <article class="metric-card"><span class="metric-label">TRẠNG THÁI AN TOÀN</span><strong id="overallState" class="state-safe">SAFE</strong><span id="overallHint" class="metric-note">Không có cảnh báo</span></article>
         <article class="metric-card"><span class="metric-label">KHOẢNG CÁCH NHỎ NHẤT</span><strong><span id="minDistance">86.4</span><small> cm</small></strong><span class="metric-note">Cảnh báo 60 cm · E-stop 30 cm</span></article>
-        <article class="metric-card"><span class="metric-label">BẰNG CHỨNG ĐÃ GHI</span><strong id="eventCount">0</strong><span class="metric-note">Keccak-256 · local proof</span></article>
-        <article class="metric-card"><span class="metric-label">MẠNG ĐANG DÙNG</span><strong id="chainName">LOCAL 31337</strong><span class="metric-note">Evidence layer</span></article>
+        <article class="metric-card"><span class="metric-label">GIAO DỊCH ĐÃ XÁC NHẬN</span><strong id="eventCount">0</strong><span class="metric-note">Trong các event đã tải của nguồn đang chọn</span></article>
+        <article class="metric-card"><span class="metric-label">MẠNG CỦA VÍ</span><strong id="chainName">CHƯA KẾT NỐI</strong><span class="metric-note">Đọc từ MetaMask khi kết nối</span></article>
       </section>
 
       <section id="sensors" class="workspace-grid">
         <div class="panel sensor-panel">
           <div class="panel-heading"><div><p class="eyebrow">LIVE TELEMETRY</p><h2>Khoảng cách cảm biến</h2></div><span id="sampleTime" class="mono muted">--:--:--</span></div>
-          <div class="sensor-cards"><article class="sensor-card" id="sensorCard"><div class="sensor-top"><span class="sensor-name">◉ HC-SR04 · GPIO 2</span><span id="sensorState" class="tag tag-safe">SAFE</span></div><div class="distance"><strong id="distanceValue">86.4</strong><span>cm</span></div><div class="bar"><span id="distanceBar" style="width:72%"></span></div><div class="sensor-foot"><span>ESP32 · 40 kHz</span><span id="distanceEcho">echo 0.0 ms</span></div></article></div>
-          <div class="threshold-legend"><span><i class="legend-safe"></i> Safe &gt; 60 cm</span><span><i class="legend-warning"></i> Warning 31–60 cm</span><span><i class="legend-danger"></i> Emergency ≤ 30 cm</span></div>
+          <div class="sensor-cards"><article class="sensor-card" id="sensorCard"><div class="sensor-top"><span class="sensor-name">◉ HC-SR04 · TRIG 5 / ECHO 18</span><span id="sensorState" class="tag tag-safe">SAFE</span></div><div class="distance"><strong id="distanceValue">86.4</strong><span>cm</span></div><div class="bar"><span id="distanceBar" style="width:72%"></span></div><div class="sensor-foot"><span>ESP32 · 40 kHz</span><span id="distanceEcho">echo 0.0 ms</span></div></article></div>
+          <div class="threshold-legend"><span><i class="legend-safe"></i> Safe &gt; 60 cm</span><span><i class="legend-warning"></i> Warning 30 &lt; d ≤ 60 cm</span><span><i class="legend-danger"></i> Emergency ≤ 30 cm</span></div>
         </div>
         <div class="panel chain-panel">
           <div class="panel-heading"><div><p class="eyebrow">WEB3 IDENTITY</p><h2>Evidence layer</h2></div><span class="chain-badge">EVM</span></div>
           <div class="wallet-row"><span class="wallet-avatar">◈</span><div><span class="metric-label">CONNECTED WALLET</span><strong id="walletAddress">Chưa kết nối</strong></div><button id="copyWalletButton" class="copy-button" type="button" disabled aria-label="Sao chép địa chỉ ví">Copy</button></div>
           <label class="field-label" for="contractAddress">Contract HRCSafetyLog</label><div class="copy-field"><input id="contractAddress" class="text-input mono" placeholder="0x… (local hoặc Sepolia)" spellcheck="false" /><button id="copyContractButton" class="copy-button" type="button" aria-label="Sao chép địa chỉ HRCSafetyLog">Copy</button></div>
-          <button id="recordButton" class="button button-primary full-button" disabled>Ghi event hiện tại lên chain</button><p id="chainMessage" class="helper">Kết nối MetaMask để ký giao dịch. Mô phỏng vẫn chạy không cần ví.</p>
+          <button id="recordButton" class="button button-primary full-button" disabled>Ghi EMERGENCY chưa gửi lên chain</button><p id="chainMessage" class="helper">Kết nối Reporter và nhập contract. Log chỉ ghi EMERGENCY; SAFE/WARNING cập nhật telemetry. Không tự mở MetaMask khi nhận mẫu.</p>
         </div>
       </section>
 
@@ -64,23 +65,23 @@
           <div class="role-guide"><span><b>1</b> Nhập ví</span><span><b>2</b> Chọn quyền</span><span><b>3</b> Xác nhận</span></div>
           <div class="role-form">
             <div><label class="field-label" for="roleAddress">Địa chỉ account</label><input id="roleAddress" class="text-input mono" placeholder="0x… account MetaMask" spellcheck="false" /></div>
-            <div><label class="field-label" for="roleSelect">Role on-chain</label><select id="roleSelect" class="text-input"><option value="reporter">Reporter · ghi safety event</option><option value="supervisor">Supervisor · approve permit</option><option value="gateway">Gateway · ghi zone entry</option></select></div>
+            <div><label class="field-label" for="roleSelect">Role on-chain</label><select id="roleSelect" class="text-input"><option value="reporter">Reporter · ghi EMERGENCY</option><option value="supervisor">Supervisor · gỡ E-STOP / duyệt permit</option><option value="gateway">Gateway · ghi zone entry</option></select></div>
           </div>
           <div class="form-actions"><button id="assignRoleButton" class="button button-primary" disabled>Cấp role</button><button id="revokeRoleButton" class="button button-outline" disabled>Thu hồi</button></div>
           <p id="roleMessage" class="helper">Kết nối bằng owner để quản lý quyền.</p>
         </div>
         <div class="panel estop-panel">
           <div class="panel-heading"><div><p class="eyebrow danger-eyebrow">SAFETY OVERRIDE</p><h2>Emergency stop</h2></div><span id="estopBadge" class="estop-badge">READY</span></div>
-          <p class="panel-intro">E-Stop on-chain khóa device để lưu bằng chứng. Quyết định dừng thời gian thực vẫn nằm ở gateway/ESP32.</p>
+          <p class="panel-intro">EMERGENCY tự kích hoạt E-STOP cả khi off-chain, không chờ giao dịch. Chỉ Supervisor được gỡ sau khi vùng trở lại SAFE. Nút gỡ sau kiểm tra dùng cho khóa giám sát; nút gỡ trên chain dùng khi đã ghi blockchain. Cơ cấu dừng ESP32 được reset tại thiết bị.</p>
           <label class="field-label" for="estopDevice">Device đang giám sát</label><input id="estopDevice" class="text-input mono" value="HRC-ESP32-01" spellcheck="false" />
-          <div class="estop-actions"><button id="estopPanelTrigger" class="button button-danger" disabled>⚠ Kích hoạt E-STOP</button><button id="estopPanelClear" class="button button-outline" disabled>Clear sau khi kiểm tra</button></div>
-          <p id="estopMessage" class="helper">Nhập contract HRCSafetyLog và kết nối owner/reporter để điều khiển.</p>
+          <div class="estop-actions"><button id="estopPanelTrigger" class="button button-danger" disabled>⚠ Kích hoạt E-STOP</button><button id="estopPanelClear" class="button button-outline" disabled>Supervisor · gỡ sau kiểm tra</button></div>
+          <p id="estopMessage" class="helper">Kết nối ví Supervisor của HRCSafetyLog để gỡ khóa khi vùng SAFE.</p><p id="chainStopStatus" class="helper">Khóa trên chain: chưa kết nối</p><button id="clearChainButton" class="button button-outline" disabled>Supervisor · gỡ khóa trên chain</button>
         </div>
       </section>
 
       <section class="panel permit-panel" id="work-permit">
         <div class="panel-heading"><div><p class="eyebrow">HRC WORKFLOW</p><h2>Work permit &amp; robot handoff</h2></div><span class="chain-badge">PERMIT LEDGER</span></div>
-        <p class="workflow-intro">Cấp phép vào vùng cộng tác và xác nhận robot đã bàn giao nhiệm vụ. Là lớp workflow Web3, không thay thế E-Stop cục bộ.</p>
+        <p class="workflow-intro">Ghi quyền vào vùng và xác nhận bàn giao của người tham gia. Đây là workflow do tài khoản xác nhận, không tự chứng minh robot đã bàn giao hoặc người đã vào vùng.</p>
         <ol class="permit-stepper" id="permitStepper" aria-label="Các bước permit"><li class="active"><span>1</span><strong>Tạo permit</strong><small>Khai báo zone/task</small></li><li><span>2</span><strong>Approve</strong><small>Supervisor duyệt</small></li><li><span>3</span><strong>Zone entry</strong><small>Ghi từ telemetry</small></li><li><span>4</span><strong>Handoff &amp; close</strong><small>Bàn giao và đóng</small></li></ol>
         <div class="permit-body">
           <div class="permit-form">
@@ -93,11 +94,11 @@
         <div class="contract-row"><div><label class="field-label" for="permitContractAddress">Contract WorkPermitHandoff</label><div class="copy-field"><input id="permitContractAddress" class="text-input mono" placeholder="0x… (sau deploy)" spellcheck="false" /><button id="copyPermitButton" class="copy-button" type="button" aria-label="Sao chép địa chỉ WorkPermitHandoff">Copy</button></div></div><p id="permitMessage" class="helper">Nhập địa chỉ contract rồi kết nối ví để bắt đầu.</p></div>
       </section>
 
-      <section id="events" class="panel timeline-panel"><div class="panel-heading"><div><p class="eyebrow">IMMUTABLE ACTIVITY</p><h2>Safety event stream</h2></div><span class="live-label"><span class="status-dot"></span> LIVE</span></div><div id="eventList" class="event-list"><div class="empty-state"><span>◎</span><p>Chưa có event. Nhấn “Chạy mô phỏng” để tạo hash bằng chứng.</p></div></div></section>
-      <section id="how-it-works" class="how-section"><div><p class="eyebrow">Ý TƯỞNG</p><h2>Blockchain không đo khoảng cách.<br /><em>Nó chứng minh chuyện đã xảy ra.</em></h2></div><div class="how-steps"><div class="how-step"><span>01</span><h3>Đo tại edge</h3><p>ESP32 lấy mẫu HC-SR04 và áp ngưỡng fail-safe 60/30 cm.</p></div><div class="how-step"><span>02</span><h3>Băm bằng chứng</h3><p>Event ID được tạo từ thiết bị, thời gian, khoảng cách và severity.</p></div><div class="how-step"><span>03</span><h3>Ghi &amp; kiểm tra</h3><p>Contract lưu hash, thiết bị, severity và cờ EmergencyStop.</p></div></div></section>
+      <section id="events" class="panel timeline-panel"><div class="panel-heading"><div><p class="eyebrow">EMERGENCY LOG &amp; EVIDENCE</p><h2>Nhật ký EMERGENCY</h2></div><span id="totalEventCount" class="live-label">0 EMERGENCY · 0 on-chain</span></div><div id="eventList" class="event-list"><div class="empty-state"><span>◎</span><p>Chưa có EMERGENCY từ nguồn đang chọn.</p></div></div></section>
+      <section id="how-it-works" class="how-section"><div><p class="eyebrow">Ý TƯỞNG</p><h2>Giữ bằng chứng sự kiện.<br /><em>Phát hiện sửa đổi sau khi cam kết.</em></h2></div><div class="how-steps"><div class="how-step"><span>01</span><h3>Đo tại edge</h3><p>ESP32 đo HC-SR04, áp ngưỡng 30 cm và chạy model nhỏ.</p></div><div class="how-step"><span>02</span><h3>Băm bằng chứng</h3><p>Gateway lưu telemetry và bản ghi bằng chứng SHA-256 ngoài chain.</p></div><div class="how-step"><span>03</span><h3>Ghi &amp; kiểm tra</h3><p>Contract lưu commitment EMERGENCY để đối chiếu. Cần kiểm tra riêng tính đúng của cảm biến.</p></div></div></section>
       <footer class="footer"><span>SONARCHAIN / HRC SAFETY LOG</span><span>Prototype · safety decisions remain local and fail-safe</span></footer>
     </main>
     <div id="toast" class="toast" role="status"></div>
-    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script><script src="app.js?v=20261003-emergency-activity"></script>
+    <script src="vendor/ethers.umd.min.js"></script><script src="app.js?v=20261005-nonce-guidance"></script>
   </body>
 </html>

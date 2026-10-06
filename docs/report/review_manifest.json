@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-05",
+  "source_docx_unchanged": "C:\\Users\\P1 Gen 5\\Downloads\\Copy of Bao_cao_blockchain.docx",
+  "output": "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\docs\\report\\Bao_cao_blockchain_da_chinh_sua.docx",
+  "sha256": {
+    "C:\\Users\\P1 Gen 5\\Downloads\\Copy of Bao_cao_blockchain.docx": "1c6b54709cdedf285fa54ca5e551fd553115da316a37d9eb712187584f863cdc",
+    "C:\\Users\\P1 Gen 5\\Downloads\\notebookedded09234 (9).ipynb": "964cbcead26f2e79075b0c5d810dc9c167cac07063e062735084771eacbe8e7f",
+    "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\ai_model\\tinyml_pipeline.py": "2ddd8946c4449fc5d0bbbf414f34df33df6a3af105d7b123df5ba74f25b30235",
+    "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\ai_model\\train_keras_tflite.py": "7ef1dfd94792ec032634c3227592d9682c4753d48b4b57d097a522ac152464ca",
+    "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\esp32_safety_idf\\main\\main.cpp": "55a534d1ef165e05a1d4f3d4858d6665b0279003f54f64722d28a63bd70d0578",
+    "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\iot_code\\evidence.py": "e9fd62ca77454bf6735e2e8fd2a4c1c90370bd081e5c894c69b907053d349027",
+    "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\docs\\report\\Bao_cao_blockchain_da_chinh_sua.docx": "3a6531321ade768acc6e5c9566a0b64e40ad32fa75358150911fc723e030976c",
+    "C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\\docs\\report\\Bao_cao_blockchain_da_chinh_sua.pdf": "0a08a2b977a9d567099abe0e4954c73c7698cbe99cf40cc850a8557e04acdd96"
+  },
+  "notebook_executed": false,
+  "tests": {
+    "python": 24,
+    "dashboard": 6,
+    "hardhat": 10
+  },
+  "measurements_not_available": [
+    "candidate_onboard_accuracy",
+    "candidate_latency",
+    "candidate_RAM",
+    "physical_motor_stop",
+    "real_end_to_end_latency",
+    "gas_cost"
+  ],
+  "reference_reports": [
+    "BaoCao_N6.pdf",
+    "Nhom03_baocao.pdf",
+    "Nhom04_baocao.pdf",
+    "Report_Nhom01 (2).pdf"
+  ],
+  "render_verification": {
+    "pages": 31,
+    "docx_zip_valid": true,
+    "source_unchanged": true,
+    "no_blank_pages": true,
+    "no_text_outside_page": true
+  }
+}

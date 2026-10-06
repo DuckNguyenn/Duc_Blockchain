@@ -1,0 +1,51 @@
+{
+  "labels": [
+    "SAFE",
+    "APPROACHING",
+    "EMERGENCY"
+  ],
+  "features": [
+    "distance_cm",
+    "distance_delta_3",
+    "distance_std_5"
+  ],
+  "window_size": 5,
+  "std_ddof": 1,
+  "normalization": {
+    "mean": [
+      141.2021484375,
+      0.9780164361000061,
+      4.315108299255371
+    ],
+    "scale": [
+      67.98619079589844,
+      11.48304557800293,
+      7.087505340576172
+    ]
+  },
+  "input": {
+    "shape": [
+      1,
+      3
+    ],
+    "scale": 0.06372566521167755,
+    "zero_point": -18,
+    "dtype": "int8"
+  },
+  "output": {
+    "shape": [
+      1,
+      3
+    ],
+    "scale": 0.00390625,
+    "zero_point": -128,
+    "dtype": "int8"
+  },
+  "model_bytes": 3456,
+  "hard_distance_rule_cm": 30.0,
+  "training_median_dt_s": 0.17600000000000016,
+  "operators": [
+    "FULLY_CONNECTED",
+    "SOFTMAX"
+  ]
+}

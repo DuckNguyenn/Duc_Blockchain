@@ -1,0 +1,53 @@
+{
+  "labels": [
+    "SAFE",
+    "APPROACHING",
+    "EMERGENCY"
+  ],
+  "features": [
+    "distance_cm",
+    "approach_speed_cm_s",
+    "distance_delta_3",
+    "distance_std_5",
+    "distance_mean_5",
+    "speed_mean_5"
+  ],
+  "normalization": {
+    "mean": [
+      114.2327651977539,
+      0.7354822158813477,
+      0.7756136655807495,
+      3.361126661300659,
+      113.71712493896484,
+      0.7846391201019287
+    ],
+    "scale": [
+      69.15736389160156,
+      64.36503601074219,
+      9.949383735656738,
+      6.1235198974609375,
+      69.15643310546875,
+      21.438114166259766
+    ]
+  },
+  "input": {
+    "shape": [
+      1,
+      6
+    ],
+    "dtype": "<class 'numpy.int8'>",
+    "scale": 0.08529447764158249,
+    "zero_point": -7
+  },
+  "output": {
+    "shape": [
+      1,
+      3
+    ],
+    "dtype": "<class 'numpy.int8'>",
+    "scale": 0.00390625,
+    "zero_point": -128
+  },
+  "model_bytes": 3800,
+  "tensor_arena_start_bytes": 16384
+}

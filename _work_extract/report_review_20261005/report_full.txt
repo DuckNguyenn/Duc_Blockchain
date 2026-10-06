@@ -1,0 +1,374 @@
+[0000] () 
+[0001] () 
+[0002] () BỘ GIÁO DỤC VÀ ĐÀO TẠO
+[0003] () TRƯỜNG ĐẠI HỌC CÔNG NGHỆ KỸ THUẬT TP. HCM
+[0004] () KHOA ĐIỆN - ĐIỆN TỬ
+[0005] () 
+[0006] ()  BÁO CÁO CUỐI KỲ MÔN HỌC
+[0007] () BLOCKCHAIN VÀ ỨNG DỤNG 
+[0008] () 
+[0009] () HỘP ĐEN AN TOÀN VÀ ĐỊNH DANH
+[0010] () CHO ROBOT HỢP TÁC
+[0011] () Nhóm thực hiện: Nhóm 9
+[0012] () Danh sách sinh viên:
+[0013] () 1. Nguyễn Trần Minh Đức                                         MSSV 23139012
+[0014] () 2. Đỗ Thanh Sơn
+[0015] () 3. Nguyễn Tuấn Kiệt
+[0016] () 4. Huỳnh Trần Tiến Thịnh
+[0017] () 5. Nguyễn Hữu Quý
+[0018] () GVHD: TS. Huỳnh Thế Thiện
+[0019] () 
+[0020] ()  
+[0021] ()  
+[0022] ()  
+[0023] () TP. Hồ Chí Minh, tháng 10 năm 2026
+[0024] () LỜI CẢM ƠN
+[0025] () Lời đầu tiên, chúng em xin gửi lời cảm ơn chân thành đến thầy Huỳnh Thế Thiện, giảng viên bộ môn Blockchain và ứng dụng. Trong suốt quá trình học tập, thầy đã rất tâm huyết truyền đạt và hướng dẫn cho chúng em nhiều điều bổ ích trong môn học và kỹ năng làm một bài nghiên cứu để chúng em có đủ kiến thức thực hiện bài nghiên cứu này.
+[0026] () Tuy nhiên vì kiến thức bản thân còn nhiều hạn chế và sự tìm hiểu chưa sâu sắc nên không tránh khỏi những thiếu sót. Mong thầy sẽ châm chước và cho chúng em những lời góp ý để bài nghiên cứu của chúng em hoàn thiện hơn. Một lần nữa, chúng em xin gửi lời cảm ơn sâu sắc đến thầy và chúc thầy luôn mạnh khỏe, hạnh phúc và thành công trong sự nghiệp.
+[0027] (Heading1) 
+[0028] (Heading1) 
+[0029] (Heading1) 
+[0030] (Heading1) 
+[0031] (Heading1) 
+[0032] (Heading1) 
+[0033] (Heading1) 
+[0034] (Heading1) 
+[0035] (Heading1) 
+[0036] (Heading1) 
+[0037] (Heading1) 
+[0038] (Heading1) 
+[0039] (Heading1) 
+[0040] (Heading1) 
+[0041] (Heading1) 
+[0042] (Heading1) 
+[0043] (Heading1) 
+[0044] (Heading1) 
+[0045] (Heading1) 
+[0046] (Heading1) TÓM TẮT
+[0047] () Đề tài SonarChain – HRC Safety Log nghiên cứu việc kết hợp IoT, AI và Blockchain để xây dựng một lớp giám sát và truy vết sự kiện an toàn trong không gian cộng tác giữa người và robot. Hệ thống sử dụng cảm biến siêu âm HC-SR04 kết nối với ESP32 để đo khoảng cách, gateway Python để xử lý telemetry, mô hình phát hiện bất thường để hỗ trợ phân tích và smart contract để lưu cam kết bằng chứng.
+[0048] () Kiến trúc được chia thành hai luồng. Luồng an toàn tại edge áp dụng ngưỡng fail-safe và có thể kích hoạt yêu cầu E-Stop cục bộ mà không phụ thuộc MQTT, RPC hoặc blockchain. Luồng truy vết tạo evidence envelope off-chain, tính SHA-256, lưu bản ghi vào outbox và ghi digest cùng metadata lên HRCSafetyLog. Smart contract WorkPermitHandoff bổ sung workflow cấp phép làm việc, zone entry và human–robot handoff. Dashboard SonarChain hỗ trợ mô phỏng telemetry, hiển thị sự kiện và ký giao dịch bằng MetaMask khi chạy mạng EVM local.
+[0049] () 
+[0050] () 
+[0051] () 
+[0052] () 
+[0053] () 
+[0054] () 
+[0055] () 
+[0056] () 
+[0057] () 
+[0058] () 
+[0059] () 
+[0060] () 
+[0061] () 
+[0062] () 
+[0063] () 
+[0064] () 
+[0065] () 
+[0066] () 
+[0067] () 
+[0068] () 
+[0069] () MỤC LỤC
+[0070] () 
+[0071] () 
+[0072] () CHƯƠNG 1:
+[0073] () GIỚI THIỆU TỔNG QUAN
+[0074] (Heading2) 1.1. Giới thiệu đề tài
+[0075] () Trong các dây chuyền sản xuất hiện đại, robot hợp tác cho phép con người và robot chia sẻ một phần không gian làm việc. Mô hình này tạo ra sự linh hoạt và hỗ trợ tự động hóa nhiều công đoạn, nhưng đồng thời đòi hỏi hệ thống phải theo dõi khoảng cách, phát hiện trạng thái nguy hiểm và lưu lại thông tin sau sự cố. Một cảnh báo tại chỗ có thể đáp ứng yêu cầu phản ứng nhanh nhưng thường thiếu dữ liệu để kiểm tra nguồn gốc; ngược lại, việc đặt quyết định dừng lên một dịch vụ mạng hoặc blockchain có thể tạo ra độ trễ và điểm phụ thuộc không phù hợp với an toàn thời gian thực.
+[0076] () Vì vậy, đề tài tập trung vào một lớp hộp đen có khả năng ghi nhận sự kiện an toàn theo cách có thể đối chiếu. Dữ liệu chi tiết được giữ ngoài chuỗi để phục vụ phân tích, trong khi blockchain lưu một cam kết ngắn gọn và các metadata cần thiết. Cách tiếp cận này tận dụng tính bất biến và khả năng kiểm toán của blockchain mà không biến blockchain thành bộ điều khiển trực tiếp của robot.
+[0077] (Heading2) 1.2. Mục tiêu đề tài
+[0078] () •Thiết kế tầng IoT dùng ESP32 và một hoặc hai cảm biến HC-SR04 để phát telemetry khoảng cách.
+[0079] () •Xây dựng gateway Python tiếp nhận dữ liệu qua Serial/MQTT, kiểm tra payload và trích xuất đặc trưng.
+[0080] () •Áp dụng Isolation Forest như lớp hỗ trợ phát hiện mẫu đo bất thường; không cho AI hạ mức cảnh báo EMERGENCY của policy ngưỡng.
+[0081] () •Chuẩn hóa evidence envelope, tạo SHA-256 và lưu bằng chứng chi tiết ngoài chuỗi.
+[0082] () •Xây dựng HRCSafetyLog để phân quyền reporter, chống ghi trùng, ghi nhận digest và duy trì trạng thái khóa logic.
+[0083] () •Xây dựng WorkPermitHandoff cho permit, supervisor approval, zone entry và human–robot handoff.
+[0084] () •Cung cấp dashboard/mô phỏng và hướng dẫn tái lập project trên mạng EVM local.
+[0085] (Heading2) 1.3. Phạm vi và giới hạn
+[0086] () Phạm vi gồm ESP32, HC-SR04, buzzer, gateway Python, dữ liệu CSV/JSON, mô hình Isolation Forest hoặc mô hình lai, hai smart contract Solidity và dashboard HTML/JavaScript. Mạng blockchain dùng Hardhat local cho phát triển. Các ngưỡng 60 cm và 30 cm là tham số demo. Hệ thống chưa được chứng nhận an toàn chức năng, chưa chứng minh cơ cấu E-Stop vật lý và không dùng blockchain để điều khiển motor hoặc relay.
+[0087] () CHƯƠNG 2
+[0088] () CƠ SỞ LÝ THUYẾT
+[0089] (Heading2) 2.1. Tổng quan về CPS và robot hợp tác
+[0090] () Hệ thống thực-ảo là hệ thống trong đó quá trình vật lý và quá trình tính toán liên kết chặt chẽ, tác động qua lại qua vòng lặp cảm nhận, tính toán và điều phối. Một hệ thống thực-ảo điển hình gồm ba thành phần: lớp cảm biến/chấp hành tiếp xúc với thế giới vật lý, lớp tính toán xử lý và ra quyết định, và lớp mạng/điều phối kết nối các thành phần phân tán. Trong đồ án này, tầng vật lý là các cảm biến sinh hiệu tại nút biên, tầng tính toán là mô hình AI được huấn luyện liên kết, còn tầng điều phối và xác thực là mạng blockchain, nơi các quyết định như chốt mô hình hay chia thưởng được thực thi tự động, minh bạch và bất biến.
+[0091] (Heading2) 2.3. Blockchain, Smart Contract và hàm băm
+[0092] () Blockchain là một hệ thống sổ cái phân tán, trong đó các giao dịch được mạng lưới xác nhận và ghi lại theo thứ tự. Sau khi dữ liệu được ghi lên blockchain, việc thay đổi dữ liệu đã ghi là rất khó vì cần phải đáp ứng các cơ chế xác nhận của mạng lưới.
+[0093] () Hợp đồng thông minh là một chương trình được triển khai trên blockchain. Với Ethereum, chương trình này được thực thi bởi máy ảo Ethereum. Hợp đồng thông minh có thể kiểm tra quyền của người gửi, kiểm tra điều kiện của dữ liệu, cập nhật trạng thái và ghi nhận các sự kiện của hệ thống.
+[0094] () Trong đề tài, blockchain không lưu toàn bộ dữ liệu cảm biến vì dữ liệu này có thể có kích thước lớn và được tạo ra thường xuyên. Blockchain chỉ lưu những thông tin cần thiết để kiểm tra và xác minh bằng chứng, gồm: mã băm của bằng chứng, mã băm của thiết bị, thời gian đo, mức độ nghiêm trọng, trạng thái dừng khẩn cấp, phiên bản cấu trúc dữ liệu và người gửi dữ liệu.
+[0095] () Các dữ liệu như dữ liệu cảm biến ban đầu, độ tin cậy của kết quả nhận diện, phiên bản mô hình và trạng thái thử gửi lại được lưu bên ngoài blockchain. Khi cần kiểm tra, hệ thống có thể lấy dữ liệu này và đối chiếu với thông tin đã được ghi trên blockchain.
+[0096] () SHA-256 là một hàm băm mật mã. Hàm này nhận dữ liệu đầu vào có kích thước bất kỳ và tạo ra một giá trị băm có kích thước cố định 256 bit, tương đương 32 byte.
+[0097] () 
+[0098] () Trong đề tài, trước khi băm, dữ liệu bằng chứng được đưa về cùng một cách biểu diễn thống nhất. Sau đó hệ thống sử dụng SHA-256 để tạo mã băm.
+[0099] () Mã băm này được ghi lên blockchain. Khi cần kiểm tra, hệ thống lấy lại dữ liệu bằng chứng được lưu bên ngoài blockchain, chuẩn hóa dữ liệu theo đúng quy tắc ban đầu và thực hiện SHA-256 một lần nữa.
+[0100] () Nếu mã băm mới giống với mã băm đã được ghi trên blockchain thì dữ liệu hiện tại phù hợp với dữ liệu đã được ghi nhận trước đó. Nếu hai mã băm khác nhau thì dữ liệu đã thay đổi hoặc quá trình chuẩn hóa dữ liệu không giống với lúc tạo mã băm ban đầu.
+[0101] () Tuy nhiên, mã băm chỉ giúp kiểm tra dữ liệu có bị thay đổi so với dữ liệu đã được ghi nhận hay không. Mã băm không thể chứng minh cảm biến đã đo chính xác, dữ liệu ban đầu không bị giả mạo, mô hình nhận diện đưa ra kết quả đúng hoặc thiết bị thực tế đã dừng.
+[0102] (Heading2) 2.4. Isolation Forest
+[0103] () Isolation Forest là thuật toán phát hiện bất thường không giám sát. Thuật toán tạo nhiều cây chia ngẫu nhiên không gian đặc trưng; mẫu khác biệt thường bị cô lập với độ dài đường đi ngắn hơn. Đề tài sử dụng distance_cm và approach_speed_cm_s, huấn luyện chủ yếu trên mẫu SAFE. AI chỉ bổ sung cho hard threshold và không được phép hạ cảnh báo EMERGENCY.
+[0104] () CHƯƠNG 3
+[0105] () THIẾT KẾ HỆ THỐNG
+[0106] (Heading2) 3.1. Kiến trúc tổng thể
+[0107] () Kiến trúc tổng thể của hệ thống SonarChain được thiết kế dựa trên nguyên tắc phân tách hai luồng độc lập: luồng an toàn (safety path) và luồng kiểm toán (auditability path). Luồng an toàn đảm nhận nhiệm vụ xử lý tín hiệu khoảng cách thời gian thực và áp dụng chính sách ngưỡng an toàn cố định ngay tại thiết bị biên. Khi khoảng cách đo được vi phạm ngưỡng nguy hiểm, hệ thống ngay lập tức thiết lập trạng thái EMERGENCY và kích hoạt tín hiệu ngắt an toàn mà không phải phụ thuộc vào broker MQTT, trung tâm xử lý trung gian hay độ trễ giao dịch của mạng blockchain. Song song với đó, luồng kiểm toán tiếp nhận dữ liệu telemetry để đóng gói gói bằng chứng, tính toán mã băm SHA-256, quản lý hàng đợi và thực thi giao dịch ghi nhận sự kiện lên sổ cái phân tán.
+[0108] () 
+[0109] () Hình 3.1. Kiến trúc tổng thể hai luồng của SonarChain.
+[0110] () [TABLE] Luồng
+[0111] () [TABLE] Dữ liệu vào
+[0112] () [TABLE] Xử lý chính
+[0113] () [TABLE] Kết quả
+[0114] () [TABLE] Luồng an toàn
+[0115] () [TABLE] Khoảng cách từ HC-SR04
+[0116] () [TABLE] Đọc cảm biến; kiểm tra lỗi; áp dụng ngưỡng 60 cm và 30 cm.
+[0117] () [TABLE] SAFE/WARNING/EMERGENCY; yêu cầu dừng nếu nguy hiểm.
+[0118] () [TABLE] Luồng kiểm toán
+[0119] () [TABLE] Dữ liệu đo và kết quả phân loại
+[0120] () [TABLE] Tạo gói bằng chứng; tính SHA-256; lưu outbox; gửi giao dịch nếu được cấu hình.
+[0121] () [TABLE] Tệp JSON và mã băm trên HRCSafetyLog.
+[0122] () [TABLE] Luồng cấp phép
+[0123] () [TABLE] Permit, tài khoản, thời gian và mã khu vực
+[0124] () [TABLE] Kiểm tra người phê duyệt, thời hạn, vào khu vực và bàn giao.
+[0125] () [TABLE] Trạng thái permit và sự kiện Solidity.
+[0126] () Blockchain không được đặt trong vòng điều khiển dừng. Hợp đồng chỉ ghi nhận trạng thái logic và bằng chứng. Trạng thái deviceLocked trên chain không chứng minh rằng động cơ, relay hoặc cơ cấu dừng vật lý đã hoạt động; việc này cần mạch an toàn riêng và phép đo kiểm chứng.
+[0127] (Heading2) 3.2. Tầng IoT
+[0128] (Heading3) 3.2.1. Vai trò
+[0129] () Tầng IoT có chức năng thu thập dữ liệu khoảng cách thời gian thực, truyền phát dữ liệu telemetry và phát tín hiệu cảnh báo trực tiếp tại thiết bị biên. Vi điều khiển ESP32 được cấu hình để duy trì tính năng xử lý an toàn cục bộ một cách độc lập ngay cả khi xảy ra sự cố gián đoạn kết nối với broker, gateway hoặc mạng lưới blockchain.
+[0130] (Heading3) 3.2.2. Phần cứng
+[0131] () 
+[0132] () 
+[0133] (Heading3) 3.2.3. Thuật toán phân loại
+[0134] () [TABLE] if distance_cm <= 30:       severity = EMERGENCY; emergency_stop = trueelif distance_cm <= 60:     severity = WARNING; emergency_stop = falseelse:                         severity = SAFE; emergency_stop = falseSau hard threshold, nếu có model hợp lệ mới xét anomaly/confidence để bổ sung WARNING.
+[0135] () 
+[0136] (Heading3) 3.2.4. Gói tin telemetry
+[0137] () [TABLE] {"device_id":"ESP32-HRC-01","sensor_id":"HC-SR04", "timestamp_ms":1234,"distance_cm":24.7, "state":"EMERGENCY","emergency_stop":true,"seq":12}
+[0138] () 
+[0139] (Heading2) 3.3. Tầng AI
+[0140] (Heading3) 3.3.1. Bộ phận xử lý dữ liệu
+[0141] () Hàm `process_row()` đóng vai trò trung tâm trong tiến trình xử lý dữ liệu đầu vào từ tệp CSV hoặc chuỗi truyền dữ liệu cảm biến. Hàm thực hiện chuẩn hóa dữ liệu khoảng cách (`distance_cm`) về dạng số thực, trích xuất các đặc trưng chuỗi thời gian, kích hoạt hàm `classify()` để xác định mức độ an toàn, khởi tạo mã định danh sự kiện (`event_id`) và gọi tiến trình `build_evidence()`. Cấu trúc kết quả trả về bao gồm các trường thông tin: `event_id`, `device_id`, `timestamp`, `distance_cm`, `severity`, `confidence`, `emergency_stop`, `action` và `evidence_hash`. Trong trường hợp hệ thống có cấu hình `EvidenceOutbox`, gói bằng chứng sẽ được ghi tạm vào bộ đệm trước khi tiến hành phát giao dịch lên mạng lưới blockchain.
+[0142] () 
+[0143] (Heading3) 3.3.2. Đặc trưng và mô hình AI
+[0144] () Các đặc trưng gồm khoảng cách hiện tại, khoảng cách nhỏ nhất, chênh lệch giữa hai cảm biến khi có hai cảm biến và tốc độ thay đổi khoảng cách. Mô hình Isolation Forest học vùng hoạt động bình thường từ các mẫu SAFE. Một số tệp mô hình có thể chứa classifier, Isolation Forest và autoencoder; gateway chỉ dùng kết quả AI để bổ sung WARNING, không được hạ EMERGENCY thành mức thấp hơn
+[0145] (Heading3) 3.3.3. Triển khai
+[0146] () Gateway tự động nạp tập tin mô hình khi khởi chạy; trong trường hợp không tìm thấy tệp mô hình, tuyến xử lý sẽ tự động chuyển sang chế độ phân loại thuần túy dựa trên ngưỡng cứng. Các chỉ số như `confidence`, `model_version` và `policy_version` được đóng gói trực tiếp vào gói bằng chứng để đảm bảo tính truy vết cho mọi quyết định phân loại của hệ thống.
+[0147] (Heading2) 3.4. Tầng Blockchain
+[0148] (Heading3) 3.4.1. Vai trò
+[0149] () Hợp đồng thông minh `HRCSafetyLog` đóng vai trò là tầng lưu trữ cam kết bằng chứng (evidence commitment layer), có nhiệm vụ duy trì các giá trị băm và metadata tối thiểu để phục vụ việc đối chiếu dữ liệu ngoài chuỗi. Trong khi đó, hợp đồng `WorkPermitHandoff` quản lý luồng quy trình (workflow layer), chịu trách nhiệm kiểm soát quyền làm việc, phê duyệt của cấp quản lý, ghi nhận truy cập vùng nguy hiểm và thủ tục bàn giao. Cả hai hợp đồng đều vận hành hoàn toàn độc lập với việc đọc dữ liệu cảm biến trực tiếp và không tham gia vào luồng điều khiển động cơ của robot.
+[0150] (Heading3) 3.4.2. Phân quyền
+[0151] () [TABLE] Vai trò
+[0152] () [TABLE] Được phép
+[0153] () [TABLE] Ý nghĩa
+[0154] () [TABLE] Owner
+[0155] () [TABLE] Quản lý reporter; clear E-Stop; quản trị contract
+[0156] () [TABLE] Tài khoản triển khai/điều hành.
+[0157] () [TABLE] Reporter
+[0158] () [TABLE] recordEvent/recordEvidence
+[0159] () [TABLE] Đưa safety event lên log.
+[0160] () [TABLE] Supervisor
+[0161] () [TABLE] Approve/revoke permit
+[0162] () [TABLE] Phê duyệt workflow.
+[0163] () [TABLE] Gateway
+[0164] () [TABLE] Record zone entry
+[0165] () [TABLE] Ghi nhận worker vào zone dựa trên telemetry.
+[0166] () [TABLE] Worker/Requester
+[0167] () [TABLE] Create permit; confirm handoff; complete theo điều kiện
+[0168] () [TABLE] Tham gia workflow.
+[0169] () 
+[0170] (Heading3) 3.4.3. Máy trạng thái và hàm
+[0171] () Hợp đồng `HRCSafetyLog` quản lý các trạng thái logic bao gồm `eventExists`, `evidenceExists`, `deviceLocked` và `emergencyStopByDevice`. Khi một sự cố mức EMERGENCY được ghi nhận, trạng thái thiết bị sẽ tự động chuyển sang bị khóa (`deviceLocked`); việc giải phóng trạng thái này thông qua hàm `clearEmergencyStop` là quyền hạn riêng biệt của tài khoản quản trị (owner). Đối với hợp đồng `WorkPermitHandoff`, quy trình cấp phép được quản lý theo máy trạng thái hữu hạn với các chuyển tiếp: `PENDING` → `APPROVED` → `ACTIVE` → `COMPLETED`, hoặc chuyển sang `REVOKED` khi vi phạm điều kiện an toàn.
+[0172] () [TABLE] Contract / hàm
+[0173] () [TABLE] Quyền
+[0174] () [TABLE] Chức năng
+[0175] () [TABLE] recordEvidence
+[0176] () [TABLE] Reporter
+[0177] () [TABLE] Ghi digest, device hash, timestamp, severity, E-Stop, schema.
+[0178] () [TABLE] clearEmergencyStop
+[0179] () [TABLE] Owner
+[0180] () [TABLE] Gỡ latch logic trên chain.
+[0181] () [TABLE] createPermit
+[0182] () [TABLE] Bất kỳ requester
+[0183] () [TABLE] Tạo permit có thời hạn.
+[0184] () [TABLE] approvePermit
+[0185] () [TABLE] Supervisor
+[0186] () [TABLE] Phê duyệt permit.
+[0187] () [TABLE] recordZoneEntry
+[0188] () [TABLE] Gateway
+[0189] () [TABLE] Đưa permit sang ACTIVE.
+[0190] () [TABLE] confirmHandoff
+[0191] () [TABLE] Worker/ requester/ supervisor
+[0192] () [TABLE] Xác nhận bàn giao.
+[0193] () [TABLE] completePermit
+[0194] () [TABLE] Participant hợp lệ
+[0195] () [TABLE] Đóng permit.
+[0196] () 
+[0197] (Heading3) 3.4.4. Evidence và chống ghi trùng
+[0198] () Hợp đồng thông minh thực thi cơ chế kiểm tra tính hợp lệ nghiêm ngặt: từ chối các giao dịch chứa `eventHash` hoặc `evidenceHash` đã tồn tại trên sổ cái, không hỗ trợ các phiên bản cấu trúc dữ liệu không tương thích, yêu cầu nhãn thời gian phải hợp lệ và kiểm tra tính nhất quán giữa cờ dừng khẩn cấp với mức độ nghiêm trọng (`severity`). Cơ chế này đảm bảo tính duy nhất của các cam kết mật mã trên chuỗi; tuy nhiên, việc xác minh nội dung chi tiết ngoài chuỗi vẫn đòi hỏi hệ thống kiểm toán thực hiện tính toán lại mã băm và đối chiếu với dữ liệu giao dịch trên sổ cái.
+[0199] (Heading2) 3.5. Backend và Dashboard
+[0200] (Heading3) 3.5.1. Lưu trữ dữ liệu cục bộ
+[0201] () Lớp lưu trữ `TelemetryStore` sử dụng hệ quản trị cơ sở dữ liệu SQLite để quản lý các trường thông tin: `event_id`, `device_id`, `sensor_id`, thời điểm đo, khoảng cách, mức độ nghiêm trọng (`severity`), cờ ngắt an toàn, độ tin cậy, `evidence_hash`, trạng thái bằng chứng, mã giao dịch (`tx_hash`) và dữ liệu thô (`raw_payload`). Việc thiết lập khóa chính duy nhất trên trường `event_id` kết hợp với rào chắn `ON CONFLICT` cho phép hệ thống cập nhật linh hoạt trạng thái xử lý và mã giao dịch mà không làm phát sinh dữ liệu trùng lặp.
+[0202] (Heading3) 3.6.2. Kết nối blockchain và gửi giao dịch
+[0203] () Module `SafetyLogClient` khởi tạo kết nối RPC thông qua Web3 HTTPProvider, tiến hành nạp giao diện ABI, khởi tạo tài khoản từ khóa mật mã cá nhân (private key) và quản lý chỉ số đếm giao dịch (`nonce`). Khi phương thức `record_evidence()` được kích hoạt, client thực hiện ánh xạ mức `severity` sang giá trị kiểu liệt kê (enum) tương ứng, chuyển đổi nhãn thời gian sang chuẩn Unix, định dạng `evidence_hash` về kiểu `bytes32`, đồng thời tính toán mã băm keccak256 cho `device_id` và schema. Giao dịch được ký bảo mật tại cục bộ, truyền phát tới nút RPC và chờ xác nhận (receipt); nếu biên nhận giao dịch trả về trạng thái thất bại (`status != 1`), hệ thống sẽ ghi nhận lỗi để bộ đệm `outbox` duy trì bản ghi ở trạng thái chờ xử lý lại.
+[0204] (Heading3) 3.6.3. Dashboard
+[0205] () Giao diện giám sát tích hợp đọc cấu trúc ABI và địa chỉ hợp đồng đã triển khai để hiển thị danh sách sự kiện thời gian thực, trạng thái vận hành thiết bị, phân quyền báo cáo và tiến trình quản lý giấy phép. Ví điện tử MetaMask đóng vai trò là trình ký giao dịch bảo mật trên mạng thử nghiệm EVM cục bộ. Các tham số cấu hình hệ thống bao gồm `RPC_URL`, `CONTRACT_ADDRESS`, `PRIVATE_KEY` và `MODEL_PATH` được quản lý tập trung qua biến môi trường, đảm bảo nguyên tắc không lưu trữ trực tiếp thông tin bảo mật trong mã nguồn.
+[0206] () 
+[0207] () CHƯƠNG 4
+[0208] () KẾT QUẢ
+[0209] (Heading2) 4.1. Kết quả thi công phần cứng
+[0210] () 
+[0211] (Heading2) 4.2. Kết quả IoT
+[0212] () [TABLE] Hạng mục
+[0213] () [TABLE] Kết quả
+[0214] () [TABLE] Đọc HC-SR04
+[0215] () [TABLE] ………………………………
+[0216] () [TABLE] Chu kỳ lấy mẫu
+[0217] () [TABLE] ………………………………
+[0218] () [TABLE] Tỷ lệ payload hợp lệ
+[0219] () [TABLE] ………………………………
+[0220] () [TABLE] Độ trễ sensor → gateway
+[0221] () [TABLE] ………………………………
+[0222] () [TABLE] Tình huống timeout
+[0223] () [TABLE] ………………………………
+[0224] () [TABLE] Sai số đo khoảng cách
+[0225] () [TABLE] ………………………………
+[0226] () 
+[0227] (Heading2) 4.3. Kết quả AI
+[0228] () [TABLE] Mô hình
+[0229] () [TABLE] Precision
+[0230] () [TABLE] Recall
+[0231] () [TABLE] F1-score
+[0232] () [TABLE] Ghi chú
+[0233] () [TABLE] Isolation Forest
+[0234] () [TABLE] ……
+[0235] () [TABLE] ……
+[0236] () [TABLE] ……
+[0237] () [TABLE] ……
+[0238] () [TABLE] Mô hình lai/autoencoder
+[0239] () [TABLE] ……
+[0240] () [TABLE] ……
+[0241] () [TABLE] ……
+[0242] () [TABLE] ……
+[0243] () [TABLE] Mô hình được chọn
+[0244] () [TABLE] ……
+[0245] () [TABLE] ……
+[0246] () [TABLE] ……
+[0247] () [TABLE] Lý do: ………
+[0248] () 
+[0249] () [Bổ sung confusion matrix, phân bố anomaly score và phân tích false negative/false positive nếu có.]
+[0250] (Heading2) 4.4. Kết quả Smart Contract
+[0251] () [TABLE] Ca kiểm thử
+[0252] () [TABLE] Kết quả mong đợi
+[0253] () [TABLE] Kết quả thực tế
+[0254] () [TABLE] Record SAFE
+[0255] () [TABLE] Thành công; không khóa device
+[0256] () [TABLE] ……………………
+[0257] () [TABLE] Record EMERGENCY
+[0258] () [TABLE] Thành công; khóa device
+[0259] () [TABLE] ……………………
+[0260] () [TABLE] Duplicate hash
+[0261] () [TABLE] Revert event already recorded
+[0262] () [TABLE] ……………………
+[0263] () [TABLE] Reporter trái phép
+[0264] () [TABLE] Revert not reporter
+[0265] () [TABLE] ……………………
+[0266] () [TABLE] Clear E-Stop
+[0267] () [TABLE] Chỉ owner; latch false
+[0268] () [TABLE] ……………………
+[0269] () [TABLE] Permit workflow
+[0270] () [TABLE] Đúng trạng thái và quyền
+[0271] () [TABLE] ……………………
+[0272] () 
+[0273] (Heading2) 4.5. Kết quả end-to-end
+[0274] () [TABLE] Kịch bản
+[0275] () [TABLE] Telemetry
+[0276] () [TABLE] AI/gateway
+[0277] () [TABLE] Blockchain
+[0278] () [TABLE] Dashboard
+[0279] () [TABLE] SAFE
+[0280] () [TABLE] ……
+[0281] () [TABLE] ……
+[0282] () [TABLE] ……
+[0283] () [TABLE] ……
+[0284] () [TABLE] WARNING
+[0285] () [TABLE] ……
+[0286] () [TABLE] ……
+[0287] () [TABLE] ……
+[0288] () [TABLE] ……
+[0289] () [TABLE] EMERGENCY
+[0290] () [TABLE] ……
+[0291] () [TABLE] ……
+[0292] () [TABLE] ……
+[0293] () [TABLE] ……
+[0294] () [TABLE] RPC mất kết nối
+[0295] () [TABLE] ……
+[0296] () [TABLE] Outbox pending
+[0297] () [TABLE] ……
+[0298] () [TABLE] ……
+[0299] () [TABLE] Permit + handoff
+[0300] () [TABLE] ……
+[0301] () [TABLE] ……
+[0302] () [TABLE] ……
+[0303] () [TABLE] ……
+[0304] () 
+[0305] () [Chèn ảnh chụp dashboard, transaction hash, event log và tệp evidence tương ứng. Các ảnh/số liệu cần ghi kèm thời gian và commit mã nguồn.]
+[0306] (Heading2) 4.6. Đánh giá mục tiêu
+[0307] () [TABLE] Mục tiêu
+[0308] () [TABLE] Bằng chứng
+[0309] () [TABLE] Đánh giá
+[0310] () [TABLE] R1
+[0311] () [TABLE] ……………………
+[0312] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0313] () [TABLE] R2
+[0314] () [TABLE] ……………………
+[0315] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0316] () [TABLE] R3
+[0317] () [TABLE] ……………………
+[0318] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0319] () [TABLE] R4
+[0320] () [TABLE] ……………………
+[0321] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0322] () [TABLE] R5
+[0323] () [TABLE] ……………………
+[0324] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0325] () [TABLE] R6
+[0326] () [TABLE] ……………………
+[0327] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0328] () [TABLE] R7
+[0329] () [TABLE] ……………………
+[0330] () [TABLE] Đạt / Đạt một phần / Chưa đạt
+[0331] () 
+[0332] () CHƯƠNG 5
+[0333] () KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+[0334] (Heading2) 5.1. Kết luận
+[0335] () Nghiên cứu đã thiết kế và triển khai thành công mô hình thực nghiệm SonarChain – HRC Safety Log dựa trên sự kết hợp giữa công nghệ IoT, AI và Blockchain. Hệ thống tích hợp thành công vi điều khiển ESP32 và cảm biến HC-SR04 để thu thập telemetry, triển khai gateway Python thực thi chính sách fail-safe kết hợp mô hình AI, phát triển cơ chế bằng chứng ngoài chuỗi (evidence outbox), cùng hai hợp đồng thông minh `HRCSafetyLog` và `WorkPermitHandoff` quản lý dữ liệu kiểm toán và luồng quy trình vận hành.
+[0336] () Kiến trúc hai luồng độc lập được xác định là nguyên tắc thiết kế cốt lõi của đề tài: quyết định ngắt an toàn phải được thực thi tức thời tại tầng biên/gateway, trong khi mạng blockchain đóng vai trò là tầng lưu trữ bằng chứng kiểm toán và điều phối quy trình. Việc phân tách rõ ràng này loại bỏ hoàn toàn sự phụ thuộc của vòng điều khiển an toàn vào độ trễ và tính sẵn sàng của hạ tầng blockchain. 
+[0337] (Heading2) 5.2. Hướng phát triển
+[0338] () Nâng cấp tầng cảm biến biên bằng việc tích hợp các công nghệ đo hiện đại như Time-of-Flight (ToF), LiDAR hoặc cảm biến an toàn chuyên dụng, kết hợp với thuật toán dung hợp cảm biến (sensor fusion).
+[0339] () Thiết kế phần cứng ngắt an toàn E-Stop vật lý độc lập, bổ sung mạch giám sát phần cứng (watchdog), dự phòng gateway và thực hiện các bài kiểm thử nghiêm ngặt trong điều kiện mất kết nối mạng hoặc sự cố nguồn điện.
+[0340] () Chuẩn hóa cấu trúc bằng chứng (evidence schema) đồng bộ giữa phần sụn (firmware), gateway, hợp đồng thông minh và giao diện giám sát; đồng thời xây dựng công cụ xác thực độc lập (verifier) để đối chiếu dữ liệu trên chuỗi.
+[0341] () Hoàn thiện hệ thống backend với dịch vụ quản trị cơ sở dữ liệu chuyên dụng, tích hợp cơ chế xác thực người dùng, chính sách lưu trữ dữ liệu lâu dài và thuật toán tự động gửi lại/đối soát giao dịch lỗi.
+[0342] () Mở rộng quy mô đánh giá mô hình AI trên các tập dữ liệu đa dạng hơn, phân tích theo phiên đo thực tế, đánh giá hiện tượng dịch chuyển phân phối dữ liệu (concept drift) và tối ưu tỷ lệ âm tính giả (false negative).
+[0343] () Nghiên cứu chuyển đổi sang các nền tảng blockchain cấp phép (permissioned blockchain) hoặc áp dụng giải pháp gom cụm giao dịch (batching/Merkle tree) nhằm giảm thiểu chi phí và nâng cao hiệu năng khi mở rộng quy mô.
+[0344] () Ràng buộc mã băm sự kiện telemetry (`telemetryEventHash`) của thủ tục vào vùng nguy hiểm với hợp đồng SafetyLog, đồng thời hoàn thiện chính sách xử lý giấy phép quá hạn.
+[0345] (Heading2) 5.3. Hạn chế
+[0346] () Hệ thống hiện tại dừng lại ở mức mô hình thực nghiệm, chưa đạt các chứng nhận chuẩn an toàn chức năng công nghiệp; cảm biến siêu âm HC-SR04 tồn tại hạn chế về góc quét, độ nhạy bề mặt vật liệu và khả năng chống nhiễu môi trường; tập dữ liệu huấn luyện AI chưa đủ độ bao phủ để khẳng định tính tổng quát hóa cao; giao diện giám sát còn duy trì trạng thái trong bộ đệm RAM; và cờ trạng thái `LOCKED` trên blockchain mới chỉ thể hiện ràng buộc về mặt logic, chưa chứng minh được sự ngắt cơ học của thiết bị vật lý.
+[0347] () PHỤ LỤC
+[0348] () HƯỚNG DẪN CHẠY VÀ TÁI LẬP DEMO
+[0349] (Heading2) A.1. Dashboard mô phỏng
+[0350] () [TABLE] cd "C:\Users\P1 Gen 5\Downloads\Blockchain"py -m http.server 8080 -d web3Mở http://localhost:8080 → Chạy mô phỏng
+[0351] () 
+[0352] (Heading2) A.2. Smart contract local
+[0353] () [TABLE] cd contractsnpm.cmd installnpm.cmd run compilenpm.cmd testnpm.cmd run nodenpm.cmd run deploy
+[0354] () 
+[0355] (Heading2) A.3. Replay dữ liệu
+[0356] () [TABLE] python -m iot_code.gateway.pipeline --csv ai_model/data/raw/son_dungyen_30_DANGER.csv --limit 10
+[0357] () 
+[0358] (Heading2) A.4. Dữ liệu cần lưu khi chạy
+[0359] () [TABLE] Thông tin
+[0360] () [TABLE] Giá trị
+[0361] () [TABLE] Thời gian
+[0362] () [TABLE] ………………………………
+[0363] () [TABLE] Commit/tag
+[0364] () [TABLE] ………………………………
+[0365] () [TABLE] Model/config
+[0366] () [TABLE] ………………………………
+[0367] () [TABLE] RPC/contract
+[0368] () [TABLE] ………………………………
+[0369] () [TABLE] File evidence
+[0370] () [TABLE] ………………………………
+[0371] () [TABLE] Người thực hiện
+[0372] () [TABLE] ………………………………
+[0373] () 

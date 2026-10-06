@@ -1,0 +1,2994 @@
+[
+  {
+    "id": 0,
+    "style": "",
+    "text": "",
+    "drawings": 1,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 1,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 2,
+    "style": "",
+    "text": "BỘ GIÁO DỤC VÀ ĐÀO TẠO",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 3,
+    "style": "",
+    "text": "TRƯỜNG ĐẠI HỌC CÔNG NGHỆ KỸ THUẬT TP. HCM",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 4,
+    "style": "",
+    "text": "KHOA ĐIỆN - ĐIỆN TỬ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 5,
+    "style": "",
+    "text": "",
+    "drawings": 1,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 6,
+    "style": "",
+    "text": " BÁO CÁO CUỐI KỲ MÔN HỌC",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 7,
+    "style": "",
+    "text": "BLOCKCHAIN VÀ ỨNG DỤNG ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 8,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 9,
+    "style": "",
+    "text": "HỘP ĐEN AN TOÀN VÀ ĐỊNH DANH",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 10,
+    "style": "",
+    "text": "CHO ROBOT HỢP TÁC",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 11,
+    "style": "",
+    "text": "Nhóm thực hiện: Nhóm 9",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 12,
+    "style": "",
+    "text": "Danh sách sinh viên:",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 13,
+    "style": "",
+    "text": "1. Nguyễn Trần Minh Đức                                         MSSV 23139012",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 14,
+    "style": "",
+    "text": "2. Đỗ Thanh Sơn",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 15,
+    "style": "",
+    "text": "3. Nguyễn Tuấn Kiệt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 16,
+    "style": "",
+    "text": "4. Huỳnh Trần Tiến Thịnh",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 17,
+    "style": "",
+    "text": "5. Nguyễn Hữu Quý",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 18,
+    "style": "",
+    "text": "GVHD: TS. Huỳnh Thế Thiện",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 19,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 20,
+    "style": "",
+    "text": " ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 21,
+    "style": "",
+    "text": " ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 22,
+    "style": "",
+    "text": " ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 23,
+    "style": "",
+    "text": "TP. Hồ Chí Minh, tháng 10 năm 2026",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 24,
+    "style": "",
+    "text": "LỜI CẢM ƠN",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 25,
+    "style": "",
+    "text": "Lời đầu tiên, chúng em xin gửi lời cảm ơn chân thành đến thầy Huỳnh Thế Thiện, giảng viên bộ môn Blockchain và ứng dụng. Trong suốt quá trình học tập, thầy đã rất tâm huyết truyền đạt và hướng dẫn cho chúng em nhiều điều bổ ích trong môn học và kỹ năng làm một bài nghiên cứu để chúng em có đủ kiến thức thực hiện bài nghiên cứu này.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 26,
+    "style": "",
+    "text": "Tuy nhiên vì kiến thức bản thân còn nhiều hạn chế và sự tìm hiểu chưa sâu sắc nên không tránh khỏi những thiếu sót. Mong thầy sẽ châm chước và cho chúng em những lời góp ý để bài nghiên cứu của chúng em hoàn thiện hơn. Một lần nữa, chúng em xin gửi lời cảm ơn sâu sắc đến thầy và chúc thầy luôn mạnh khỏe, hạnh phúc và thành công trong sự nghiệp.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 27,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 28,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 29,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 30,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 31,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 32,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 33,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 34,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 35,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 36,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 37,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 38,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 39,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 40,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 41,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 42,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 43,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 44,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 45,
+    "style": "Heading1",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 46,
+    "style": "Heading1",
+    "text": "TÓM TẮT",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 47,
+    "style": "",
+    "text": "Đề tài SonarChain – HRC Safety Log nghiên cứu việc kết hợp IoT, AI và Blockchain để xây dựng một lớp giám sát và truy vết sự kiện an toàn trong không gian cộng tác giữa người và robot. Hệ thống sử dụng cảm biến siêu âm HC-SR04 kết nối với ESP32 để đo khoảng cách, gateway Python để xử lý telemetry, mô hình phát hiện bất thường để hỗ trợ phân tích và smart contract để lưu cam kết bằng chứng.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 48,
+    "style": "",
+    "text": "Kiến trúc được chia thành hai luồng. Luồng an toàn tại edge áp dụng ngưỡng fail-safe và có thể kích hoạt yêu cầu E-Stop cục bộ mà không phụ thuộc MQTT, RPC hoặc blockchain. Luồng truy vết tạo evidence envelope off-chain, tính SHA-256, lưu bản ghi vào outbox và ghi digest cùng metadata lên HRCSafetyLog. Smart contract WorkPermitHandoff bổ sung workflow cấp phép làm việc, zone entry và human–robot handoff. Dashboard SonarChain hỗ trợ mô phỏng telemetry, hiển thị sự kiện và ký giao dịch bằng MetaMask khi chạy mạng EVM local.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 49,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 50,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 51,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 52,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 53,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 54,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 55,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 56,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 57,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 58,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 59,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 60,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 61,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 62,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 63,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 64,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 65,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 66,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 67,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 68,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 69,
+    "style": "",
+    "text": "MỤC LỤC",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 70,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 71,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 72,
+    "style": "",
+    "text": "CHƯƠNG 1:",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 73,
+    "style": "",
+    "text": "GIỚI THIỆU TỔNG QUAN",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 74,
+    "style": "Heading2",
+    "text": "1.1. Giới thiệu đề tài",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 75,
+    "style": "",
+    "text": "Trong các dây chuyền sản xuất hiện đại, robot hợp tác cho phép con người và robot chia sẻ một phần không gian làm việc. Mô hình này tạo ra sự linh hoạt và hỗ trợ tự động hóa nhiều công đoạn, nhưng đồng thời đòi hỏi hệ thống phải theo dõi khoảng cách, phát hiện trạng thái nguy hiểm và lưu lại thông tin sau sự cố. Một cảnh báo tại chỗ có thể đáp ứng yêu cầu phản ứng nhanh nhưng thường thiếu dữ liệu để kiểm tra nguồn gốc; ngược lại, việc đặt quyết định dừng lên một dịch vụ mạng hoặc blockchain có thể tạo ra độ trễ và điểm phụ thuộc không phù hợp với an toàn thời gian thực.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 76,
+    "style": "",
+    "text": "Vì vậy, đề tài tập trung vào một lớp hộp đen có khả năng ghi nhận sự kiện an toàn theo cách có thể đối chiếu. Dữ liệu chi tiết được giữ ngoài chuỗi để phục vụ phân tích, trong khi blockchain lưu một cam kết ngắn gọn và các metadata cần thiết. Cách tiếp cận này tận dụng tính bất biến và khả năng kiểm toán của blockchain mà không biến blockchain thành bộ điều khiển trực tiếp của robot.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 77,
+    "style": "Heading2",
+    "text": "1.2. Mục tiêu đề tài",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 78,
+    "style": "",
+    "text": "•Thiết kế tầng IoT dùng ESP32 và một hoặc hai cảm biến HC-SR04 để phát telemetry khoảng cách.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 79,
+    "style": "",
+    "text": "•Xây dựng gateway Python tiếp nhận dữ liệu qua Serial/MQTT, kiểm tra payload và trích xuất đặc trưng.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 80,
+    "style": "",
+    "text": "•Áp dụng Isolation Forest như lớp hỗ trợ phát hiện mẫu đo bất thường; không cho AI hạ mức cảnh báo EMERGENCY của policy ngưỡng.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 81,
+    "style": "",
+    "text": "•Chuẩn hóa evidence envelope, tạo SHA-256 và lưu bằng chứng chi tiết ngoài chuỗi.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 82,
+    "style": "",
+    "text": "•Xây dựng HRCSafetyLog để phân quyền reporter, chống ghi trùng, ghi nhận digest và duy trì trạng thái khóa logic.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 83,
+    "style": "",
+    "text": "•Xây dựng WorkPermitHandoff cho permit, supervisor approval, zone entry và human–robot handoff.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 84,
+    "style": "",
+    "text": "•Cung cấp dashboard/mô phỏng và hướng dẫn tái lập project trên mạng EVM local.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 85,
+    "style": "Heading2",
+    "text": "1.3. Phạm vi và giới hạn",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 86,
+    "style": "",
+    "text": "Phạm vi gồm ESP32, HC-SR04, buzzer, gateway Python, dữ liệu CSV/JSON, mô hình Isolation Forest hoặc mô hình lai, hai smart contract Solidity và dashboard HTML/JavaScript. Mạng blockchain dùng Hardhat local cho phát triển. Các ngưỡng 60 cm và 30 cm là tham số demo. Hệ thống chưa được chứng nhận an toàn chức năng, chưa chứng minh cơ cấu E-Stop vật lý và không dùng blockchain để điều khiển motor hoặc relay.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 87,
+    "style": "",
+    "text": "CHƯƠNG 2",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 88,
+    "style": "",
+    "text": "CƠ SỞ LÝ THUYẾT",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 89,
+    "style": "Heading2",
+    "text": "2.1. Tổng quan về CPS và robot hợp tác",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 90,
+    "style": "",
+    "text": "Hệ thống thực-ảo là hệ thống trong đó quá trình vật lý và quá trình tính toán liên kết chặt chẽ, tác động qua lại qua vòng lặp cảm nhận, tính toán và điều phối. Một hệ thống thực-ảo điển hình gồm ba thành phần: lớp cảm biến/chấp hành tiếp xúc với thế giới vật lý, lớp tính toán xử lý và ra quyết định, và lớp mạng/điều phối kết nối các thành phần phân tán. Trong đồ án này, tầng vật lý là các cảm biến sinh hiệu tại nút biên, tầng tính toán là mô hình AI được huấn luyện liên kết, còn tầng điều phối và xác thực là mạng blockchain, nơi các quyết định như chốt mô hình hay chia thưởng được thực thi tự động, minh bạch và bất biến.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 91,
+    "style": "Heading2",
+    "text": "2.3. Blockchain, Smart Contract và hàm băm",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 92,
+    "style": "",
+    "text": "Blockchain là một hệ thống sổ cái phân tán, trong đó các giao dịch được mạng lưới xác nhận và ghi lại theo thứ tự. Sau khi dữ liệu được ghi lên blockchain, việc thay đổi dữ liệu đã ghi là rất khó vì cần phải đáp ứng các cơ chế xác nhận của mạng lưới.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 93,
+    "style": "",
+    "text": "Hợp đồng thông minh là một chương trình được triển khai trên blockchain. Với Ethereum, chương trình này được thực thi bởi máy ảo Ethereum. Hợp đồng thông minh có thể kiểm tra quyền của người gửi, kiểm tra điều kiện của dữ liệu, cập nhật trạng thái và ghi nhận các sự kiện của hệ thống.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 94,
+    "style": "",
+    "text": "Trong đề tài, blockchain không lưu toàn bộ dữ liệu cảm biến vì dữ liệu này có thể có kích thước lớn và được tạo ra thường xuyên. Blockchain chỉ lưu những thông tin cần thiết để kiểm tra và xác minh bằng chứng, gồm: mã băm của bằng chứng, mã băm của thiết bị, thời gian đo, mức độ nghiêm trọng, trạng thái dừng khẩn cấp, phiên bản cấu trúc dữ liệu và người gửi dữ liệu.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 95,
+    "style": "",
+    "text": "Các dữ liệu như dữ liệu cảm biến ban đầu, độ tin cậy của kết quả nhận diện, phiên bản mô hình và trạng thái thử gửi lại được lưu bên ngoài blockchain. Khi cần kiểm tra, hệ thống có thể lấy dữ liệu này và đối chiếu với thông tin đã được ghi trên blockchain.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 96,
+    "style": "",
+    "text": "SHA-256 là một hàm băm mật mã. Hàm này nhận dữ liệu đầu vào có kích thước bất kỳ và tạo ra một giá trị băm có kích thước cố định 256 bit, tương đương 32 byte.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 97,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 98,
+    "style": "",
+    "text": "Trong đề tài, trước khi băm, dữ liệu bằng chứng được đưa về cùng một cách biểu diễn thống nhất. Sau đó hệ thống sử dụng SHA-256 để tạo mã băm.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 99,
+    "style": "",
+    "text": "Mã băm này được ghi lên blockchain. Khi cần kiểm tra, hệ thống lấy lại dữ liệu bằng chứng được lưu bên ngoài blockchain, chuẩn hóa dữ liệu theo đúng quy tắc ban đầu và thực hiện SHA-256 một lần nữa.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 100,
+    "style": "",
+    "text": "Nếu mã băm mới giống với mã băm đã được ghi trên blockchain thì dữ liệu hiện tại phù hợp với dữ liệu đã được ghi nhận trước đó. Nếu hai mã băm khác nhau thì dữ liệu đã thay đổi hoặc quá trình chuẩn hóa dữ liệu không giống với lúc tạo mã băm ban đầu.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 101,
+    "style": "",
+    "text": "Tuy nhiên, mã băm chỉ giúp kiểm tra dữ liệu có bị thay đổi so với dữ liệu đã được ghi nhận hay không. Mã băm không thể chứng minh cảm biến đã đo chính xác, dữ liệu ban đầu không bị giả mạo, mô hình nhận diện đưa ra kết quả đúng hoặc thiết bị thực tế đã dừng.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 102,
+    "style": "Heading2",
+    "text": "2.4. Isolation Forest",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 103,
+    "style": "",
+    "text": "Isolation Forest là thuật toán phát hiện bất thường không giám sát. Thuật toán tạo nhiều cây chia ngẫu nhiên không gian đặc trưng; mẫu khác biệt thường bị cô lập với độ dài đường đi ngắn hơn. Đề tài sử dụng distance_cm và approach_speed_cm_s, huấn luyện chủ yếu trên mẫu SAFE. AI chỉ bổ sung cho hard threshold và không được phép hạ cảnh báo EMERGENCY.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 104,
+    "style": "",
+    "text": "CHƯƠNG 3",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 105,
+    "style": "",
+    "text": "THIẾT KẾ HỆ THỐNG",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 106,
+    "style": "Heading2",
+    "text": "3.1. Kiến trúc tổng thể",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 107,
+    "style": "",
+    "text": "Kiến trúc tổng thể của hệ thống SonarChain được thiết kế dựa trên nguyên tắc phân tách hai luồng độc lập: luồng an toàn (safety path) và luồng kiểm toán (auditability path). Luồng an toàn đảm nhận nhiệm vụ xử lý tín hiệu khoảng cách thời gian thực và áp dụng chính sách ngưỡng an toàn cố định ngay tại thiết bị biên. Khi khoảng cách đo được vi phạm ngưỡng nguy hiểm, hệ thống ngay lập tức thiết lập trạng thái EMERGENCY và kích hoạt tín hiệu ngắt an toàn mà không phải phụ thuộc vào broker MQTT, trung tâm xử lý trung gian hay độ trễ giao dịch của mạng blockchain. Song song với đó, luồng kiểm toán tiếp nhận dữ liệu telemetry để đóng gói gói bằng chứng, tính toán mã băm SHA-256, quản lý hàng đợi và thực thi giao dịch ghi nhận sự kiện lên sổ cái phân tán.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 108,
+    "style": "",
+    "text": "",
+    "drawings": 1,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 109,
+    "style": "",
+    "text": "Hình 3.1. Kiến trúc tổng thể hai luồng của SonarChain.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 110,
+    "style": "",
+    "text": "Luồng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 111,
+    "style": "",
+    "text": "Dữ liệu vào",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 112,
+    "style": "",
+    "text": "Xử lý chính",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 113,
+    "style": "",
+    "text": "Kết quả",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 114,
+    "style": "",
+    "text": "Luồng an toàn",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 115,
+    "style": "",
+    "text": "Khoảng cách từ HC-SR04",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 116,
+    "style": "",
+    "text": "Đọc cảm biến; kiểm tra lỗi; áp dụng ngưỡng 60 cm và 30 cm.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 117,
+    "style": "",
+    "text": "SAFE/WARNING/EMERGENCY; yêu cầu dừng nếu nguy hiểm.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 118,
+    "style": "",
+    "text": "Luồng kiểm toán",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 119,
+    "style": "",
+    "text": "Dữ liệu đo và kết quả phân loại",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 120,
+    "style": "",
+    "text": "Tạo gói bằng chứng; tính SHA-256; lưu outbox; gửi giao dịch nếu được cấu hình.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 121,
+    "style": "",
+    "text": "Tệp JSON và mã băm trên HRCSafetyLog.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 122,
+    "style": "",
+    "text": "Luồng cấp phép",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 123,
+    "style": "",
+    "text": "Permit, tài khoản, thời gian và mã khu vực",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 124,
+    "style": "",
+    "text": "Kiểm tra người phê duyệt, thời hạn, vào khu vực và bàn giao.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 125,
+    "style": "",
+    "text": "Trạng thái permit và sự kiện Solidity.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 126,
+    "style": "",
+    "text": "Blockchain không được đặt trong vòng điều khiển dừng. Hợp đồng chỉ ghi nhận trạng thái logic và bằng chứng. Trạng thái deviceLocked trên chain không chứng minh rằng động cơ, relay hoặc cơ cấu dừng vật lý đã hoạt động; việc này cần mạch an toàn riêng và phép đo kiểm chứng.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 127,
+    "style": "Heading2",
+    "text": "3.2. Tầng IoT",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 128,
+    "style": "Heading3",
+    "text": "3.2.1. Vai trò",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 129,
+    "style": "",
+    "text": "Tầng IoT có chức năng thu thập dữ liệu khoảng cách thời gian thực, truyền phát dữ liệu telemetry và phát tín hiệu cảnh báo trực tiếp tại thiết bị biên. Vi điều khiển ESP32 được cấu hình để duy trì tính năng xử lý an toàn cục bộ một cách độc lập ngay cả khi xảy ra sự cố gián đoạn kết nối với broker, gateway hoặc mạng lưới blockchain.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 130,
+    "style": "Heading3",
+    "text": "3.2.2. Phần cứng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 131,
+    "style": "",
+    "text": "",
+    "drawings": 1,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 132,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 133,
+    "style": "Heading3",
+    "text": "3.2.3. Thuật toán phân loại",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 134,
+    "style": "",
+    "text": "if distance_cm <= 30:       severity = EMERGENCY; emergency_stop = trueelif distance_cm <= 60:     severity = WARNING; emergency_stop = falseelse:                         severity = SAFE; emergency_stop = falseSau hard threshold, nếu có model hợp lệ mới xét anomaly/confidence để bổ sung WARNING.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 135,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 136,
+    "style": "Heading3",
+    "text": "3.2.4. Gói tin telemetry",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 137,
+    "style": "",
+    "text": "{\"device_id\":\"ESP32-HRC-01\",\"sensor_id\":\"HC-SR04\", \"timestamp_ms\":1234,\"distance_cm\":24.7, \"state\":\"EMERGENCY\",\"emergency_stop\":true,\"seq\":12}",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 138,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 139,
+    "style": "Heading2",
+    "text": "3.3. Tầng AI",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 140,
+    "style": "Heading3",
+    "text": "3.3.1. Bộ phận xử lý dữ liệu",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 141,
+    "style": "",
+    "text": "Hàm `process_row()` đóng vai trò trung tâm trong tiến trình xử lý dữ liệu đầu vào từ tệp CSV hoặc chuỗi truyền dữ liệu cảm biến. Hàm thực hiện chuẩn hóa dữ liệu khoảng cách (`distance_cm`) về dạng số thực, trích xuất các đặc trưng chuỗi thời gian, kích hoạt hàm `classify()` để xác định mức độ an toàn, khởi tạo mã định danh sự kiện (`event_id`) và gọi tiến trình `build_evidence()`. Cấu trúc kết quả trả về bao gồm các trường thông tin: `event_id`, `device_id`, `timestamp`, `distance_cm`, `severity`, `confidence`, `emergency_stop`, `action` và `evidence_hash`. Trong trường hợp hệ thống có cấu hình `EvidenceOutbox`, gói bằng chứng sẽ được ghi tạm vào bộ đệm trước khi tiến hành phát giao dịch lên mạng lưới blockchain.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 142,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 143,
+    "style": "Heading3",
+    "text": "3.3.2. Đặc trưng và mô hình AI",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 144,
+    "style": "",
+    "text": "Các đặc trưng gồm khoảng cách hiện tại, khoảng cách nhỏ nhất, chênh lệch giữa hai cảm biến khi có hai cảm biến và tốc độ thay đổi khoảng cách. Mô hình Isolation Forest học vùng hoạt động bình thường từ các mẫu SAFE. Một số tệp mô hình có thể chứa classifier, Isolation Forest và autoencoder; gateway chỉ dùng kết quả AI để bổ sung WARNING, không được hạ EMERGENCY thành mức thấp hơn",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 145,
+    "style": "Heading3",
+    "text": "3.3.3. Triển khai",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 146,
+    "style": "",
+    "text": "Gateway tự động nạp tập tin mô hình khi khởi chạy; trong trường hợp không tìm thấy tệp mô hình, tuyến xử lý sẽ tự động chuyển sang chế độ phân loại thuần túy dựa trên ngưỡng cứng. Các chỉ số như `confidence`, `model_version` và `policy_version` được đóng gói trực tiếp vào gói bằng chứng để đảm bảo tính truy vết cho mọi quyết định phân loại của hệ thống.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 147,
+    "style": "Heading2",
+    "text": "3.4. Tầng Blockchain",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 148,
+    "style": "Heading3",
+    "text": "3.4.1. Vai trò",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 149,
+    "style": "",
+    "text": "Hợp đồng thông minh `HRCSafetyLog` đóng vai trò là tầng lưu trữ cam kết bằng chứng (evidence commitment layer), có nhiệm vụ duy trì các giá trị băm và metadata tối thiểu để phục vụ việc đối chiếu dữ liệu ngoài chuỗi. Trong khi đó, hợp đồng `WorkPermitHandoff` quản lý luồng quy trình (workflow layer), chịu trách nhiệm kiểm soát quyền làm việc, phê duyệt của cấp quản lý, ghi nhận truy cập vùng nguy hiểm và thủ tục bàn giao. Cả hai hợp đồng đều vận hành hoàn toàn độc lập với việc đọc dữ liệu cảm biến trực tiếp và không tham gia vào luồng điều khiển động cơ của robot.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 150,
+    "style": "Heading3",
+    "text": "3.4.2. Phân quyền",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 151,
+    "style": "",
+    "text": "Vai trò",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 152,
+    "style": "",
+    "text": "Được phép",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 153,
+    "style": "",
+    "text": "Ý nghĩa",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 154,
+    "style": "",
+    "text": "Owner",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 155,
+    "style": "",
+    "text": "Quản lý reporter; clear E-Stop; quản trị contract",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 156,
+    "style": "",
+    "text": "Tài khoản triển khai/điều hành.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 157,
+    "style": "",
+    "text": "Reporter",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 158,
+    "style": "",
+    "text": "recordEvent/recordEvidence",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 159,
+    "style": "",
+    "text": "Đưa safety event lên log.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 160,
+    "style": "",
+    "text": "Supervisor",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 161,
+    "style": "",
+    "text": "Approve/revoke permit",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 162,
+    "style": "",
+    "text": "Phê duyệt workflow.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 163,
+    "style": "",
+    "text": "Gateway",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 164,
+    "style": "",
+    "text": "Record zone entry",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 165,
+    "style": "",
+    "text": "Ghi nhận worker vào zone dựa trên telemetry.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 166,
+    "style": "",
+    "text": "Worker/Requester",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 167,
+    "style": "",
+    "text": "Create permit; confirm handoff; complete theo điều kiện",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 168,
+    "style": "",
+    "text": "Tham gia workflow.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 169,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 170,
+    "style": "Heading3",
+    "text": "3.4.3. Máy trạng thái và hàm",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 171,
+    "style": "",
+    "text": "Hợp đồng `HRCSafetyLog` quản lý các trạng thái logic bao gồm `eventExists`, `evidenceExists`, `deviceLocked` và `emergencyStopByDevice`. Khi một sự cố mức EMERGENCY được ghi nhận, trạng thái thiết bị sẽ tự động chuyển sang bị khóa (`deviceLocked`); việc giải phóng trạng thái này thông qua hàm `clearEmergencyStop` là quyền hạn riêng biệt của tài khoản quản trị (owner). Đối với hợp đồng `WorkPermitHandoff`, quy trình cấp phép được quản lý theo máy trạng thái hữu hạn với các chuyển tiếp: `PENDING` → `APPROVED` → `ACTIVE` → `COMPLETED`, hoặc chuyển sang `REVOKED` khi vi phạm điều kiện an toàn.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 172,
+    "style": "",
+    "text": "Contract / hàm",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 173,
+    "style": "",
+    "text": "Quyền",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 174,
+    "style": "",
+    "text": "Chức năng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 175,
+    "style": "",
+    "text": "recordEvidence",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 176,
+    "style": "",
+    "text": "Reporter",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 177,
+    "style": "",
+    "text": "Ghi digest, device hash, timestamp, severity, E-Stop, schema.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 178,
+    "style": "",
+    "text": "clearEmergencyStop",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 179,
+    "style": "",
+    "text": "Owner",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 180,
+    "style": "",
+    "text": "Gỡ latch logic trên chain.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 181,
+    "style": "",
+    "text": "createPermit",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 182,
+    "style": "",
+    "text": "Bất kỳ requester",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 183,
+    "style": "",
+    "text": "Tạo permit có thời hạn.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 184,
+    "style": "",
+    "text": "approvePermit",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 185,
+    "style": "",
+    "text": "Supervisor",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 186,
+    "style": "",
+    "text": "Phê duyệt permit.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 187,
+    "style": "",
+    "text": "recordZoneEntry",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 188,
+    "style": "",
+    "text": "Gateway",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 189,
+    "style": "",
+    "text": "Đưa permit sang ACTIVE.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 190,
+    "style": "",
+    "text": "confirmHandoff",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 191,
+    "style": "",
+    "text": "Worker/ requester/ supervisor",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 192,
+    "style": "",
+    "text": "Xác nhận bàn giao.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 193,
+    "style": "",
+    "text": "completePermit",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 194,
+    "style": "",
+    "text": "Participant hợp lệ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 195,
+    "style": "",
+    "text": "Đóng permit.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 196,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 197,
+    "style": "Heading3",
+    "text": "3.4.4. Evidence và chống ghi trùng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 198,
+    "style": "",
+    "text": "Hợp đồng thông minh thực thi cơ chế kiểm tra tính hợp lệ nghiêm ngặt: từ chối các giao dịch chứa `eventHash` hoặc `evidenceHash` đã tồn tại trên sổ cái, không hỗ trợ các phiên bản cấu trúc dữ liệu không tương thích, yêu cầu nhãn thời gian phải hợp lệ và kiểm tra tính nhất quán giữa cờ dừng khẩn cấp với mức độ nghiêm trọng (`severity`). Cơ chế này đảm bảo tính duy nhất của các cam kết mật mã trên chuỗi; tuy nhiên, việc xác minh nội dung chi tiết ngoài chuỗi vẫn đòi hỏi hệ thống kiểm toán thực hiện tính toán lại mã băm và đối chiếu với dữ liệu giao dịch trên sổ cái.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 199,
+    "style": "Heading2",
+    "text": "3.5. Backend và Dashboard",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 200,
+    "style": "Heading3",
+    "text": "3.5.1. Lưu trữ dữ liệu cục bộ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 201,
+    "style": "",
+    "text": "Lớp lưu trữ `TelemetryStore` sử dụng hệ quản trị cơ sở dữ liệu SQLite để quản lý các trường thông tin: `event_id`, `device_id`, `sensor_id`, thời điểm đo, khoảng cách, mức độ nghiêm trọng (`severity`), cờ ngắt an toàn, độ tin cậy, `evidence_hash`, trạng thái bằng chứng, mã giao dịch (`tx_hash`) và dữ liệu thô (`raw_payload`). Việc thiết lập khóa chính duy nhất trên trường `event_id` kết hợp với rào chắn `ON CONFLICT` cho phép hệ thống cập nhật linh hoạt trạng thái xử lý và mã giao dịch mà không làm phát sinh dữ liệu trùng lặp.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 202,
+    "style": "Heading3",
+    "text": "3.6.2. Kết nối blockchain và gửi giao dịch",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 203,
+    "style": "",
+    "text": "Module `SafetyLogClient` khởi tạo kết nối RPC thông qua Web3 HTTPProvider, tiến hành nạp giao diện ABI, khởi tạo tài khoản từ khóa mật mã cá nhân (private key) và quản lý chỉ số đếm giao dịch (`nonce`). Khi phương thức `record_evidence()` được kích hoạt, client thực hiện ánh xạ mức `severity` sang giá trị kiểu liệt kê (enum) tương ứng, chuyển đổi nhãn thời gian sang chuẩn Unix, định dạng `evidence_hash` về kiểu `bytes32`, đồng thời tính toán mã băm keccak256 cho `device_id` và schema. Giao dịch được ký bảo mật tại cục bộ, truyền phát tới nút RPC và chờ xác nhận (receipt); nếu biên nhận giao dịch trả về trạng thái thất bại (`status != 1`), hệ thống sẽ ghi nhận lỗi để bộ đệm `outbox` duy trì bản ghi ở trạng thái chờ xử lý lại.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 204,
+    "style": "Heading3",
+    "text": "3.6.3. Dashboard",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 205,
+    "style": "",
+    "text": "Giao diện giám sát tích hợp đọc cấu trúc ABI và địa chỉ hợp đồng đã triển khai để hiển thị danh sách sự kiện thời gian thực, trạng thái vận hành thiết bị, phân quyền báo cáo và tiến trình quản lý giấy phép. Ví điện tử MetaMask đóng vai trò là trình ký giao dịch bảo mật trên mạng thử nghiệm EVM cục bộ. Các tham số cấu hình hệ thống bao gồm `RPC_URL`, `CONTRACT_ADDRESS`, `PRIVATE_KEY` và `MODEL_PATH` được quản lý tập trung qua biến môi trường, đảm bảo nguyên tắc không lưu trữ trực tiếp thông tin bảo mật trong mã nguồn.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 206,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 207,
+    "style": "",
+    "text": "CHƯƠNG 4",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 208,
+    "style": "",
+    "text": "KẾT QUẢ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 209,
+    "style": "Heading2",
+    "text": "4.1. Kết quả thi công phần cứng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 210,
+    "style": "",
+    "text": "",
+    "drawings": 1,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 211,
+    "style": "Heading2",
+    "text": "4.2. Kết quả IoT",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 212,
+    "style": "",
+    "text": "Hạng mục",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 213,
+    "style": "",
+    "text": "Kết quả",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 214,
+    "style": "",
+    "text": "Đọc HC-SR04",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 215,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 216,
+    "style": "",
+    "text": "Chu kỳ lấy mẫu",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 217,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 218,
+    "style": "",
+    "text": "Tỷ lệ payload hợp lệ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 219,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 220,
+    "style": "",
+    "text": "Độ trễ sensor → gateway",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 221,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 222,
+    "style": "",
+    "text": "Tình huống timeout",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 223,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 224,
+    "style": "",
+    "text": "Sai số đo khoảng cách",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 225,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 226,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 227,
+    "style": "Heading2",
+    "text": "4.3. Kết quả AI",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 228,
+    "style": "",
+    "text": "Mô hình",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 229,
+    "style": "",
+    "text": "Precision",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 230,
+    "style": "",
+    "text": "Recall",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 231,
+    "style": "",
+    "text": "F1-score",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 232,
+    "style": "",
+    "text": "Ghi chú",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 233,
+    "style": "",
+    "text": "Isolation Forest",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 234,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 235,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 236,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 237,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 238,
+    "style": "",
+    "text": "Mô hình lai/autoencoder",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 239,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 240,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 241,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 242,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 243,
+    "style": "",
+    "text": "Mô hình được chọn",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 244,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 245,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 246,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 247,
+    "style": "",
+    "text": "Lý do: ………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 248,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 249,
+    "style": "",
+    "text": "[Bổ sung confusion matrix, phân bố anomaly score và phân tích false negative/false positive nếu có.]",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 250,
+    "style": "Heading2",
+    "text": "4.4. Kết quả Smart Contract",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 251,
+    "style": "",
+    "text": "Ca kiểm thử",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 252,
+    "style": "",
+    "text": "Kết quả mong đợi",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 253,
+    "style": "",
+    "text": "Kết quả thực tế",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 254,
+    "style": "",
+    "text": "Record SAFE",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 255,
+    "style": "",
+    "text": "Thành công; không khóa device",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 256,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 257,
+    "style": "",
+    "text": "Record EMERGENCY",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 258,
+    "style": "",
+    "text": "Thành công; khóa device",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 259,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 260,
+    "style": "",
+    "text": "Duplicate hash",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 261,
+    "style": "",
+    "text": "Revert event already recorded",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 262,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 263,
+    "style": "",
+    "text": "Reporter trái phép",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 264,
+    "style": "",
+    "text": "Revert not reporter",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 265,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 266,
+    "style": "",
+    "text": "Clear E-Stop",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 267,
+    "style": "",
+    "text": "Chỉ owner; latch false",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 268,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 269,
+    "style": "",
+    "text": "Permit workflow",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 270,
+    "style": "",
+    "text": "Đúng trạng thái và quyền",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 271,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 272,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 273,
+    "style": "Heading2",
+    "text": "4.5. Kết quả end-to-end",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 274,
+    "style": "",
+    "text": "Kịch bản",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 275,
+    "style": "",
+    "text": "Telemetry",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 276,
+    "style": "",
+    "text": "AI/gateway",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 277,
+    "style": "",
+    "text": "Blockchain",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 278,
+    "style": "",
+    "text": "Dashboard",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 279,
+    "style": "",
+    "text": "SAFE",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 280,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 281,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 282,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 283,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 284,
+    "style": "",
+    "text": "WARNING",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 285,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 286,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 287,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 288,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 289,
+    "style": "",
+    "text": "EMERGENCY",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 290,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 291,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 292,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 293,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 294,
+    "style": "",
+    "text": "RPC mất kết nối",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 295,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 296,
+    "style": "",
+    "text": "Outbox pending",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 297,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 298,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 299,
+    "style": "",
+    "text": "Permit + handoff",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 300,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 301,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 302,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 303,
+    "style": "",
+    "text": "……",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 304,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 305,
+    "style": "",
+    "text": "[Chèn ảnh chụp dashboard, transaction hash, event log và tệp evidence tương ứng. Các ảnh/số liệu cần ghi kèm thời gian và commit mã nguồn.]",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 306,
+    "style": "Heading2",
+    "text": "4.6. Đánh giá mục tiêu",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 307,
+    "style": "",
+    "text": "Mục tiêu",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 308,
+    "style": "",
+    "text": "Bằng chứng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 309,
+    "style": "",
+    "text": "Đánh giá",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 310,
+    "style": "",
+    "text": "R1",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 311,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 312,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 313,
+    "style": "",
+    "text": "R2",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 314,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 315,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 316,
+    "style": "",
+    "text": "R3",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 317,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 318,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 319,
+    "style": "",
+    "text": "R4",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 320,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 321,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 322,
+    "style": "",
+    "text": "R5",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 323,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 324,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 325,
+    "style": "",
+    "text": "R6",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 326,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 327,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 328,
+    "style": "",
+    "text": "R7",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 329,
+    "style": "",
+    "text": "……………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 330,
+    "style": "",
+    "text": "Đạt / Đạt một phần / Chưa đạt",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 331,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 332,
+    "style": "",
+    "text": "CHƯƠNG 5",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 333,
+    "style": "",
+    "text": "KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 334,
+    "style": "Heading2",
+    "text": "5.1. Kết luận",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 335,
+    "style": "",
+    "text": "Nghiên cứu đã thiết kế và triển khai thành công mô hình thực nghiệm SonarChain – HRC Safety Log dựa trên sự kết hợp giữa công nghệ IoT, AI và Blockchain. Hệ thống tích hợp thành công vi điều khiển ESP32 và cảm biến HC-SR04 để thu thập telemetry, triển khai gateway Python thực thi chính sách fail-safe kết hợp mô hình AI, phát triển cơ chế bằng chứng ngoài chuỗi (evidence outbox), cùng hai hợp đồng thông minh `HRCSafetyLog` và `WorkPermitHandoff` quản lý dữ liệu kiểm toán và luồng quy trình vận hành.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 336,
+    "style": "",
+    "text": "Kiến trúc hai luồng độc lập được xác định là nguyên tắc thiết kế cốt lõi của đề tài: quyết định ngắt an toàn phải được thực thi tức thời tại tầng biên/gateway, trong khi mạng blockchain đóng vai trò là tầng lưu trữ bằng chứng kiểm toán và điều phối quy trình. Việc phân tách rõ ràng này loại bỏ hoàn toàn sự phụ thuộc của vòng điều khiển an toàn vào độ trễ và tính sẵn sàng của hạ tầng blockchain. ",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 337,
+    "style": "Heading2",
+    "text": "5.2. Hướng phát triển",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 338,
+    "style": "",
+    "text": "Nâng cấp tầng cảm biến biên bằng việc tích hợp các công nghệ đo hiện đại như Time-of-Flight (ToF), LiDAR hoặc cảm biến an toàn chuyên dụng, kết hợp với thuật toán dung hợp cảm biến (sensor fusion).",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 339,
+    "style": "",
+    "text": "Thiết kế phần cứng ngắt an toàn E-Stop vật lý độc lập, bổ sung mạch giám sát phần cứng (watchdog), dự phòng gateway và thực hiện các bài kiểm thử nghiêm ngặt trong điều kiện mất kết nối mạng hoặc sự cố nguồn điện.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 340,
+    "style": "",
+    "text": "Chuẩn hóa cấu trúc bằng chứng (evidence schema) đồng bộ giữa phần sụn (firmware), gateway, hợp đồng thông minh và giao diện giám sát; đồng thời xây dựng công cụ xác thực độc lập (verifier) để đối chiếu dữ liệu trên chuỗi.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 341,
+    "style": "",
+    "text": "Hoàn thiện hệ thống backend với dịch vụ quản trị cơ sở dữ liệu chuyên dụng, tích hợp cơ chế xác thực người dùng, chính sách lưu trữ dữ liệu lâu dài và thuật toán tự động gửi lại/đối soát giao dịch lỗi.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 342,
+    "style": "",
+    "text": "Mở rộng quy mô đánh giá mô hình AI trên các tập dữ liệu đa dạng hơn, phân tích theo phiên đo thực tế, đánh giá hiện tượng dịch chuyển phân phối dữ liệu (concept drift) và tối ưu tỷ lệ âm tính giả (false negative).",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 343,
+    "style": "",
+    "text": "Nghiên cứu chuyển đổi sang các nền tảng blockchain cấp phép (permissioned blockchain) hoặc áp dụng giải pháp gom cụm giao dịch (batching/Merkle tree) nhằm giảm thiểu chi phí và nâng cao hiệu năng khi mở rộng quy mô.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 344,
+    "style": "",
+    "text": "Ràng buộc mã băm sự kiện telemetry (`telemetryEventHash`) của thủ tục vào vùng nguy hiểm với hợp đồng SafetyLog, đồng thời hoàn thiện chính sách xử lý giấy phép quá hạn.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 345,
+    "style": "Heading2",
+    "text": "5.3. Hạn chế",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 346,
+    "style": "",
+    "text": "Hệ thống hiện tại dừng lại ở mức mô hình thực nghiệm, chưa đạt các chứng nhận chuẩn an toàn chức năng công nghiệp; cảm biến siêu âm HC-SR04 tồn tại hạn chế về góc quét, độ nhạy bề mặt vật liệu và khả năng chống nhiễu môi trường; tập dữ liệu huấn luyện AI chưa đủ độ bao phủ để khẳng định tính tổng quát hóa cao; giao diện giám sát còn duy trì trạng thái trong bộ đệm RAM; và cờ trạng thái `LOCKED` trên blockchain mới chỉ thể hiện ràng buộc về mặt logic, chưa chứng minh được sự ngắt cơ học của thiết bị vật lý.",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 347,
+    "style": "",
+    "text": "PHỤ LỤC",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 348,
+    "style": "",
+    "text": "HƯỚNG DẪN CHẠY VÀ TÁI LẬP DEMO",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 349,
+    "style": "Heading2",
+    "text": "A.1. Dashboard mô phỏng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 350,
+    "style": "",
+    "text": "cd \"C:\\Users\\P1 Gen 5\\Downloads\\Blockchain\"py -m http.server 8080 -d web3Mở http://localhost:8080 → Chạy mô phỏng",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 351,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 352,
+    "style": "Heading2",
+    "text": "A.2. Smart contract local",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 353,
+    "style": "",
+    "text": "cd contractsnpm.cmd installnpm.cmd run compilenpm.cmd testnpm.cmd run nodenpm.cmd run deploy",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 354,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 355,
+    "style": "Heading2",
+    "text": "A.3. Replay dữ liệu",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 356,
+    "style": "",
+    "text": "python -m iot_code.gateway.pipeline --csv ai_model/data/raw/son_dungyen_30_DANGER.csv --limit 10",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 357,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 358,
+    "style": "Heading2",
+    "text": "A.4. Dữ liệu cần lưu khi chạy",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  },
+  {
+    "id": 359,
+    "style": "",
+    "text": "Thông tin",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 360,
+    "style": "",
+    "text": "Giá trị",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 361,
+    "style": "",
+    "text": "Thời gian",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 362,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 363,
+    "style": "",
+    "text": "Commit/tag",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 364,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 365,
+    "style": "",
+    "text": "Model/config",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 366,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 367,
+    "style": "",
+    "text": "RPC/contract",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 368,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 369,
+    "style": "",
+    "text": "File evidence",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 370,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 371,
+    "style": "",
+    "text": "Người thực hiện",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 372,
+    "style": "",
+    "text": "………………………………",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": true
+  },
+  {
+    "id": 373,
+    "style": "",
+    "text": "",
+    "drawings": 0,
+    "equations": 0,
+    "in_table": false
+  }
+]

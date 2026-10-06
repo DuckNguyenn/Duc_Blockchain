@@ -1,0 +1,377 @@
+﻿{
+  "checks": "passed",
+  "pages": [
+    {
+      "page": 1,
+      "characters": 478,
+      "first_lines": [
+        "B\u1ed8 GI\u00c1O D\u1ee4C V\u00c0 \u0110\u00c0O T\u1ea0O",
+        "TR\u01af\u1edcNG \u0110\u1ea0I H\u1eccC C\u00d4NG NGH\u1ec6 K\u1ef8 THU\u1eacT TP. HCM"
+      ],
+      "last_lines": [
+        "GVHD: TS. Hu\u1ef3nh Th\u1ebf Thi\u1ec7n",
+        "TP. H\u1ed3 Ch\u00ed Minh, th\u00e1ng 10 n\u0103m 2026"
+      ]
+    },
+    {
+      "page": 2,
+      "characters": 467,
+      "first_lines": [
+        "2",
+        "L\u1edcI C\u1ea2M \u01a0N"
+      ],
+      "last_lines": [
+        "quy m\u00f4 d\u1eef li\u1ec7u. Nh\u00f3m mong nh\u1eadn \u0111\u01b0\u1ee3c \u00fd ki\u1ebfn \u0111\u00f3ng g\u00f3p \u0111\u1ec3 ti\u1ebfp t\u1ee5c ho\u00e0n thi\u1ec7n m\u00f4 h\u00ecnh",
+        "th\u1ef1c nghi\u1ec7m v\u00e0 n\u1ed9i dung b\u00e1o c\u00e1o."
+      ]
+    },
+    {
+      "page": 3,
+      "characters": 1487,
+      "first_lines": [
+        "3",
+        "T\u00d3M T\u1eaeT"
+      ],
+      "last_lines": [
+        "T\u1eeb kh\u00f3a: ESP32; c\u1ea3m bi\u1ebfn si\u00eau \u00e2m; TinyML; MLP; l\u01b0\u1ee3ng t\u1eed h\u00f3a INT8; b\u1eb1ng ch\u1ee9ng",
+        "ngo\u00e0i chu\u1ed7i; blockchain."
+      ]
+    },
+    {
+      "page": 4,
+      "characters": 3031,
+      "first_lines": [
+        "4",
+        "M\u1ee4C L\u1ee4C"
+      ],
+      "last_lines": [
+        "3.4.3. G\u1eedi giao d\u1ecbch ......................................................................................... 17",
+        "3.5. Hai h\u1ee3p \u0111\u1ed3ng th\u00f4ng minh ............................................................................ 17"
+      ]
+    },
+    {
+      "page": 5,
+      "characters": 3150,
+      "first_lines": [
+        "5",
+        "3.5.1. HRCSafetyLog ...................................................................................... 17"
+      ],
+      "last_lines": [
+        "B.2. Validation .................................................................................................... 31",
+        "B.3. Test .............................................................................................................. 31"
+      ]
+    },
+    {
+      "page": 6,
+      "characters": 654,
+      "first_lines": [
+        "6",
+        "DANH M\u1ee4C T\u1eea VI\u1ebeT T\u1eaeT"
+      ],
+      "last_lines": [
+        "SHA-256",
+        "H\u00e0m b\u0103m m\u1eadt m\u00e3 cho gi\u00e1 tr\u1ecb b\u0103m 256 bit"
+      ]
+    },
+    {
+      "page": 7,
+      "characters": 2193,
+      "first_lines": [
+        "7",
+        "CH\u01af\u01a0NG 1. GI\u1edaI THI\u1ec6U T\u1ed4NG QUAN"
+      ],
+      "last_lines": [
+        "R4 \u2014 Chu\u1ea9n h\u00f3a n\u1ed9i dung b\u1eb1ng ch\u1ee9ng, t\u1ea1o SHA-256 v\u00e0 l\u01b0u g\u00f3i JSON ngo\u00e0i chu\u1ed7i",
+        "v\u1edbi tr\u1ea1ng th\u00e1i x\u1eed l\u00fd c\u00f3 th\u1ec3 \u0111\u1ed1i chi\u1ebfu."
+      ]
+    },
+    {
+      "page": 8,
+      "characters": 2036,
+      "first_lines": [
+        "8",
+        "R5 \u2014 X\u00e2y d\u1ef1ng HRCSafetyLog \u0111\u1ec3 qu\u1ea3n l\u00fd reporter, ghi digest v\u00e0 metadata, ng\u0103n"
+      ],
+      "last_lines": [
+        "lu\u1eadn, h\u1ea1n ch\u1ebf v\u00e0 h\u01b0\u1edbng ph\u00e1t tri\u1ec3n. Ph\u1ee5 l\u1ee5c cung c\u1ea5p l\u1ec7nh t\u00e1i l\u1eadp v\u00e0 danh s\u00e1ch b\u1ea3n ghi",
+        "c\u1ee7a ph\u00e9p chia d\u1eef li\u1ec7u."
+      ]
+    },
+    {
+      "page": 9,
+      "characters": 2272,
+      "first_lines": [
+        "9",
+        "CH\u01af\u01a0NG 2. C\u01a0 S\u1ede L\u00dd THUY\u1ebeT"
+      ],
+      "last_lines": [
+        "\u0111i\u1ec7n \u00e1p GPIO \u0111\u01b0\u1ee3c x\u00e1c \u0111\u1ecbnh theo datasheet ESP32 [4]. Vi\u1ec7c t\u00ednh \u0111\u00fang kho\u1ea3ng c\u00e1ch",
+        "trong ch\u01b0\u01a1ng tr\u00ecnh kh\u00f4ng thay th\u1ebf cho ki\u1ec3m tra \u0111i\u1ec7n \u00e1p v\u00e0 sai s\u1ed1 \u0111o tr\u00ean m\u1ea1ch th\u1ef1c."
+      ]
+    },
+    {
+      "page": 10,
+      "characters": 2323,
+      "first_lines": [
+        "10",
+        "2.3. MLP v\u00e0 ph\u00e2n lo\u1ea1i ba tr\u1ea1ng th\u00e1i"
+      ],
+      "last_lines": [
+        "[8]. Validation d\u00f9ng ch\u1ecdn ki\u1ebfn tr\u00fac v\u00e0 theo d\u00f5i hu\u1ea5n luy\u1ec7n; test d\u00f9ng \u0111\u00e1nh gi\u00e1 sau khi",
+        "ch\u1ed1t l\u1ef1a ch\u1ecdn."
+      ]
+    },
+    {
+      "page": 11,
+      "characters": 2530,
+      "first_lines": [
+        "11",
+        "C\u1eeda s\u1ed5 theo s\u1ed1 m\u1eabu ph\u1ee5 thu\u1ed9c v\u00e0o nh\u1ecbp l\u1ea5y m\u1eabu. Thay \u0111\u1ed5i chu k\u1ef3 thu nh\u1eadn l\u00e0m thay"
+      ],
+      "last_lines": [
+        "l\u00fd tr\u1ea1ng th\u00e1i v\u00e0 ki\u1ec3m tra \u0111i\u1ec1u ki\u1ec7n khi giao d\u1ecbch \u0111\u01b0\u1ee3c th\u1ef1c thi tr\u00ean EVM. H\u1ee3p \u0111\u1ed3ng",
+        "kh\u00f4ng t\u1ef1 \u0111\u1ecdc c\u1ea3m bi\u1ebfn ngo\u00e0i chu\u1ed7i; gateway ho\u1eb7c t\u00e0i kho\u1ea3n \u0111\u01b0\u1ee3c c\u1ea5p quy\u1ec1n ph\u1ea3i g\u1eedi"
+      ]
+    },
+    {
+      "page": 12,
+      "characters": 1578,
+      "first_lines": [
+        "12",
+        "d\u1eef li\u1ec7u v\u00e0o [10]. Vi\u1ec7c ti\u00eau th\u1ee5 t\u00e0i nguy\u00ean \u0111\u01b0\u1ee3c \u0111o b\u1eb1ng gas; gas s\u1eed d\u1ee5ng v\u00e0 gi\u00e1 gas l\u00e0"
+      ],
+      "last_lines": [
+        "ch\u01b0a ch\u1ee9ng minh t\u00ednh b\u1ea5t bi\u1ebfn tuy\u1ec7t \u0111\u1ed1i, \u0111\u1ed9 b\u1ec1n ho\u1eb7c m\u1ee9c ph\u00e2n t\u00e1n c\u1ee7a m\u1ed9t m\u1ea1ng tri\u1ec3n",
+        "khai th\u1ef1c."
+      ]
+    },
+    {
+      "page": 13,
+      "characters": 1240,
+      "first_lines": [
+        "13",
+        "CH\u01af\u01a0NG 3. THI\u1ebeT K\u1ebe H\u1ec6 TH\u1ed0NG"
+      ],
+      "last_lines": [
+        "ngu\u1ed3n ho\u1eb7c l\u1ed7i ph\u1ea7n c\u1ee9ng. Kh\u00f3a logic tr\u00ean chain v\u00e0 tr\u1ea1ng th\u00e1i t\u1ee9c th\u1eddi tr\u00ean ESP32 \u0111\u01b0\u1ee3c",
+        "theo d\u00f5i ri\u00eang."
+      ]
+    },
+    {
+      "page": 14,
+      "characters": 1049,
+      "first_lines": [
+        "14",
+        "3.2. T\u1ea7ng IoT v\u00e0 firmware"
+      ],
+      "last_lines": [
+        "Buzzer b\u1eadt khi EMERGENCY, SENSOR_FAULT ho\u1eb7c AI_FAULT, tr\u1eeb khi ng\u01b0\u1eddi",
+        "d\u00f9ng \u0111ang t\u1eaft \u00e2m b\u00e1o. Khi c\u00f3 m\u1eabu SAFE, tr\u1ea1ng th\u00e1i t\u1eaft \u00e2m \u0111\u01b0\u1ee3c x\u00f3a. C\u1edd"
+      ]
+    },
+    {
+      "page": 15,
+      "characters": 1981,
+      "first_lines": [
+        "15",
+        "emergency_stop c\u1ee7a firmware \u0111\u01b0\u1ee3c \u0111\u1eb7t khi tr\u1ea1ng th\u00e1i l\u00e0 EMERGENCY; c\u00e1c m\u1eabu l\u1ed7i"
+      ],
+      "last_lines": [
+        "size 32, t\u1ed1i \u0111a 150 epoch, L2 = 0,001 t\u1ea1i c\u00e1c l\u1edbp \u1ea9n v\u00e0 class weight c\u00e2n b\u1eb1ng t\u1eeb train.",
+        "EarlyStopping theo val_loss c\u00f3 patience 20, min_delta 0,0001 v\u00e0 restore_best_weights;"
+      ]
+    },
+    {
+      "page": 16,
+      "characters": 2300,
+      "first_lines": [
+        "16",
+        "ReduceLROnPlateau c\u00f3 patience 7, factor 0,5 v\u00e0 learning rate t\u1ed1i thi\u1ec3u 10\u207b\u2075. Sau t\u1eebng"
+      ],
+      "last_lines": [
+        "build_evidence t\u1ea1o envelope theo schema sonarchain.evidence.v1, g\u1ed3m m\u00e3 s\u1ef1",
+        "ki\u1ec7n/thi\u1ebft b\u1ecb/c\u1ea3m bi\u1ebfn, th\u1eddi \u0111i\u1ec3m \u0111o/nh\u1eadn, kho\u1ea3ng c\u00e1ch, tr\u1ea1ng th\u00e1i, c\u1edd d\u1eebng, confidence,"
+      ]
+    },
+    {
+      "page": 17,
+      "characters": 2209,
+      "first_lines": [
+        "17",
+        "policy_version, model_version v\u00e0 source. N\u1ed9i dung \u0111\u01b0\u1ee3c bi\u1ec3u di\u1ec5n b\u1eb1ng JSON v\u1edbi"
+      ],
+      "last_lines": [
+        "tr\u00ecnh l\u00e0 x\u00e1c nh\u1eadn c\u1ee7a c\u00e1c t\u00e0i kho\u1ea3n \u0111\u01b0\u1ee3c c\u1ea5p quy\u1ec1n, ch\u01b0a t\u1ef1 ch\u1ee9ng minh ng\u01b0\u1eddi \u0111\u00e3 v\u00e0o",
+        "v\u00f9ng ho\u1eb7c robot \u0111\u00e3 b\u00e0n giao v\u1eadt l\u00fd."
+      ]
+    },
+    {
+      "page": 18,
+      "characters": 1645,
+      "first_lines": [
+        "18",
+        "B\u1ea3ng 3.4. Ph\u00e2n quy\u1ec1n thao t\u00e1c"
+      ],
+      "last_lines": [
+        "ph\u1ee5c h\u1ed3i \u0111\u1ea7y \u0111\u1ee7 sau refresh; receipt t\u1eeb giao d\u1ecbch k\u00fd qua tr\u00ecnh duy\u1ec7t ch\u01b0a t\u1ef1 \u0111\u1ed3ng b\u1ed9 v\u00e0o",
+        "SQLite/outbox. C\u00e1c gi\u1edbi h\u1ea1n n\u00e0y \u0111\u01b0\u1ee3c gi\u1eef r\u00f5 trong ph\u1ea7n \u0111\u00e1nh gi\u00e1."
+      ]
+    },
+    {
+      "page": 19,
+      "characters": 949,
+      "first_lines": [
+        "19",
+        "CH\u01af\u01a0NG 4. K\u1ebeT QU\u1ea2 V\u00c0 \u0110\u00c1NH GI\u00c1"
+      ],
+      "last_lines": [
+        "C\u00f3 \u1ea3nh nguy\u00ean m\u1eabu; ch\u01b0a c\u00f3 b\u1ea3ng \u0111o",
+        "hi\u1ec7u n\u0103ng"
+      ]
+    },
+    {
+      "page": 20,
+      "characters": 838,
+      "first_lines": [
+        "20",
+        "H\u00ecnh 4.1. \u1ea2nh nguy\u00ean m\u1eabu ph\u1ea7n c\u1ee9ng \u0111\u01b0\u1ee3c gi\u1eef t\u1eeb b\u00e1o c\u00e1o g\u1ed1c; \u1ea3nh kh\u00f4ng thay cho ph\u00e9p \u0111o \u0111\u1ed9 tr\u1ec5"
+      ],
+      "last_lines": [
+        "C\u1ea7n \u0111o preprocessing, Invoke, arena",
+        "v\u00e0 to\u00e0n pipeline"
+      ]
+    },
+    {
+      "page": 21,
+      "characters": 1371,
+      "first_lines": [
+        "21",
+        "T\u1eeb m\u00e3 ngu\u1ed3n v\u00e0 \u1ea3nh l\u1eafp r\u00e1p c\u00f3 th\u1ec3 x\u00e1c \u0111\u1ecbnh c\u1ea5u h\u00ecnh nguy\u00ean m\u1eabu, nh\u01b0ng ch\u01b0a th\u1ec3"
+      ],
+      "last_lines": [
+        "khi tr\u1ecdng s\u1ed1 \u0111ang c\u1eadp nh\u1eadt v\u00e0 kh\u00f4ng \u0111\u1ed3ng nh\u1ea5t v\u1edbi \u0111\u00e1nh gi\u00e1 l\u1ea1i to\u00e0n b\u1ed9 train b\u1eb1ng model",
+        "\u0111\u00e3 ch\u1ed1t."
+      ]
+    },
+    {
+      "page": 22,
+      "characters": 1563,
+      "first_lines": [
+        "22",
+        "\u1ede ph\u1ea7n cu\u1ed1i qu\u00e1 tr\u00ecnh train, validation accuracy c\u00f2n t\u0103ng v\u00e0 validation loss ti\u1ebfp t\u1ee5c"
+      ],
+      "last_lines": [
+        "0,9725",
+        "159"
+      ]
+    },
+    {
+      "page": 23,
+      "characters": 1277,
+      "first_lines": [
+        "23",
+        "H\u00ecnh 4.3. Ma tr\u1eadn nh\u1ea7m l\u1eabn INT8: h\u00e0ng l\u00e0 l\u1edbp th\u1eadt, c\u1ed9t l\u00e0 l\u1edbp d\u1ef1 \u0111o\u00e1n."
+      ],
+      "last_lines": [
+        "kh\u00e1c khi tri\u1ec3n khai. C\u1ea7n b\u1ed5 sung c\u00e1c phi\u00ean \u1edf \u0111\u00fang cadence v\u00e0 gi\u1eef m\u1ed9t t\u1eadp \u0111o m\u1edbi \u0111\u1ed9c",
+        "l\u1eadp; kh\u00f4ng ti\u1ebfp t\u1ee5c ch\u1ecdn c\u1ea5u h\u00ecnh theo test \u0111\u00e3 xem."
+      ]
+    },
+    {
+      "page": 24,
+      "characters": 1092,
+      "first_lines": [
+        "24",
+        "4.4. K\u1ebft qu\u1ea3 ki\u1ec3m th\u1eed ph\u1ea7n m\u1ec1m v\u00e0 h\u1ee3p \u0111\u1ed3ng"
+      ],
+      "last_lines": [
+        "ch\u01b0a thay th\u1ebf vi\u1ec7c \u0111o t\u00ednh s\u1eb5n s\u00e0ng m\u1ea1ng, chi ph\u00ed gas th\u1ef1c t\u1ebf, \u0111\u1ed3ng b\u1ed9 dashboard\u2013",
+        "gateway sau giao d\u1ecbch v\u00ed ho\u1eb7c ki\u1ec3m th\u1eed an to\u00e0n robot."
+      ]
+    },
+    {
+      "page": 25,
+      "characters": 168,
+      "first_lines": [
+        "25",
+        "4.5. K\u1ebft qu\u1ea3 dashboard v\u00e0 lu\u1ed3ng t\u00edch h\u1ee3p"
+      ],
+      "last_lines": [
+        "H\u00ecnh 4.4. Dashboard sau khi x\u1eed l\u00fd m\u1eabu SENSOR_FAULT trong ki\u1ec3m tra tr\u00ecnh duy\u1ec7t v\u1edbi API gi\u1ea3 l\u1eadp;",
+        "ch\u01b0a c\u00f3 ESP32 k\u1ebft n\u1ed1i."
+      ]
+    },
+    {
+      "page": 26,
+      "characters": 1842,
+      "first_lines": [
+        "26",
+        "B\u1ea3ng 4.7. C\u00e1c t\u00ecnh hu\u1ed1ng \u0111\u01b0\u1ee3c x\u00e1c nh\u1eadn b\u1eb1ng ki\u1ec3m th\u1eed"
+      ],
+      "last_lines": [
+        "\u0110\u1ea1t nguy\u00ean m\u1eabu; thi\u1ebfu phi\u00ean",
+        "demo ph\u1ea7n c\u1ee9ng \u0111\u1ea7y \u0111\u1ee7"
+      ]
+    },
+    {
+      "page": 27,
+      "characters": 2232,
+      "first_lines": [
+        "27",
+        "CH\u01af\u01a0NG 5. K\u1ebeT LU\u1eacN V\u00c0 H\u01af\u1edaNG PH\u00c1T TRI\u1ec2N"
+      ],
+      "last_lines": [
+        "tr\u1ec5 c\u1ea3nh b\u00e1o, tensor arena/RAM v\u00e0 jitter. Ch\u1ec9 thay \u0111\u1ed5i ki\u1ebfn tr\u00fac, s\u1ed1 epoch ho\u1eb7c class",
+        "weight theo validation."
+      ]
+    },
+    {
+      "page": 28,
+      "characters": 807,
+      "first_lines": [
+        "28",
+        "Thi\u1ebft k\u1ebf c\u01a1 c\u1ea5u d\u1eebng motor/relay, latch v\u00e0 reset c\u00f3 ki\u1ec3m so\u00e1t; b\u1ed5 sung watchdog v\u00e0"
+      ],
+      "last_lines": [
+        "batching/Merkle tree, \u0111o gas v\u00e0 chi ph\u00ed theo \u0111i\u1ec1u ki\u1ec7n tri\u1ec3n khai; kh\u00f4ng d\u00f9ng th\u00f4ng s\u1ed1",
+        "Hardhat l\u00e0m chi ph\u00ed ti\u1ec1n th\u1ef1c."
+      ]
+    },
+    {
+      "page": 29,
+      "characters": 3273,
+      "first_lines": [
+        "29",
+        "T\u00c0I LI\u1ec6U THAM KH\u1ea2O"
+      ],
+      "last_lines": [
+        "c\u00e1c log ki\u1ec3m th\u1eed ng\u00e0y 05/10/2026. B\u00e1o c\u00e1o nh\u00f3m kh\u00e1c ch\u1ec9 d\u00f9ng tham kh\u1ea3o c\u00e1ch t\u1ed5 ch\u1ee9c v\u00e0 v\u0103n",
+        "phong, kh\u00f4ng l\u00e0m ngu\u1ed3n s\u1ed1 li\u1ec7u SonarChain."
+      ]
+    },
+    {
+      "page": 30,
+      "characters": 2189,
+      "first_lines": [
+        "30",
+        "PH\u1ee4 L\u1ee4C A. H\u01af\u1edaNG D\u1eaaN T\u00c1I L\u1eacP"
+      ],
+      "last_lines": [
+        "RAM/latency v\u00e0 k\u1ebft qu\u1ea3 parity. N\u1ebfu ghi chain, l\u01b0u evidence JSON, digest, network/contract v\u00e0",
+        "receipt t\u01b0\u01a1ng \u1ee9ng. T\u00ednh accuracy th\u1ef1c t\u1ebf tr\u00ean phi\u00ean \u0111o m\u1edbi c\u00f3 nh\u00e3n \u0111\u1ed9c l\u1eadp."
+      ]
+    },
+    {
+      "page": 31,
+      "characters": 779,
+      "first_lines": [
+        "31",
+        "PH\u1ee4 L\u1ee4C B. MANIFEST CHIA D\u1eee LI\u1ec6U"
+      ],
+      "last_lines": [
+        "son_roi_30ve150_cham_RETREATING.csv",
+        "son_roi_50ve200_cham_RETREATING.csv"
+      ]
+    }
+  ]
+}
